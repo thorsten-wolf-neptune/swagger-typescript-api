@@ -29,29 +29,6 @@ const types = {
   // dateTime: "Date",
 };
 
-const typesDDIC = {
-  /** { type: "integer" } -> { type: "number" } */
-  integer: TS_KEYWORDS.NUMBER,
-  number: TS_KEYWORDS.NUMBER,
-  boolean: TS_KEYWORDS.BOOLEAN,
-  object: TS_KEYWORDS.OBJECT,
-  file: TS_KEYWORDS.FILE,
-  string: {
-    $default: TS_KEYWORDS.STRING,
-
-    /** formats */
-    binary: TS_KEYWORDS.FILE,
-  },
-  array: ({ items, ...schemaPart }) => {
-    const contentDDIC = getInlineParseContentDDIC(items);
-    return checkAndAddNull(schemaPart, `(${contentDDIC})[]`);
-  },
-
-  // TODO: probably it can be needed
-  // date: "Date",
-  // dateTime: "Date",
-};
-
 const stealTypeFromSchema = (rawSchema) => {
   const schema = rawSchema || {};
 
@@ -77,20 +54,6 @@ const getTypeAlias = (rawSchema) => {
   const type = internalCase(stealTypeFromSchema(schema));
   const format = internalCase(schema.format);
   const typeAlias = _.get(types, [type, format]) || _.get(types, [type, "$default"]) || types[type];
-
-  if (_.isFunction(typeAlias)) {
-    return typeAlias(schema);
-  }
-
-  return typeAlias || type;
-};
-
-const getTypeAliasDDIC = (rawSchema) => {
-  const schema = rawSchema || {};
-  const type = internalCase(stealTypeFromSchema(schema));
-  const format = internalCase(schema.format);
-  const typeAlias =
-    _.get(typesDDIC, [type, format]) || _.get(typesDDIC, [type, "$default"]) || typesDDIC[type];
 
   if (_.isFunction(typeAlias)) {
     return typeAlias(schema);
@@ -148,19 +111,6 @@ const getType = (schema) => {
   return primitiveType ? checkAndAddNull(schema, primitiveType) : TS_KEYWORDS.ANY;
 };
 
-const getTypeDDIC = (schema) => {
-  if (!schema) return TS_KEYWORDS.ANY;
-
-  const refTypeInfo = getRefType(schema);
-
-  if (refTypeInfo) {
-    return checkAndAddNull(schema, formatModelName(refTypeInfo.typeName));
-  }
-
-  const primitiveType = getTypeAliasDDIC(schema);
-  return primitiveType ? checkAndAddNull(schema, primitiveType) : TS_KEYWORDS.ANY;
-};
-
 const isRequired = (property, name, requiredProperties) => {
   if (property["x-omitempty"] === false) {
     return true;
@@ -187,7 +137,6 @@ const getObjectTypeContent = (schema) => {
     const nullable = !!(rawTypeData.nullable || property.nullable);
     const fieldName = isValidName(name) ? name : `"${name}"`;
     const fieldValue = getInlineParseContent(property);
-    const fieldValueDDIC = getInlineParseContentDDIC(property);
 
     return {
       $$raw: property,
@@ -210,9 +159,7 @@ const getObjectTypeContent = (schema) => {
       isNullable: nullable,
       name: fieldName,
       value: fieldValue,
-      valueDDIC: fieldValueDDIC,
       field: _.compact([fieldName, !required && "?", ": ", fieldValue]).join(""),
-      fieldDDIC: _.compact([fieldName, !required && "?", ": ", fieldValueDDIC]).join(""),
     };
   });
 
@@ -281,7 +228,7 @@ const getComplexType = (schema) => {
 
 const attachParsedRef = (originalSchema, parsedSchema) => {
   const parsedSchemaAfterHook =
-    config.hooks.onParseSchema(originalSchema, parsedSchema) || parsedSchema;
+    config.hooks.onParseSchema(originalSchema, parsedSchema, config) || parsedSchema;
 
   if (originalSchema) {
     originalSchema.$parsed = parsedSchemaAfterHook;
@@ -417,7 +364,6 @@ const schemaParsers = {
       description: formatDescription(description),
       // TODO: probably it should be refactored. `type === 'null'` is not flexible
       content: type === TS_KEYWORDS.NULL ? type : contentType || getType(schema),
-      contentDDIC: type === TS_KEYWORDS.NULL ? type : contentType || getTypeDDIC(schema),
     });
   },
 };
@@ -441,6 +387,9 @@ const parseSchema = (rawSchema, typeName, formattersMap) => {
     return rawSchema;
   }
 
+  config.schemaStack.push({ rawSchema: rawSchema, typeName: typeName, formattersMap });
+  let position = config.schemaStack.length - 1;
+
   if (rawSchema.$parsed) {
     schemaType = rawSchema.$parsed.schemaType;
     parsedSchema = rawSchema.$parsed;
@@ -454,10 +403,22 @@ const parseSchema = (rawSchema, typeName, formattersMap) => {
     parsedSchema = schemaParsers[schemaType](fixedRawSchema, typeName);
   }
 
-  return (
+  let res;
+  if (formattersMap && formattersMap[schemaType]) {
+    res = formattersMap[schemaType](parsedSchema);
+  } else {
+    res = parsedSchema;
+  }
+
+  config.schemaStack.splice(position, 1);
+
+  return res;
+  /*
+return (
     (formattersMap && formattersMap[schemaType] && formattersMap[schemaType](parsedSchema)) ||
     parsedSchema
   );
+  */
 };
 
 const parseSchemas = (components) =>
@@ -465,9 +426,6 @@ const parseSchemas = (components) =>
 
 const getInlineParseContent = (rawTypeData, typeName = null) =>
   parseSchema(rawTypeData, typeName, inlineExtraFormatters).content;
-
-const getInlineParseContentDDIC = (rawTypeData, typeName = null) =>
-  parseSchema(rawTypeData, typeName, inlineExtraFormatters).contentDDIC;
 
 const getParseContent = (rawTypeData, typeName = null) =>
   parseSchema(rawTypeData, typeName).content;
@@ -477,7 +435,6 @@ module.exports = {
   parseSchema,
   parseSchemas,
   getInlineParseContent,
-  getInlineParseContentDDIC,
   getParseContent,
   getType,
   getRefType,

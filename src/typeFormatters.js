@@ -1,7 +1,6 @@
 const _ = require("lodash");
 const { config } = require("./config");
 const { TS_KEYWORDS, SCHEMA_TYPES } = require("./constants");
-
 const formatters = {
   [SCHEMA_TYPES.ENUM]: (content) => {
     const isNumberEnum = _.some(content, (content) => typeof content.key === "number");

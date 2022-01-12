@@ -118,7 +118,7 @@ export interface Hooks {
   /** calls after parse schema component */
   onCreateComponent: (component: SchemaComponent) => SchemaComponent | void;
   /** calls after parse any kind of schema */
-  onParseSchema: (originalSchema: any, parsedSchema: any) => any | void;
+  onParseSchema: (originalSchema: any, parsedSchema: any, config: any) => any | void;
   /** calls after parse route (return type: customized route (ParsedRoute), nothing change (void), false (ignore this route)) */
   onCreateRoute: (routeData: ParsedRoute) => ParsedRoute | void | false;
   /** Start point of work this tool (after fetching schema) */

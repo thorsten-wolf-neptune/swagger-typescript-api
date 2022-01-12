@@ -84,6 +84,7 @@ const config = {
   typePrefix: "",
   typeSuffix: "",
   componentTypeNameResolver: new NameResolver([]),
+  schemaStack: [],
 };
 
 /** needs to use data everywhere in project */
