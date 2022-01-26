@@ -118,7 +118,11 @@ export interface Hooks {
   /** calls after parse schema component */
   onCreateComponent: (component: SchemaComponent) => SchemaComponent | void;
   /** calls after parse any kind of schema */
-  onParseSchema: (originalSchema: any, parsedSchema: any, config: any) => any | void;
+  onParseSchema: <C extends GenerateApiConfiguration["config"]>(
+    originalSchema: any,
+    parsedSchema: any,
+    config: C,
+  ) => any | void;
   /** calls after parse route (return type: customized route (ParsedRoute), nothing change (void), false (ignore this route)) */
   onCreateRoute: (routeData: ParsedRoute) => ParsedRoute | void | false;
   /** Start point of work this tool (after fetching schema) */
@@ -285,7 +289,12 @@ export enum SCHEMA_TYPES {
 }
 
 type MAIN_SCHEMA_TYPES = SCHEMA_TYPES.PRIMITIVE | SCHEMA_TYPES.OBJECT | SCHEMA_TYPES.ENUM;
-
+export interface SchemaStackItem {
+  rawSchema: string | SchemaComponent["rawTypeData"];
+  typeName?: string;
+  formattersMap?: Record<MAIN_SCHEMA_TYPES, (content: ModelType) => string>;
+}
+export type SchemaStack = SchemaStackItem[];
 export interface GenerateApiConfiguration {
   apiConfig: {
     baseUrl: string;
@@ -323,6 +332,7 @@ export interface GenerateApiConfiguration {
       routeName: string;
     };
     routeNameDuplicatesMap: Map<string, string>;
+    schemaStack: SchemaStack;
   };
   modelTypes: ModelType[];
   rawModelTypes: SchemaComponent[];
