@@ -276,7 +276,7 @@ const schemaParsers = {
               : isBooleanEnum
               ? `${enumValue}`
               : isIntegerEnum
-              ? `0o${enumValue}` // Octal literals should not be used.
+              ? `${enumValue.replace(/^0+/, "")}` // replace leading zeros otherwise: Octal literals should not be used.
               : `"${enumValue}"`,
         };
       });
@@ -292,7 +292,7 @@ const schemaParsers = {
               : isBooleanEnum
               ? `${key}`
               : isIntegerEnum
-              ? `0o${key}` // Octal literals should not be used.
+              ? `${key.replace(/^0+/, "")}` // replace leading zeros otherwise: Octal literals should not be used.
               : `"${key}"`,
         };
       });
