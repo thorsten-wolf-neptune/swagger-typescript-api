@@ -252,6 +252,7 @@ const schemaParsers = {
     if (_.isArray(enumNames) && _.size(enumNames)) {
       content = _.map(enumNames, (enumName, index) => {
         const enumValue = _.get(schema.enum, index);
+        const enumOnlyZeros = /^0*$/.test(enumValue);
         const formattedKey = (enumName && formatEnumKey(enumName)) || formatEnumKey(enumValue);
 
         if (enumNamesAsValues || _.isUndefined(enumValue)) {
@@ -262,38 +263,55 @@ const schemaParsers = {
           };
         }
 
+        let val;
+        if (enumValue === null) {
+          val = enumValue;
+        } else if (isBooleanEnum) {
+          val = `${enumValue}`;
+        } else if (isIntegerEnum) {
+          if (enumOnlyZeros) {
+            val = `0`;
+          } else {
+            val = `${enumValue.replace(/^0+/, "")}`; // replace leading zeros otherwise: Octal literals should not be used.
+          }
+        } else {
+          val = `"${enumValue}"`;
+        }
+
         return {
           key: formattedKey,
           type: keyType,
-          value:
-            // enumValue === null
-            //   ? enumValue
-            //   : isIntegerOrBooleanEnum
-            //   ? `${enumValue}`
-            //   : `"${enumValue}"`,
-            enumValue === null
-              ? enumValue
-              : isBooleanEnum
-              ? `${enumValue}`
-              : isIntegerEnum
-              ? `${enumValue.replace(/^0+/, "")}` // replace leading zeros otherwise: Octal literals should not be used.
-              : `"${enumValue}"`,
+          // enumValue === null
+          //   ? enumValue
+          //   : isIntegerOrBooleanEnum
+          //   ? `${enumValue}`
+          //   : `"${enumValue}"`,
+          value: val,
         };
       });
     } else {
       content = _.map(schema.enum, (key) => {
+        const enumOnlyZeros = /^0*$/.test(key);
+        let val;
+        if (key === null) {
+          val = key;
+        } else if (isBooleanEnum) {
+          val = `${key}`;
+        } else if (isIntegerEnum) {
+          if (enumOnlyZeros) {
+            val = `0`;
+          } else {
+            val = `${key.replace(/^0+/, "")}`; // replace leading zeros otherwise: Octal literals should not be used.
+          }
+        } else {
+          val = `"${key}"`;
+        }
+
         return {
           key: isIntegerOrBooleanEnum ? key : formatEnumKey(key),
           type: keyType,
           // value: key === null ? key : isIntegerOrBooleanEnum ? `${key}` : `"${key}"`,
-          value:
-            key === null
-              ? key
-              : isBooleanEnum
-              ? `${key}`
-              : isIntegerEnum
-              ? `${key.replace(/^0+/, "")}` // replace leading zeros otherwise: Octal literals should not be used.
-              : `"${key}"`,
+          value: val,
         };
       });
     }
