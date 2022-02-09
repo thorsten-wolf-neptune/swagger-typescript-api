@@ -245,6 +245,8 @@ const schemaParsers = {
     const keyType = getType(schema);
     const enumNames = getEnumNames(schema);
     const isIntegerOrBooleanEnum = keyType === types.number || keyType === types.boolean;
+    const isIntegerEnum = keyType === types.number;
+    const isBooleanEnum = keyType === types.boolean;
     let content = null;
 
     if (_.isArray(enumNames) && _.size(enumNames)) {
@@ -264,10 +266,17 @@ const schemaParsers = {
           key: formattedKey,
           type: keyType,
           value:
+            // enumValue === null
+            //   ? enumValue
+            //   : isIntegerOrBooleanEnum
+            //   ? `${enumValue}`
+            //   : `"${enumValue}"`,
             enumValue === null
               ? enumValue
-              : isIntegerOrBooleanEnum
+              : isBooleanEnum
               ? `${enumValue}`
+              : isIntegerEnum
+              ? `0o${enumValue}` // Octal literals should not be used.
               : `"${enumValue}"`,
         };
       });
@@ -276,7 +285,15 @@ const schemaParsers = {
         return {
           key: isIntegerOrBooleanEnum ? key : formatEnumKey(key),
           type: keyType,
-          value: key === null ? key : isIntegerOrBooleanEnum ? `${key}` : `"${key}"`,
+          // value: key === null ? key : isIntegerOrBooleanEnum ? `${key}` : `"${key}"`,
+          value:
+            key === null
+              ? key
+              : isBooleanEnum
+              ? `${key}`
+              : isIntegerEnum
+              ? `0o${key}` // Octal literals should not be used.
+              : `"${key}"`,
         };
       });
     }
