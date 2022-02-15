@@ -1,3 +1,41 @@
+# Adjustments to main repo
+This fork is adding some extra features to allow a split of data definitions (done with) data-contract into multiple files.
+
+The main adjustment is based the introduction of a "schemaStack" in the schema.js
+
+That schema Stack will be passed along onParseSchema hook function. That enables us to see the relation of parent <--> child schema definitions.
+
+API Factory NodeJS client will use this to make schema useages containing a x-sap-ddic-name property (schema elements that refer to a SAP DDIC Definition) outsourced into a central ddic.ts file. 
+
+The overall goal is to have a central ddic.ts file that contains all SAP DDIC definitions. Those then can be reused across multiple apis.
+
+Additionally this fork contains an adjustment of the generation for enum values in schema.js
+
+This is adjusted in schema.js and is related to the following issue scenario:
+
+When having "number" enum values but those contain leading zeros the typescript compile will throw an error telling that "Octal literals should not be used". Example:
+```ts
+/**
+ * Activation type
+ * @xSAPDdicName AUTHCLASS_
+ * @xSAPInttype N
+ */
+export type AUTHCLASS_ = 01 | 02 | 10 | 00;
+```
+Our adjustment will fix this and create then the following 
+
+We solved it by removing leading zeros as well as if the value only contains zeros then not leav a single zero in place.
+
+Our adjustment will fix this and create then the following:
+```ts
+/**
+ * Activation type
+ * @xSAPDdicName AUTHCLASS_
+ * @xSAPInttype N
+ */
+export type AUTHCLASS_ = 1 | 2 | 10 | 0;
+```
+
 # swagger-typescript-api  
 
 [![NPM badge](https://img.shields.io/npm/v/swagger-typescript-api.svg)](https://www.npmjs.com/package/swagger-typescript-api) 
