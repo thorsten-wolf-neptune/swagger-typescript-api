@@ -271,8 +271,10 @@ const schemaParsers = {
         } else if (isIntegerEnum) {
           if (enumOnlyZeros) {
             val = `0`;
-          } else {
+          } else if (enumValue.replace) {
             val = `${enumValue.replace(/^0+/, "")}`; // replace leading zeros otherwise: Octal literals should not be used.
+          } else {
+            val = `${enumValue}`;
           }
         } else {
           val = `"${enumValue}"`;
@@ -300,8 +302,10 @@ const schemaParsers = {
         } else if (isIntegerEnum) {
           if (enumOnlyZeros) {
             val = `0`;
-          } else {
+          } else if (key.replace) {
             val = `${key.replace(/^0+/, "")}`; // replace leading zeros otherwise: Octal literals should not be used.
+          } else {
+            val = `${key}`;
           }
         } else {
           val = `"${key}"`;

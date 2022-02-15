@@ -1,5 +1,5 @@
 {
-  "name": "swagger-typescript-api",
+  "name": "@neptunesoftware/swagger-typescript-api",
   "version": "9.2.0",
   "description": "Generate typescript/javascript api from swagger schema",
   "scripts": {
@@ -41,7 +41,7 @@
     "test:partialBaseTemplate": "node tests/spec/partialBaseTemplate/test.js",
     "test:partialDefaultTemplate": "node tests/spec/partialDefaultTemplate/test.js"
   },
-  "author": "acacode",
+  "author": "Thorsten Wolf",
   "license": "MIT",
   "typings": "./index.d.ts",
   "main": "src/index.js",
