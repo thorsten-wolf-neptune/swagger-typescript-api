@@ -1,0 +1,17 @@
+node_modules
+.vscode
+.idea
+swagger-test-cli.*
+swagger-test-cli
+dist
+scriptsRunner.js
+tsconfig.json
+.prettierrc
+.prettierignore
+.all-contributorsrc
+tests
+assets
+.github
+.gitignore
+package-lock.json
+_config.yml

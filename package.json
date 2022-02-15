@@ -1,5 +1,5 @@
 {
-  "name": "@neptunesoftware/swagger-typescript-api",
+  "name": "@thorsten-wolf-neptune/swagger-typescript-api",
   "version": "9.2.0",
   "description": "Generate typescript/javascript api from swagger schema",
   "scripts": {
@@ -97,11 +97,11 @@
     "LICENSE"
   ],
   "bugs": {
-    "url": "https://github.com/acacode/swagger-typescript-api/issues"
+    "url": "https://github.com/thorsten-wolf-neptune/swagger-typescript-api/issues"
   },
-  "homepage": "https://github.com/acacode/swagger-typescript-api",
+  "homepage": "https://github.com/thorsten-wolf-neptune/swagger-typescript-api",
   "repository": {
     "type": "git",
-    "url": "git://github.com/acacode/swagger-typescript-api"
+    "url": "git://github.com/thorsten-wolf-neptune/swagger-typescript-api"
   }
 }
