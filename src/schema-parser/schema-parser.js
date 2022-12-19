@@ -390,7 +390,7 @@ class SchemaParser {
 
       _.merge(schema, this.config.hooks.onPreParseSchema(schema, typeName, schemaType));
       parsedSchema = this.baseSchemaParsers[schemaType](schema, typeName);
-      schema.$parsed = this.config.hooks.onParseSchema(schema, parsedSchema) || parsedSchema;
+      schema.$parsed = this.config.hooks.onParseSchema(schema, parsedSchema, this.config) || parsedSchema;
     }
 
     this.$processingSchemaPath.pop();

@@ -276,7 +276,7 @@ export interface Hooks {
   /** calls after parse schema component */
   onCreateComponent: (component: SchemaComponent) => SchemaComponent | void;
   /** calls before parse any kind of schema */
-  onPreParseSchema: (originalSchema: any, typeName: string, schemaType: string) => any;
+  onPreParseSchema: (originalSchema: any, typeName: string, schemaType: string, config: any) => any;
   /** calls after parse any kind of schema */
   onParseSchema: <C extends GenerateApiConfiguration["config"]>(
     originalSchema: any,
@@ -441,11 +441,23 @@ export enum SCHEMA_TYPES {
 }
 
 type MAIN_SCHEMA_TYPES = SCHEMA_TYPES.PRIMITIVE | SCHEMA_TYPES.OBJECT | SCHEMA_TYPES.ENUM;
+
+type ExtractingOptions = {
+  requestBodySuffix: string[];
+  responseBodySuffix: string[];
+  responseErrorSuffix: string[];
+  requestParamsSuffix: string[];
+  requestBodyNameResolver: (name: string, reservedNames: string) => string | undefined;
+  responseBodyNameResolver: (name: string, reservedNames: string) => string | undefined;
+  responseErrorNameResolver: (name: string, reservedNames: string) => string | undefined;
+  requestParamsNameResolver: (name: string, reservedNames: string) => string | undefined;
+};
 export interface SchemaStackItem {
   rawSchema: string | SchemaComponent["rawTypeData"];
   typeName?: string;
   formattersMap?: Record<MAIN_SCHEMA_TYPES, (content: ModelType) => string>;
 }
+
 export type SchemaStack = SchemaStackItem[];
 export interface GenerateApiConfiguration {
   apiConfig: {
