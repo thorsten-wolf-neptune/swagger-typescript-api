@@ -9,7 +9,7 @@
  * ---------------------------------------------------------------
  */
 
-export interface IMySuperPrefixStepMySuperSuffix {
+export interface Step {
   /** address of the stop */
   address?: string;
   /**
@@ -63,7 +63,7 @@ export interface IMySuperPrefixStepMySuperSuffix {
   url?: string;
 }
 
-export interface IMySuperPrefixTripMySuperSuffix {
+export interface Trip {
   /**
    * begin of the trip in its local timezone as YYYY-MM-DDThh:mm
    * @format date-time
@@ -313,7 +313,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     tripList: (params: RequestParams = {}) =>
-      this.request<IMySuperPrefixTripMySuperSuffix[], any>({
+      this.request<Trip[], any>({
         path: `/trip`,
         method: "GET",
         secure: true,
@@ -329,7 +329,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     stopDetail: (tripId: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixStepMySuperSuffix[], any>({
+      this.request<Step[], any>({
         path: `/trip/${tripId}/stop`,
         method: "GET",
         secure: true,

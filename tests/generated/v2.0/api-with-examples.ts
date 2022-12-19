@@ -9,10 +9,6 @@
  * ---------------------------------------------------------------
  */
 
-export type IMySuperPrefixConsumesPlainTextPayloadMySuperSuffix = string;
-
-export type IMySuperPrefixWithCharsetPayloadMySuperSuffix = string;
-
 export type QueryParamsType = Record<string | number, any>;
 export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
 
@@ -267,7 +263,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary consumes contains charset
      * @request POST:/with-charset/
      */
-    withCharset: (someParm: IMySuperPrefixWithCharsetPayloadMySuperSuffix, params: RequestParams = {}) =>
+    withCharset: (someParm: string, params: RequestParams = {}) =>
       this.request<any, void>({
         path: `/with-charset/`,
         method: "POST",
@@ -284,7 +280,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary consumes plain text
      * @request POST:/consumes-plain-text/
      */
-    consumesPlainText: (someParm: IMySuperPrefixConsumesPlainTextPayloadMySuperSuffix, params: RequestParams = {}) =>
+    consumesPlainText: (someParm: string, params: RequestParams = {}) =>
       this.request<any, void>({
         path: `/consumes-plain-text/`,
         method: "POST",

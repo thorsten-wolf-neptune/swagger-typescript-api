@@ -9,12 +9,12 @@
  * ---------------------------------------------------------------
  */
 
-export interface IMySuperPrefixMessageMySuperSuffix {
+export interface Message {
   code?: number;
   text?: string;
 }
 
-export type IMySuperPrefixMessagesMySuperSuffix = Record<string, IMySuperPrefixMessageMySuperSuffix>;
+export type Messages = Record<string, Message>;
 
 export type QueryParamsType = Record<string | number, any>;
 export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;

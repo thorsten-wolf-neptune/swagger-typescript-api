@@ -9,7 +9,7 @@
  * ---------------------------------------------------------------
  */
 
-export interface IMySuperPrefixPetMySuperSuffix {
+export interface Pet {
   /** @format int64 */
   id: number;
   multiple?: string | number;
@@ -246,7 +246,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/pets
      */
     petsList: (params: RequestParams = {}) =>
-      this.request<IMySuperPrefixPetMySuperSuffix[], any>({
+      this.request<Pet[], any>({
         path: `/pets`,
         method: "GET",
         format: "json",

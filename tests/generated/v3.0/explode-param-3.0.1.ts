@@ -9,21 +9,11 @@
  * ---------------------------------------------------------------
  */
 
-export interface IMySuperPrefixCreateFilePayloadMySuperSuffix {
-  /** @default "" */
-  meme: string;
-  memeType?: string;
-}
-
-export interface IMySuperPrefixFloopMySuperSuffix {
+export interface Floop {
   info?: string;
 }
 
-export interface IMySuperPrefixGetsParamsMySuperSuffix {
-  params?: IMySuperPrefixQueryParamsMySuperSuffix;
-}
-
-export interface IMySuperPrefixQueryParamsMySuperSuffix {
+export interface QueryParams {
   /**
    * Page size
    * @format int32
@@ -263,8 +253,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Some summary
      * @request POST:/{user}/foos
      */
-    createFile: (user: string, data: IMySuperPrefixCreateFilePayloadMySuperSuffix, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixFloopMySuperSuffix, any>({
+    createFile: (
+      user: string,
+      data: {
+        /** @default "" */
+        meme: string;
+        memeType?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<Floop, any>({
         path: `/${user}/foos`,
         method: "POST",
         body: data,
@@ -280,7 +278,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name Gets
      * @request GET:/something/
      */
-    gets: (query: IMySuperPrefixGetsParamsMySuperSuffix, params: RequestParams = {}) =>
+    gets: (
+      query?: {
+        params?: QueryParams;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<any, any>({
         path: `/something/`,
         method: "GET",

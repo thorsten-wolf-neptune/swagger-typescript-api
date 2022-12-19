@@ -9,25 +9,19 @@
  * ---------------------------------------------------------------
  */
 
-export interface IMySuperPrefixGetPullRequestsByRepositoryParamsMySuperSuffix {
-  state?: "open" | "merged" | "declined";
-  username: string;
-  slug: string;
-}
-
-export interface IMySuperPrefixPullrequestMySuperSuffix {
-  author?: IMySuperPrefixUserMySuperSuffix;
+export interface Pullrequest {
+  author?: User;
   id?: number;
-  repository?: IMySuperPrefixRepositoryMySuperSuffix;
+  repository?: Repository;
   title?: string;
 }
 
-export interface IMySuperPrefixRepositoryMySuperSuffix {
-  owner?: IMySuperPrefixUserMySuperSuffix;
+export interface Repository {
+  owner?: User;
   slug?: string;
 }
 
-export interface IMySuperPrefixUserMySuperSuffix {
+export interface User {
   username?: string;
   uuid?: string;
 }
@@ -255,7 +249,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/2.0/users/{username}
      */
     getUserByName: (username: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixUserMySuperSuffix, any>({
+      this.request<User, any>({
         path: `/2.0/users/${username}`,
         method: "GET",
         format: "json",
@@ -269,7 +263,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/2.0/repositories/{username}
      */
     getRepositoriesByOwner: (username: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixRepositoryMySuperSuffix[], any>({
+      this.request<Repository[], any>({
         path: `/2.0/repositories/${username}`,
         method: "GET",
         format: "json",
@@ -283,7 +277,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/2.0/repositories/{username}/{slug}
      */
     getRepository: (username: string, slug: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixRepositoryMySuperSuffix, any>({
+      this.request<Repository, any>({
         path: `/2.0/repositories/${username}/${slug}`,
         method: "GET",
         format: "json",
@@ -297,10 +291,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/2.0/repositories/{username}/{slug}/pullrequests
      */
     getPullRequestsByRepository: (
-      { username, slug, ...query }: IMySuperPrefixGetPullRequestsByRepositoryParamsMySuperSuffix,
+      username: string,
+      slug: string,
+      query?: {
+        state?: "open" | "merged" | "declined";
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixPullrequestMySuperSuffix[], any>({
+      this.request<Pullrequest[], any>({
         path: `/2.0/repositories/${username}/${slug}/pullrequests`,
         method: "GET",
         query: query,
@@ -315,7 +313,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/2.0/repositories/{username}/{slug}/pullrequests/{pid}
      */
     getPullRequestsById: (username: string, slug: string, pid: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixPullrequestMySuperSuffix, any>({
+      this.request<Pullrequest, any>({
         path: `/2.0/repositories/${username}/${slug}/pullrequests/${pid}`,
         method: "GET",
         format: "json",

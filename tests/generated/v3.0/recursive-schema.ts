@@ -10,9 +10,9 @@
  */
 
 /** RECURSIVE */
-export interface IMySuperPrefixRecursiveObjectMySuperSuffix {
+export interface RecursiveObject {
   /** RECURSIVE */
-  bar?: IMySuperPrefixRecursiveObjectMySuperSuffix;
+  bar?: RecursiveObject;
   /**
    * Unique identifier of the GitHub app
    * @example 37

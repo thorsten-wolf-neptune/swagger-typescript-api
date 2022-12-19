@@ -9,28 +9,20 @@
  * ---------------------------------------------------------------
  */
 
-export interface IMySuperPrefixErrorMySuperSuffix {
+export interface Error {
   /** @format int32 */
   code: number;
   message: string;
 }
 
-export interface IMySuperPrefixListPetsParamsMySuperSuffix {
-  /**
-   * How many items to return at one time (max 100)
-   * @format int32
-   */
-  limit?: number;
-}
-
-export interface IMySuperPrefixPetMySuperSuffix {
+export interface Pet {
   /** @format int64 */
   id: number;
   name: string;
   tag?: string;
 }
 
-export type IMySuperPrefixPetsMySuperSuffix = IMySuperPrefixPetMySuperSuffix[];
+export type Pets = Pet[];
 
 export type QueryParamsType = Record<string | number, any>;
 export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
@@ -258,8 +250,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary List all pets
      * @request GET:/pets
      */
-    listPets: (query: IMySuperPrefixListPetsParamsMySuperSuffix, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixPetsMySuperSuffix, IMySuperPrefixErrorMySuperSuffix>({
+    listPets: (
+      query?: {
+        /**
+         * How many items to return at one time (max 100)
+         * @format int32
+         */
+        limit?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<Pets, Error>({
         path: `/pets`,
         method: "GET",
         query: query,
@@ -276,7 +277,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/pets
      */
     createPets: (params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixErrorMySuperSuffix>({
+      this.request<void, Error>({
         path: `/pets`,
         method: "POST",
         ...params,
@@ -291,7 +292,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/pets/{petId}
      */
     showPetById: (petId: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixPetsMySuperSuffix, IMySuperPrefixErrorMySuperSuffix>({
+      this.request<Pets, Error>({
         path: `/pets/${petId}`,
         method: "GET",
         format: "json",

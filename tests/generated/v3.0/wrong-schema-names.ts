@@ -13,31 +13,25 @@
  * Not found response
  * @example "Not found"
  */
-export type IMySuperPrefixDFMySuperSuffix = string;
+export type DF = string;
 
 /**
  * Not found response
  * @example "Not found"
  */
-export type IMySuperPrefixTypeFFMySuperSuffix = string;
+export type TypeFF = string;
 
 /**
  * Not found response
  * @example "Not found"
  */
-export type IMySuperPrefixType405MySuperSuffix = string;
+export type Type405 = string;
 
 /**
  * Not found response
  * @example "Not found"
  */
-export type IMySuperPrefixType404MySuperSuffix = string;
-
-export interface IMySuperPrefixGetPullRequestsByRepositoryParamsMySuperSuffix {
-  state?: "open" | "merged" | "declined";
-  username: string;
-  slug: string;
-}
+export type Type404 = string;
 
 export type QueryParamsType = Record<string | number, any>;
 export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
@@ -304,7 +298,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/2.0/repositories/{username}/{slug}/pullrequests
      */
     getPullRequestsByRepository: (
-      { username, slug, ...query }: IMySuperPrefixGetPullRequestsByRepositoryParamsMySuperSuffix,
+      username: string,
+      slug: string,
+      query?: {
+        state?: "open" | "merged" | "declined";
+      },
       params: RequestParams = {},
     ) =>
       this.request<any[], any>({
@@ -322,7 +320,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/2.0/repositories/{username}/{slug}/pullrequests/{pid}
      */
     getPullRequestsById: (username: string, slug: string, pid: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixType404MySuperSuffix, any>({
+      this.request<Type404, any>({
         path: `/2.0/repositories/${username}/${slug}/pullrequests/${pid}`,
         method: "GET",
         format: "json",

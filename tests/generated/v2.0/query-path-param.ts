@@ -9,19 +9,6 @@
  * ---------------------------------------------------------------
  */
 
-export interface IMySuperPrefixListPetsParamsMySuperSuffix {
-  /**
-   * How many items to return at one time (max 100)
-   * @format int32
-   */
-  queryParam?: number;
-  /**
-   * How many items to return at one time (max 100)
-   * @format int32
-   */
-  query?: number;
-}
-
 export type QueryParamsType = Record<string | number, any>;
 export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
 
@@ -248,7 +235,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary List all pets
      * @request GET:/foobarbaz/{query}
      */
-    listPets: ({ query, ...queryParams }: IMySuperPrefixListPetsParamsMySuperSuffix, params: RequestParams = {}) =>
+    listPets: (
+      query?: number,
+      queryParams?: {
+        /**
+         * How many items to return at one time (max 100)
+         * @format int32
+         */
+        queryParam?: number;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<object, any>({
         path: `/foobarbaz/${query}`,
         method: "GET",

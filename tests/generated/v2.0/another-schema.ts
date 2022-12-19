@@ -9,30 +9,25 @@
  * ---------------------------------------------------------------
  */
 
-export interface IMySuperPrefixBarMySuperSuffix {
+export interface Bar {
   A?: string;
   /** @format int32 */
   B: number;
-  Baz?: IMySuperPrefixBazMySuperSuffix;
+  Baz?: Baz;
   /** @format date-time */
   C: string;
 }
 
-export interface IMySuperPrefixBazMySuperSuffix {
-  Color: IMySuperPrefixColorMySuperSuffix;
+export interface Baz {
+  Color: Color;
   /** @format decimal */
   D: number;
 }
 
-export enum IMySuperPrefixColorMySuperSuffix {
+export enum Color {
   RED = 0,
   GREEN = 1,
   BLUE = 2,
-}
-
-export interface IMySuperPrefixFooGetBarParamsMySuperSuffix {
-  /** @format int32 */
-  id: number;
 }
 
 export type QueryParamsType = Record<string | number, any>;
@@ -272,8 +267,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name FooGetBar
      * @request GET:/api/Foo/GetBar
      */
-    fooGetBar: (query: IMySuperPrefixFooGetBarParamsMySuperSuffix, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixBarMySuperSuffix | null, any>({
+    fooGetBar: (
+      query: {
+        /** @format int32 */
+        id: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<Bar | null, any>({
         path: `/api/Foo/GetBar`,
         method: "GET",
         query: query,
@@ -288,7 +289,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name FooSetBar
      * @request POST:/api/Foo/SetBar
      */
-    fooSetBar: (value: IMySuperPrefixBarMySuperSuffix | null, params: RequestParams = {}) =>
+    fooSetBar: (value: Bar | null, params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/api/Foo/SetBar`,
         method: "POST",

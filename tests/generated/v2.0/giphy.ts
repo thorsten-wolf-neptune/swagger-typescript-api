@@ -9,12 +9,7 @@
  * ---------------------------------------------------------------
  */
 
-export interface IMySuperPrefixGetGifsByIdParamsMySuperSuffix {
-  /** Filters results by specified GIF IDs, separated by commas. */
-  ids?: string;
-}
-
-export interface IMySuperPrefixGifMySuperSuffix {
+export interface Gif {
   /**
    * The unique bit.ly URL for this GIF
    * @example "http://gph.is/1gsWDcL"
@@ -43,45 +38,45 @@ export interface IMySuperPrefixGifMySuperSuffix {
   /** An object containing data for various available formats and sizes of this GIF. */
   images?: {
     /** Data surrounding a version of this GIF downsized to be under 2mb. */
-    downsized?: IMySuperPrefixImageMySuperSuffix;
+    downsized?: Image;
     /** Data surrounding a version of this GIF downsized to be under 8mb. */
-    downsized_large?: IMySuperPrefixImageMySuperSuffix;
+    downsized_large?: Image;
     /** Data surrounding a version of this GIF downsized to be under 5mb. */
-    downsized_medium?: IMySuperPrefixImageMySuperSuffix;
+    downsized_medium?: Image;
     /** Data surrounding a version of this GIF downsized to be under 200kb. */
-    downsized_small?: IMySuperPrefixImageMySuperSuffix;
+    downsized_small?: Image;
     /** Data surrounding a static preview image of the downsized version of this GIF. */
-    downsized_still?: IMySuperPrefixImageMySuperSuffix;
+    downsized_still?: Image;
     /** Data surrounding versions of this GIF with a fixed height of 200 pixels. Good for mobile use. */
-    fixed_height?: IMySuperPrefixImageMySuperSuffix;
+    fixed_height?: Image;
     /** Data surrounding versions of this GIF with a fixed height of 200 pixels and the number of frames reduced to 6. */
-    fixed_height_downsampled?: IMySuperPrefixImageMySuperSuffix;
+    fixed_height_downsampled?: Image;
     /** Data surrounding versions of this GIF with a fixed height of 100 pixels. Good for mobile keyboards. */
-    fixed_height_small?: IMySuperPrefixImageMySuperSuffix;
+    fixed_height_small?: Image;
     /** Data surrounding a static image of this GIF with a fixed height of 100 pixels. */
-    fixed_height_small_still?: IMySuperPrefixImageMySuperSuffix;
+    fixed_height_small_still?: Image;
     /** Data surrounding a static image of this GIF with a fixed height of 200 pixels. */
-    fixed_height_still?: IMySuperPrefixImageMySuperSuffix;
+    fixed_height_still?: Image;
     /** Data surrounding versions of this GIF with a fixed width of 200 pixels. Good for mobile use. */
-    fixed_width?: IMySuperPrefixImageMySuperSuffix;
+    fixed_width?: Image;
     /** Data surrounding versions of this GIF with a fixed width of 200 pixels and the number of frames reduced to 6. */
-    fixed_width_downsampled?: IMySuperPrefixImageMySuperSuffix;
+    fixed_width_downsampled?: Image;
     /** Data surrounding versions of this GIF with a fixed width of 100 pixels. Good for mobile keyboards. */
-    fixed_width_small?: IMySuperPrefixImageMySuperSuffix;
+    fixed_width_small?: Image;
     /** Data surrounding a static image of this GIF with a fixed width of 100 pixels. */
-    fixed_width_small_still?: IMySuperPrefixImageMySuperSuffix;
+    fixed_width_small_still?: Image;
     /** Data surrounding a static image of this GIF with a fixed width of 200 pixels. */
-    fixed_width_still?: IMySuperPrefixImageMySuperSuffix;
+    fixed_width_still?: Image;
     /** Data surrounding a version of this GIF set to loop for 15 seconds. */
-    looping?: IMySuperPrefixImageMySuperSuffix;
+    looping?: Image;
     /** Data surrounding the original version of this GIF. Good for desktop use. */
-    original?: IMySuperPrefixImageMySuperSuffix;
+    original?: Image;
     /** Data surrounding a static preview image of the original GIF. */
-    original_still?: IMySuperPrefixImageMySuperSuffix;
+    original_still?: Image;
     /** Data surrounding a version of this GIF in .MP4 format limited to 50kb that displays the first 1-2 seconds of the GIF. */
-    preview?: IMySuperPrefixImageMySuperSuffix;
+    preview?: Image;
     /** Data surrounding a version of this GIF limited to 50kb that displays the first 1-2 seconds of the GIF. */
-    preview_gif?: IMySuperPrefixImageMySuperSuffix;
+    preview_gif?: Image;
   };
   /**
    * The creation or upload date from this GIF's source.
@@ -139,7 +134,7 @@ export interface IMySuperPrefixGifMySuperSuffix {
    */
   url?: string;
   /** The User Object contains information about the user associated with a GIF and URLs to assets such as that user's avatar image, profile, and more. */
-  user?: IMySuperPrefixUserMySuperSuffix;
+  user?: User;
   /**
    * The username this GIF is attached to, if applicable
    * @example "JoeCool4000"
@@ -147,7 +142,7 @@ export interface IMySuperPrefixGifMySuperSuffix {
   username?: string;
 }
 
-export interface IMySuperPrefixImageMySuperSuffix {
+export interface Image {
   /**
    * The URL for this GIF in .MP4 format.
    * @example "https://media1.giphy.com/media/cZ7rmKfFYOvYI/giphy.mp4"
@@ -196,7 +191,7 @@ export interface IMySuperPrefixImageMySuperSuffix {
 }
 
 /** The Meta Object contains basic information regarding the request, whether it was successful, and the response given by the API.  Check `responses` to see a description of types of response codes the API might give you under different cirumstances. */
-export interface IMySuperPrefixMetaMySuperSuffix {
+export interface Meta {
   /**
    * HTTP Response Message
    * @example "OK"
@@ -216,7 +211,7 @@ export interface IMySuperPrefixMetaMySuperSuffix {
 }
 
 /** The Pagination Object contains information relating to the number of total results available as well as the number of results fetched and their relative positions. */
-export interface IMySuperPrefixPaginationMySuperSuffix {
+export interface Pagination {
   /**
    * Total number of items returned.
    * @format int32
@@ -237,108 +232,8 @@ export interface IMySuperPrefixPaginationMySuperSuffix {
   total_count?: number;
 }
 
-export interface IMySuperPrefixRandomGifParamsMySuperSuffix {
-  /** Filters results by specified tag. */
-  tag?: string;
-  /** Filters results by specified rating. */
-  rating?: string;
-}
-
-export interface IMySuperPrefixRandomStickerParamsMySuperSuffix {
-  /** Filters results by specified tag. */
-  tag?: string;
-  /** Filters results by specified rating. */
-  rating?: string;
-}
-
-export interface IMySuperPrefixSearchGifsParamsMySuperSuffix {
-  /** Search query term or prhase. */
-  q: string;
-  /**
-   * The maximum number of records to return.
-   * @format int32
-   * @default 25
-   */
-  limit?: number;
-  /**
-   * An optional results offset.
-   * @format int32
-   * @default 0
-   */
-  offset?: number;
-  /** Filters results by specified rating. */
-  rating?: string;
-  /** Specify default language for regional content; use a 2-letter ISO 639-1 language code. */
-  lang?: string;
-}
-
-export interface IMySuperPrefixSearchStickersParamsMySuperSuffix {
-  /** Search query term or prhase. */
-  q: string;
-  /**
-   * The maximum number of records to return.
-   * @format int32
-   * @default 25
-   */
-  limit?: number;
-  /**
-   * An optional results offset.
-   * @format int32
-   * @default 0
-   */
-  offset?: number;
-  /** Filters results by specified rating. */
-  rating?: string;
-  /** Specify default language for regional content; use a 2-letter ISO 639-1 language code. */
-  lang?: string;
-}
-
-export interface IMySuperPrefixTranslateGifParamsMySuperSuffix {
-  /** Search term. */
-  s: string;
-}
-
-export interface IMySuperPrefixTranslateStickerParamsMySuperSuffix {
-  /** Search term. */
-  s: string;
-}
-
-export interface IMySuperPrefixTrendingGifsParamsMySuperSuffix {
-  /**
-   * The maximum number of records to return.
-   * @format int32
-   * @default 25
-   */
-  limit?: number;
-  /**
-   * An optional results offset.
-   * @format int32
-   * @default 0
-   */
-  offset?: number;
-  /** Filters results by specified rating. */
-  rating?: string;
-}
-
-export interface IMySuperPrefixTrendingStickersParamsMySuperSuffix {
-  /**
-   * The maximum number of records to return.
-   * @format int32
-   * @default 25
-   */
-  limit?: number;
-  /**
-   * An optional results offset.
-   * @format int32
-   * @default 0
-   */
-  offset?: number;
-  /** Filters results by specified rating. */
-  rating?: string;
-}
-
 /** The User Object contains information about the user associated with a GIF and URLs to assets such as that user's avatar image, profile, and more. */
-export interface IMySuperPrefixUserMySuperSuffix {
+export interface User {
   /**
    * The URL for this user's avatar image.
    * @example "https://media1.giphy.com/avatars/election2016/XwYrZi5H87o6.gif"
@@ -602,14 +497,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/gifs
      * @secure
      */
-    getGifsById: (query: IMySuperPrefixGetGifsByIdParamsMySuperSuffix, params: RequestParams = {}) =>
+    getGifsById: (
+      query?: {
+        /** Filters results by specified GIF IDs, separated by commas. */
+        ids?: string;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<
         {
-          data?: IMySuperPrefixGifMySuperSuffix[];
+          data?: Gif[];
           /** The Meta Object contains basic information regarding the request, whether it was successful, and the response given by the API.  Check `responses` to see a description of types of response codes the API might give you under different cirumstances. */
-          meta?: IMySuperPrefixMetaMySuperSuffix;
+          meta?: Meta;
           /** The Pagination Object contains information relating to the number of total results available as well as the number of results fetched and their relative positions. */
-          pagination?: IMySuperPrefixPaginationMySuperSuffix;
+          pagination?: Pagination;
         },
         any
       >({
@@ -630,12 +531,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/gifs/random
      * @secure
      */
-    randomGif: (query: IMySuperPrefixRandomGifParamsMySuperSuffix, params: RequestParams = {}) =>
+    randomGif: (
+      query?: {
+        /** Filters results by specified tag. */
+        tag?: string;
+        /** Filters results by specified rating. */
+        rating?: string;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<
         {
-          data?: IMySuperPrefixGifMySuperSuffix;
+          data?: Gif;
           /** The Meta Object contains basic information regarding the request, whether it was successful, and the response given by the API.  Check `responses` to see a description of types of response codes the API might give you under different cirumstances. */
-          meta?: IMySuperPrefixMetaMySuperSuffix;
+          meta?: Meta;
         },
         any
       >({
@@ -656,14 +565,36 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/gifs/search
      * @secure
      */
-    searchGifs: (query: IMySuperPrefixSearchGifsParamsMySuperSuffix, params: RequestParams = {}) =>
+    searchGifs: (
+      query: {
+        /** Search query term or prhase. */
+        q: string;
+        /**
+         * The maximum number of records to return.
+         * @format int32
+         * @default 25
+         */
+        limit?: number;
+        /**
+         * An optional results offset.
+         * @format int32
+         * @default 0
+         */
+        offset?: number;
+        /** Filters results by specified rating. */
+        rating?: string;
+        /** Specify default language for regional content; use a 2-letter ISO 639-1 language code. */
+        lang?: string;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<
         {
-          data?: IMySuperPrefixGifMySuperSuffix[];
+          data?: Gif[];
           /** The Meta Object contains basic information regarding the request, whether it was successful, and the response given by the API.  Check `responses` to see a description of types of response codes the API might give you under different cirumstances. */
-          meta?: IMySuperPrefixMetaMySuperSuffix;
+          meta?: Meta;
           /** The Pagination Object contains information relating to the number of total results available as well as the number of results fetched and their relative positions. */
-          pagination?: IMySuperPrefixPaginationMySuperSuffix;
+          pagination?: Pagination;
         },
         any
       >({
@@ -684,12 +615,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/gifs/translate
      * @secure
      */
-    translateGif: (query: IMySuperPrefixTranslateGifParamsMySuperSuffix, params: RequestParams = {}) =>
+    translateGif: (
+      query: {
+        /** Search term. */
+        s: string;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<
         {
-          data?: IMySuperPrefixGifMySuperSuffix;
+          data?: Gif;
           /** The Meta Object contains basic information regarding the request, whether it was successful, and the response given by the API.  Check `responses` to see a description of types of response codes the API might give you under different cirumstances. */
-          meta?: IMySuperPrefixMetaMySuperSuffix;
+          meta?: Meta;
         },
         any
       >({
@@ -710,14 +647,32 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/gifs/trending
      * @secure
      */
-    trendingGifs: (query: IMySuperPrefixTrendingGifsParamsMySuperSuffix, params: RequestParams = {}) =>
+    trendingGifs: (
+      query?: {
+        /**
+         * The maximum number of records to return.
+         * @format int32
+         * @default 25
+         */
+        limit?: number;
+        /**
+         * An optional results offset.
+         * @format int32
+         * @default 0
+         */
+        offset?: number;
+        /** Filters results by specified rating. */
+        rating?: string;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<
         {
-          data?: IMySuperPrefixGifMySuperSuffix[];
+          data?: Gif[];
           /** The Meta Object contains basic information regarding the request, whether it was successful, and the response given by the API.  Check `responses` to see a description of types of response codes the API might give you under different cirumstances. */
-          meta?: IMySuperPrefixMetaMySuperSuffix;
+          meta?: Meta;
           /** The Pagination Object contains information relating to the number of total results available as well as the number of results fetched and their relative positions. */
-          pagination?: IMySuperPrefixPaginationMySuperSuffix;
+          pagination?: Pagination;
         },
         any
       >({
@@ -741,9 +696,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getGifById: (gifId: number, params: RequestParams = {}) =>
       this.request<
         {
-          data?: IMySuperPrefixGifMySuperSuffix;
+          data?: Gif;
           /** The Meta Object contains basic information regarding the request, whether it was successful, and the response given by the API.  Check `responses` to see a description of types of response codes the API might give you under different cirumstances. */
-          meta?: IMySuperPrefixMetaMySuperSuffix;
+          meta?: Meta;
         },
         any
       >({
@@ -764,12 +719,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/stickers/random
      * @secure
      */
-    randomSticker: (query: IMySuperPrefixRandomStickerParamsMySuperSuffix, params: RequestParams = {}) =>
+    randomSticker: (
+      query?: {
+        /** Filters results by specified tag. */
+        tag?: string;
+        /** Filters results by specified rating. */
+        rating?: string;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<
         {
-          data?: IMySuperPrefixGifMySuperSuffix;
+          data?: Gif;
           /** The Meta Object contains basic information regarding the request, whether it was successful, and the response given by the API.  Check `responses` to see a description of types of response codes the API might give you under different cirumstances. */
-          meta?: IMySuperPrefixMetaMySuperSuffix;
+          meta?: Meta;
         },
         any
       >({
@@ -790,14 +753,36 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/stickers/search
      * @secure
      */
-    searchStickers: (query: IMySuperPrefixSearchStickersParamsMySuperSuffix, params: RequestParams = {}) =>
+    searchStickers: (
+      query: {
+        /** Search query term or prhase. */
+        q: string;
+        /**
+         * The maximum number of records to return.
+         * @format int32
+         * @default 25
+         */
+        limit?: number;
+        /**
+         * An optional results offset.
+         * @format int32
+         * @default 0
+         */
+        offset?: number;
+        /** Filters results by specified rating. */
+        rating?: string;
+        /** Specify default language for regional content; use a 2-letter ISO 639-1 language code. */
+        lang?: string;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<
         {
-          data?: IMySuperPrefixGifMySuperSuffix[];
+          data?: Gif[];
           /** The Meta Object contains basic information regarding the request, whether it was successful, and the response given by the API.  Check `responses` to see a description of types of response codes the API might give you under different cirumstances. */
-          meta?: IMySuperPrefixMetaMySuperSuffix;
+          meta?: Meta;
           /** The Pagination Object contains information relating to the number of total results available as well as the number of results fetched and their relative positions. */
-          pagination?: IMySuperPrefixPaginationMySuperSuffix;
+          pagination?: Pagination;
         },
         any
       >({
@@ -818,12 +803,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/stickers/translate
      * @secure
      */
-    translateSticker: (query: IMySuperPrefixTranslateStickerParamsMySuperSuffix, params: RequestParams = {}) =>
+    translateSticker: (
+      query: {
+        /** Search term. */
+        s: string;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<
         {
-          data?: IMySuperPrefixGifMySuperSuffix;
+          data?: Gif;
           /** The Meta Object contains basic information regarding the request, whether it was successful, and the response given by the API.  Check `responses` to see a description of types of response codes the API might give you under different cirumstances. */
-          meta?: IMySuperPrefixMetaMySuperSuffix;
+          meta?: Meta;
         },
         any
       >({
@@ -844,14 +835,32 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/stickers/trending
      * @secure
      */
-    trendingStickers: (query: IMySuperPrefixTrendingStickersParamsMySuperSuffix, params: RequestParams = {}) =>
+    trendingStickers: (
+      query?: {
+        /**
+         * The maximum number of records to return.
+         * @format int32
+         * @default 25
+         */
+        limit?: number;
+        /**
+         * An optional results offset.
+         * @format int32
+         * @default 0
+         */
+        offset?: number;
+        /** Filters results by specified rating. */
+        rating?: string;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<
         {
-          data?: IMySuperPrefixGifMySuperSuffix[];
+          data?: Gif[];
           /** The Meta Object contains basic information regarding the request, whether it was successful, and the response given by the API.  Check `responses` to see a description of types of response codes the API might give you under different cirumstances. */
-          meta?: IMySuperPrefixMetaMySuperSuffix;
+          meta?: Meta;
           /** The Pagination Object contains information relating to the number of total results available as well as the number of results fetched and their relative positions. */
-          pagination?: IMySuperPrefixPaginationMySuperSuffix;
+          pagination?: Pagination;
         },
         any
       >({

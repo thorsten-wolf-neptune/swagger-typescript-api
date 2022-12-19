@@ -9,6043 +9,7 @@
  * ---------------------------------------------------------------
  */
 
-export interface IMySuperPrefixActionsCreateOrUpdateOrgSecretPayloadMySuperSuffix {
-  /** Value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get an organization public key](https://docs.github.com/rest/reference/actions#get-an-organization-public-key) endpoint. */
-  encrypted_value?: string;
-  /** ID of the key you used to encrypt the secret. */
-  key_id?: string;
-  /**
-   * Configures the access that repositories have to the organization secret. Can be one of:
-   * \- `all` - All repositories in an organization can access the secret.
-   * \- `private` - Private repositories in an organization can access the secret.
-   * \- `selected` - Only specific repositories can access the secret.
-   */
-  visibility?: "all" | "private" | "selected";
-  /** An array of repository ids that can access the organization secret. You can only provide a list of repository ids when the `visibility` is set to `selected`. You can manage the list of selected repositories using the [List selected repositories for an organization secret](https://docs.github.com/rest/reference/actions#list-selected-repositories-for-an-organization-secret), [Set selected repositories for an organization secret](https://docs.github.com/rest/reference/actions#set-selected-repositories-for-an-organization-secret), and [Remove selected repository from an organization secret](https://docs.github.com/rest/reference/actions#remove-selected-repository-from-an-organization-secret) endpoints. */
-  selected_repository_ids?: string[];
-}
-
-export interface IMySuperPrefixActionsCreateOrUpdateRepoSecretPayloadMySuperSuffix {
-  /** Value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get a repository public key](https://docs.github.com/rest/reference/actions#get-a-repository-public-key) endpoint. */
-  encrypted_value?: string;
-  /** ID of the key you used to encrypt the secret. */
-  key_id?: string;
-}
-
-export interface IMySuperPrefixActionsCreateSelfHostedRunnerGroupForOrgPayloadMySuperSuffix {
-  /** Name of the runner group. */
-  name: string;
-  /**
-   * Visibility of a runner group. You can select all repositories, select individual repositories, or limit access to private repositories. Can be one of: `all`, `selected`, or `private`.
-   * @default "all"
-   */
-  visibility?: "selected" | "all" | "private";
-  /** List of repository IDs that can access the runner group. */
-  selected_repository_ids?: number[];
-  /** List of runner IDs to add to the runner group. */
-  runners?: number[];
-}
-
-export interface IMySuperPrefixActionsCreateWorkflowDispatchPayloadMySuperSuffix {
-  /** The git reference for the workflow. The reference can be a branch or tag name. */
-  ref: string;
-  /** Input keys and values configured in the workflow file. The maximum number of properties is 10. Any default properties configured in the workflow file will be used when `inputs` are omitted. */
-  inputs?: Record<string, string>;
-}
-
-export interface IMySuperPrefixActionsListArtifactsForRepoParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixActionsListJobsForWorkflowRunParamsMySuperSuffix {
-  /**
-   * Filters jobs by their `completed_at` timestamp. Can be one of:
-   * \* `latest`: Returns jobs from the most recent execution of the workflow run.
-   * \* `all`: Returns all jobs for a workflow run, including from old executions of the workflow run.
-   * @default "latest"
-   */
-  filter?: "latest" | "all";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-  runId: number;
-}
-
-export interface IMySuperPrefixActionsListOrgSecretsParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-}
-
-export interface IMySuperPrefixActionsListRepoSecretsParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixActionsListRepoWorkflowsParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixActionsListSelectedRepositoriesEnabledGithubActionsOrganizationParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-}
-
-export interface IMySuperPrefixActionsListSelfHostedRunnerGroupsForOrgParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-}
-
-export interface IMySuperPrefixActionsListSelfHostedRunnersForOrgParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-}
-
-export interface IMySuperPrefixActionsListSelfHostedRunnersForRepoParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixActionsListSelfHostedRunnersInGroupForOrgParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-  /** Unique identifier of the self-hosted runner group. */
-  runnerGroupId: number;
-}
-
-export interface IMySuperPrefixActionsListWorkflowRunArtifactsParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-  runId: number;
-}
-
-export interface IMySuperPrefixActionsListWorkflowRunsForRepoParamsMySuperSuffix {
-  /** Returns someone's workflow runs. Use the login for the user who created the `push` associated with the check suite or workflow run. */
-  actor?: string;
-  /** Returns workflow runs associated with a branch. Use the name of the branch of the `push`. */
-  branch?: string;
-  /** Returns workflow run triggered by the event you specify. For example, `push`, `pull_request` or `issue`. For more information, see "[Events that trigger workflows](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows)." */
-  event?: string;
-  /** Returns workflow runs associated with the check run `status` or `conclusion` you specify. For example, a conclusion can be `success` or a status can be `completed`. For more information, see the `status` and `conclusion` options available in "[Create a check run](https://docs.github.com/rest/reference/checks#create-a-check-run)." */
-  status?: "completed" | "status" | "conclusion";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixActionsListWorkflowRunsParamsMySuperSuffix {
-  /** Returns someone's workflow runs. Use the login for the user who created the `push` associated with the check suite or workflow run. */
-  actor?: string;
-  /** Returns workflow runs associated with a branch. Use the name of the branch of the `push`. */
-  branch?: string;
-  /** Returns workflow run triggered by the event you specify. For example, `push`, `pull_request` or `issue`. For more information, see "[Events that trigger workflows](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows)." */
-  event?: string;
-  /** Returns workflow runs associated with the check run `status` or `conclusion` you specify. For example, a conclusion can be `success` or a status can be `completed`. For more information, see the `status` and `conclusion` options available in "[Create a check run](https://docs.github.com/rest/reference/checks#create-a-check-run)." */
-  status?: "completed" | "status" | "conclusion";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-  /** The ID of the workflow. You can also pass the workflow file name as a string. */
-  workflowId: number | string;
-}
-
-export interface IMySuperPrefixActionsSetGithubActionsPermissionsOrganizationPayloadMySuperSuffix {
-  /** The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`. */
-  enabled_repositories: IMySuperPrefixEnabledRepositoriesMySuperSuffix;
-  /** The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`. */
-  allowed_actions?: IMySuperPrefixAllowedActionsMySuperSuffix;
-}
-
-export interface IMySuperPrefixActionsSetGithubActionsPermissionsRepositoryPayloadMySuperSuffix {
-  /** Whether GitHub Actions is enabled on the repository. */
-  enabled: IMySuperPrefixActionsEnabledMySuperSuffix;
-  /** The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`. */
-  allowed_actions?: IMySuperPrefixAllowedActionsMySuperSuffix;
-}
-
-export interface IMySuperPrefixActionsSetRepoAccessToSelfHostedRunnerGroupInOrgPayloadMySuperSuffix {
-  /** List of repository IDs that can access the runner group. */
-  selected_repository_ids: number[];
-}
-
-export interface IMySuperPrefixActionsSetSelectedReposForOrgSecretPayloadMySuperSuffix {
-  /** An array of repository ids that can access the organization secret. You can only provide a list of repository ids when the `visibility` is set to `selected`. You can add and remove individual repositories using the [Set selected repositories for an organization secret](https://docs.github.com/rest/reference/actions#set-selected-repositories-for-an-organization-secret) and [Remove selected repository from an organization secret](https://docs.github.com/rest/reference/actions#remove-selected-repository-from-an-organization-secret) endpoints. */
-  selected_repository_ids?: number[];
-}
-
-export interface IMySuperPrefixActionsSetSelectedRepositoriesEnabledGithubActionsOrganizationPayloadMySuperSuffix {
-  /** List of repository IDs to enable for GitHub Actions. */
-  selected_repository_ids: number[];
-}
-
-export interface IMySuperPrefixActionsSetSelfHostedRunnersInGroupForOrgPayloadMySuperSuffix {
-  /** List of runner IDs to add to the runner group. */
-  runners: number[];
-}
-
-export interface IMySuperPrefixActionsUpdateSelfHostedRunnerGroupForOrgPayloadMySuperSuffix {
-  /** Name of the runner group. */
-  name?: string;
-  /** Visibility of a runner group. You can select all repositories, select individual repositories, or all private repositories. Can be one of: `all`, `selected`, or `private`. */
-  visibility?: "selected" | "all" | "private";
-}
-
-export interface IMySuperPrefixActivityListEventsForAuthenticatedUserParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  username: string;
-}
-
-export interface IMySuperPrefixActivityListNotificationsForAuthenticatedUserParamsMySuperSuffix {
-  /**
-   * If `true`, show notifications marked as read.
-   * @default false
-   */
-  all?: boolean;
-  /**
-   * If `true`, only shows notifications in which the user is directly participating or mentioned.
-   * @default false
-   */
-  participating?: boolean;
-  /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  since?: string;
-  /** Only show notifications updated before the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  before?: string;
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixActivityListOrgEventsForAuthenticatedUserParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  username: string;
-  org: string;
-}
-
-export interface IMySuperPrefixActivityListPublicEventsForRepoNetworkParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixActivityListPublicEventsForUserParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  username: string;
-}
-
-export interface IMySuperPrefixActivityListPublicEventsParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixActivityListPublicOrgEventsParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-}
-
-export interface IMySuperPrefixActivityListReceivedEventsForUserParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  username: string;
-}
-
-export interface IMySuperPrefixActivityListReceivedPublicEventsForUserParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  username: string;
-}
-
-export interface IMySuperPrefixActivityListRepoEventsParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixActivityListRepoNotificationsForAuthenticatedUserParamsMySuperSuffix {
-  /**
-   * If `true`, show notifications marked as read.
-   * @default false
-   */
-  all?: boolean;
-  /**
-   * If `true`, only shows notifications in which the user is directly participating or mentioned.
-   * @default false
-   */
-  participating?: boolean;
-  /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  since?: string;
-  /** Only show notifications updated before the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  before?: string;
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixActivityListReposStarredByAuthenticatedUserParamsMySuperSuffix {
-  /**
-   * One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
-   * @default "created"
-   */
-  sort?: "created" | "updated";
-  /**
-   * One of `asc` (ascending) or `desc` (descending).
-   * @default "desc"
-   */
-  direction?: "asc" | "desc";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixActivityListReposStarredByUserParamsMySuperSuffix {
-  /**
-   * One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
-   * @default "created"
-   */
-  sort?: "created" | "updated";
-  /**
-   * One of `asc` (ascending) or `desc` (descending).
-   * @default "desc"
-   */
-  direction?: "asc" | "desc";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  username: string;
-}
-
-export interface IMySuperPrefixActivityListReposWatchedByUserParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  username: string;
-}
-
-export interface IMySuperPrefixActivityListStargazersForRepoParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixActivityListWatchedReposForAuthenticatedUserParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixActivityListWatchersForRepoParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixActivityMarkNotificationsAsReadPayloadMySuperSuffix {
-  /**
-   * Describes the last point that notifications were checked.
-   * @format date-time
-   */
-  last_read_at?: string;
-  /** Whether the notification has been read. */
-  read?: boolean;
-}
-
-export interface IMySuperPrefixActivityMarkRepoNotificationsAsReadPayloadMySuperSuffix {
-  /** Describes the last point that notifications were checked. Anything updated since this time will not be marked as read. If you omit this parameter, all notifications are marked as read. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. Default: The current timestamp. */
-  last_read_at?: string;
-}
-
-export interface IMySuperPrefixActivitySetRepoSubscriptionPayloadMySuperSuffix {
-  /** Determines if notifications should be received from this repository. */
-  subscribed?: boolean;
-  /** Determines if all notifications should be blocked from this repository. */
-  ignored?: boolean;
-}
-
-export interface IMySuperPrefixActivitySetThreadSubscriptionPayloadMySuperSuffix {
-  /**
-   * Whether to block all notifications from a thread.
-   * @default false
-   */
-  ignored?: boolean;
-}
-
-export interface IMySuperPrefixAppsCheckTokenPayloadMySuperSuffix {
-  /** The access_token of the OAuth application. */
-  access_token: string;
-}
-
-export interface IMySuperPrefixAppsCreateContentAttachmentPayloadMySuperSuffix {
-  /**
-   * The title of the attachment
-   * @maxLength 1024
-   * @example "Title of the attachment"
-   */
-  title: string;
-  /**
-   * The body of the attachment
-   * @maxLength 262144
-   * @example "Body of the attachment"
-   */
-  body: string;
-}
-
-export interface IMySuperPrefixAppsCreateInstallationAccessTokenPayloadMySuperSuffix {
-  /** List of repository names that the token should have access to */
-  repositories?: string[];
-  /**
-   * List of repository IDs that the token should have access to
-   * @example [1]
-   */
-  repository_ids?: number[];
-  /** The permissions granted to the user-to-server access token. */
-  permissions?: IMySuperPrefixAppPermissionsMySuperSuffix;
-}
-
-export interface IMySuperPrefixAppsDeleteAuthorizationPayloadMySuperSuffix {
-  /** The OAuth access token used to authenticate to the GitHub API. */
-  access_token?: string;
-}
-
-export interface IMySuperPrefixAppsDeleteTokenPayloadMySuperSuffix {
-  /** The OAuth access token used to authenticate to the GitHub API. */
-  access_token?: string;
-}
-
-export interface IMySuperPrefixAppsListAccountsForPlanParamsMySuperSuffix {
-  /**
-   * One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
-   * @default "created"
-   */
-  sort?: "created" | "updated";
-  /** To return the oldest accounts first, set to `asc`. Can be one of `asc` or `desc`. Ignored without the `sort` parameter. */
-  direction?: "asc" | "desc";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  /** plan_id parameter */
-  planId: number;
-}
-
-export interface IMySuperPrefixAppsListAccountsForPlanStubbedParamsMySuperSuffix {
-  /**
-   * One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
-   * @default "created"
-   */
-  sort?: "created" | "updated";
-  /** To return the oldest accounts first, set to `asc`. Can be one of `asc` or `desc`. Ignored without the `sort` parameter. */
-  direction?: "asc" | "desc";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  /** plan_id parameter */
-  planId: number;
-}
-
-export interface IMySuperPrefixAppsListInstallationReposForAuthenticatedUserParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  /** installation_id parameter */
-  installationId: number;
-}
-
-export interface IMySuperPrefixAppsListInstallationsForAuthenticatedUserParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixAppsListInstallationsParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  since?: string;
-  outdated?: string;
-}
-
-export interface IMySuperPrefixAppsListPlansParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixAppsListPlansStubbedParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixAppsListReposAccessibleToInstallationParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixAppsListSubscriptionsForAuthenticatedUserParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixAppsListSubscriptionsForAuthenticatedUserStubbedParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixAppsResetTokenPayloadMySuperSuffix {
-  /** The access_token of the OAuth application. */
-  access_token: string;
-}
-
-export interface IMySuperPrefixAppsScopeTokenPayloadMySuperSuffix {
-  /**
-   * **Required.** The OAuth access token used to authenticate to the GitHub API.
-   * @example "e72e16c7e42f292c6912e7710c838347ae178b4a"
-   */
-  access_token?: string;
-  /**
-   * The name of the user or organization to scope the user-to-server access token to. **Required** unless `target_id` is specified.
-   * @example "octocat"
-   */
-  target?: string;
-  /**
-   * The ID of the user or organization to scope the user-to-server access token to. **Required** unless `target` is specified.
-   * @example 1
-   */
-  target_id?: number;
-  /** The list of repository IDs to scope the user-to-server access token to. `repositories` may not be specified if `repository_ids` is specified. */
-  repositories?: string[];
-  /**
-   * The list of repository names to scope the user-to-server access token to. `repository_ids` may not be specified if `repositories` is specified.
-   * @example [1]
-   */
-  repository_ids?: number[];
-  /** The permissions granted to the user-to-server access token. */
-  permissions?: IMySuperPrefixAppPermissionsMySuperSuffix;
-}
-
-/** @example {"content_type":"json","insecure_ssl":"0","secret":"********","url":"https://example.com/webhook"} */
-export interface IMySuperPrefixAppsUpdateWebhookConfigForAppPayloadMySuperSuffix {
-  /** The URL to which the payloads will be delivered. */
-  url?: IMySuperPrefixWebhookConfigUrlMySuperSuffix;
-  /** The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. */
-  content_type?: IMySuperPrefixWebhookConfigContentTypeMySuperSuffix;
-  /** If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value for [delivery signature headers](https://docs.github.com/webhooks/event-payloads/#delivery-headers). */
-  secret?: IMySuperPrefixWebhookConfigSecretMySuperSuffix;
-  /** Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** */
-  insecure_ssl?: IMySuperPrefixWebhookConfigInsecureSslMySuperSuffix;
-}
-
-export interface IMySuperPrefixAuditLogGetAuditLogParamsMySuperSuffix {
-  /** A search phrase. For more information, see [Searching the audit log](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization#searching-the-audit-log). */
-  phrase?: string;
-  /**
-   * The event types to include:
-   *
-   * - `web` - returns web (non-Git) events
-   * - `git` - returns Git events
-   * - `all` - returns both web and Git events
-   *
-   * The default is `web`.
-   */
-  include?: "web" | "git" | "all";
-  /** A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor. */
-  after?: string;
-  /** A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor. */
-  before?: string;
-  /**
-   * The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
-   *
-   * The default is `desc`.
-   */
-  order?: "desc" | "asc";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /** The slug version of the enterprise name. You can also substitute this value with the enterprise id. */
-  enterprise: string;
-}
-
-export type IMySuperPrefixChecksCreatePayloadMySuperSuffix = (
-  | {
-      status?: "completed";
-      [key: string]: any;
-    }
-  | {
-      status?: "queued" | "in_progress";
-      [key: string]: any;
-    }
-  | ({
-      status?: "completed";
-      [key: string]: any;
-    } & {
-      status?: "queued" | "in_progress";
-      [key: string]: any;
-    })
-) & {
-  /** The name of the check. For example, "code-coverage". */
-  name: string;
-  /** The SHA of the commit. */
-  head_sha: string;
-  /** The URL of the integrator's site that has the full details of the check. If the integrator does not provide this, then the homepage of the GitHub app is used. */
-  details_url?: string;
-  /** A reference for the run on the integrator's system. */
-  external_id?: string;
-  /**
-   * The current status. Can be one of `queued`, `in_progress`, or `completed`.
-   * @default "queued"
-   */
-  status?: "queued" | "in_progress" | "completed";
-  /** The time that the check run began. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  started_at?: string;
-  /**
-   * **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `success`, `failure`, `neutral`, `cancelled`, `skipped`, `timed_out`, or `action_required`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.
-   * **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. Only GitHub can change a check run conclusion to `stale`.
-   */
-  conclusion?: "success" | "failure" | "neutral" | "cancelled" | "skipped" | "timed_out" | "action_required";
-  /** The time the check completed. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  completed_at?: string;
-  /** Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object) description. */
-  output?: {
-    /** The title of the check run. */
-    title: string;
-    /**
-     * The summary of the check run. This parameter supports Markdown.
-     * @maxLength 65535
-     */
-    summary: string;
-    /**
-     * The details of the check run. This parameter supports Markdown.
-     * @maxLength 65535
-     */
-    text?: string;
-    /**
-     * Adds information from your analysis to specific lines of code. Annotations are visible on GitHub in the **Checks** and **Files changed** tab of the pull request. The Checks API limits the number of annotations to a maximum of 50 per API request. To create more than 50 annotations, you have to make multiple requests to the [Update a check run](https://docs.github.com/rest/reference/checks#update-a-check-run) endpoint. Each time you update the check run, annotations are appended to the list of annotations that already exist for the check run. For details about how you can view annotations on GitHub, see "[About status checks](https://help.github.com/articles/about-status-checks#checks)". See the [`annotations` object](https://docs.github.com/rest/reference/checks#annotations-object) description for details about how to use this parameter.
-     * @maxItems 50
-     */
-    annotations?: {
-      /** The path of the file to add an annotation to. For example, `assets/css/main.css`. */
-      path: string;
-      /** The start line of the annotation. */
-      start_line: number;
-      /** The end line of the annotation. */
-      end_line: number;
-      /** The start column of the annotation. Annotations only support `start_column` and `end_column` on the same line. Omit this parameter if `start_line` and `end_line` have different values. */
-      start_column?: number;
-      /** The end column of the annotation. Annotations only support `start_column` and `end_column` on the same line. Omit this parameter if `start_line` and `end_line` have different values. */
-      end_column?: number;
-      /** The level of the annotation. Can be one of `notice`, `warning`, or `failure`. */
-      annotation_level: "notice" | "warning" | "failure";
-      /** A short description of the feedback for these lines of code. The maximum size is 64 KB. */
-      message: string;
-      /** The title that represents the annotation. The maximum size is 255 characters. */
-      title?: string;
-      /** Details about this annotation. The maximum size is 64 KB. */
-      raw_details?: string;
-    }[];
-    /** Adds images to the output displayed in the GitHub pull request UI. See the [`images` object](https://docs.github.com/rest/reference/checks#images-object) description for details. */
-    images?: {
-      /** The alternative text for the image. */
-      alt: string;
-      /** The full URL of the image. */
-      image_url: string;
-      /** A short image description. */
-      caption?: string;
-    }[];
-  };
-  /**
-   * Displays a button on GitHub that can be clicked to alert your app to do additional tasks. For example, a code linting app can display a button that automatically fixes detected errors. The button created in this object is displayed after the check run completes. When a user clicks the button, GitHub sends the [`check_run.requested_action` webhook](https://docs.github.com/webhooks/event-payloads/#check_run) to your app. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://docs.github.com/rest/reference/checks#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)." To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)."
-   * @maxItems 3
-   */
-  actions?: {
-    /**
-     * The text to be displayed on a button in the web UI. The maximum size is 20 characters.
-     * @maxLength 20
-     */
-    label: string;
-    /**
-     * A short explanation of what this action would do. The maximum size is 40 characters.
-     * @maxLength 40
-     */
-    description: string;
-    /**
-     * A reference for the action on the integrator's system. The maximum size is 20 characters.
-     * @maxLength 20
-     */
-    identifier: string;
-  }[];
-};
-
-export interface IMySuperPrefixChecksCreateSuitePayloadMySuperSuffix {
-  /** The sha of the head commit. */
-  head_sha: string;
-}
-
-export interface IMySuperPrefixChecksListAnnotationsParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-  /** check_run_id parameter */
-  checkRunId: number;
-}
-
-export interface IMySuperPrefixChecksListForRefParamsMySuperSuffix {
-  /** Returns check runs with the specified `name`. */
-  check_name?: string;
-  /** Returns check runs with the specified `status`. Can be one of `queued`, `in_progress`, or `completed`. */
-  status?: "queued" | "in_progress" | "completed";
-  /**
-   * Filters check runs by their `completed_at` timestamp. Can be one of `latest` (returning the most recent check runs) or `all`.
-   * @default "latest"
-   */
-  filter?: "latest" | "all";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-  /** ref+ parameter */
-  ref: string;
-}
-
-export interface IMySuperPrefixChecksListForSuiteParamsMySuperSuffix {
-  /** Returns check runs with the specified `name`. */
-  check_name?: string;
-  /** Returns check runs with the specified `status`. Can be one of `queued`, `in_progress`, or `completed`. */
-  status?: "queued" | "in_progress" | "completed";
-  /**
-   * Filters check runs by their `completed_at` timestamp. Can be one of `latest` (returning the most recent check runs) or `all`.
-   * @default "latest"
-   */
-  filter?: "latest" | "all";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-  /** check_suite_id parameter */
-  checkSuiteId: number;
-}
-
-export interface IMySuperPrefixChecksListSuitesForRefParamsMySuperSuffix {
-  /**
-   * Filters check suites by GitHub App `id`.
-   * @example 1
-   */
-  app_id?: number;
-  /** Returns check runs with the specified `name`. */
-  check_name?: string;
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-  /** ref+ parameter */
-  ref: string;
-}
-
-export interface IMySuperPrefixChecksSetSuitesPreferencesPayloadMySuperSuffix {
-  /** Enables or disables automatic creation of CheckSuite events upon pushes to the repository. Enabled by default. See the [`auto_trigger_checks` object](https://docs.github.com/rest/reference/checks#auto_trigger_checks-object) description for details. */
-  auto_trigger_checks?: {
-    /** The `id` of the GitHub App. */
-    app_id: number;
-    /**
-     * Set to `true` to enable automatic creation of CheckSuite events upon pushes to the repository, or `false` to disable them.
-     * @default true
-     */
-    setting: boolean;
-  }[];
-}
-
-export type IMySuperPrefixChecksUpdatePayloadMySuperSuffix = (
-  | {
-      status?: "completed";
-      [key: string]: any;
-    }
-  | {
-      status?: "queued" | "in_progress";
-      [key: string]: any;
-    }
-  | ({
-      status?: "completed";
-      [key: string]: any;
-    } & {
-      status?: "queued" | "in_progress";
-      [key: string]: any;
-    })
-) & {
-  /** The name of the check. For example, "code-coverage". */
-  name?: string;
-  /** The URL of the integrator's site that has the full details of the check. */
-  details_url?: string;
-  /** A reference for the run on the integrator's system. */
-  external_id?: string;
-  /** This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  started_at?: string;
-  /** The current status. Can be one of `queued`, `in_progress`, or `completed`. */
-  status?: "queued" | "in_progress" | "completed";
-  /**
-   * **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `success`, `failure`, `neutral`, `cancelled`, `skipped`, `timed_out`, or `action_required`.
-   * **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. Only GitHub can change a check run conclusion to `stale`.
-   */
-  conclusion?: "success" | "failure" | "neutral" | "cancelled" | "skipped" | "timed_out" | "action_required";
-  /** The time the check completed. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  completed_at?: string;
-  /** Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object-1) description. */
-  output?: {
-    /** **Required**. */
-    title?: string;
-    /**
-     * Can contain Markdown.
-     * @maxLength 65535
-     */
-    summary: string;
-    /**
-     * Can contain Markdown.
-     * @maxLength 65535
-     */
-    text?: string;
-    /**
-     * Adds information from your analysis to specific lines of code. Annotations are visible in GitHub's pull request UI. Annotations are visible in GitHub's pull request UI. The Checks API limits the number of annotations to a maximum of 50 per API request. To create more than 50 annotations, you have to make multiple requests to the [Update a check run](https://docs.github.com/rest/reference/checks#update-a-check-run) endpoint. Each time you update the check run, annotations are appended to the list of annotations that already exist for the check run. For details about annotations in the UI, see "[About status checks](https://help.github.com/articles/about-status-checks#checks)". See the [`annotations` object](https://docs.github.com/rest/reference/checks#annotations-object-1) description for details.
-     * @maxItems 50
-     */
-    annotations?: {
-      /** The path of the file to add an annotation to. For example, `assets/css/main.css`. */
-      path: string;
-      /** The start line of the annotation. */
-      start_line: number;
-      /** The end line of the annotation. */
-      end_line: number;
-      /** The start column of the annotation. Annotations only support `start_column` and `end_column` on the same line. Omit this parameter if `start_line` and `end_line` have different values. */
-      start_column?: number;
-      /** The end column of the annotation. Annotations only support `start_column` and `end_column` on the same line. Omit this parameter if `start_line` and `end_line` have different values. */
-      end_column?: number;
-      /** The level of the annotation. Can be one of `notice`, `warning`, or `failure`. */
-      annotation_level: "notice" | "warning" | "failure";
-      /** A short description of the feedback for these lines of code. The maximum size is 64 KB. */
-      message: string;
-      /** The title that represents the annotation. The maximum size is 255 characters. */
-      title?: string;
-      /** Details about this annotation. The maximum size is 64 KB. */
-      raw_details?: string;
-    }[];
-    /** Adds images to the output displayed in the GitHub pull request UI. See the [`images` object](https://docs.github.com/rest/reference/checks#annotations-object-1) description for details. */
-    images?: {
-      /** The alternative text for the image. */
-      alt: string;
-      /** The full URL of the image. */
-      image_url: string;
-      /** A short image description. */
-      caption?: string;
-    }[];
-  };
-  /**
-   * Possible further actions the integrator can perform, which a user may trigger. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://docs.github.com/rest/reference/checks#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)."
-   * @maxItems 3
-   */
-  actions?: {
-    /**
-     * The text to be displayed on a button in the web UI. The maximum size is 20 characters.
-     * @maxLength 20
-     */
-    label: string;
-    /**
-     * A short explanation of what this action would do. The maximum size is 40 characters.
-     * @maxLength 40
-     */
-    description: string;
-    /**
-     * A reference for the action on the integrator's system. The maximum size is 20 characters.
-     * @maxLength 20
-     */
-    identifier: string;
-  }[];
-};
-
-export interface IMySuperPrefixCodeScanningListAlertsForRepoParamsMySuperSuffix {
-  /** Set to `open`, `fixed`, or `dismissed` to list code scanning alerts in a specific state. */
-  state?: IMySuperPrefixCodeScanningAlertStateMySuperSuffix;
-  /** Set a full Git reference to list alerts for a specific branch. The `ref` must be formatted as `refs/heads/<branch name>`. */
-  ref?: IMySuperPrefixCodeScanningAlertRefMySuperSuffix;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixCodeScanningListRecentAnalysesParamsMySuperSuffix {
-  /** Set a full Git reference to list alerts for a specific branch. The `ref` must be formatted as `refs/heads/<branch name>`. */
-  ref?: IMySuperPrefixCodeScanningAnalysisRefMySuperSuffix;
-  /** Set a single code scanning tool name to filter alerts by tool. */
-  tool_name?: IMySuperPrefixCodeScanningAnalysisToolNameMySuperSuffix;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixCodeScanningUpdateAlertPayloadMySuperSuffix {
-  /** Sets the state of the code scanning alert. Can be one of `open` or `dismissed`. You must provide `dismissed_reason` when you set the state to `dismissed`. */
-  state: IMySuperPrefixCodeScanningAlertSetStateMySuperSuffix;
-  /** **Required when the state is dismissed.** The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`. */
-  dismissed_reason?: IMySuperPrefixCodeScanningAlertDismissedReasonMySuperSuffix;
-}
-
-export interface IMySuperPrefixCodeScanningUploadSarifPayloadMySuperSuffix {
-  /** The commit SHA of the code scanning analysis file. */
-  commit_sha: IMySuperPrefixCodeScanningAnalysisCommitShaMySuperSuffix;
-  /** The full Git reference of the code scanning analysis file, formatted as `refs/heads/<branch name>`. */
-  ref: IMySuperPrefixCodeScanningAnalysisRefMySuperSuffix;
-  /** A Base64 string representing the SARIF file to upload. You must first compress your SARIF file using [`gzip`](http://www.gnu.org/software/gzip/manual/gzip.html) and then translate the contents of the file into a Base64 encoding string. */
-  sarif: IMySuperPrefixCodeScanningAnalysisSarifFileMySuperSuffix;
-  /**
-   * The base directory used in the analysis, as it appears in the SARIF file.
-   * This property is used to convert file paths from absolute to relative, so that alerts can be mapped to their correct location in the repository.
-   * @format uri
-   * @example "file:///github/workspace/"
-   */
-  checkout_uri?: string;
-  /**
-   * The time that the analysis run began. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-   * @format date
-   */
-  started_at?: string;
-  /** The name of the tool used to generate the code scanning analysis alert. */
-  tool_name: IMySuperPrefixCodeScanningAnalysisToolNameMySuperSuffix;
-}
-
-export interface IMySuperPrefixEnterpriseAdminCreateSelfHostedRunnerGroupForEnterprisePayloadMySuperSuffix {
-  /** Name of the runner group. */
-  name: string;
-  /** Visibility of a runner group. You can select all organizations or select individual organization. Can be one of: `all` or `selected` */
-  visibility?: "selected" | "all";
-  /** List of organization IDs that can access the runner group. */
-  selected_organization_ids?: number[];
-  /** List of runner IDs to add to the runner group. */
-  runners?: number[];
-}
-
-export interface IMySuperPrefixEnterpriseAdminListOrgAccessToSelfHostedRunnerGroupInEnterpriseParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  /** The slug version of the enterprise name. You can also substitute this value with the enterprise id. */
-  enterprise: string;
-  /** Unique identifier of the self-hosted runner group. */
-  runnerGroupId: number;
-}
-
-export interface IMySuperPrefixEnterpriseAdminListProvisionedGroupsEnterpriseParamsMySuperSuffix {
-  /** Used for pagination: the index of the first result to return. */
-  startIndex?: number;
-  /** Used for pagination: the number of results to return. */
-  count?: number;
-  /** The slug version of the enterprise name. You can also substitute this value with the enterprise id. */
-  enterprise: string;
-}
-
-export interface IMySuperPrefixEnterpriseAdminListProvisionedIdentitiesEnterpriseParamsMySuperSuffix {
-  /** Used for pagination: the index of the first result to return. */
-  startIndex?: number;
-  /** Used for pagination: the number of results to return. */
-  count?: number;
-  /** The slug version of the enterprise name. You can also substitute this value with the enterprise id. */
-  enterprise: string;
-}
-
-export interface IMySuperPrefixEnterpriseAdminListSelectedOrganizationsEnabledGithubActionsEnterpriseParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  /** The slug version of the enterprise name. You can also substitute this value with the enterprise id. */
-  enterprise: string;
-}
-
-export interface IMySuperPrefixEnterpriseAdminListSelfHostedRunnerGroupsForEnterpriseParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  /** The slug version of the enterprise name. You can also substitute this value with the enterprise id. */
-  enterprise: string;
-}
-
-export interface IMySuperPrefixEnterpriseAdminListSelfHostedRunnersForEnterpriseParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  /** The slug version of the enterprise name. You can also substitute this value with the enterprise id. */
-  enterprise: string;
-}
-
-export interface IMySuperPrefixEnterpriseAdminListSelfHostedRunnersInGroupForEnterpriseParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  /** The slug version of the enterprise name. You can also substitute this value with the enterprise id. */
-  enterprise: string;
-  /** Unique identifier of the self-hosted runner group. */
-  runnerGroupId: number;
-}
-
-export interface IMySuperPrefixEnterpriseAdminProvisionAndInviteEnterpriseGroupPayloadMySuperSuffix {
-  /** The SCIM schema URIs. */
-  schemas: string[];
-  /** The name of the SCIM group. This must match the GitHub organization that the group maps to. */
-  displayName: string;
-  members?: {
-    /** The SCIM user ID for a user. */
-    value: string;
-  }[];
-}
-
-export interface IMySuperPrefixEnterpriseAdminProvisionAndInviteEnterpriseUserPayloadMySuperSuffix {
-  /** The SCIM schema URIs. */
-  schemas: string[];
-  /** The username for the user. */
-  userName: string;
-  name: {
-    /** The first name of the user. */
-    givenName: string;
-    /** The last name of the user. */
-    familyName: string;
-  };
-  /** List of user emails. */
-  emails: {
-    /** The email address. */
-    value: string;
-    /** The type of email address. */
-    type: string;
-    /** Whether this email address is the primary address. */
-    primary: boolean;
-  }[];
-  /** List of SCIM group IDs the user is a member of. */
-  groups?: {
-    value?: string;
-  }[];
-}
-
-export interface IMySuperPrefixEnterpriseAdminSetGithubActionsPermissionsEnterprisePayloadMySuperSuffix {
-  /** The policy that controls the organizations in the enterprise that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`. */
-  enabled_organizations: IMySuperPrefixEnabledOrganizationsMySuperSuffix;
-  /** The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`. */
-  allowed_actions?: IMySuperPrefixAllowedActionsMySuperSuffix;
-}
-
-export interface IMySuperPrefixEnterpriseAdminSetInformationForProvisionedEnterpriseGroupPayloadMySuperSuffix {
-  /** The SCIM schema URIs. */
-  schemas: string[];
-  /** The name of the SCIM group. This must match the GitHub organization that the group maps to. */
-  displayName: string;
-  members?: {
-    /** The SCIM user ID for a user. */
-    value: string;
-  }[];
-}
-
-export interface IMySuperPrefixEnterpriseAdminSetInformationForProvisionedEnterpriseUserPayloadMySuperSuffix {
-  /** The SCIM schema URIs. */
-  schemas: string[];
-  /** The username for the user. */
-  userName: string;
-  name: {
-    /** The first name of the user. */
-    givenName: string;
-    /** The last name of the user. */
-    familyName: string;
-  };
-  /** List of user emails. */
-  emails: {
-    /** The email address. */
-    value: string;
-    /** The type of email address. */
-    type: string;
-    /** Whether this email address is the primary address. */
-    primary: boolean;
-  }[];
-  /** List of SCIM group IDs the user is a member of. */
-  groups?: {
-    value?: string;
-  }[];
-}
-
-export interface IMySuperPrefixEnterpriseAdminSetOrgAccessToSelfHostedRunnerGroupInEnterprisePayloadMySuperSuffix {
-  /** List of organization IDs that can access the runner group. */
-  selected_organization_ids: number[];
-}
-
-export interface IMySuperPrefixEnterpriseAdminSetSelectedOrganizationsEnabledGithubActionsEnterprisePayloadMySuperSuffix {
-  /** List of organization IDs to enable for GitHub Actions. */
-  selected_organization_ids: number[];
-}
-
-export interface IMySuperPrefixEnterpriseAdminSetSelfHostedRunnersInGroupForEnterprisePayloadMySuperSuffix {
-  /** List of runner IDs to add to the runner group. */
-  runners: number[];
-}
-
-export interface IMySuperPrefixEnterpriseAdminUpdateAttributeForEnterpriseGroupPayloadMySuperSuffix {
-  /** The SCIM schema URIs. */
-  schemas: string[];
-  /** Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2). */
-  Operations: object[];
-}
-
-export interface IMySuperPrefixEnterpriseAdminUpdateAttributeForEnterpriseUserPayloadMySuperSuffix {
-  /** The SCIM schema URIs. */
-  schemas: string[];
-  /** Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2). */
-  Operations: object[];
-}
-
-export interface IMySuperPrefixEnterpriseAdminUpdateSelfHostedRunnerGroupForEnterprisePayloadMySuperSuffix {
-  /** Name of the runner group. */
-  name?: string;
-  /**
-   * Visibility of a runner group. You can select all organizations or select individual organizations. Can be one of: `all` or `selected`
-   * @default "all"
-   */
-  visibility?: "selected" | "all";
-}
-
-export interface IMySuperPrefixGistsCreateCommentPayloadMySuperSuffix {
-  /**
-   * The comment text.
-   * @maxLength 65535
-   * @example "Body of the attachment"
-   */
-  body: string;
-}
-
-export interface IMySuperPrefixGistsCreatePayloadMySuperSuffix {
-  /**
-   * Description of the gist
-   * @example "Example Ruby script"
-   */
-  description?: string;
-  /**
-   * Names and content for the files that make up the gist
-   * @example {"hello.rb":{"content":"puts \"Hello, World!\""}}
-   */
-  files: Record<
-    string,
-    {
-      /** Content of the file */
-      content: string;
-    }
-  >;
-  /** Flag indicating whether the gist is public */
-  public?: boolean | "true" | "false";
-}
-
-export interface IMySuperPrefixGistsListCommentsParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  /** gist_id parameter */
-  gistId: string;
-}
-
-export interface IMySuperPrefixGistsListCommitsParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  /** gist_id parameter */
-  gistId: string;
-}
-
-export interface IMySuperPrefixGistsListForUserParamsMySuperSuffix {
-  /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  since?: string;
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  username: string;
-}
-
-export interface IMySuperPrefixGistsListForksParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  /** gist_id parameter */
-  gistId: string;
-}
-
-export interface IMySuperPrefixGistsListParamsMySuperSuffix {
-  /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  since?: string;
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixGistsListPublicParamsMySuperSuffix {
-  /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  since?: string;
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixGistsListStarredParamsMySuperSuffix {
-  /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  since?: string;
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixGistsUpdateCommentPayloadMySuperSuffix {
-  /**
-   * The comment text.
-   * @maxLength 65535
-   * @example "Body of the attachment"
-   */
-  body: string;
-}
-
-export type IMySuperPrefixGistsUpdatePayloadMySuperSuffix = null & {
-  /**
-   * Description of the gist
-   * @example "Example Ruby script"
-   */
-  description?: string;
-  /**
-   * Names of files to be updated
-   * @example {"hello.rb":{"content":"blah","filename":"goodbye.rb"}}
-   */
-  files?: Record<
-    string,
-    (object | null) & {
-      /** The new content of the file */
-      content?: string;
-      /** The new filename for the file */
-      filename?: string | null;
-    }
-  >;
-};
-
-export interface IMySuperPrefixGitCreateBlobPayloadMySuperSuffix {
-  /** The new blob's content. */
-  content: string;
-  /**
-   * The encoding used for `content`. Currently, `"utf-8"` and `"base64"` are supported.
-   * @default "utf-8"
-   */
-  encoding?: string;
-}
-
-export interface IMySuperPrefixGitCreateCommitPayloadMySuperSuffix {
-  /** The commit message */
-  message: string;
-  /** The SHA of the tree object this commit points to */
-  tree: string;
-  /** The SHAs of the commits that were the parents of this commit. If omitted or empty, the commit will be written as a root commit. For a single parent, an array of one SHA should be provided; for a merge commit, an array of more than one should be provided. */
-  parents?: string[];
-  /** Information about the author of the commit. By default, the `author` will be the authenticated user and the current date. See the `author` and `committer` object below for details. */
-  author?: {
-    /** The name of the author (or committer) of the commit */
-    name?: string;
-    /** The email of the author (or committer) of the commit */
-    email?: string;
-    /** Indicates when this commit was authored (or committed). This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-    date?: string;
-  };
-  /** Information about the person who is making the commit. By default, `committer` will use the information set in `author`. See the `author` and `committer` object below for details. */
-  committer?: {
-    /** The name of the author (or committer) of the commit */
-    name?: string;
-    /** The email of the author (or committer) of the commit */
-    email?: string;
-    /** Indicates when this commit was authored (or committed). This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-    date?: string;
-  };
-  /** The [PGP signature](https://en.wikipedia.org/wiki/Pretty_Good_Privacy) of the commit. GitHub adds the signature to the `gpgsig` header of the created commit. For a commit signature to be verifiable by Git or GitHub, it must be an ASCII-armored detached PGP signature over the string commit as it would be written to the object database. To pass a `signature` parameter, you need to first manually create a valid PGP signature, which can be complicated. You may find it easier to [use the command line](https://git-scm.com/book/id/v2/Git-Tools-Signing-Your-Work) to create signed commits. */
-  signature?: string;
-}
-
-export interface IMySuperPrefixGitCreateRefPayloadMySuperSuffix {
-  /** The name of the fully qualified reference (ie: `refs/heads/master`). If it doesn't start with 'refs' and have at least two slashes, it will be rejected. */
-  ref: string;
-  /** The SHA1 value for this reference. */
-  sha: string;
-  /** @example ""refs/heads/newbranch"" */
-  key?: string;
-}
-
-export interface IMySuperPrefixGitCreateTagPayloadMySuperSuffix {
-  /** The tag's name. This is typically a version (e.g., "v0.0.1"). */
-  tag: string;
-  /** The tag message. */
-  message: string;
-  /** The SHA of the git object this is tagging. */
-  object: string;
-  /** The type of the object we're tagging. Normally this is a `commit` but it can also be a `tree` or a `blob`. */
-  type: "commit" | "tree" | "blob";
-  /** An object with information about the individual creating the tag. */
-  tagger?: {
-    /** The name of the author of the tag */
-    name?: string;
-    /** The email of the author of the tag */
-    email?: string;
-    /** When this object was tagged. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-    date?: string;
-  };
-}
-
-export interface IMySuperPrefixGitCreateTreePayloadMySuperSuffix {
-  /** Objects (of `path`, `mode`, `type`, and `sha`) specifying a tree structure. */
-  tree: {
-    /** The file referenced in the tree. */
-    path?: string;
-    /** The file mode; one of `100644` for file (blob), `100755` for executable (blob), `040000` for subdirectory (tree), `160000` for submodule (commit), or `120000` for a blob that specifies the path of a symlink. */
-    mode?: "100644" | "100755" | "040000" | "160000" | "120000";
-    /** Either `blob`, `tree`, or `commit`. */
-    type?: "blob" | "tree" | "commit";
-    /**
-     * The SHA1 checksum ID of the object in the tree. Also called `tree.sha`. If the value is `null` then the file will be deleted.
-     *
-     * **Note:** Use either `tree.sha` or `content` to specify the contents of the entry. Using both `tree.sha` and `content` will return an error.
-     */
-    sha?: string | null;
-    /**
-     * The content you want this file to have. GitHub will write this blob out and use that SHA for this entry. Use either this, or `tree.sha`.
-     *
-     * **Note:** Use either `tree.sha` or `content` to specify the contents of the entry. Using both `tree.sha` and `content` will return an error.
-     */
-    content?: string;
-  }[];
-  /**
-   * The SHA1 of an existing Git tree object which will be used as the base for the new tree. If provided, a new Git tree object will be created from entries in the Git tree object pointed to by `base_tree` and entries defined in the `tree` parameter. Entries defined in the `tree` parameter will overwrite items from `base_tree` with the same `path`. If you're creating new changes on a branch, then normally you'd set `base_tree` to the SHA1 of the Git tree object of the current latest commit on the branch you're working on.
-   * If not provided, GitHub will create a new Git tree object from only the entries defined in the `tree` parameter. If you create a new commit pointing to such a tree, then all files which were a part of the parent commit's tree and were not defined in the `tree` parameter will be listed as deleted by the new commit.
-   */
-  base_tree?: string;
-}
-
-export interface IMySuperPrefixGitGetTreeParamsMySuperSuffix {
-  /** Setting this parameter to any value returns the objects or subtrees referenced by the tree specified in `:tree_sha`. For example, setting `recursive` to any of the following will enable returning objects or subtrees: `0`, `1`, `"true"`, and `"false"`. Omit this parameter to prevent recursively returning objects or subtrees. */
-  recursive?: string;
-  owner: string;
-  repo: string;
-  treeSha: string;
-}
-
-export interface IMySuperPrefixGitListMatchingRefsParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-  /** ref+ parameter */
-  ref: string;
-}
-
-export interface IMySuperPrefixGitUpdateRefPayloadMySuperSuffix {
-  /** The SHA1 value to set this reference to */
-  sha: string;
-  /**
-   * Indicates whether to force the update or to make sure the update is a fast-forward update. Leaving this out or setting it to `false` will make sure you're not overwriting work.
-   * @default false
-   */
-  force?: boolean;
-}
-
-export interface IMySuperPrefixIssuesAddAssigneesPayloadMySuperSuffix {
-  /** Usernames of people to assign this issue to. _NOTE: Only users with push access can add assignees to an issue. Assignees are silently ignored otherwise._ */
-  assignees?: string[];
-}
-
-export interface IMySuperPrefixIssuesAddLabelsPayloadMySuperSuffix {
-  /** The name of the label to add to the issue. Must contain at least one label. **Note:** Alternatively, you can pass a single label as a `string` or an `array` of labels directly, but GitHub recommends passing an object with the `labels` key. */
-  labels: string[];
-}
-
-export interface IMySuperPrefixIssuesCreateCommentPayloadMySuperSuffix {
-  /** The contents of the comment. */
-  body: string;
-}
-
-export interface IMySuperPrefixIssuesCreateLabelPayloadMySuperSuffix {
-  /** The name of the label. Emoji can be added to label names, using either native emoji or colon-style markup. For example, typing `:strawberry:` will render the emoji ![:strawberry:](https://github.githubassets.com/images/icons/emoji/unicode/1f353.png ":strawberry:"). For a full list of available emoji and codes, see [emoji-cheat-sheet.com](http://emoji-cheat-sheet.com/). */
-  name: string;
-  /** The [hexadecimal color code](http://www.color-hex.com/) for the label, without the leading `#`. */
-  color?: string;
-  /** A short description of the label. */
-  description?: string;
-}
-
-export interface IMySuperPrefixIssuesCreateMilestonePayloadMySuperSuffix {
-  /** The title of the milestone. */
-  title: string;
-  /**
-   * The state of the milestone. Either `open` or `closed`.
-   * @default "open"
-   */
-  state?: "open" | "closed";
-  /** A description of the milestone. */
-  description?: string;
-  /** The milestone due date. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  due_on?: string;
-}
-
-export interface IMySuperPrefixIssuesCreatePayloadMySuperSuffix {
-  /** The title of the issue. */
-  title: string | number;
-  /** The contents of the issue. */
-  body?: string;
-  /** Login for the user that this issue should be assigned to. _NOTE: Only users with push access can set the assignee for new issues. The assignee is silently dropped otherwise. **This field is deprecated.**_ */
-  assignee?: string | null;
-  /** The `number` of the milestone to associate this issue with. _NOTE: Only users with push access can set the milestone for new issues. The milestone is silently dropped otherwise._ */
-  milestone?: string | number | null;
-  /** Labels to associate with this issue. _NOTE: Only users with push access can set labels for new issues. Labels are silently dropped otherwise._ */
-  labels?: (
-    | string
-    | {
-        id?: number;
-        name?: string;
-        description?: string | null;
-        color?: string | null;
-      }
-  )[];
-  /** Logins for Users to assign to this issue. _NOTE: Only users with push access can set assignees for new issues. Assignees are silently dropped otherwise._ */
-  assignees?: string[];
-}
-
-export interface IMySuperPrefixIssuesListAssigneesParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixIssuesListCommentsForRepoParamsMySuperSuffix {
-  /**
-   * One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
-   * @default "created"
-   */
-  sort?: "created" | "updated";
-  /** Either `asc` or `desc`. Ignored without the `sort` parameter. */
-  direction?: "asc" | "desc";
-  /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  since?: string;
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixIssuesListCommentsParamsMySuperSuffix {
-  /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  since?: string;
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-  /** issue_number parameter */
-  issueNumber: number;
-}
-
-export interface IMySuperPrefixIssuesListEventsForRepoParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixIssuesListEventsForTimelineParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-  /** issue_number parameter */
-  issueNumber: number;
-}
-
-export interface IMySuperPrefixIssuesListEventsParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-  /** issue_number parameter */
-  issueNumber: number;
-}
-
-export interface IMySuperPrefixIssuesListForAuthenticatedUserParamsMySuperSuffix {
-  /**
-   * Indicates which sorts of issues to return. Can be one of:
-   * \* `assigned`: Issues assigned to you
-   * \* `created`: Issues created by you
-   * \* `mentioned`: Issues mentioning you
-   * \* `subscribed`: Issues you're subscribed to updates for
-   * \* `all`: All issues the authenticated user can see, regardless of participation or creation
-   * @default "assigned"
-   */
-  filter?: "assigned" | "created" | "mentioned" | "subscribed" | "all";
-  /**
-   * Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
-   * @default "open"
-   */
-  state?: "open" | "closed" | "all";
-  /** A list of comma separated label names. Example: `bug,ui,@high` */
-  labels?: string;
-  /**
-   * What to sort results by. Can be either `created`, `updated`, `comments`.
-   * @default "created"
-   */
-  sort?: "created" | "updated" | "comments";
-  /**
-   * One of `asc` (ascending) or `desc` (descending).
-   * @default "desc"
-   */
-  direction?: "asc" | "desc";
-  /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  since?: string;
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixIssuesListForOrgParamsMySuperSuffix {
-  /**
-   * Indicates which sorts of issues to return. Can be one of:
-   * \* `assigned`: Issues assigned to you
-   * \* `created`: Issues created by you
-   * \* `mentioned`: Issues mentioning you
-   * \* `subscribed`: Issues you're subscribed to updates for
-   * \* `all`: All issues the authenticated user can see, regardless of participation or creation
-   * @default "assigned"
-   */
-  filter?: "assigned" | "created" | "mentioned" | "subscribed" | "all";
-  /**
-   * Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
-   * @default "open"
-   */
-  state?: "open" | "closed" | "all";
-  /** A list of comma separated label names. Example: `bug,ui,@high` */
-  labels?: string;
-  /**
-   * What to sort results by. Can be either `created`, `updated`, `comments`.
-   * @default "created"
-   */
-  sort?: "created" | "updated" | "comments";
-  /**
-   * One of `asc` (ascending) or `desc` (descending).
-   * @default "desc"
-   */
-  direction?: "asc" | "desc";
-  /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  since?: string;
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-}
-
-export interface IMySuperPrefixIssuesListForRepoParamsMySuperSuffix {
-  /** If an `integer` is passed, it should refer to a milestone by its `number` field. If the string `*` is passed, issues with any milestone are accepted. If the string `none` is passed, issues without milestones are returned. */
-  milestone?: string;
-  /**
-   * Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
-   * @default "open"
-   */
-  state?: "open" | "closed" | "all";
-  /** Can be the name of a user. Pass in `none` for issues with no assigned user, and `*` for issues assigned to any user. */
-  assignee?: string;
-  /** The user that created the issue. */
-  creator?: string;
-  /** A user that's mentioned in the issue. */
-  mentioned?: string;
-  /** A list of comma separated label names. Example: `bug,ui,@high` */
-  labels?: string;
-  /**
-   * What to sort results by. Can be either `created`, `updated`, `comments`.
-   * @default "created"
-   */
-  sort?: "created" | "updated" | "comments";
-  /**
-   * One of `asc` (ascending) or `desc` (descending).
-   * @default "desc"
-   */
-  direction?: "asc" | "desc";
-  /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  since?: string;
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixIssuesListLabelsForMilestoneParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-  /** milestone_number parameter */
-  milestoneNumber: number;
-}
-
-export interface IMySuperPrefixIssuesListLabelsForRepoParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixIssuesListLabelsOnIssueParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-  /** issue_number parameter */
-  issueNumber: number;
-}
-
-export interface IMySuperPrefixIssuesListMilestonesParamsMySuperSuffix {
-  /**
-   * The state of the milestone. Either `open`, `closed`, or `all`.
-   * @default "open"
-   */
-  state?: "open" | "closed" | "all";
-  /**
-   * What to sort results by. Either `due_on` or `completeness`.
-   * @default "due_on"
-   */
-  sort?: "due_on" | "completeness";
-  /**
-   * The direction of the sort. Either `asc` or `desc`.
-   * @default "asc"
-   */
-  direction?: "asc" | "desc";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixIssuesListParamsMySuperSuffix {
-  /**
-   * Indicates which sorts of issues to return. Can be one of:
-   * \* `assigned`: Issues assigned to you
-   * \* `created`: Issues created by you
-   * \* `mentioned`: Issues mentioning you
-   * \* `subscribed`: Issues you're subscribed to updates for
-   * \* `all`: All issues the authenticated user can see, regardless of participation or creation
-   * @default "assigned"
-   */
-  filter?: "assigned" | "created" | "mentioned" | "subscribed" | "all";
-  /**
-   * Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
-   * @default "open"
-   */
-  state?: "open" | "closed" | "all";
-  /** A list of comma separated label names. Example: `bug,ui,@high` */
-  labels?: string;
-  /**
-   * What to sort results by. Can be either `created`, `updated`, `comments`.
-   * @default "created"
-   */
-  sort?: "created" | "updated" | "comments";
-  /**
-   * One of `asc` (ascending) or `desc` (descending).
-   * @default "desc"
-   */
-  direction?: "asc" | "desc";
-  /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  since?: string;
-  collab?: boolean;
-  orgs?: boolean;
-  owned?: boolean;
-  pulls?: boolean;
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export type IMySuperPrefixIssuesLockPayloadMySuperSuffix = {
-  /**
-   * The reason for locking the issue or pull request conversation. Lock will fail if you don't use one of these reasons:
-   * \* `off-topic`
-   * \* `too heated`
-   * \* `resolved`
-   * \* `spam`
-   */
-  lock_reason?: "off-topic" | "too heated" | "resolved" | "spam";
-} | null;
-
-export interface IMySuperPrefixIssuesRemoveAssigneesPayloadMySuperSuffix {
-  /** Usernames of assignees to remove from an issue. _NOTE: Only users with push access can remove assignees from an issue. Assignees are silently ignored otherwise._ */
-  assignees?: string[];
-}
-
-export interface IMySuperPrefixIssuesSetLabelsPayloadMySuperSuffix {
-  /** The names of the labels to add to the issue. You can pass an empty array to remove all labels. **Note:** Alternatively, you can pass a single label as a `string` or an `array` of labels directly, but GitHub recommends passing an object with the `labels` key. */
-  labels?: string[];
-}
-
-export interface IMySuperPrefixIssuesUpdateCommentPayloadMySuperSuffix {
-  /** The contents of the comment. */
-  body: string;
-}
-
-export interface IMySuperPrefixIssuesUpdateLabelPayloadMySuperSuffix {
-  /** The new name of the label. Emoji can be added to label names, using either native emoji or colon-style markup. For example, typing `:strawberry:` will render the emoji ![:strawberry:](https://github.githubassets.com/images/icons/emoji/unicode/1f353.png ":strawberry:"). For a full list of available emoji and codes, see [emoji-cheat-sheet.com](http://emoji-cheat-sheet.com/). */
-  new_name?: string;
-  /** The [hexadecimal color code](http://www.color-hex.com/) for the label, without the leading `#`. */
-  color?: string;
-  /** A short description of the label. */
-  description?: string;
-}
-
-export interface IMySuperPrefixIssuesUpdateMilestonePayloadMySuperSuffix {
-  /** The title of the milestone. */
-  title?: string;
-  /**
-   * The state of the milestone. Either `open` or `closed`.
-   * @default "open"
-   */
-  state?: "open" | "closed";
-  /** A description of the milestone. */
-  description?: string;
-  /** The milestone due date. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  due_on?: string;
-}
-
-export interface IMySuperPrefixIssuesUpdatePayloadMySuperSuffix {
-  /** The title of the issue. */
-  title?: string | number;
-  /** The contents of the issue. */
-  body?: string;
-  /** Login for the user that this issue should be assigned to. **This field is deprecated.** */
-  assignee?: string | null;
-  /** State of the issue. Either `open` or `closed`. */
-  state?: "open" | "closed";
-  /** The `number` of the milestone to associate this issue with or `null` to remove current. _NOTE: Only users with push access can set the milestone for issues. The milestone is silently dropped otherwise._ */
-  milestone?: string | number | null;
-  /** Labels to associate with this issue. Pass one or more Labels to _replace_ the set of Labels on this Issue. Send an empty array (`[]`) to clear all Labels from the Issue. _NOTE: Only users with push access can set labels for issues. Labels are silently dropped otherwise._ */
-  labels?: (
-    | string
-    | {
-        id?: number;
-        name?: string;
-        description?: string | null;
-        color?: string | null;
-      }
-  )[];
-  /** Logins for Users to assign to this issue. Pass one or more user logins to _replace_ the set of assignees on this Issue. Send an empty array (`[]`) to clear all assignees from the Issue. _NOTE: Only users with push access can set assignees for new issues. Assignees are silently dropped otherwise._ */
-  assignees?: string[];
-}
-
-export interface IMySuperPrefixLicensesGetAllCommonlyUsedParamsMySuperSuffix {
-  featured?: boolean;
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-}
-
-export interface IMySuperPrefixMarkdownRenderPayloadMySuperSuffix {
-  /** The Markdown text to render in HTML. */
-  text: string;
-  /**
-   * The rendering mode.
-   * @default "markdown"
-   * @example "markdown"
-   */
-  mode?: "markdown" | "gfm";
-  /** The repository context to use when creating references in `gfm` mode. */
-  context?: string;
-}
-
-export type IMySuperPrefixMarkdownRenderRawPayloadMySuperSuffix = string;
-
-export interface IMySuperPrefixMetaGetOctocatParamsMySuperSuffix {
-  /** The words to show in Octocat's speech bubble */
-  s?: string;
-}
-
-export interface IMySuperPrefixMigrationsGetCommitAuthorsParamsMySuperSuffix {
-  /** A user ID. Only return users with an ID greater than this ID. */
-  since?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixMigrationsGetStatusForAuthenticatedUserParamsMySuperSuffix {
-  exclude?: string[];
-  /** migration_id parameter */
-  migrationId: number;
-}
-
-export interface IMySuperPrefixMigrationsListForAuthenticatedUserParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixMigrationsListForOrgParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-}
-
-export interface IMySuperPrefixMigrationsListReposForOrgParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-  /** migration_id parameter */
-  migrationId: number;
-}
-
-export interface IMySuperPrefixMigrationsListReposForUserParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  /** migration_id parameter */
-  migrationId: number;
-}
-
-export interface IMySuperPrefixMigrationsMapCommitAuthorPayloadMySuperSuffix {
-  /** The new Git author email. */
-  email?: string;
-  /** The new Git author name. */
-  name?: string;
-  /** @example ""can't touch this"" */
-  remote_id?: string;
-}
-
-export interface IMySuperPrefixMigrationsSetLfsPreferencePayloadMySuperSuffix {
-  /** Can be one of `opt_in` (large files will be stored using Git LFS) or `opt_out` (large files will be removed during the import). */
-  use_lfs: "opt_in" | "opt_out";
-}
-
-export interface IMySuperPrefixMigrationsStartForAuthenticatedUserPayloadMySuperSuffix {
-  /**
-   * Lock the repositories being migrated at the start of the migration
-   * @example true
-   */
-  lock_repositories?: boolean;
-  /**
-   * Do not include attachments in the migration
-   * @example true
-   */
-  exclude_attachments?: boolean;
-  /**
-   * Exclude attributes from the API response to improve performance
-   * @example ["repositories"]
-   */
-  exclude?: "repositories"[];
-  repositories: string[];
-}
-
-export interface IMySuperPrefixMigrationsStartForOrgPayloadMySuperSuffix {
-  /** A list of arrays indicating which repositories should be migrated. */
-  repositories: string[];
-  /**
-   * Indicates whether repositories should be locked (to prevent manipulation) while migrating data.
-   * @default false
-   */
-  lock_repositories?: boolean;
-  /**
-   * Indicates whether attachments should be excluded from the migration (to reduce migration archive file size).
-   * @default false
-   */
-  exclude_attachments?: boolean;
-  exclude?: string[];
-}
-
-export interface IMySuperPrefixMigrationsStartImportPayloadMySuperSuffix {
-  /** The URL of the originating repository. */
-  vcs_url: string;
-  /** The originating VCS type. Can be one of `subversion`, `git`, `mercurial`, or `tfvc`. Please be aware that without this parameter, the import job will take additional time to detect the VCS type before beginning the import. This detection step will be reflected in the response. */
-  vcs?: "subversion" | "git" | "mercurial" | "tfvc";
-  /** If authentication is required, the username to provide to `vcs_url`. */
-  vcs_username?: string;
-  /** If authentication is required, the password to provide to `vcs_url`. */
-  vcs_password?: string;
-  /** For a tfvc import, the name of the project that is being imported. */
-  tfvc_project?: string;
-}
-
-export interface IMySuperPrefixMigrationsUpdateImportPayloadMySuperSuffix {
-  /** The username to provide to the originating repository. */
-  vcs_username?: string;
-  /** The password to provide to the originating repository. */
-  vcs_password?: string;
-  /** @example ""git"" */
-  vcs?: string;
-  /** @example ""project1"" */
-  tfvc_project?: string;
-}
-
-export interface IMySuperPrefixOauthAuthorizationsCreateAuthorizationPayloadMySuperSuffix {
-  /**
-   * A list of scopes that this authorization is in.
-   * @example ["public_repo","user"]
-   */
-  scopes?: string[] | null;
-  /**
-   * A note to remind you what the OAuth token is for.
-   * @example "Update all gems"
-   */
-  note?: string;
-  /** A URL to remind you what app the OAuth token is for. */
-  note_url?: string;
-  /**
-   * The OAuth app client key for which to create the token.
-   * @maxLength 20
-   */
-  client_id?: string;
-  /**
-   * The OAuth app client secret for which to create the token.
-   * @maxLength 40
-   */
-  client_secret?: string;
-  /** A unique string to distinguish an authorization from others created for the same client ID and user. */
-  fingerprint?: string;
-}
-
-export interface IMySuperPrefixOauthAuthorizationsGetOrCreateAuthorizationForAppAndFingerprintPayloadMySuperSuffix {
-  /**
-   * The OAuth app client secret for which to create the token.
-   * @maxLength 40
-   */
-  client_secret: string;
-  /**
-   * A list of scopes that this authorization is in.
-   * @example ["public_repo","user"]
-   */
-  scopes?: string[] | null;
-  /**
-   * A note to remind you what the OAuth token is for.
-   * @example "Update all gems"
-   */
-  note?: string;
-  /** A URL to remind you what app the OAuth token is for. */
-  note_url?: string;
-}
-
-export interface IMySuperPrefixOauthAuthorizationsGetOrCreateAuthorizationForAppPayloadMySuperSuffix {
-  /**
-   * The OAuth app client secret for which to create the token.
-   * @maxLength 40
-   */
-  client_secret: string;
-  /**
-   * A list of scopes that this authorization is in.
-   * @example ["public_repo","user"]
-   */
-  scopes?: string[] | null;
-  /**
-   * A note to remind you what the OAuth token is for.
-   * @example "Update all gems"
-   */
-  note?: string;
-  /** A URL to remind you what app the OAuth token is for. */
-  note_url?: string;
-  /** A unique string to distinguish an authorization from others created for the same client ID and user. */
-  fingerprint?: string;
-}
-
-export interface IMySuperPrefixOauthAuthorizationsListAuthorizationsParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixOauthAuthorizationsListGrantsParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixOauthAuthorizationsUpdateAuthorizationPayloadMySuperSuffix {
-  /**
-   * A list of scopes that this authorization is in.
-   * @example ["public_repo","user"]
-   */
-  scopes?: string[] | null;
-  /** A list of scopes to add to this authorization. */
-  add_scopes?: string[];
-  /** A list of scopes to remove from this authorization. */
-  remove_scopes?: string[];
-  /**
-   * A note to remind you what the OAuth token is for.
-   * @example "Update all gems"
-   */
-  note?: string;
-  /** A URL to remind you what app the OAuth token is for. */
-  note_url?: string;
-  /** A unique string to distinguish an authorization from others created for the same client ID and user. */
-  fingerprint?: string;
-}
-
-export interface IMySuperPrefixOrgsCreateInvitationPayloadMySuperSuffix {
-  /** **Required unless you provide `email`**. GitHub user ID for the person you are inviting. */
-  invitee_id?: number;
-  /** **Required unless you provide `invitee_id`**. Email address of the person you are inviting, which can be an existing GitHub user. */
-  email?: string;
-  /**
-   * Specify role for new member. Can be one of:
-   * \* `admin` - Organization owners with full administrative rights to the organization and complete access to all repositories and teams.
-   * \* `direct_member` - Non-owner organization members with ability to see other members and join teams by invitation.
-   * \* `billing_manager` - Non-owner organization members with ability to manage the billing settings of your organization.
-   * @default "direct_member"
-   */
-  role?: "admin" | "direct_member" | "billing_manager";
-  /** Specify IDs for the teams you want to invite new members to. */
-  team_ids?: number[];
-}
-
-export interface IMySuperPrefixOrgsCreateWebhookPayloadMySuperSuffix {
-  /** Must be passed as "web". */
-  name: string;
-  /** Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#create-hook-config-params). */
-  config: {
-    /** The URL to which the payloads will be delivered. */
-    url: IMySuperPrefixWebhookConfigUrlMySuperSuffix;
-    /** The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. */
-    content_type?: IMySuperPrefixWebhookConfigContentTypeMySuperSuffix;
-    /** If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value for [delivery signature headers](https://docs.github.com/webhooks/event-payloads/#delivery-headers). */
-    secret?: IMySuperPrefixWebhookConfigSecretMySuperSuffix;
-    /** Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** */
-    insecure_ssl?: IMySuperPrefixWebhookConfigInsecureSslMySuperSuffix;
-    /** @example ""kdaigle"" */
-    username?: string;
-    /** @example ""password"" */
-    password?: string;
-  };
-  /**
-   * Determines what [events](https://docs.github.com/webhooks/event-payloads) the hook is triggered for.
-   * @default ["push"]
-   */
-  events?: string[];
-  /**
-   * Determines if notifications are sent when the webhook is triggered. Set to `true` to send notifications.
-   * @default true
-   */
-  active?: boolean;
-}
-
-export interface IMySuperPrefixOrgsGetAuditLogParamsMySuperSuffix {
-  /** A search phrase. For more information, see [Searching the audit log](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization#searching-the-audit-log). */
-  phrase?: string;
-  /**
-   * The event types to include:
-   *
-   * - `web` - returns web (non-Git) events
-   * - `git` - returns Git events
-   * - `all` - returns both web and Git events
-   *
-   * The default is `web`.
-   */
-  include?: "web" | "git" | "all";
-  /** A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor. */
-  after?: string;
-  /** A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor. */
-  before?: string;
-  /**
-   * The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
-   *
-   * The default is `desc`.
-   */
-  order?: "desc" | "asc";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  org: string;
-}
-
-export interface IMySuperPrefixOrgsListAppInstallationsParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-}
-
-export interface IMySuperPrefixOrgsListFailedInvitationsParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-}
-
-export interface IMySuperPrefixOrgsListForAuthenticatedUserParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixOrgsListForUserParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  username: string;
-}
-
-export interface IMySuperPrefixOrgsListInvitationTeamsParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-  /** invitation_id parameter */
-  invitationId: number;
-}
-
-export interface IMySuperPrefixOrgsListMembersParamsMySuperSuffix {
-  /**
-   * Filter members returned in the list. Can be one of:
-   * \* `2fa_disabled` - Members without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled. Available for organization owners.
-   * \* `all` - All members the authenticated user can see.
-   * @default "all"
-   */
-  filter?: "2fa_disabled" | "all";
-  /**
-   * Filter members returned by their role. Can be one of:
-   * \* `all` - All members of the organization, regardless of role.
-   * \* `admin` - Organization owners.
-   * \* `member` - Non-owner organization members.
-   * @default "all"
-   */
-  role?: "all" | "admin" | "member";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-}
-
-export interface IMySuperPrefixOrgsListMembershipsForAuthenticatedUserParamsMySuperSuffix {
-  /** Indicates the state of the memberships to return. Can be either `active` or `pending`. If not specified, the API returns both active and pending memberships. */
-  state?: "active" | "pending";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixOrgsListOutsideCollaboratorsParamsMySuperSuffix {
-  /**
-   * Filter the list of outside collaborators. Can be one of:
-   * \* `2fa_disabled`: Outside collaborators without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled.
-   * \* `all`: All outside collaborators.
-   * @default "all"
-   */
-  filter?: "2fa_disabled" | "all";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-}
-
-export interface IMySuperPrefixOrgsListParamsMySuperSuffix {
-  /** An organization ID. Only return organizations with an ID greater than this ID. */
-  since?: number;
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-}
-
-export interface IMySuperPrefixOrgsListPendingInvitationsParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-}
-
-export interface IMySuperPrefixOrgsListPublicMembersParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-}
-
-export interface IMySuperPrefixOrgsListWebhooksParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-}
-
-export interface IMySuperPrefixOrgsSetMembershipForUserPayloadMySuperSuffix {
-  /**
-   * The role to give the user in the organization. Can be one of:
-   * \* `admin` - The user will become an owner of the organization.
-   * \* `member` - The user will become a non-owner member of the organization.
-   * @default "member"
-   */
-  role?: "admin" | "member";
-}
-
-export interface IMySuperPrefixOrgsUpdateMembershipForAuthenticatedUserPayloadMySuperSuffix {
-  /** The state that the membership should be in. Only `"active"` will be accepted. */
-  state: "active";
-}
-
-export interface IMySuperPrefixOrgsUpdatePayloadMySuperSuffix {
-  /** Billing email address. This address is not publicized. */
-  billing_email?: string;
-  /** The company name. */
-  company?: string;
-  /** The publicly visible email address. */
-  email?: string;
-  /** The Twitter username of the company. */
-  twitter_username?: string;
-  /** The location. */
-  location?: string;
-  /** The shorthand name of the company. */
-  name?: string;
-  /** The description of the company. */
-  description?: string;
-  /** Toggles whether an organization can use organization projects. */
-  has_organization_projects?: boolean;
-  /** Toggles whether repositories that belong to the organization can use repository projects. */
-  has_repository_projects?: boolean;
-  /**
-   * Default permission level members have for organization repositories:
-   * \* `read` - can pull, but not push to or administer this repository.
-   * \* `write` - can pull and push, but not administer this repository.
-   * \* `admin` - can pull, push, and administer this repository.
-   * \* `none` - no permissions granted by default.
-   * @default "read"
-   */
-  default_repository_permission?: "read" | "write" | "admin" | "none";
-  /**
-   * Toggles the ability of non-admin organization members to create repositories. Can be one of:
-   * \* `true` - all organization members can create repositories.
-   * \* `false` - only organization owners can create repositories.
-   * Default: `true`
-   * **Note:** A parameter can override this parameter. See `members_allowed_repository_creation_type` in this table for details. **Note:** A parameter can override this parameter. See `members_allowed_repository_creation_type` in this table for details.
-   * @default true
-   */
-  members_can_create_repositories?: boolean;
-  /**
-   * Toggles whether organization members can create internal repositories, which are visible to all enterprise members. You can only allow members to create internal repositories if your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. Can be one of:
-   * \* `true` - all organization members can create internal repositories.
-   * \* `false` - only organization owners can create internal repositories.
-   * Default: `true`. For more information, see "[Restricting repository creation in your organization](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)" in the GitHub Help documentation.
-   */
-  members_can_create_internal_repositories?: boolean;
-  /**
-   * Toggles whether organization members can create private repositories, which are visible to organization members with permission. Can be one of:
-   * \* `true` - all organization members can create private repositories.
-   * \* `false` - only organization owners can create private repositories.
-   * Default: `true`. For more information, see "[Restricting repository creation in your organization](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)" in the GitHub Help documentation.
-   */
-  members_can_create_private_repositories?: boolean;
-  /**
-   * Toggles whether organization members can create public repositories, which are visible to anyone. Can be one of:
-   * \* `true` - all organization members can create public repositories.
-   * \* `false` - only organization owners can create public repositories.
-   * Default: `true`. For more information, see "[Restricting repository creation in your organization](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)" in the GitHub Help documentation.
-   */
-  members_can_create_public_repositories?: boolean;
-  /**
-   * Specifies which types of repositories non-admin organization members can create. Can be one of:
-   * \* `all` - all organization members can create public and private repositories.
-   * \* `private` - members can create private repositories. This option is only available to repositories that are part of an organization on GitHub Enterprise Cloud.
-   * \* `none` - only admin members can create repositories.
-   * **Note:** This parameter is deprecated and will be removed in the future. Its return value ignores internal repositories. Using this parameter overrides values set in `members_can_create_repositories`. See the parameter deprecation notice in the operation description for details.
-   */
-  members_allowed_repository_creation_type?: "all" | "private" | "none";
-  /**
-   * Toggles whether organization members can create GitHub Pages sites. Can be one of:
-   * \* `true` - all organization members can create GitHub Pages sites.
-   * \* `false` - no organization members can create GitHub Pages sites. Existing published sites will not be impacted.
-   * @default true
-   */
-  members_can_create_pages?: boolean;
-  /**
-   * Toggles whether organization members can create public GitHub Pages sites. Can be one of:
-   * \* `true` - all organization members can create public GitHub Pages sites.
-   * \* `false` - no organization members can create public GitHub Pages sites. Existing published sites will not be impacted.
-   * @default true
-   */
-  members_can_create_public_pages?: boolean;
-  /**
-   * Toggles whether organization members can create private GitHub Pages sites. Can be one of:
-   * \* `true` - all organization members can create private GitHub Pages sites.
-   * \* `false` - no organization members can create private GitHub Pages sites. Existing published sites will not be impacted.
-   * @default true
-   */
-  members_can_create_private_pages?: boolean;
-  /** @example ""http://github.blog"" */
-  blog?: string;
-}
-
-/** @example {"content_type":"json","insecure_ssl":"0","secret":"********","url":"https://example.com/webhook"} */
-export interface IMySuperPrefixOrgsUpdateWebhookConfigForOrgPayloadMySuperSuffix {
-  /** The URL to which the payloads will be delivered. */
-  url?: IMySuperPrefixWebhookConfigUrlMySuperSuffix;
-  /** The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. */
-  content_type?: IMySuperPrefixWebhookConfigContentTypeMySuperSuffix;
-  /** If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value for [delivery signature headers](https://docs.github.com/webhooks/event-payloads/#delivery-headers). */
-  secret?: IMySuperPrefixWebhookConfigSecretMySuperSuffix;
-  /** Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** */
-  insecure_ssl?: IMySuperPrefixWebhookConfigInsecureSslMySuperSuffix;
-}
-
-export interface IMySuperPrefixOrgsUpdateWebhookPayloadMySuperSuffix {
-  /** Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#update-hook-config-params). */
-  config?: {
-    /** The URL to which the payloads will be delivered. */
-    url: IMySuperPrefixWebhookConfigUrlMySuperSuffix;
-    /** The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. */
-    content_type?: IMySuperPrefixWebhookConfigContentTypeMySuperSuffix;
-    /** If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value for [delivery signature headers](https://docs.github.com/webhooks/event-payloads/#delivery-headers). */
-    secret?: IMySuperPrefixWebhookConfigSecretMySuperSuffix;
-    /** Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** */
-    insecure_ssl?: IMySuperPrefixWebhookConfigInsecureSslMySuperSuffix;
-  };
-  /**
-   * Determines what [events](https://docs.github.com/webhooks/event-payloads) the hook is triggered for.
-   * @default ["push"]
-   */
-  events?: string[];
-  /**
-   * Determines if notifications are sent when the webhook is triggered. Set to `true` to send notifications.
-   * @default true
-   */
-  active?: boolean;
-  /** @example ""web"" */
-  name?: string;
-}
-
-export interface IMySuperPrefixProjectsAddCollaboratorPayloadMySuperSuffix {
-  /**
-   * The permission to grant the collaborator.
-   * @default "write"
-   * @example "write"
-   */
-  permission?: "read" | "write" | "admin";
-}
-
-export type IMySuperPrefixProjectsCreateCardPayloadMySuperSuffix =
-  | {
-      /**
-       * The project card's note
-       * @example "Update all gems"
-       */
-      note: string | null;
-    }
-  | {
-      /**
-       * The unique identifier of the content associated with the card
-       * @example 42
-       */
-      content_id: number;
-      /**
-       * The piece of content associated with the card
-       * @example "PullRequest"
-       */
-      content_type: string;
-    };
-
-export interface IMySuperPrefixProjectsCreateColumnPayloadMySuperSuffix {
-  /**
-   * Name of the project column
-   * @example "Remaining tasks"
-   */
-  name: string;
-}
-
-export interface IMySuperPrefixProjectsCreateForAuthenticatedUserPayloadMySuperSuffix {
-  /**
-   * Name of the project
-   * @example "Week One Sprint"
-   */
-  name: string;
-  /**
-   * Body of the project
-   * @example "This project represents the sprint of the first week in January"
-   */
-  body?: string | null;
-}
-
-export interface IMySuperPrefixProjectsCreateForOrgPayloadMySuperSuffix {
-  /** The name of the project. */
-  name: string;
-  /** The description of the project. */
-  body?: string;
-}
-
-export interface IMySuperPrefixProjectsCreateForRepoPayloadMySuperSuffix {
-  /** The name of the project. */
-  name: string;
-  /** The description of the project. */
-  body?: string;
-}
-
-export interface IMySuperPrefixProjectsListCardsParamsMySuperSuffix {
-  /**
-   * Filters the project cards that are returned by the card's state. Can be one of `all`,`archived`, or `not_archived`.
-   * @default "not_archived"
-   */
-  archived_state?: "all" | "archived" | "not_archived";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  /** column_id parameter */
-  columnId: number;
-}
-
-export interface IMySuperPrefixProjectsListCollaboratorsParamsMySuperSuffix {
-  /**
-   * Filters the collaborators by their affiliation. Can be one of:
-   * \* `outside`: Outside collaborators of a project that are not a member of the project's organization.
-   * \* `direct`: Collaborators with permissions to a project, regardless of organization membership status.
-   * \* `all`: All collaborators the authenticated user can see.
-   * @default "all"
-   */
-  affiliation?: "outside" | "direct" | "all";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  projectId: number;
-}
-
-export interface IMySuperPrefixProjectsListColumnsParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  projectId: number;
-}
-
-export interface IMySuperPrefixProjectsListForOrgParamsMySuperSuffix {
-  /**
-   * Indicates the state of the projects to return. Can be either `open`, `closed`, or `all`.
-   * @default "open"
-   */
-  state?: "open" | "closed" | "all";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-}
-
-export interface IMySuperPrefixProjectsListForRepoParamsMySuperSuffix {
-  /**
-   * Indicates the state of the projects to return. Can be either `open`, `closed`, or `all`.
-   * @default "open"
-   */
-  state?: "open" | "closed" | "all";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixProjectsListForUserParamsMySuperSuffix {
-  /**
-   * Indicates the state of the projects to return. Can be either `open`, `closed`, or `all`.
-   * @default "open"
-   */
-  state?: "open" | "closed" | "all";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  username: string;
-}
-
-export interface IMySuperPrefixProjectsMoveCardPayloadMySuperSuffix {
-  /**
-   * The position of the card in a column
-   * @pattern ^(?:top|bottom|after:\d+)$
-   * @example "bottom"
-   */
-  position: string;
-  /**
-   * The unique identifier of the column the card should be moved to
-   * @example 42
-   */
-  column_id?: number;
-}
-
-export interface IMySuperPrefixProjectsMoveColumnPayloadMySuperSuffix {
-  /**
-   * The position of the column in a project
-   * @pattern ^(?:first|last|after:\d+)$
-   * @example "last"
-   */
-  position: string;
-}
-
-export interface IMySuperPrefixProjectsUpdateCardPayloadMySuperSuffix {
-  /**
-   * The project card's note
-   * @example "Update all gems"
-   */
-  note?: string | null;
-  /**
-   * Whether or not the card is archived
-   * @example false
-   */
-  archived?: boolean;
-}
-
-export interface IMySuperPrefixProjectsUpdateColumnPayloadMySuperSuffix {
-  /**
-   * Name of the project column
-   * @example "Remaining tasks"
-   */
-  name: string;
-}
-
-export interface IMySuperPrefixProjectsUpdatePayloadMySuperSuffix {
-  /**
-   * Name of the project
-   * @example "Week One Sprint"
-   */
-  name?: string;
-  /**
-   * Body of the project
-   * @example "This project represents the sprint of the first week in January"
-   */
-  body?: string | null;
-  /**
-   * State of the project; either 'open' or 'closed'
-   * @example "open"
-   */
-  state?: string;
-  /** The baseline permission that all organization members have on this project */
-  organization_permission?: "read" | "write" | "admin" | "none";
-  /** Whether or not this project can be seen by everyone. */
-  private?: boolean;
-}
-
-export interface IMySuperPrefixPullsCreatePayloadMySuperSuffix {
-  /** The title of the new pull request. */
-  title?: string;
-  /** The name of the branch where your changes are implemented. For cross-repository pull requests in the same network, namespace `head` with a user like this: `username:branch`. */
-  head: string;
-  /** The name of the branch you want the changes pulled into. This should be an existing branch on the current repository. You cannot submit a pull request to one repository that requests a merge to a base of another repository. */
-  base: string;
-  /** The contents of the pull request. */
-  body?: string;
-  /** Indicates whether [maintainers can modify](https://help.github.com/articles/allowing-changes-to-a-pull-request-branch-created-from-a-fork/) the pull request. */
-  maintainer_can_modify?: boolean;
-  /** Indicates whether the pull request is a draft. See "[Draft Pull Requests](https://help.github.com/en/articles/about-pull-requests#draft-pull-requests)" in the GitHub Help documentation to learn more. */
-  draft?: boolean;
-  /** @example 1 */
-  issue?: number;
-}
-
-export interface IMySuperPrefixPullsCreateReplyForReviewCommentPayloadMySuperSuffix {
-  /** The text of the review comment. */
-  body: string;
-}
-
-export interface IMySuperPrefixPullsCreateReviewCommentPayloadMySuperSuffix {
-  /** The text of the review comment. */
-  body: string;
-  /** The SHA of the commit needing a comment. Not using the latest commit SHA may render your comment outdated if a subsequent commit modifies the line you specify as the `position`. */
-  commit_id?: string;
-  /** The relative path to the file that necessitates a comment. */
-  path: string;
-  /** **Required without `comfort-fade` preview**. The position in the diff where you want to add a review comment. Note this value is not the same as the line number in the file. For help finding the position value, read the note above. */
-  position?: number;
-  /** **Required with `comfort-fade` preview**. In a split diff view, the side of the diff that the pull request's changes appear on. Can be `LEFT` or `RIGHT`. Use `LEFT` for deletions that appear in red. Use `RIGHT` for additions that appear in green or unchanged lines that appear in white and are shown for context. For a multi-line comment, side represents whether the last line of the comment range is a deletion or addition. For more information, see "[Diff view options](https://help.github.com/en/articles/about-comparing-branches-in-pull-requests#diff-view-options)" in the GitHub Help documentation. */
-  side?: "LEFT" | "RIGHT";
-  /** **Required with `comfort-fade` preview**. The line of the blob in the pull request diff that the comment applies to. For a multi-line comment, the last line of the range that your comment applies to. */
-  line?: number;
-  /** **Required when using multi-line comments**. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_line` is the first line in the pull request diff that your multi-line comment applies to. To learn more about multi-line comments, see "[Commenting on a pull request](https://help.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)" in the GitHub Help documentation. */
-  start_line?: number;
-  /** **Required when using multi-line comments**. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_side` is the starting side of the diff that the comment applies to. Can be `LEFT` or `RIGHT`. To learn more about multi-line comments, see "[Commenting on a pull request](https://help.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)" in the GitHub Help documentation. See `side` in this table for additional context. */
-  start_side?: "LEFT" | "RIGHT" | "side";
-  /** @example 2 */
-  in_reply_to?: number;
-}
-
-export interface IMySuperPrefixPullsCreateReviewPayloadMySuperSuffix {
-  /** The SHA of the commit that needs a review. Not using the latest commit SHA may render your review comment outdated if a subsequent commit modifies the line you specify as the `position`. Defaults to the most recent commit in the pull request when you do not specify a value. */
-  commit_id?: string;
-  /** **Required** when using `REQUEST_CHANGES` or `COMMENT` for the `event` parameter. The body text of the pull request review. */
-  body?: string;
-  /** The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. By leaving this blank, you set the review action state to `PENDING`, which means you will need to [submit the pull request review](https://docs.github.com/rest/reference/pulls#submit-a-review-for-a-pull-request) when you are ready. */
-  event?: "APPROVE" | "REQUEST_CHANGES" | "COMMENT";
-  /** Use the following table to specify the location, destination, and contents of the draft review comment. */
-  comments?: {
-    /** The relative path to the file that necessitates a review comment. */
-    path: string;
-    /** The position in the diff where you want to add a review comment. Note this value is not the same as the line number in the file. For help finding the position value, read the note below. */
-    position?: number;
-    /** Text of the review comment. */
-    body: string;
-    /** @example 28 */
-    line?: number;
-    /** @example "RIGHT" */
-    side?: string;
-    /** @example 26 */
-    start_line?: number;
-    /** @example "LEFT" */
-    start_side?: string;
-  }[];
-}
-
-export interface IMySuperPrefixPullsDismissReviewPayloadMySuperSuffix {
-  /** The message for the pull request review dismissal */
-  message: string;
-  /** @example ""APPROVE"" */
-  event?: string;
-}
-
-export interface IMySuperPrefixPullsListCommentsForReviewParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-  pullNumber: number;
-  /** review_id parameter */
-  reviewId: number;
-}
-
-export interface IMySuperPrefixPullsListCommitsParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-  pullNumber: number;
-}
-
-export interface IMySuperPrefixPullsListFilesParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-  pullNumber: number;
-}
-
-export interface IMySuperPrefixPullsListParamsMySuperSuffix {
-  /**
-   * Either `open`, `closed`, or `all` to filter by state.
-   * @default "open"
-   */
-  state?: "open" | "closed" | "all";
-  /** Filter pulls by head user or head organization and branch name in the format of `user:ref-name` or `organization:ref-name`. For example: `github:new-script-format` or `octocat:test-branch`. */
-  head?: string;
-  /** Filter pulls by base branch name. Example: `gh-pages`. */
-  base?: string;
-  /**
-   * What to sort results by. Can be either `created`, `updated`, `popularity` (comment count) or `long-running` (age, filtering by pulls updated in the last month).
-   * @default "created"
-   */
-  sort?: "created" | "updated" | "popularity" | "long-running";
-  /** The direction of the sort. Can be either `asc` or `desc`. Default: `desc` when sort is `created` or sort is not specified, otherwise `asc`. */
-  direction?: "asc" | "desc";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixPullsListRequestedReviewersParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-  pullNumber: number;
-}
-
-export interface IMySuperPrefixPullsListReviewCommentsForRepoParamsMySuperSuffix {
-  /**
-   * One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
-   * @default "created"
-   */
-  sort?: "created" | "updated";
-  /** Can be either `asc` or `desc`. Ignored without `sort` parameter. */
-  direction?: "asc" | "desc";
-  /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  since?: string;
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixPullsListReviewCommentsParamsMySuperSuffix {
-  /**
-   * One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
-   * @default "created"
-   */
-  sort?: "created" | "updated";
-  /** Can be either `asc` or `desc`. Ignored without `sort` parameter. */
-  direction?: "asc" | "desc";
-  /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  since?: string;
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-  pullNumber: number;
-}
-
-export interface IMySuperPrefixPullsListReviewsParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-  pullNumber: number;
-}
-
-export type IMySuperPrefixPullsMergePayloadMySuperSuffix = {
-  /** Title for the automatic commit message. */
-  commit_title?: string;
-  /** Extra detail to append to automatic commit message. */
-  commit_message?: string;
-  /** SHA that pull request head must match to allow merge. */
-  sha?: string;
-  /** Merge method to use. Possible values are `merge`, `squash` or `rebase`. Default is `merge`. */
-  merge_method?: "merge" | "squash" | "rebase";
-} | null;
-
-export interface IMySuperPrefixPullsRemoveRequestedReviewersPayloadMySuperSuffix {
-  /** An array of user `login`s that will be removed. */
-  reviewers?: string[];
-  /** An array of team `slug`s that will be removed. */
-  team_reviewers?: string[];
-}
-
-export interface IMySuperPrefixPullsRequestReviewersPayloadMySuperSuffix {
-  /** An array of user `login`s that will be requested. */
-  reviewers?: string[];
-  /** An array of team `slug`s that will be requested. */
-  team_reviewers?: string[];
-}
-
-export interface IMySuperPrefixPullsSubmitReviewPayloadMySuperSuffix {
-  /** The body text of the pull request review */
-  body?: string;
-  /** The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. When you leave this blank, the API returns _HTTP 422 (Unrecognizable entity)_ and sets the review action state to `PENDING`, which means you will need to re-submit the pull request review using a review action. */
-  event: "APPROVE" | "REQUEST_CHANGES" | "COMMENT";
-}
-
-export type IMySuperPrefixPullsUpdateBranchPayloadMySuperSuffix = {
-  /** The expected SHA of the pull request's HEAD ref. This is the most recent commit on the pull request's branch. If the expected SHA does not match the pull request's HEAD, you will receive a `422 Unprocessable Entity` status. You can use the "[List commits](https://docs.github.com/rest/reference/repos#list-commits)" endpoint to find the most recent commit SHA. Default: SHA of the pull request's current HEAD ref. */
-  expected_head_sha?: string;
-} | null;
-
-export interface IMySuperPrefixPullsUpdatePayloadMySuperSuffix {
-  /** The title of the pull request. */
-  title?: string;
-  /** The contents of the pull request. */
-  body?: string;
-  /** State of this Pull Request. Either `open` or `closed`. */
-  state?: "open" | "closed";
-  /** The name of the branch you want your changes pulled into. This should be an existing branch on the current repository. You cannot update the base branch on a pull request to point to another repository. */
-  base?: string;
-  /** Indicates whether [maintainers can modify](https://help.github.com/articles/allowing-changes-to-a-pull-request-branch-created-from-a-fork/) the pull request. */
-  maintainer_can_modify?: boolean;
-}
-
-export interface IMySuperPrefixPullsUpdateReviewCommentPayloadMySuperSuffix {
-  /** The text of the reply to the review comment. */
-  body: string;
-}
-
-export interface IMySuperPrefixPullsUpdateReviewPayloadMySuperSuffix {
-  /** The body text of the pull request review. */
-  body: string;
-}
-
-export interface IMySuperPrefixReactionsCreateForCommitCommentPayloadMySuperSuffix {
-  /** The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the commit comment. */
-  content: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
-}
-
-export interface IMySuperPrefixReactionsCreateForIssueCommentPayloadMySuperSuffix {
-  /** The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue comment. */
-  content: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
-}
-
-export interface IMySuperPrefixReactionsCreateForIssuePayloadMySuperSuffix {
-  /** The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue. */
-  content: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
-}
-
-export interface IMySuperPrefixReactionsCreateForPullRequestReviewCommentPayloadMySuperSuffix {
-  /** The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the pull request review comment. */
-  content: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
-}
-
-export interface IMySuperPrefixReactionsCreateForTeamDiscussionCommentInOrgPayloadMySuperSuffix {
-  /** The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion comment. */
-  content: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
-}
-
-export interface IMySuperPrefixReactionsCreateForTeamDiscussionCommentLegacyPayloadMySuperSuffix {
-  /** The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion comment. */
-  content: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
-}
-
-export interface IMySuperPrefixReactionsCreateForTeamDiscussionInOrgPayloadMySuperSuffix {
-  /** The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion. */
-  content: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
-}
-
-export interface IMySuperPrefixReactionsCreateForTeamDiscussionLegacyPayloadMySuperSuffix {
-  /** The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion. */
-  content: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
-}
-
-export interface IMySuperPrefixReactionsListForCommitCommentParamsMySuperSuffix {
-  /** Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a commit comment. */
-  content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-  /** comment_id parameter */
-  commentId: number;
-}
-
-export interface IMySuperPrefixReactionsListForIssueCommentParamsMySuperSuffix {
-  /** Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to an issue comment. */
-  content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-  /** comment_id parameter */
-  commentId: number;
-}
-
-export interface IMySuperPrefixReactionsListForIssueParamsMySuperSuffix {
-  /** Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to an issue. */
-  content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-  /** issue_number parameter */
-  issueNumber: number;
-}
-
-export interface IMySuperPrefixReactionsListForPullRequestReviewCommentParamsMySuperSuffix {
-  /** Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a pull request review comment. */
-  content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-  /** comment_id parameter */
-  commentId: number;
-}
-
-export interface IMySuperPrefixReactionsListForTeamDiscussionCommentInOrgParamsMySuperSuffix {
-  /** Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion comment. */
-  content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-  /** team_slug parameter */
-  teamSlug: string;
-  discussionNumber: number;
-  commentNumber: number;
-}
-
-export interface IMySuperPrefixReactionsListForTeamDiscussionCommentLegacyParamsMySuperSuffix {
-  /** Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion comment. */
-  content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  teamId: number;
-  discussionNumber: number;
-  commentNumber: number;
-}
-
-export interface IMySuperPrefixReactionsListForTeamDiscussionInOrgParamsMySuperSuffix {
-  /** Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion. */
-  content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-  /** team_slug parameter */
-  teamSlug: string;
-  discussionNumber: number;
-}
-
-export interface IMySuperPrefixReactionsListForTeamDiscussionLegacyParamsMySuperSuffix {
-  /** Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion. */
-  content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  teamId: number;
-  discussionNumber: number;
-}
-
-/** @example {"apps":["my-app"]} */
-export interface IMySuperPrefixReposAddAppAccessRestrictionsPayloadMySuperSuffix {
-  /** apps parameter */
-  apps: string[];
-}
-
-export interface IMySuperPrefixReposAddCollaboratorPayloadMySuperSuffix {
-  /**
-   * The permission to grant the collaborator. **Only valid on organization-owned repositories.** Can be one of:
-   * \* `pull` - can pull, but not push to or administer this repository.
-   * \* `push` - can pull and push, but not administer this repository.
-   * \* `admin` - can pull, push and administer this repository.
-   * \* `maintain` - Recommended for project managers who need to manage the repository without access to sensitive or destructive actions.
-   * \* `triage` - Recommended for contributors who need to proactively manage issues and pull requests without write access.
-   * @default "push"
-   */
-  permission?: "pull" | "push" | "admin" | "maintain" | "triage";
-  /** @example ""push"" */
-  permissions?: string;
-}
-
-/** @example {"contexts":["contexts"]} */
-export interface IMySuperPrefixReposAddStatusCheckContextsPayloadMySuperSuffix {
-  /** contexts parameter */
-  contexts: string[];
-}
-
-/** @example {"teams":["my-team"]} */
-export interface IMySuperPrefixReposAddTeamAccessRestrictionsPayloadMySuperSuffix {
-  /** teams parameter */
-  teams: string[];
-}
-
-/** @example {"users":["mona"]} */
-export interface IMySuperPrefixReposAddUserAccessRestrictionsPayloadMySuperSuffix {
-  /** users parameter */
-  users: string[];
-}
-
-export interface IMySuperPrefixReposCreateCommitCommentPayloadMySuperSuffix {
-  /** The contents of the comment. */
-  body: string;
-  /** Relative path of the file to comment on. */
-  path?: string;
-  /** Line index in the diff to comment on. */
-  position?: number;
-  /** **Deprecated**. Use **position** parameter instead. Line number in the file to comment on. */
-  line?: number;
-}
-
-export interface IMySuperPrefixReposCreateCommitStatusPayloadMySuperSuffix {
-  /** The state of the status. Can be one of `error`, `failure`, `pending`, or `success`. */
-  state: "error" | "failure" | "pending" | "success";
-  /**
-   * The target URL to associate with this status. This URL will be linked from the GitHub UI to allow users to easily see the source of the status.
-   * For example, if your continuous integration system is posting build status, you would want to provide the deep link for the build output for this specific SHA:
-   * `http://ci.example.com/user/repo/build/sha`
-   */
-  target_url?: string;
-  /** A short description of the status. */
-  description?: string;
-  /**
-   * A string label to differentiate this status from the status of other systems. This field is case-insensitive.
-   * @default "default"
-   */
-  context?: string;
-}
-
-export interface IMySuperPrefixReposCreateDeployKeyPayloadMySuperSuffix {
-  /** A name for the key. */
-  title?: string;
-  /** The contents of the key. */
-  key: string;
-  /**
-   * If `true`, the key will only be able to read repository contents. Otherwise, the key will be able to read and write.
-   *
-   * Deploy keys with write access can perform the same actions as an organization member with admin access, or a collaborator on a personal repository. For more information, see "[Repository permission levels for an organization](https://help.github.com/articles/repository-permission-levels-for-an-organization/)" and "[Permission levels for a user account repository](https://help.github.com/articles/permission-levels-for-a-user-account-repository/)."
-   */
-  read_only?: boolean;
-}
-
-export interface IMySuperPrefixReposCreateDeploymentPayloadMySuperSuffix {
-  /** The ref to deploy. This can be a branch, tag, or SHA. */
-  ref: string;
-  /**
-   * Specifies a task to execute (e.g., `deploy` or `deploy:migrations`).
-   * @default "deploy"
-   */
-  task?: string;
-  /**
-   * Attempts to automatically merge the default branch into the requested ref, if it's behind the default branch.
-   * @default true
-   */
-  auto_merge?: boolean;
-  /** The [status](https://docs.github.com/rest/reference/repos#statuses) contexts to verify against commit status checks. If you omit this parameter, GitHub verifies all unique contexts before creating a deployment. To bypass checking entirely, pass an empty array. Defaults to all unique contexts. */
-  required_contexts?: string[];
-  /** JSON payload with extra information about the deployment. */
-  payload?: Record<string, any> | string;
-  /**
-   * Name for the target deployment environment (e.g., `production`, `staging`, `qa`).
-   * @default "production"
-   */
-  environment?: string;
-  /**
-   * Short description of the deployment.
-   * @default ""
-   */
-  description?: string | null;
-  /**
-   * Specifies if the given environment is specific to the deployment and will no longer exist at some point in the future. Default: `false`
-   * **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type. **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type.
-   * @default false
-   */
-  transient_environment?: boolean;
-  /**
-   * Specifies if the given environment is one that end-users directly interact with. Default: `true` when `environment` is `production` and `false` otherwise.
-   * **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type.
-   */
-  production_environment?: boolean;
-  /** @example ""1776-07-04T00:00:00.000-07:52"" */
-  created_at?: string;
-}
-
-export interface IMySuperPrefixReposCreateDeploymentStatusPayloadMySuperSuffix {
-  /** The state of the status. Can be one of `error`, `failure`, `inactive`, `in_progress`, `queued` `pending`, or `success`. **Note:** To use the `inactive` state, you must provide the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type. To use the `in_progress` and `queued` states, you must provide the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type. When you set a transient deployment to `inactive`, the deployment will be shown as `destroyed` in GitHub. */
-  state: "error" | "failure" | "inactive" | "in_progress" | "queued" | "pending" | "success";
-  /**
-   * The target URL to associate with this status. This URL should contain output to keep the user updated while the task is running or serve as historical information for what happened in the deployment. **Note:** It's recommended to use the `log_url` parameter, which replaces `target_url`.
-   * @default ""
-   */
-  target_url?: string;
-  /**
-   * The full URL of the deployment's output. This parameter replaces `target_url`. We will continue to accept `target_url` to support legacy uses, but we recommend replacing `target_url` with `log_url`. Setting `log_url` will automatically set `target_url` to the same value. Default: `""`
-   * **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type. **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type.
-   * @default ""
-   */
-  log_url?: string;
-  /**
-   * A short description of the status. The maximum description length is 140 characters.
-   * @default ""
-   */
-  description?: string;
-  /** Name for the target deployment environment, which can be changed when setting a deploy status. For example, `production`, `staging`, or `qa`. **Note:** This parameter requires you to use the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type. */
-  environment?: "production" | "staging" | "qa";
-  /**
-   * Sets the URL for accessing your environment. Default: `""`
-   * **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type. **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type.
-   * @default ""
-   */
-  environment_url?: string;
-  /**
-   * Adds a new `inactive` status to all prior non-transient, non-production environment deployments with the same repository and `environment` name as the created status's deployment. An `inactive` status is only added to deployments that had a `success` state. Default: `true`
-   * **Note:** To add an `inactive` status to `production` environments, you must use the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type.
-   * **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type.
-   */
-  auto_inactive?: boolean;
-}
-
-export interface IMySuperPrefixReposCreateDispatchEventPayloadMySuperSuffix {
-  /** A custom webhook event name. */
-  event_type: string;
-  /** JSON payload with extra information about the webhook event that your action or worklow may use. */
-  client_payload?: Record<string, any>;
-}
-
-export interface IMySuperPrefixReposCreateForAuthenticatedUserPayloadMySuperSuffix {
-  /**
-   * The name of the repository.
-   * @example "Team Environment"
-   */
-  name: string;
-  /** A short description of the repository. */
-  description?: string;
-  /** A URL with more information about the repository. */
-  homepage?: string;
-  /**
-   * Whether the repository is private or public.
-   * @default false
-   */
-  private?: boolean;
-  /**
-   * Whether issues are enabled.
-   * @default true
-   * @example true
-   */
-  has_issues?: boolean;
-  /**
-   * Whether projects are enabled.
-   * @default true
-   * @example true
-   */
-  has_projects?: boolean;
-  /**
-   * Whether the wiki is enabled.
-   * @default true
-   * @example true
-   */
-  has_wiki?: boolean;
-  /** The id of the team that will be granted access to this repository. This is only valid when creating a repository in an organization. */
-  team_id?: number;
-  /**
-   * Whether the repository is initialized with a minimal README.
-   * @default false
-   */
-  auto_init?: boolean;
-  /**
-   * The desired language or platform to apply to the .gitignore.
-   * @example "Haskell"
-   */
-  gitignore_template?: string;
-  /**
-   * The license keyword of the open source license for this repository.
-   * @example "mit"
-   */
-  license_template?: string;
-  /**
-   * Whether to allow squash merges for pull requests.
-   * @default true
-   * @example true
-   */
-  allow_squash_merge?: boolean;
-  /**
-   * Whether to allow merge commits for pull requests.
-   * @default true
-   * @example true
-   */
-  allow_merge_commit?: boolean;
-  /**
-   * Whether to allow rebase merges for pull requests.
-   * @default true
-   * @example true
-   */
-  allow_rebase_merge?: boolean;
-  /**
-   * Whether to delete head branches when pull requests are merged
-   * @default false
-   * @example false
-   */
-  delete_branch_on_merge?: boolean;
-  /**
-   * Whether downloads are enabled.
-   * @default true
-   * @example true
-   */
-  has_downloads?: boolean;
-  /**
-   * Whether this repository acts as a template that can be used to generate new repositories.
-   * @default false
-   * @example true
-   */
-  is_template?: boolean;
-}
-
-export interface IMySuperPrefixReposCreateForkPayloadMySuperSuffix {
-  /** Optional parameter to specify the organization name if forking into an organization. */
-  organization?: string;
-}
-
-export interface IMySuperPrefixReposCreateInOrgPayloadMySuperSuffix {
-  /** The name of the repository. */
-  name: string;
-  /** A short description of the repository. */
-  description?: string;
-  /** A URL with more information about the repository. */
-  homepage?: string;
-  /**
-   * Either `true` to create a private repository or `false` to create a public one.
-   * @default false
-   */
-  private?: boolean;
-  /**
-   * Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)" in the GitHub Help documentation.
-   * The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header.
-   */
-  visibility?: "public" | "private" | "visibility" | "internal";
-  /**
-   * Either `true` to enable issues for this repository or `false` to disable them.
-   * @default true
-   */
-  has_issues?: boolean;
-  /**
-   * Either `true` to enable projects for this repository or `false` to disable them. **Note:** If you're creating a repository in an organization that has disabled repository projects, the default is `false`, and if you pass `true`, the API returns an error.
-   * @default true
-   */
-  has_projects?: boolean;
-  /**
-   * Either `true` to enable the wiki for this repository or `false` to disable it.
-   * @default true
-   */
-  has_wiki?: boolean;
-  /**
-   * Either `true` to make this repo available as a template repository or `false` to prevent it.
-   * @default false
-   */
-  is_template?: boolean;
-  /** The id of the team that will be granted access to this repository. This is only valid when creating a repository in an organization. */
-  team_id?: number;
-  /**
-   * Pass `true` to create an initial commit with empty README.
-   * @default false
-   */
-  auto_init?: boolean;
-  /** Desired language or platform [.gitignore template](https://github.com/github/gitignore) to apply. Use the name of the template without the extension. For example, "Haskell". */
-  gitignore_template?: string;
-  /** Choose an [open source license template](https://choosealicense.com/) that best suits your needs, and then use the [license keyword](https://help.github.com/articles/licensing-a-repository/#searching-github-by-license-type) as the `license_template` string. For example, "mit" or "mpl-2.0". */
-  license_template?: string;
-  /**
-   * Either `true` to allow squash-merging pull requests, or `false` to prevent squash-merging.
-   * @default true
-   */
-  allow_squash_merge?: boolean;
-  /**
-   * Either `true` to allow merging pull requests with a merge commit, or `false` to prevent merging pull requests with merge commits.
-   * @default true
-   */
-  allow_merge_commit?: boolean;
-  /**
-   * Either `true` to allow rebase-merging pull requests, or `false` to prevent rebase-merging.
-   * @default true
-   */
-  allow_rebase_merge?: boolean;
-  /**
-   * Either `true` to allow automatically deleting head branches when pull requests are merged, or `false` to prevent automatic deletion.
-   * @default false
-   */
-  delete_branch_on_merge?: boolean;
-}
-
-export interface IMySuperPrefixReposCreateOrUpdateFileContentsPayloadMySuperSuffix {
-  /** The commit message. */
-  message: string;
-  /** The new file content, using Base64 encoding. */
-  content: string;
-  /** **Required if you are updating a file**. The blob SHA of the file being replaced. */
-  sha?: string;
-  /** The branch name. Default: the repository’s default branch (usually `master`) */
-  branch?: string;
-  /** The person that committed the file. Default: the authenticated user. */
-  committer?: {
-    /** The name of the author or committer of the commit. You'll receive a `422` status code if `name` is omitted. */
-    name: string;
-    /** The email of the author or committer of the commit. You'll receive a `422` status code if `email` is omitted. */
-    email: string;
-    /** @example ""2013-01-05T13:13:22+05:00"" */
-    date?: string;
-  };
-  /** The author of the file. Default: The `committer` or the authenticated user if you omit `committer`. */
-  author?: {
-    /** The name of the author or committer of the commit. You'll receive a `422` status code if `name` is omitted. */
-    name: string;
-    /** The email of the author or committer of the commit. You'll receive a `422` status code if `email` is omitted. */
-    email: string;
-    /** @example ""2013-01-15T17:13:22+05:00"" */
-    date?: string;
-  };
-}
-
-/** The source branch and directory used to publish your Pages site. */
-export interface IMySuperPrefixReposCreatePagesSitePayloadMySuperSuffix {
-  /** The source branch and directory used to publish your Pages site. */
-  source: {
-    /** The repository branch used to publish your site's source files. */
-    branch: string;
-    /**
-     * The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. Default: `/`
-     * @default "/"
-     */
-    path?: "/" | "/docs";
-  };
-}
-
-export interface IMySuperPrefixReposCreateReleasePayloadMySuperSuffix {
-  /** The name of the tag. */
-  tag_name: string;
-  /** Specifies the commitish value that determines where the Git tag is created from. Can be any branch or commit SHA. Unused if the Git tag already exists. Default: the repository's default branch (usually `master`). */
-  target_commitish?: string;
-  /** The name of the release. */
-  name?: string;
-  /** Text describing the contents of the tag. */
-  body?: string;
-  /**
-   * `true` to create a draft (unpublished) release, `false` to create a published one.
-   * @default false
-   */
-  draft?: boolean;
-  /**
-   * `true` to identify the release as a prerelease. `false` to identify the release as a full release.
-   * @default false
-   */
-  prerelease?: boolean;
-}
-
-export interface IMySuperPrefixReposCreateUsingTemplatePayloadMySuperSuffix {
-  /** The organization or person who will own the new repository. To create a new repository in an organization, the authenticated user must be a member of the specified organization. */
-  owner?: string;
-  /** The name of the new repository. */
-  name: string;
-  /** A short description of the new repository. */
-  description?: string;
-  /**
-   * Set to `true` to include the directory structure and files from all branches in the template repository, and not just the default branch. Default: `false`.
-   * @default false
-   */
-  include_all_branches?: boolean;
-  /**
-   * Either `true` to create a new private repository or `false` to create a new public one.
-   * @default false
-   */
-  private?: boolean;
-}
-
-export interface IMySuperPrefixReposCreateWebhookPayloadMySuperSuffix {
-  /** Use `web` to create a webhook. Default: `web`. This parameter only accepts the value `web`. */
-  name?: string;
-  /** Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params). */
-  config: {
-    /** The URL to which the payloads will be delivered. */
-    url: IMySuperPrefixWebhookConfigUrlMySuperSuffix;
-    /** The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. */
-    content_type?: IMySuperPrefixWebhookConfigContentTypeMySuperSuffix;
-    /** If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value for [delivery signature headers](https://docs.github.com/webhooks/event-payloads/#delivery-headers). */
-    secret?: IMySuperPrefixWebhookConfigSecretMySuperSuffix;
-    /** Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** */
-    insecure_ssl?: IMySuperPrefixWebhookConfigInsecureSslMySuperSuffix;
-    /** @example ""abc"" */
-    token?: string;
-    /** @example ""sha256"" */
-    digest?: string;
-  };
-  /**
-   * Determines what [events](https://docs.github.com/webhooks/event-payloads) the hook is triggered for.
-   * @default ["push"]
-   */
-  events?: string[];
-  /**
-   * Determines if notifications are sent when the webhook is triggered. Set to `true` to send notifications.
-   * @default true
-   */
-  active?: boolean;
-}
-
-export interface IMySuperPrefixReposDeleteFilePayloadMySuperSuffix {
-  /** The commit message. */
-  message: string;
-  /** The blob SHA of the file being replaced. */
-  sha: string;
-  /** The branch name. Default: the repository’s default branch (usually `master`) */
-  branch?: string;
-  /** object containing information about the committer. */
-  committer?: {
-    /** The name of the author (or committer) of the commit */
-    name?: string;
-    /** The email of the author (or committer) of the commit */
-    email?: string;
-  };
-  /** object containing information about the author. */
-  author?: {
-    /** The name of the author (or committer) of the commit */
-    name?: string;
-    /** The email of the author (or committer) of the commit */
-    email?: string;
-  };
-}
-
-export interface IMySuperPrefixReposGetClonesParamsMySuperSuffix {
-  /**
-   * Must be one of: `day`, `week`.
-   * @default "day"
-   */
-  per?: "day" | "week";
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixReposGetContentParamsMySuperSuffix {
-  /** The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`) */
-  ref?: string;
-  owner: string;
-  repo: string;
-  /** path+ parameter */
-  path: string;
-}
-
-export interface IMySuperPrefixReposGetReadmeParamsMySuperSuffix {
-  /** The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`) */
-  ref?: string;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixReposGetViewsParamsMySuperSuffix {
-  /**
-   * Must be one of: `day`, `week`.
-   * @default "day"
-   */
-  per?: "day" | "week";
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixReposListBranchesParamsMySuperSuffix {
-  /** Setting to `true` returns only protected branches. When set to `false`, only unprotected branches are returned. Omitting this parameter returns all branches. */
-  protected?: boolean;
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixReposListCollaboratorsParamsMySuperSuffix {
-  /**
-   * Filter collaborators returned by their affiliation. Can be one of:
-   * \* `outside`: All outside collaborators of an organization-owned repository.
-   * \* `direct`: All collaborators with permissions to an organization-owned repository, regardless of organization membership status.
-   * \* `all`: All collaborators the authenticated user can see.
-   * @default "all"
-   */
-  affiliation?: "outside" | "direct" | "all";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixReposListCommentsForCommitParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-  /** commit_sha parameter */
-  commitSha: string;
-}
-
-export interface IMySuperPrefixReposListCommitCommentsForRepoParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixReposListCommitStatusesForRefParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-  /** ref+ parameter */
-  ref: string;
-}
-
-export interface IMySuperPrefixReposListCommitsParamsMySuperSuffix {
-  /** SHA or branch to start listing commits from. Default: the repository’s default branch (usually `master`). */
-  sha?: string;
-  /** Only commits containing this file path will be returned. */
-  path?: string;
-  /** GitHub login or email address by which to filter by commit author. */
-  author?: string;
-  /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  since?: string;
-  /** Only commits before this date will be returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  until?: string;
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixReposListContributorsParamsMySuperSuffix {
-  /** Set to `1` or `true` to include anonymous contributors in results. */
-  anon?: string;
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixReposListDeployKeysParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixReposListDeploymentStatusesParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-  /** deployment_id parameter */
-  deploymentId: number;
-}
-
-export interface IMySuperPrefixReposListDeploymentsParamsMySuperSuffix {
-  /**
-   * The SHA recorded at creation time.
-   * @default "none"
-   */
-  sha?: string;
-  /**
-   * The name of the ref. This can be a branch, tag, or SHA.
-   * @default "none"
-   */
-  ref?: string;
-  /**
-   * The name of the task for the deployment (e.g., `deploy` or `deploy:migrations`).
-   * @default "none"
-   */
-  task?: string;
-  /**
-   * The name of the environment that was deployed to (e.g., `staging` or `production`).
-   * @default "none"
-   */
-  environment?: string;
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixReposListForAuthenticatedUserParamsMySuperSuffix {
-  /**
-   * Can be one of `all`, `public`, or `private`.
-   * @default "all"
-   */
-  visibility?: "all" | "public" | "private";
-  /**
-   * Comma-separated list of values. Can include:
-   * \* `owner`: Repositories that are owned by the authenticated user.
-   * \* `collaborator`: Repositories that the user has been added to as a collaborator.
-   * \* `organization_member`: Repositories that the user has access to through being a member of an organization. This includes every repository on every team that the user is on.
-   * @default "owner,collaborator,organization_member"
-   */
-  affiliation?: string;
-  /**
-   * Can be one of `all`, `owner`, `public`, `private`, `member`. Default: `all`
-   *
-   * Will cause a `422` error if used in the same request as **visibility** or **affiliation**. Will cause a `422` error if used in the same request as **visibility** or **affiliation**.
-   * @default "all"
-   */
-  type?: "all" | "owner" | "public" | "private" | "member";
-  /**
-   * Can be one of `created`, `updated`, `pushed`, `full_name`.
-   * @default "full_name"
-   */
-  sort?: "created" | "updated" | "pushed" | "full_name";
-  /** Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc` */
-  direction?: "asc" | "desc";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  since?: string;
-  /** Only show notifications updated before the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  before?: string;
-}
-
-export interface IMySuperPrefixReposListForOrgParamsMySuperSuffix {
-  /** Specifies the types of repositories you want returned. Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`, `internal`. Default: `all`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `type` can also be `internal`. */
-  type?: "all" | "public" | "private" | "forks" | "sources" | "member" | "internal";
-  /**
-   * Can be one of `created`, `updated`, `pushed`, `full_name`.
-   * @default "created"
-   */
-  sort?: "created" | "updated" | "pushed" | "full_name";
-  /** Can be one of `asc` or `desc`. Default: when using `full_name`: `asc`, otherwise `desc` */
-  direction?: "asc" | "desc";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-}
-
-export interface IMySuperPrefixReposListForUserParamsMySuperSuffix {
-  /**
-   * Can be one of `all`, `owner`, `member`.
-   * @default "owner"
-   */
-  type?: "all" | "owner" | "member";
-  /**
-   * Can be one of `created`, `updated`, `pushed`, `full_name`.
-   * @default "full_name"
-   */
-  sort?: "created" | "updated" | "pushed" | "full_name";
-  /** Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc` */
-  direction?: "asc" | "desc";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  username: string;
-}
-
-export interface IMySuperPrefixReposListForksParamsMySuperSuffix {
-  /**
-   * The sort order. Can be either `newest`, `oldest`, or `stargazers`.
-   * @default "newest"
-   */
-  sort?: "newest" | "oldest" | "stargazers";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixReposListInvitationsForAuthenticatedUserParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixReposListInvitationsParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixReposListPagesBuildsParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixReposListPublicParamsMySuperSuffix {
-  /** A repository ID. Only return repositories with an ID greater than this ID. */
-  since?: number;
-}
-
-export interface IMySuperPrefixReposListPullRequestsAssociatedWithCommitParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-  /** commit_sha parameter */
-  commitSha: string;
-}
-
-export interface IMySuperPrefixReposListReleaseAssetsParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-  /** release_id parameter */
-  releaseId: number;
-}
-
-export interface IMySuperPrefixReposListReleasesParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixReposListTagsParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixReposListTeamsParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixReposListWebhooksParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixReposMergePayloadMySuperSuffix {
-  /** The name of the base branch that the head will be merged into. */
-  base: string;
-  /** The head to merge. This can be a branch name or a commit SHA1. */
-  head: string;
-  /** Commit message to use for the merge commit. If omitted, a default message will be used. */
-  commit_message?: string;
-}
-
-/** @example {"apps":["my-app"]} */
-export interface IMySuperPrefixReposRemoveAppAccessRestrictionsPayloadMySuperSuffix {
-  /** apps parameter */
-  apps: string[];
-}
-
-/** @example {"contexts":["contexts"]} */
-export interface IMySuperPrefixReposRemoveStatusCheckContextsPayloadMySuperSuffix {
-  /** contexts parameter */
-  contexts: string[];
-}
-
-/** @example {"teams":["my-team"]} */
-export interface IMySuperPrefixReposRemoveTeamAccessRestrictionsPayloadMySuperSuffix {
-  /** teams parameter */
-  teams: string[];
-}
-
-/** @example {"users":["mona"]} */
-export interface IMySuperPrefixReposRemoveUserAccessRestrictionsPayloadMySuperSuffix {
-  /** users parameter */
-  users: string[];
-}
-
-export interface IMySuperPrefixReposRenameBranchPayloadMySuperSuffix {
-  /** The new name of the branch. */
-  new_name: string;
-}
-
-export interface IMySuperPrefixReposReplaceAllTopicsPayloadMySuperSuffix {
-  /** An array of topics to add to the repository. Pass one or more topics to _replace_ the set of existing topics. Send an empty array (`[]`) to clear all topics from the repository. **Note:** Topic `names` cannot contain uppercase letters. */
-  names: string[];
-}
-
-/** @example {"apps":["my-app"]} */
-export interface IMySuperPrefixReposSetAppAccessRestrictionsPayloadMySuperSuffix {
-  /** apps parameter */
-  apps: string[];
-}
-
-/** @example {"contexts":["contexts"]} */
-export interface IMySuperPrefixReposSetStatusCheckContextsPayloadMySuperSuffix {
-  /** contexts parameter */
-  contexts: string[];
-}
-
-/** @example {"teams":["my-team"]} */
-export interface IMySuperPrefixReposSetTeamAccessRestrictionsPayloadMySuperSuffix {
-  /** teams parameter */
-  teams: string[];
-}
-
-/** @example {"users":["mona"]} */
-export interface IMySuperPrefixReposSetUserAccessRestrictionsPayloadMySuperSuffix {
-  /** users parameter */
-  users: string[];
-}
-
-export interface IMySuperPrefixReposTransferPayloadMySuperSuffix {
-  /** The username or organization name the repository will be transferred to. */
-  new_owner: string;
-  /** ID of the team or teams to add to the repository. Teams can only be added to organization-owned repositories. */
-  team_ids?: number[];
-}
-
-export interface IMySuperPrefixReposUpdateBranchProtectionPayloadMySuperSuffix {
-  /** Require status checks to pass before merging. Set to `null` to disable. */
-  required_status_checks: {
-    /** Require branches to be up to date before merging. */
-    strict: boolean;
-    /** The list of status checks to require in order to merge into this branch */
-    contexts: string[];
-  } | null;
-  /** Enforce all configured restrictions for administrators. Set to `true` to enforce required status checks for repository administrators. Set to `null` to disable. */
-  enforce_admins: boolean | null;
-  /** Require at least one approving review on a pull request, before merging. Set to `null` to disable. */
-  required_pull_request_reviews: {
-    /** Specify which users and teams can dismiss pull request reviews. Pass an empty `dismissal_restrictions` object to disable. User and team `dismissal_restrictions` are only available for organization-owned repositories. Omit this parameter for personal repositories. */
-    dismissal_restrictions?: {
-      /** The list of user `login`s with dismissal access */
-      users?: string[];
-      /** The list of team `slug`s with dismissal access */
-      teams?: string[];
-    };
-    /** Set to `true` if you want to automatically dismiss approving reviews when someone pushes a new commit. */
-    dismiss_stale_reviews?: boolean;
-    /** Blocks merging pull requests until [code owners](https://help.github.com/articles/about-code-owners/) review them. */
-    require_code_owner_reviews?: boolean;
-    /** Specify the number of reviewers required to approve pull requests. Use a number between 1 and 6. */
-    required_approving_review_count?: number;
-  } | null;
-  /** Restrict who can push to the protected branch. User, app, and team `restrictions` are only available for organization-owned repositories. Set to `null` to disable. */
-  restrictions: {
-    /** The list of user `login`s with push access */
-    users: string[];
-    /** The list of team `slug`s with push access */
-    teams: string[];
-    /** The list of app `slug`s with push access */
-    apps?: string[];
-  } | null;
-  /** Enforces a linear commit Git history, which prevents anyone from pushing merge commits to a branch. Set to `true` to enforce a linear commit history. Set to `false` to disable a linear commit Git history. Your repository must allow squash merging or rebase merging before you can enable a linear commit history. Default: `false`. For more information, see "[Requiring a linear commit history](https://help.github.com/github/administering-a-repository/requiring-a-linear-commit-history)" in the GitHub Help documentation. */
-  required_linear_history?: boolean;
-  /** Permits force pushes to the protected branch by anyone with write access to the repository. Set to `true` to allow force pushes. Set to `false` or `null` to block force pushes. Default: `false`. For more information, see "[Enabling force pushes to a protected branch](https://help.github.com/en/github/administering-a-repository/enabling-force-pushes-to-a-protected-branch)" in the GitHub Help documentation." */
-  allow_force_pushes?: boolean | null;
-  /** Allows deletion of the protected branch by anyone with write access to the repository. Set to `false` to prevent deletion of the protected branch. Default: `false`. For more information, see "[Enabling force pushes to a protected branch](https://help.github.com/en/github/administering-a-repository/enabling-force-pushes-to-a-protected-branch)" in the GitHub Help documentation. */
-  allow_deletions?: boolean;
-}
-
-export interface IMySuperPrefixReposUpdateCommitCommentPayloadMySuperSuffix {
-  /** The contents of the comment */
-  body: string;
-}
-
-export interface IMySuperPrefixReposUpdateInformationAboutPagesSitePayloadMySuperSuffix {
-  /** Specify a custom domain for the repository. Sending a `null` value will remove the custom domain. For more about custom domains, see "[Using a custom domain with GitHub Pages](https://help.github.com/articles/using-a-custom-domain-with-github-pages/)." */
-  cname?: string | null;
-  /** Configures access controls for the GitHub Pages site. If public is set to `true`, the site is accessible to anyone on the internet. If set to `false`, the site will only be accessible to users who have at least `read` access to the repository that published the site. This includes anyone in your Enterprise if the repository is set to `internal` visibility. This feature is only available to repositories in an organization on an Enterprise plan. */
-  public?: boolean;
-  /** Update the source for the repository. Must include the branch name, and may optionally specify the subdirectory `/docs`. Possible values are `"gh-pages"`, `"master"`, and `"master /docs"`. */
-  source:
-    | "gh-pages"
-    | "master"
-    | "master /docs"
-    | {
-        /** The repository branch used to publish your site's source files. */
-        branch: string;
-        /** The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. */
-        path: "/" | "/docs";
-      }
-    | (
-        | "gh-pages"
-        | "master"
-        | ("master /docs" & {
-            /** The repository branch used to publish your site's source files. */
-            branch: string;
-            /** The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. */
-            path: "/" | "/docs";
-          })
-      );
-}
-
-export interface IMySuperPrefixReposUpdateInvitationPayloadMySuperSuffix {
-  /** The permissions that the associated user will have on the repository. Valid values are `read`, `write`, `maintain`, `triage`, and `admin`. */
-  permissions?: "read" | "write" | "maintain" | "triage" | "admin";
-}
-
-export interface IMySuperPrefixReposUpdatePayloadMySuperSuffix {
-  /** The name of the repository. */
-  name?: string;
-  /** A short description of the repository. */
-  description?: string;
-  /** A URL with more information about the repository. */
-  homepage?: string;
-  /**
-   * Either `true` to make the repository private or `false` to make it public. Default: `false`.
-   * **Note**: You will get a `422` error if the organization restricts [changing repository visibility](https://help.github.com/articles/repository-permission-levels-for-an-organization#changing-the-visibility-of-repositories) to organization owners and a non-owner tries to change the value of private. **Note**: You will get a `422` error if the organization restricts [changing repository visibility](https://help.github.com/articles/repository-permission-levels-for-an-organization#changing-the-visibility-of-repositories) to organization owners and a non-owner tries to change the value of private.
-   * @default false
-   */
-  private?: boolean;
-  /** Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. The `visibility` parameter overrides the `private` parameter when you use both along with the `nebula-preview` preview header. */
-  visibility?: "public" | "private" | "visibility" | "internal";
-  /**
-   * Either `true` to enable issues for this repository or `false` to disable them.
-   * @default true
-   */
-  has_issues?: boolean;
-  /**
-   * Either `true` to enable projects for this repository or `false` to disable them. **Note:** If you're creating a repository in an organization that has disabled repository projects, the default is `false`, and if you pass `true`, the API returns an error.
-   * @default true
-   */
-  has_projects?: boolean;
-  /**
-   * Either `true` to enable the wiki for this repository or `false` to disable it.
-   * @default true
-   */
-  has_wiki?: boolean;
-  /**
-   * Either `true` to make this repo available as a template repository or `false` to prevent it.
-   * @default false
-   */
-  is_template?: boolean;
-  /** Updates the default branch for this repository. */
-  default_branch?: string;
-  /**
-   * Either `true` to allow squash-merging pull requests, or `false` to prevent squash-merging.
-   * @default true
-   */
-  allow_squash_merge?: boolean;
-  /**
-   * Either `true` to allow merging pull requests with a merge commit, or `false` to prevent merging pull requests with merge commits.
-   * @default true
-   */
-  allow_merge_commit?: boolean;
-  /**
-   * Either `true` to allow rebase-merging pull requests, or `false` to prevent rebase-merging.
-   * @default true
-   */
-  allow_rebase_merge?: boolean;
-  /**
-   * Either `true` to allow automatically deleting head branches when pull requests are merged, or `false` to prevent automatic deletion.
-   * @default false
-   */
-  delete_branch_on_merge?: boolean;
-  /**
-   * `true` to archive this repository. **Note**: You cannot unarchive repositories through the API.
-   * @default false
-   */
-  archived?: boolean;
-}
-
-export interface IMySuperPrefixReposUpdatePullRequestReviewProtectionPayloadMySuperSuffix {
-  /** Specify which users and teams can dismiss pull request reviews. Pass an empty `dismissal_restrictions` object to disable. User and team `dismissal_restrictions` are only available for organization-owned repositories. Omit this parameter for personal repositories. */
-  dismissal_restrictions?: {
-    /** The list of user `login`s with dismissal access */
-    users?: string[];
-    /** The list of team `slug`s with dismissal access */
-    teams?: string[];
-  };
-  /** Set to `true` if you want to automatically dismiss approving reviews when someone pushes a new commit. */
-  dismiss_stale_reviews?: boolean;
-  /** Blocks merging pull requests until [code owners](https://help.github.com/articles/about-code-owners/) have reviewed. */
-  require_code_owner_reviews?: boolean;
-  /** Specifies the number of reviewers required to approve pull requests. Use a number between 1 and 6. */
-  required_approving_review_count?: number;
-}
-
-export interface IMySuperPrefixReposUpdateReleaseAssetPayloadMySuperSuffix {
-  /** The file name of the asset. */
-  name?: string;
-  /** An alternate short description of the asset. Used in place of the filename. */
-  label?: string;
-  /** @example ""uploaded"" */
-  state?: string;
-}
-
-export interface IMySuperPrefixReposUpdateReleasePayloadMySuperSuffix {
-  /** The name of the tag. */
-  tag_name?: string;
-  /** Specifies the commitish value that determines where the Git tag is created from. Can be any branch or commit SHA. Unused if the Git tag already exists. Default: the repository's default branch (usually `master`). */
-  target_commitish?: string;
-  /** The name of the release. */
-  name?: string;
-  /** Text describing the contents of the tag. */
-  body?: string;
-  /** `true` makes the release a draft, and `false` publishes the release. */
-  draft?: boolean;
-  /** `true` to identify the release as a prerelease, `false` to identify the release as a full release. */
-  prerelease?: boolean;
-}
-
-export interface IMySuperPrefixReposUpdateStatusCheckProtectionPayloadMySuperSuffix {
-  /** Require branches to be up to date before merging. */
-  strict?: boolean;
-  /** The list of status checks to require in order to merge into this branch */
-  contexts?: string[];
-}
-
-/** @example {"content_type":"json","insecure_ssl":"0","secret":"********","url":"https://example.com/webhook"} */
-export interface IMySuperPrefixReposUpdateWebhookConfigForRepoPayloadMySuperSuffix {
-  /** The URL to which the payloads will be delivered. */
-  url?: IMySuperPrefixWebhookConfigUrlMySuperSuffix;
-  /** The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. */
-  content_type?: IMySuperPrefixWebhookConfigContentTypeMySuperSuffix;
-  /** If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value for [delivery signature headers](https://docs.github.com/webhooks/event-payloads/#delivery-headers). */
-  secret?: IMySuperPrefixWebhookConfigSecretMySuperSuffix;
-  /** Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** */
-  insecure_ssl?: IMySuperPrefixWebhookConfigInsecureSslMySuperSuffix;
-}
-
-export interface IMySuperPrefixReposUpdateWebhookPayloadMySuperSuffix {
-  /** Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params). */
-  config?: {
-    /** The URL to which the payloads will be delivered. */
-    url: IMySuperPrefixWebhookConfigUrlMySuperSuffix;
-    /** The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. */
-    content_type?: IMySuperPrefixWebhookConfigContentTypeMySuperSuffix;
-    /** If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value for [delivery signature headers](https://docs.github.com/webhooks/event-payloads/#delivery-headers). */
-    secret?: IMySuperPrefixWebhookConfigSecretMySuperSuffix;
-    /** Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** */
-    insecure_ssl?: IMySuperPrefixWebhookConfigInsecureSslMySuperSuffix;
-    /** @example ""bar@example.com"" */
-    address?: string;
-    /** @example ""The Serious Room"" */
-    room?: string;
-  };
-  /**
-   * Determines what [events](https://docs.github.com/webhooks/event-payloads) the hook is triggered for. This replaces the entire array of events.
-   * @default ["push"]
-   */
-  events?: string[];
-  /** Determines a list of events to be added to the list of events that the Hook triggers for. */
-  add_events?: string[];
-  /** Determines a list of events to be removed from the list of events that the Hook triggers for. */
-  remove_events?: string[];
-  /**
-   * Determines if notifications are sent when the webhook is triggered. Set to `true` to send notifications.
-   * @default true
-   */
-  active?: boolean;
-}
-
-export interface IMySuperPrefixReposUploadReleaseAssetParamsMySuperSuffix {
-  name?: string;
-  label?: string;
-  owner: string;
-  repo: string;
-  /** release_id parameter */
-  releaseId: number;
-}
-
-/** The raw file data */
-export type IMySuperPrefixReposUploadReleaseAssetPayloadMySuperSuffix = string;
-
-export interface IMySuperPrefixScimListProvisionedIdentitiesParamsMySuperSuffix {
-  /** Used for pagination: the index of the first result to return. */
-  startIndex?: number;
-  /** Used for pagination: the number of results to return. */
-  count?: number;
-  /**
-   * Filters results using the equals query parameter operator (`eq`). You can filter results that are equal to `id`, `userName`, `emails`, and `external_id`. For example, to search for an identity with the `userName` Octocat, you would use this query:
-   *
-   * `?filter=userName%20eq%20\"Octocat\"`.
-   *
-   * To filter results for the identity with the email `octocat@github.com`, you would use this query:
-   *
-   * `?filter=emails%20eq%20\"octocat@github.com\"`.
-   */
-  filter?: string;
-  org: string;
-}
-
-export interface IMySuperPrefixScimProvisionAndInviteUserPayloadMySuperSuffix {
-  /**
-   * Configured by the admin. Could be an email, login, or username
-   * @example "someone@example.com"
-   */
-  userName: string;
-  /**
-   * The name of the user, suitable for display to end-users
-   * @example "Jon Doe"
-   */
-  displayName?: string;
-  /** @example {"givenName":"Jane","familyName":"User"} */
-  name: {
-    givenName: string;
-    familyName: string;
-    formatted?: string;
-  };
-  /**
-   * user emails
-   * @minItems 1
-   * @example [{"value":"someone@example.com","primary":true},{"value":"another@example.com","primary":false}]
-   */
-  emails: {
-    value: string;
-    primary?: boolean;
-    type?: string;
-  }[];
-  schemas?: string[];
-  externalId?: string;
-  groups?: string[];
-  active?: boolean;
-}
-
-export interface IMySuperPrefixScimSetInformationForProvisionedUserPayloadMySuperSuffix {
-  schemas?: string[];
-  /**
-   * The name of the user, suitable for display to end-users
-   * @example "Jon Doe"
-   */
-  displayName?: string;
-  externalId?: string;
-  groups?: string[];
-  active?: boolean;
-  /**
-   * Configured by the admin. Could be an email, login, or username
-   * @example "someone@example.com"
-   */
-  userName: string;
-  /** @example {"givenName":"Jane","familyName":"User"} */
-  name: {
-    givenName: string;
-    familyName: string;
-    formatted?: string;
-  };
-  /**
-   * user emails
-   * @minItems 1
-   * @example [{"value":"someone@example.com","primary":true},{"value":"another@example.com","primary":false}]
-   */
-  emails: {
-    type?: string;
-    value: string;
-    primary?: boolean;
-  }[];
-}
-
-export interface IMySuperPrefixScimUpdateAttributeForUserPayloadMySuperSuffix {
-  schemas?: string[];
-  /**
-   * Set of operations to be performed
-   * @minItems 1
-   * @example [{"op":"replace","value":{"active":false}}]
-   */
-  Operations: {
-    op: "add" | "remove" | "replace";
-    path?: string;
-    value?:
-      | {
-          active?: boolean | null;
-          userName?: string | null;
-          externalId?: string | null;
-          givenName?: string | null;
-          familyName?: string | null;
-        }
-      | {
-          value?: string;
-          primary?: boolean;
-        }[]
-      | string;
-  }[];
-}
-
-export interface IMySuperPrefixSearchCodeParamsMySuperSuffix {
-  /** The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). See "[Searching code](https://help.github.com/articles/searching-code/)" for a detailed list of qualifiers. */
-  q: string;
-  /** Sorts the results of your query. Can only be `indexed`, which indicates how recently a file has been indexed by the GitHub search infrastructure. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results) */
-  sort?: "indexed";
-  /**
-   * Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
-   * @default "desc"
-   */
-  order?: "desc" | "asc";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixSearchCommitsParamsMySuperSuffix {
-  /** The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). See "[Searching commits](https://help.github.com/articles/searching-commits/)" for a detailed list of qualifiers. */
-  q: string;
-  /** Sorts the results of your query by `author-date` or `committer-date`. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results) */
-  sort?: "author-date" | "committer-date";
-  /**
-   * Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
-   * @default "desc"
-   */
-  order?: "desc" | "asc";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixSearchIssuesAndPullRequestsParamsMySuperSuffix {
-  /** The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). See "[Searching issues and pull requests](https://help.github.com/articles/searching-issues-and-pull-requests/)" for a detailed list of qualifiers. */
-  q: string;
-  /** Sorts the results of your query by the number of `comments`, `reactions`, `reactions-+1`, `reactions--1`, `reactions-smile`, `reactions-thinking_face`, `reactions-heart`, `reactions-tada`, or `interactions`. You can also sort results by how recently the items were `created` or `updated`, Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results) */
-  sort?:
-    | "comments"
-    | "reactions"
-    | "reactions-+1"
-    | "reactions--1"
-    | "reactions-smile"
-    | "reactions-thinking_face"
-    | "reactions-heart"
-    | "reactions-tada"
-    | "interactions"
-    | "created"
-    | "updated";
-  /**
-   * Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
-   * @default "desc"
-   */
-  order?: "desc" | "asc";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixSearchLabelsParamsMySuperSuffix {
-  /** The id of the repository. */
-  repository_id: number;
-  /** The search keywords. This endpoint does not accept qualifiers in the query. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). */
-  q: string;
-  /** Sorts the results of your query by when the label was `created` or `updated`. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results) */
-  sort?: "created" | "updated";
-  /**
-   * Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
-   * @default "desc"
-   */
-  order?: "desc" | "asc";
-}
-
-export interface IMySuperPrefixSearchReposParamsMySuperSuffix {
-  /** The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). See "[Searching for repositories](https://help.github.com/articles/searching-for-repositories/)" for a detailed list of qualifiers. */
-  q: string;
-  /** Sorts the results of your query by number of `stars`, `forks`, or `help-wanted-issues` or how recently the items were `updated`. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results) */
-  sort?: "stars" | "forks" | "help-wanted-issues" | "updated";
-  /**
-   * Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
-   * @default "desc"
-   */
-  order?: "desc" | "asc";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixSearchTopicsParamsMySuperSuffix {
-  /** The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). */
-  q: string;
-}
-
-export interface IMySuperPrefixSearchUsersParamsMySuperSuffix {
-  /** The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). See "[Searching users](https://help.github.com/articles/searching-users/)" for a detailed list of qualifiers. */
-  q: string;
-  /** Sorts the results of your query by number of `followers` or `repositories`, or when the person `joined` GitHub. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results) */
-  sort?: "followers" | "repositories" | "joined";
-  /**
-   * Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
-   * @default "desc"
-   */
-  order?: "desc" | "asc";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixSecretScanningListAlertsForRepoParamsMySuperSuffix {
-  /** Set to `open` or `resolved` to only list secret scanning alerts in a specific state. */
-  state?: "open" | "resolved";
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  owner: string;
-  repo: string;
-}
-
-export interface IMySuperPrefixSecretScanningUpdateAlertPayloadMySuperSuffix {
-  /** Sets the state of the secret scanning alert. Can be either `open` or `resolved`. You must provide `resolution` when you set the state to `resolved`. */
-  state: IMySuperPrefixSecretScanningAlertStateMySuperSuffix;
-  /** **Required when the `state` is `resolved`.** The reason for resolving the alert. Can be one of `false_positive`, `wont_fix`, `revoked`, or `used_in_tests`. */
-  resolution?: IMySuperPrefixSecretScanningAlertResolutionMySuperSuffix;
-}
-
-export interface IMySuperPrefixTeamsAddOrUpdateMembershipForUserInOrgPayloadMySuperSuffix {
-  /**
-   * The role that this user should have in the team. Can be one of:
-   * \* `member` - a normal member of the team.
-   * \* `maintainer` - a team maintainer. Able to add/remove other team members, promote other team members to team maintainer, and edit the team's name and description.
-   * @default "member"
-   */
-  role?: "member" | "maintainer";
-}
-
-export interface IMySuperPrefixTeamsAddOrUpdateMembershipForUserLegacyPayloadMySuperSuffix {
-  /**
-   * The role that this user should have in the team. Can be one of:
-   * \* `member` - a normal member of the team.
-   * \* `maintainer` - a team maintainer. Able to add/remove other team members, promote other team members to team maintainer, and edit the team's name and description.
-   * @default "member"
-   */
-  role?: "member" | "maintainer";
-}
-
-export interface IMySuperPrefixTeamsAddOrUpdateProjectPermissionsInOrgPayloadMySuperSuffix {
-  /**
-   * The permission to grant to the team for this project. Can be one of:
-   * \* `read` - team members can read, but not write to or administer this project.
-   * \* `write` - team members can read and write, but not administer this project.
-   * \* `admin` - team members can read, write and administer this project.
-   * Default: the team's `permission` attribute will be used to determine what permission to grant the team on this project. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
-   */
-  permission?: "read" | "write" | "admin";
-}
-
-export interface IMySuperPrefixTeamsAddOrUpdateProjectPermissionsLegacyPayloadMySuperSuffix {
-  /**
-   * The permission to grant to the team for this project. Can be one of:
-   * \* `read` - team members can read, but not write to or administer this project.
-   * \* `write` - team members can read and write, but not administer this project.
-   * \* `admin` - team members can read, write and administer this project.
-   * Default: the team's `permission` attribute will be used to determine what permission to grant the team on this project. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
-   */
-  permission?: "read" | "write" | "admin";
-}
-
-export interface IMySuperPrefixTeamsAddOrUpdateRepoPermissionsInOrgPayloadMySuperSuffix {
-  /**
-   * The permission to grant the team on this repository. Can be one of:
-   * \* `pull` - team members can pull, but not push to or administer this repository.
-   * \* `push` - team members can pull and push, but not administer this repository.
-   * \* `admin` - team members can pull, push and administer this repository.
-   * \* `maintain` - team members can manage the repository without access to sensitive or destructive actions. Recommended for project managers. Only applies to repositories owned by organizations.
-   * \* `triage` - team members can proactively manage issues and pull requests without write access. Recommended for contributors who triage a repository. Only applies to repositories owned by organizations.
-   *
-   * If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
-   */
-  permission?: "pull" | "push" | "admin" | "maintain" | "triage";
-}
-
-export interface IMySuperPrefixTeamsAddOrUpdateRepoPermissionsLegacyPayloadMySuperSuffix {
-  /**
-   * The permission to grant the team on this repository. Can be one of:
-   * \* `pull` - team members can pull, but not push to or administer this repository.
-   * \* `push` - team members can pull and push, but not administer this repository.
-   * \* `admin` - team members can pull, push and administer this repository.
-   *
-   * If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
-   */
-  permission?: "pull" | "push" | "admin";
-}
-
-export interface IMySuperPrefixTeamsCreateDiscussionCommentInOrgPayloadMySuperSuffix {
-  /** The discussion comment's body text. */
-  body: string;
-}
-
-export interface IMySuperPrefixTeamsCreateDiscussionCommentLegacyPayloadMySuperSuffix {
-  /** The discussion comment's body text. */
-  body: string;
-}
-
-export interface IMySuperPrefixTeamsCreateDiscussionInOrgPayloadMySuperSuffix {
-  /** The discussion post's title. */
-  title: string;
-  /** The discussion post's body text. */
-  body: string;
-  /**
-   * Private posts are only visible to team members, organization owners, and team maintainers. Public posts are visible to all members of the organization. Set to `true` to create a private post.
-   * @default false
-   */
-  private?: boolean;
-}
-
-export interface IMySuperPrefixTeamsCreateDiscussionLegacyPayloadMySuperSuffix {
-  /** The discussion post's title. */
-  title: string;
-  /** The discussion post's body text. */
-  body: string;
-  /**
-   * Private posts are only visible to team members, organization owners, and team maintainers. Public posts are visible to all members of the organization. Set to `true` to create a private post.
-   * @default false
-   */
-  private?: boolean;
-}
-
-export interface IMySuperPrefixTeamsCreateOrUpdateIdpGroupConnectionsInOrgPayloadMySuperSuffix {
-  /** The IdP groups you want to connect to a GitHub team. When updating, the new `groups` object will replace the original one. You must include any existing groups that you don't want to remove. */
-  groups: {
-    /** ID of the IdP group. */
-    group_id: string;
-    /** Name of the IdP group. */
-    group_name: string;
-    /** Description of the IdP group. */
-    group_description: string;
-  }[];
-}
-
-export interface IMySuperPrefixTeamsCreateOrUpdateIdpGroupConnectionsLegacyPayloadMySuperSuffix {
-  /** The IdP groups you want to connect to a GitHub team. When updating, the new `groups` object will replace the original one. You must include any existing groups that you don't want to remove. */
-  groups: {
-    /** ID of the IdP group. */
-    group_id: string;
-    /** Name of the IdP group. */
-    group_name: string;
-    /** Description of the IdP group. */
-    group_description: string;
-    /** @example ""caceab43fc9ffa20081c"" */
-    id?: string;
-    /** @example ""external-team-6c13e7288ef7"" */
-    name?: string;
-    /** @example ""moar cheese pleese"" */
-    description?: string;
-  }[];
-  /** @example ""I am not a timestamp"" */
-  synced_at?: string;
-}
-
-export interface IMySuperPrefixTeamsCreatePayloadMySuperSuffix {
-  /** The name of the team. */
-  name: string;
-  /** The description of the team. */
-  description?: string;
-  /** List GitHub IDs for organization members who will become team maintainers. */
-  maintainers?: string[];
-  /** The full name (e.g., "organization-name/repository-name") of repositories to add the team to. */
-  repo_names?: string[];
-  /**
-   * The level of privacy this team should have. The options are:
-   * **For a non-nested team:**
-   * \* `secret` - only visible to organization owners and members of this team.
-   * \* `closed` - visible to all members of this organization.
-   * Default: `secret`
-   * **For a parent or child team:**
-   * \* `closed` - visible to all members of this organization.
-   * Default for child team: `closed`
-   */
-  privacy?: "secret" | "closed";
-  /**
-   * **Deprecated**. The permission that new repositories will be added to the team with when none is specified. Can be one of:
-   * \* `pull` - team members can pull, but not push to or administer newly-added repositories.
-   * \* `push` - team members can pull and push, but not administer newly-added repositories.
-   * \* `admin` - team members can pull, push and administer newly-added repositories.
-   * @default "pull"
-   */
-  permission?: "pull" | "push" | "admin";
-  /** The ID of a team to set as the parent team. */
-  parent_team_id?: number;
-}
-
-export interface IMySuperPrefixTeamsListChildInOrgParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-  /** team_slug parameter */
-  teamSlug: string;
-}
-
-export interface IMySuperPrefixTeamsListChildLegacyParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  teamId: number;
-}
-
-export interface IMySuperPrefixTeamsListDiscussionCommentsInOrgParamsMySuperSuffix {
-  /**
-   * One of `asc` (ascending) or `desc` (descending).
-   * @default "desc"
-   */
-  direction?: "asc" | "desc";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-  /** team_slug parameter */
-  teamSlug: string;
-  discussionNumber: number;
-}
-
-export interface IMySuperPrefixTeamsListDiscussionCommentsLegacyParamsMySuperSuffix {
-  /**
-   * One of `asc` (ascending) or `desc` (descending).
-   * @default "desc"
-   */
-  direction?: "asc" | "desc";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  teamId: number;
-  discussionNumber: number;
-}
-
-export interface IMySuperPrefixTeamsListDiscussionsInOrgParamsMySuperSuffix {
-  /**
-   * One of `asc` (ascending) or `desc` (descending).
-   * @default "desc"
-   */
-  direction?: "asc" | "desc";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-  /** team_slug parameter */
-  teamSlug: string;
-}
-
-export interface IMySuperPrefixTeamsListDiscussionsLegacyParamsMySuperSuffix {
-  /**
-   * One of `asc` (ascending) or `desc` (descending).
-   * @default "desc"
-   */
-  direction?: "asc" | "desc";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  teamId: number;
-}
-
-export interface IMySuperPrefixTeamsListForAuthenticatedUserParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixTeamsListIdpGroupsForOrgParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-}
-
-export interface IMySuperPrefixTeamsListMembersInOrgParamsMySuperSuffix {
-  /**
-   * Filters members returned by their role in the team. Can be one of:
-   * \* `member` - normal members of the team.
-   * \* `maintainer` - team maintainers.
-   * \* `all` - all members of the team.
-   * @default "all"
-   */
-  role?: "member" | "maintainer" | "all";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-  /** team_slug parameter */
-  teamSlug: string;
-}
-
-export interface IMySuperPrefixTeamsListMembersLegacyParamsMySuperSuffix {
-  /**
-   * Filters members returned by their role in the team. Can be one of:
-   * \* `member` - normal members of the team.
-   * \* `maintainer` - team maintainers.
-   * \* `all` - all members of the team.
-   * @default "all"
-   */
-  role?: "member" | "maintainer" | "all";
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  teamId: number;
-}
-
-export interface IMySuperPrefixTeamsListParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-}
-
-export interface IMySuperPrefixTeamsListPendingInvitationsInOrgParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-  /** team_slug parameter */
-  teamSlug: string;
-}
-
-export interface IMySuperPrefixTeamsListPendingInvitationsLegacyParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  teamId: number;
-}
-
-export interface IMySuperPrefixTeamsListProjectsInOrgParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-  /** team_slug parameter */
-  teamSlug: string;
-}
-
-export interface IMySuperPrefixTeamsListProjectsLegacyParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  teamId: number;
-}
-
-export interface IMySuperPrefixTeamsListReposInOrgParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  org: string;
-  /** team_slug parameter */
-  teamSlug: string;
-}
-
-export interface IMySuperPrefixTeamsListReposLegacyParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  teamId: number;
-}
-
-export interface IMySuperPrefixTeamsUpdateDiscussionCommentInOrgPayloadMySuperSuffix {
-  /** The discussion comment's body text. */
-  body: string;
-}
-
-export interface IMySuperPrefixTeamsUpdateDiscussionCommentLegacyPayloadMySuperSuffix {
-  /** The discussion comment's body text. */
-  body: string;
-}
-
-export interface IMySuperPrefixTeamsUpdateDiscussionInOrgPayloadMySuperSuffix {
-  /** The discussion post's title. */
-  title?: string;
-  /** The discussion post's body text. */
-  body?: string;
-}
-
-export interface IMySuperPrefixTeamsUpdateDiscussionLegacyPayloadMySuperSuffix {
-  /** The discussion post's title. */
-  title?: string;
-  /** The discussion post's body text. */
-  body?: string;
-}
-
-export interface IMySuperPrefixTeamsUpdateInOrgPayloadMySuperSuffix {
-  /** The name of the team. */
-  name: string;
-  /** The description of the team. */
-  description?: string;
-  /**
-   * The level of privacy this team should have. Editing teams without specifying this parameter leaves `privacy` intact. When a team is nested, the `privacy` for parent teams cannot be `secret`. The options are:
-   * **For a non-nested team:**
-   * \* `secret` - only visible to organization owners and members of this team.
-   * \* `closed` - visible to all members of this organization.
-   * **For a parent or child team:**
-   * \* `closed` - visible to all members of this organization.
-   */
-  privacy?: "secret" | "closed";
-  /**
-   * **Deprecated**. The permission that new repositories will be added to the team with when none is specified. Can be one of:
-   * \* `pull` - team members can pull, but not push to or administer newly-added repositories.
-   * \* `push` - team members can pull and push, but not administer newly-added repositories.
-   * \* `admin` - team members can pull, push and administer newly-added repositories.
-   * @default "pull"
-   */
-  permission?: "pull" | "push" | "admin";
-  /** The ID of a team to set as the parent team. */
-  parent_team_id?: number;
-}
-
-export interface IMySuperPrefixTeamsUpdateLegacyPayloadMySuperSuffix {
-  /** The name of the team. */
-  name: string;
-  /** The description of the team. */
-  description?: string;
-  /**
-   * The level of privacy this team should have. Editing teams without specifying this parameter leaves `privacy` intact. The options are:
-   * **For a non-nested team:**
-   * \* `secret` - only visible to organization owners and members of this team.
-   * \* `closed` - visible to all members of this organization.
-   * **For a parent or child team:**
-   * \* `closed` - visible to all members of this organization.
-   */
-  privacy?: "secret" | "closed";
-  /**
-   * **Deprecated**. The permission that new repositories will be added to the team with when none is specified. Can be one of:
-   * \* `pull` - team members can pull, but not push to or administer newly-added repositories.
-   * \* `push` - team members can pull and push, but not administer newly-added repositories.
-   * \* `admin` - team members can pull, push and administer newly-added repositories.
-   * @default "pull"
-   */
-  permission?: "pull" | "push" | "admin";
-  /** The ID of a team to set as the parent team. */
-  parent_team_id?: number | null;
-}
-
-export type IMySuperPrefixUsersAddEmailForAuthenticatedPayloadMySuperSuffix =
-  | {
-      /**
-       * Adds one or more email addresses to your GitHub account. Must contain at least one email address. **Note:** Alternatively, you can pass a single email address or an `array` of emails addresses directly, but we recommend that you pass an object using the `emails` key.
-       * @example []
-       */
-      emails: string[];
-    }
-  | string[]
-  | string;
-
-export interface IMySuperPrefixUsersCreateGpgKeyForAuthenticatedPayloadMySuperSuffix {
-  /** A GPG key in ASCII-armored format. */
-  armored_public_key: string;
-}
-
-export interface IMySuperPrefixUsersCreatePublicSshKeyForAuthenticatedPayloadMySuperSuffix {
-  /**
-   * A descriptive name for the new key.
-   * @example "Personal MacBook Air"
-   */
-  title?: string;
-  /**
-   * The public SSH key to add to your GitHub account.
-   * @pattern ^ssh-(rsa|dss|ed25519) |^ecdsa-sha2-nistp(256|384|521)
-   */
-  key: string;
-}
-
-/** Deletes one or more email addresses from your GitHub account. Must contain at least one email address. **Note:** Alternatively, you can pass a single email address or an `array` of emails addresses directly, but we recommend that you pass an object using the `emails` key. */
-export type IMySuperPrefixUsersDeleteEmailForAuthenticatedPayloadMySuperSuffix =
-  | {
-      /** Email addresses associated with the GitHub user account. */
-      emails: string[];
-    }
-  | string[]
-  | string;
-
-export interface IMySuperPrefixUsersGetContextForUserParamsMySuperSuffix {
-  /** Identifies which additional information you'd like to receive about the person's hovercard. Can be `organization`, `repository`, `issue`, `pull_request`. **Required** when using `subject_id`. */
-  subject_type?: "organization" | "repository" | "issue" | "pull_request";
-  /** Uses the ID for the `subject_type` you specified. **Required** when using `subject_type`. */
-  subject_id?: string;
-  username: string;
-}
-
-export interface IMySuperPrefixUsersListEmailsForAuthenticatedParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixUsersListFollowedByAuthenticatedParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixUsersListFollowersForAuthenticatedUserParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixUsersListFollowersForUserParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  username: string;
-}
-
-export interface IMySuperPrefixUsersListFollowingForUserParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  username: string;
-}
-
-export interface IMySuperPrefixUsersListGpgKeysForAuthenticatedParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixUsersListGpgKeysForUserParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  username: string;
-}
-
-export interface IMySuperPrefixUsersListParamsMySuperSuffix {
-  /** A user ID. Only return users with an ID greater than this ID. */
-  since?: number;
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-}
-
-export interface IMySuperPrefixUsersListPublicEmailsForAuthenticatedParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixUsersListPublicKeysForUserParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-  username: string;
-}
-
-export interface IMySuperPrefixUsersListPublicSshKeysForAuthenticatedParamsMySuperSuffix {
-  /**
-   * Results per page (max 100)
-   * @default 30
-   */
-  per_page?: number;
-  /**
-   * Page number of the results to fetch.
-   * @default 1
-   */
-  page?: number;
-}
-
-export interface IMySuperPrefixUsersSetPrimaryEmailVisibilityForAuthenticatedPayloadMySuperSuffix {
-  /**
-   * An email address associated with the GitHub user account to manage.
-   * @example "org@example.com"
-   */
-  email: string;
-  /** Denotes whether an email is publically visible. */
-  visibility: "public" | "private";
-}
-
-export interface IMySuperPrefixUsersUpdateAuthenticatedPayloadMySuperSuffix {
-  /**
-   * The new name of the user.
-   * @example "Omar Jahandar"
-   */
-  name?: string;
-  /**
-   * The publicly visible email address of the user.
-   * @example "omar@example.com"
-   */
-  email?: string;
-  /**
-   * The new blog URL of the user.
-   * @example "blog.example.com"
-   */
-  blog?: string;
-  /**
-   * The new Twitter username of the user.
-   * @example "therealomarj"
-   */
-  twitter_username?: string | null;
-  /**
-   * The new company of the user.
-   * @example "Acme corporation"
-   */
-  company?: string;
-  /**
-   * The new location of the user.
-   * @example "Berlin, Germany"
-   */
-  location?: string;
-  /** The new hiring availability of the user. */
-  hireable?: boolean;
-  /** The new short biography of the user. */
-  bio?: string;
-}
-
-export interface IMySuperPrefixActionsBillingUsageMySuperSuffix {
+export interface ActionsBillingUsage {
   /** The amount of free GitHub Actions minutes available. */
   included_minutes: number;
   minutes_used_breakdown: {
@@ -6063,26 +27,26 @@ export interface IMySuperPrefixActionsBillingUsageMySuperSuffix {
 }
 
 /** Whether GitHub Actions is enabled on the repository. */
-export type IMySuperPrefixActionsEnabledMySuperSuffix = boolean;
+export type ActionsEnabled = boolean;
 
-export interface IMySuperPrefixActionsEnterprisePermissionsMySuperSuffix {
+export interface ActionsEnterprisePermissions {
   /** The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`. */
-  allowed_actions: IMySuperPrefixAllowedActionsMySuperSuffix;
+  allowed_actions: AllowedActions;
   /** The policy that controls the organizations in the enterprise that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`. */
-  enabled_organizations: IMySuperPrefixEnabledOrganizationsMySuperSuffix;
+  enabled_organizations: EnabledOrganizations;
   /** The API URL to use to get or set the actions that are allowed to run, when `allowed_actions` is set to `selected`. */
-  selected_actions_url?: IMySuperPrefixSelectedActionsUrlMySuperSuffix;
+  selected_actions_url?: SelectedActionsUrl;
   /** The API URL to use to get or set the selected organizations that are allowed to run GitHub Actions, when `enabled_organizations` is set to `selected`. */
   selected_organizations_url?: string;
 }
 
-export interface IMySuperPrefixActionsOrganizationPermissionsMySuperSuffix {
+export interface ActionsOrganizationPermissions {
   /** The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`. */
-  allowed_actions: IMySuperPrefixAllowedActionsMySuperSuffix;
+  allowed_actions: AllowedActions;
   /** The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`. */
-  enabled_repositories: IMySuperPrefixEnabledRepositoriesMySuperSuffix;
+  enabled_repositories: EnabledRepositories;
   /** The API URL to use to get or set the actions that are allowed to run, when `allowed_actions` is set to `selected`. */
-  selected_actions_url?: IMySuperPrefixSelectedActionsUrlMySuperSuffix;
+  selected_actions_url?: SelectedActionsUrl;
   /** The API URL to use to get or set the selected repositories that are allowed to run GitHub Actions, when `enabled_repositories` is set to `selected`. */
   selected_repositories_url?: string;
 }
@@ -6091,7 +55,7 @@ export interface IMySuperPrefixActionsOrganizationPermissionsMySuperSuffix {
  * ActionsPublicKey
  * The public key used for setting Actions Secrets.
  */
-export interface IMySuperPrefixActionsPublicKeyMySuperSuffix {
+export interface ActionsPublicKey {
   /** @example "2011-01-26T19:01:12Z" */
   created_at?: string;
   /** @example 2 */
@@ -6112,20 +76,20 @@ export interface IMySuperPrefixActionsPublicKeyMySuperSuffix {
   url?: string;
 }
 
-export interface IMySuperPrefixActionsRepositoryPermissionsMySuperSuffix {
+export interface ActionsRepositoryPermissions {
   /** The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`. */
-  allowed_actions: IMySuperPrefixAllowedActionsMySuperSuffix;
+  allowed_actions: AllowedActions;
   /** Whether GitHub Actions is enabled on the repository. */
-  enabled: IMySuperPrefixActionsEnabledMySuperSuffix;
+  enabled: ActionsEnabled;
   /** The API URL to use to get or set the actions that are allowed to run, when `allowed_actions` is set to `selected`. */
-  selected_actions_url?: IMySuperPrefixSelectedActionsUrlMySuperSuffix;
+  selected_actions_url?: SelectedActionsUrl;
 }
 
 /**
  * Actions Secret
  * Set secrets for GitHub Actions.
  */
-export interface IMySuperPrefixActionsSecretMySuperSuffix {
+export interface ActionsSecret {
   /** @format date-time */
   created_at: string;
   /**
@@ -6141,7 +105,7 @@ export interface IMySuperPrefixActionsSecretMySuperSuffix {
  * Actor
  * Actor
  */
-export interface IMySuperPrefixActorMySuperSuffix {
+export interface Actor {
   /** @format uri */
   avatar_url: string;
   display_login?: string;
@@ -6156,25 +120,25 @@ export interface IMySuperPrefixActorMySuperSuffix {
  * The time that the alert was created in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
  * @format date-time
  */
-export type IMySuperPrefixAlertCreatedAtMySuperSuffix = string;
+export type AlertCreatedAt = string;
 
 /**
  * The GitHub URL of the alert resource.
  * @format uri
  */
-export type IMySuperPrefixAlertHtmlUrlMySuperSuffix = string;
+export type AlertHtmlUrl = string;
 
 /** The security alert number. */
-export type IMySuperPrefixAlertNumberMySuperSuffix = number;
+export type AlertNumber = number;
 
 /**
  * The REST API URL of the alert resource.
  * @format uri
  */
-export type IMySuperPrefixAlertUrlMySuperSuffix = string;
+export type AlertUrl = string;
 
 /** The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`. */
-export enum IMySuperPrefixAllowedActionsMySuperSuffix {
+export enum AllowedActions {
   All = "all",
   LocalOnly = "local_only",
   Selected = "selected",
@@ -6184,7 +148,7 @@ export enum IMySuperPrefixAllowedActionsMySuperSuffix {
  * Api Overview
  * Api Overview
  */
-export interface IMySuperPrefixApiOverviewMySuperSuffix {
+export interface ApiOverview {
   /** @example ["13.64.0.0/16","13.65.0.0/16"] */
   actions?: string[];
   /** @example ["127.0.0.1/32"] */
@@ -6212,7 +176,7 @@ export interface IMySuperPrefixApiOverviewMySuperSuffix {
  * The permissions granted to the user-to-server access token.
  * @example {"contents":"read","issues":"read","deployments":"write","single_file":"read"}
  */
-export interface IMySuperPrefixAppPermissionsMySuperSuffix {
+export interface AppPermissions {
   /** The level of permission to grant the access token for GitHub Actions workflows, workflow runs, and artifacts. Can be one of: `read` or `write`. */
   actions?: "read" | "write";
   /** The level of permission to grant the access token for repository creation, deletion, settings, teams, and collaborators creation. Can be one of: `read` or `write`. */
@@ -6279,7 +243,7 @@ export interface IMySuperPrefixAppPermissionsMySuperSuffix {
  * Application Grant
  * The authorization associated with an OAuth Access.
  */
-export interface IMySuperPrefixApplicationGrantMySuperSuffix {
+export interface ApplicationGrant {
   app: {
     client_id: string;
     name: string;
@@ -6305,14 +269,14 @@ export interface IMySuperPrefixApplicationGrantMySuperSuffix {
    * @example "https://api.github.com/applications/grants/1"
    */
   url: string;
-  user?: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  user?: SimpleUser | null;
 }
 
 /**
  * Artifact
  * An artifact
  */
-export interface IMySuperPrefixArtifactMySuperSuffix {
+export interface Artifact {
   /** @example "https://api.github.com/repos/github/hello-world/actions/artifacts/5/zip" */
   archive_download_url: string;
   /** @format date-time */
@@ -6341,7 +305,7 @@ export interface IMySuperPrefixArtifactMySuperSuffix {
   url: string;
 }
 
-export interface IMySuperPrefixAuditLogEventMySuperSuffix {
+export interface AuditLogEvent {
   /** The time the audit log event occurred, given as a [Unix timestamp](http://en.wikipedia.org/wiki/Unix_time). */
   "@timestamp"?: number;
   /** The name of the action that was performed, for example `user.login` or `repo.create`. */
@@ -6394,7 +358,7 @@ export interface IMySuperPrefixAuditLogEventMySuperSuffix {
  * Authentication Token
  * Authentication Token
  */
-export interface IMySuperPrefixAuthenticationTokenMySuperSuffix {
+export interface AuthenticationToken {
   /**
    * The time this token expires
    * @format date-time
@@ -6404,7 +368,7 @@ export interface IMySuperPrefixAuthenticationTokenMySuperSuffix {
   /** @example {"issues":"read","deployments":"write"} */
   permissions?: object;
   /** The repositories this token has access to */
-  repositories?: IMySuperPrefixRepositoryMySuperSuffix[];
+  repositories?: Repository[];
   /** Describe whether all repositories have been selected or there's a selection involved */
   repository_selection?: "all" | "selected";
   /** @example "config.yaml" */
@@ -6421,7 +385,7 @@ export interface IMySuperPrefixAuthenticationTokenMySuperSuffix {
  * How the author is associated with the repository.
  * @example "OWNER"
  */
-export enum IMySuperPrefixAuthorAssociationMySuperSuffix {
+export enum AuthorAssociation {
   COLLABORATOR = "COLLABORATOR",
   CONTRIBUTOR = "CONTRIBUTOR",
   FIRST_TIMER = "FIRST_TIMER",
@@ -6436,7 +400,7 @@ export enum IMySuperPrefixAuthorAssociationMySuperSuffix {
  * Authorization
  * The authorization for an OAuth app, GitHub App, or a Personal Access Token.
  */
-export interface IMySuperPrefixAuthorizationMySuperSuffix {
+export interface Authorization {
   app: {
     client_id: string;
     name: string;
@@ -6448,7 +412,7 @@ export interface IMySuperPrefixAuthorizationMySuperSuffix {
   fingerprint: string | null;
   hashed_token: string | null;
   id: number;
-  installation?: IMySuperPrefixScopedInstallationMySuperSuffix | null;
+  installation?: ScopedInstallation | null;
   note: string | null;
   /** @format uri */
   note_url: string | null;
@@ -6460,20 +424,20 @@ export interface IMySuperPrefixAuthorizationMySuperSuffix {
   updated_at: string;
   /** @format uri */
   url: string;
-  user?: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  user?: SimpleUser | null;
 }
 
 /**
  * Auto merge
  * The status of auto merging a pull request.
  */
-export type IMySuperPrefixAutoMergeMySuperSuffix = {
+export type AutoMerge = {
   /** Commit message for the merge commit. */
   commit_message: string;
   /** Title for the merge commit message. */
   commit_title: string;
   /** Simple User */
-  enabled_by: IMySuperPrefixSimpleUserMySuperSuffix;
+  enabled_by: SimpleUser;
   /** The merge method to use. */
   merge_method: "merge" | "squash" | "rebase";
 } | null;
@@ -6482,7 +446,7 @@ export type IMySuperPrefixAutoMergeMySuperSuffix = {
  * Base Gist
  * Base Gist
  */
-export interface IMySuperPrefixBaseGistMySuperSuffix {
+export interface BaseGist {
   comments: number;
   /** @format uri */
   comments_url: string;
@@ -6513,21 +477,21 @@ export interface IMySuperPrefixBaseGistMySuperSuffix {
   html_url: string;
   id: string;
   node_id: string;
-  owner?: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  owner?: SimpleUser | null;
   public: boolean;
   truncated?: boolean;
   /** @format date-time */
   updated_at: string;
   /** @format uri */
   url: string;
-  user: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  user: SimpleUser | null;
 }
 
 /**
  * Basic Error
  * Basic Error
  */
-export interface IMySuperPrefixBasicErrorMySuperSuffix {
+export interface BasicError {
   documentation_url?: string;
   message?: string;
 }
@@ -6536,7 +500,7 @@ export interface IMySuperPrefixBasicErrorMySuperSuffix {
  * Blob
  * Blob
  */
-export interface IMySuperPrefixBlobMySuperSuffix {
+export interface Blob {
   content: string;
   encoding: string;
   highlighted_content?: string;
@@ -6551,7 +515,7 @@ export interface IMySuperPrefixBlobMySuperSuffix {
  * Branch Protection
  * Branch Protection
  */
-export interface IMySuperPrefixBranchProtectionMySuperSuffix {
+export interface BranchProtection {
   allow_deletions?: {
     enabled?: boolean;
   };
@@ -6560,7 +524,7 @@ export interface IMySuperPrefixBranchProtectionMySuperSuffix {
   };
   enabled: boolean;
   /** Protected Branch Admin Enforced */
-  enforce_admins?: IMySuperPrefixProtectedBranchAdminEnforcedMySuperSuffix;
+  enforce_admins?: ProtectedBranchAdminEnforced;
   /** @example ""branch/with/protection"" */
   name?: string;
   /** @example ""https://api.github.com/repos/owner-79e94e2d36b3fd06a32bb213/AAA_Public_Repo/branches/branch/with/protection/protection"" */
@@ -6569,7 +533,7 @@ export interface IMySuperPrefixBranchProtectionMySuperSuffix {
     enabled?: boolean;
   };
   /** Protected Branch Pull Request Review */
-  required_pull_request_reviews?: IMySuperPrefixProtectedBranchPullRequestReviewMySuperSuffix;
+  required_pull_request_reviews?: ProtectedBranchPullRequestReview;
   required_status_checks: {
     url?: string;
     enforcement_level: string;
@@ -6577,7 +541,7 @@ export interface IMySuperPrefixBranchProtectionMySuperSuffix {
     contexts_url?: string;
   };
   /** Branch Restriction Policy */
-  restrictions?: IMySuperPrefixBranchRestrictionPolicyMySuperSuffix;
+  restrictions?: BranchRestrictionPolicy;
   url?: string;
 }
 
@@ -6585,7 +549,7 @@ export interface IMySuperPrefixBranchProtectionMySuperSuffix {
  * Branch Restriction Policy
  * Branch Restriction Policy
  */
-export interface IMySuperPrefixBranchRestrictionPolicyMySuperSuffix {
+export interface BranchRestrictionPolicy {
   apps: {
     id?: number;
     slug?: string;
@@ -6686,7 +650,7 @@ export interface IMySuperPrefixBranchRestrictionPolicyMySuperSuffix {
  * Branch Short
  * Branch Short
  */
-export interface IMySuperPrefixBranchShortMySuperSuffix {
+export interface BranchShort {
   commit: {
     sha: string;
     url: string;
@@ -6699,20 +663,20 @@ export interface IMySuperPrefixBranchShortMySuperSuffix {
  * Branch With Protection
  * Branch With Protection
  */
-export interface IMySuperPrefixBranchWithProtectionMySuperSuffix {
+export interface BranchWithProtection {
   _links: {
     html: string;
     /** @format uri */
     self: string;
   };
   /** Commit */
-  commit: IMySuperPrefixCommitMySuperSuffix;
+  commit: Commit;
   name: string;
   /** @example ""mas*"" */
   pattern?: string;
   protected: boolean;
   /** Branch Protection */
-  protection: IMySuperPrefixBranchProtectionMySuperSuffix;
+  protection: BranchProtection;
   /** @format uri */
   protection_url: string;
   /** @example 1 */
@@ -6723,7 +687,7 @@ export interface IMySuperPrefixBranchWithProtectionMySuperSuffix {
  * Check Annotation
  * Check Annotation
  */
-export interface IMySuperPrefixCheckAnnotationMySuperSuffix {
+export interface CheckAnnotation {
   /** @example "warning" */
   annotation_level: string | null;
   blob_href: string;
@@ -6749,8 +713,8 @@ export interface IMySuperPrefixCheckAnnotationMySuperSuffix {
  * CheckRun
  * A check performed on the code of a given code change
  */
-export interface IMySuperPrefixCheckRunMySuperSuffix {
-  app: IMySuperPrefixIntegrationMySuperSuffix | null;
+export interface CheckRun {
+  app: Integration | null;
   check_suite: {
     id: number;
   } | null;
@@ -6792,7 +756,7 @@ export interface IMySuperPrefixCheckRunMySuperSuffix {
     /** @format uri */
     annotations_url: string;
   };
-  pull_requests: IMySuperPrefixPullRequestMinimalMySuperSuffix[];
+  pull_requests: PullRequestMinimal[];
   /**
    * @format date-time
    * @example "2018-05-04T01:14:52Z"
@@ -6811,10 +775,10 @@ export interface IMySuperPrefixCheckRunMySuperSuffix {
  * CheckSuite
  * A suite of checks performed on the code of a given code change
  */
-export interface IMySuperPrefixCheckSuiteMySuperSuffix {
+export interface CheckSuite {
   /** @example "d6fde92930d4715a2b49857d24b940956b26d2d3" */
   after: string | null;
-  app: IMySuperPrefixIntegrationMySuperSuffix | null;
+  app: Integration | null;
   /** @example "146e867f55c26428e5f9fade55a9bbf5e95a7912" */
   before: string | null;
   check_runs_url: string;
@@ -6825,7 +789,7 @@ export interface IMySuperPrefixCheckSuiteMySuperSuffix {
   /** @example "master" */
   head_branch: string | null;
   /** Simple Commit */
-  head_commit: IMySuperPrefixSimpleCommitMySuperSuffix;
+  head_commit: SimpleCommit;
   /**
    * The SHA of the head commit that is being checked.
    * @example "009b8a3a9ccbb128af87f9b1c0f4c62e8a304f6d"
@@ -6836,9 +800,9 @@ export interface IMySuperPrefixCheckSuiteMySuperSuffix {
   latest_check_runs_count: number;
   /** @example "MDEwOkNoZWNrU3VpdGU1" */
   node_id: string;
-  pull_requests: IMySuperPrefixPullRequestMinimalMySuperSuffix[] | null;
+  pull_requests: PullRequestMinimal[] | null;
   /** Minimal Repository */
-  repository: IMySuperPrefixMinimalRepositoryMySuperSuffix;
+  repository: MinimalRepository;
   /** @example "completed" */
   status: "queued" | "in_progress" | "completed" | null;
   /** @format date-time */
@@ -6851,7 +815,7 @@ export interface IMySuperPrefixCheckSuiteMySuperSuffix {
  * Check Suite Preference
  * Check suite configuration preferences for a repository.
  */
-export interface IMySuperPrefixCheckSuitePreferenceMySuperSuffix {
+export interface CheckSuitePreference {
   preferences: {
     auto_trigger_checks?: {
       app_id: number;
@@ -6859,15 +823,15 @@ export interface IMySuperPrefixCheckSuitePreferenceMySuperSuffix {
     }[];
   };
   /** A git repository */
-  repository: IMySuperPrefixRepositoryMySuperSuffix;
+  repository: Repository;
 }
 
 /**
  * Clone Traffic
  * Clone Traffic
  */
-export interface IMySuperPrefixCloneTrafficMySuperSuffix {
-  clones: IMySuperPrefixTrafficMySuperSuffix[];
+export interface CloneTraffic {
+  clones: Traffic[];
   /** @example 173 */
   count: number;
   /** @example 128 */
@@ -6878,13 +842,13 @@ export interface IMySuperPrefixCloneTrafficMySuperSuffix {
  * Code Frequency Stat
  * Code Frequency Stat
  */
-export type IMySuperPrefixCodeFrequencyStatMySuperSuffix = number[];
+export type CodeFrequencyStat = number[];
 
 /**
  * Code Of Conduct
  * Code Of Conduct
  */
-export interface IMySuperPrefixCodeOfConductMySuperSuffix {
+export interface CodeOfConduct {
   /**
    * @example "# Contributor Covenant Code of Conduct
    *
@@ -6954,7 +918,7 @@ export interface IMySuperPrefixCodeOfConductMySuperSuffix {
  * Code Of Conduct Simple
  * Code of Conduct Simple
  */
-export interface IMySuperPrefixCodeOfConductSimpleMySuperSuffix {
+export interface CodeOfConductSimple {
   /** @format uri */
   html_url: string | null;
   /** @example "citizen_code_of_conduct" */
@@ -6968,81 +932,77 @@ export interface IMySuperPrefixCodeOfConductSimpleMySuperSuffix {
   url: string;
 }
 
-export interface IMySuperPrefixCodeScanningAlertCodeScanningAlertMySuperSuffix {
+export interface CodeScanningAlertCodeScanningAlert {
   /** The time that the alert was created in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  created_at: IMySuperPrefixAlertCreatedAtMySuperSuffix;
+  created_at: AlertCreatedAt;
   /** The time that the alert was dismissed in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  dismissed_at: IMySuperPrefixCodeScanningAlertDismissedAtMySuperSuffix;
+  dismissed_at: CodeScanningAlertDismissedAt;
   /** Simple User */
-  dismissed_by: IMySuperPrefixSimpleUserMySuperSuffix;
+  dismissed_by: SimpleUser;
   /** **Required when the state is dismissed.** The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`. */
-  dismissed_reason: IMySuperPrefixCodeScanningAlertDismissedReasonMySuperSuffix;
+  dismissed_reason: CodeScanningAlertDismissedReason;
   /** The GitHub URL of the alert resource. */
-  html_url: IMySuperPrefixAlertHtmlUrlMySuperSuffix;
-  instances: IMySuperPrefixCodeScanningAlertInstancesMySuperSuffix;
+  html_url: AlertHtmlUrl;
+  instances: CodeScanningAlertInstances;
   /** The security alert number. */
-  number: IMySuperPrefixAlertNumberMySuperSuffix;
-  rule: IMySuperPrefixCodeScanningAlertRuleMySuperSuffix;
+  number: AlertNumber;
+  rule: CodeScanningAlertRule;
   /** State of a code scanning alert. */
-  state: IMySuperPrefixCodeScanningAlertStateMySuperSuffix;
-  tool: IMySuperPrefixCodeScanningAnalysisToolMySuperSuffix;
+  state: CodeScanningAlertState;
+  tool: CodeScanningAnalysisTool;
   /** The REST API URL of the alert resource. */
-  url: IMySuperPrefixAlertUrlMySuperSuffix;
+  url: AlertUrl;
 }
 
-export interface IMySuperPrefixCodeScanningAlertCodeScanningAlertItemsMySuperSuffix {
+export interface CodeScanningAlertCodeScanningAlertItems {
   /** The time that the alert was created in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  created_at: IMySuperPrefixAlertCreatedAtMySuperSuffix;
+  created_at: AlertCreatedAt;
   /** The time that the alert was dismissed in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  dismissed_at: IMySuperPrefixCodeScanningAlertDismissedAtMySuperSuffix;
+  dismissed_at: CodeScanningAlertDismissedAt;
   /** Simple User */
-  dismissed_by: IMySuperPrefixSimpleUserMySuperSuffix;
+  dismissed_by: SimpleUser;
   /** **Required when the state is dismissed.** The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`. */
-  dismissed_reason: IMySuperPrefixCodeScanningAlertDismissedReasonMySuperSuffix;
+  dismissed_reason: CodeScanningAlertDismissedReason;
   /** The GitHub URL of the alert resource. */
-  html_url: IMySuperPrefixAlertHtmlUrlMySuperSuffix;
+  html_url: AlertHtmlUrl;
   /** The security alert number. */
-  number: IMySuperPrefixAlertNumberMySuperSuffix;
-  rule: IMySuperPrefixCodeScanningAlertRuleMySuperSuffix;
+  number: AlertNumber;
+  rule: CodeScanningAlertRule;
   /** State of a code scanning alert. */
-  state: IMySuperPrefixCodeScanningAlertStateMySuperSuffix;
-  tool: IMySuperPrefixCodeScanningAnalysisToolMySuperSuffix;
+  state: CodeScanningAlertState;
+  tool: CodeScanningAnalysisTool;
   /** The REST API URL of the alert resource. */
-  url: IMySuperPrefixAlertUrlMySuperSuffix;
+  url: AlertUrl;
 }
 
 /**
  * The time that the alert was dismissed in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
  * @format date-time
  */
-export type IMySuperPrefixCodeScanningAlertDismissedAtMySuperSuffix = string | null;
+export type CodeScanningAlertDismissedAt = string | null;
 
 /** **Required when the state is dismissed.** The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`. */
-export type IMySuperPrefixCodeScanningAlertDismissedReasonMySuperSuffix =
-  | "false positive"
-  | "won't fix"
-  | "used in tests"
-  | null;
+export type CodeScanningAlertDismissedReason = "false positive" | "won't fix" | "used in tests" | null;
 
 /** Identifies the variable values associated with the environment in which the analysis that generated this alert instance was performed, such as the language that was analyzed. */
-export type IMySuperPrefixCodeScanningAlertEnvironmentMySuperSuffix = string;
+export type CodeScanningAlertEnvironment = string;
 
-export type IMySuperPrefixCodeScanningAlertInstancesMySuperSuffix = {
+export type CodeScanningAlertInstances = {
   /** The full Git reference, formatted as `refs/heads/<branch name>`. */
-  ref?: IMySuperPrefixCodeScanningAlertRefMySuperSuffix;
+  ref?: CodeScanningAlertRef;
   /** Identifies the configuration under which the analysis was executed. For example, in GitHub Actions this includes the workflow filename and job name. */
-  analysis_key?: IMySuperPrefixCodeScanningAnalysisAnalysisKeyMySuperSuffix;
+  analysis_key?: CodeScanningAnalysisAnalysisKey;
   /** Identifies the variable values associated with the environment in which the analysis that generated this alert instance was performed, such as the language that was analyzed. */
-  environment?: IMySuperPrefixCodeScanningAlertEnvironmentMySuperSuffix;
+  environment?: CodeScanningAlertEnvironment;
   matrix_vars?: string | null;
   /** State of a code scanning alert. */
-  state?: IMySuperPrefixCodeScanningAlertStateMySuperSuffix;
+  state?: CodeScanningAlertState;
 }[];
 
 /** The full Git reference, formatted as `refs/heads/<branch name>`. */
-export type IMySuperPrefixCodeScanningAlertRefMySuperSuffix = string;
+export type CodeScanningAlertRef = string;
 
-export interface IMySuperPrefixCodeScanningAlertRuleMySuperSuffix {
+export interface CodeScanningAlertRule {
   /** A short description of the rule used to detect the alert. */
   description?: string;
   /** A unique identifier for the rule used to detect the alert. */
@@ -7052,36 +1012,36 @@ export interface IMySuperPrefixCodeScanningAlertRuleMySuperSuffix {
 }
 
 /** Sets the state of the code scanning alert. Can be one of `open` or `dismissed`. You must provide `dismissed_reason` when you set the state to `dismissed`. */
-export enum IMySuperPrefixCodeScanningAlertSetStateMySuperSuffix {
+export enum CodeScanningAlertSetState {
   Open = "open",
   Dismissed = "dismissed",
 }
 
 /** State of a code scanning alert. */
-export enum IMySuperPrefixCodeScanningAlertStateMySuperSuffix {
+export enum CodeScanningAlertState {
   Open = "open",
   Dismissed = "dismissed",
   Fixed = "fixed",
 }
 
 /** Identifies the configuration under which the analysis was executed. For example, in GitHub Actions this includes the workflow filename and job name. */
-export type IMySuperPrefixCodeScanningAnalysisAnalysisKeyMySuperSuffix = string;
+export type CodeScanningAnalysisAnalysisKey = string;
 
-export interface IMySuperPrefixCodeScanningAnalysisCodeScanningAnalysisMySuperSuffix {
+export interface CodeScanningAnalysisCodeScanningAnalysis {
   /** Identifies the configuration under which the analysis was executed. For example, in GitHub Actions this includes the workflow filename and job name. */
-  analysis_key: IMySuperPrefixCodeScanningAnalysisAnalysisKeyMySuperSuffix;
+  analysis_key: CodeScanningAnalysisAnalysisKey;
   /** The commit SHA of the code scanning analysis file. */
-  commit_sha: IMySuperPrefixCodeScanningAnalysisCommitShaMySuperSuffix;
+  commit_sha: CodeScanningAnalysisCommitSha;
   /** The time that the analysis was created in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  created_at: IMySuperPrefixCodeScanningAnalysisCreatedAtMySuperSuffix;
+  created_at: CodeScanningAnalysisCreatedAt;
   /** Identifies the variable values associated with the environment in which this analysis was performed. */
-  environment: IMySuperPrefixCodeScanningAnalysisEnvironmentMySuperSuffix;
+  environment: CodeScanningAnalysisEnvironment;
   /** @example "error reading field xyz" */
   error: string;
   /** The full Git reference of the code scanning analysis file, formatted as `refs/heads/<branch name>`. */
-  ref: IMySuperPrefixCodeScanningAnalysisRefMySuperSuffix;
+  ref: CodeScanningAnalysisRef;
   /** The name of the tool used to generate the code scanning analysis alert. */
-  tool_name: IMySuperPrefixCodeScanningAnalysisToolNameMySuperSuffix;
+  tool_name: CodeScanningAnalysisToolName;
 }
 
 /**
@@ -7090,38 +1050,38 @@ export interface IMySuperPrefixCodeScanningAnalysisCodeScanningAnalysisMySuperSu
  * @maxLength 40
  * @pattern ^[0-9a-fA-F]+$
  */
-export type IMySuperPrefixCodeScanningAnalysisCommitShaMySuperSuffix = string;
+export type CodeScanningAnalysisCommitSha = string;
 
 /**
  * The time that the analysis was created in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
  * @format date-time
  */
-export type IMySuperPrefixCodeScanningAnalysisCreatedAtMySuperSuffix = string;
+export type CodeScanningAnalysisCreatedAt = string;
 
 /** Identifies the variable values associated with the environment in which this analysis was performed. */
-export type IMySuperPrefixCodeScanningAnalysisEnvironmentMySuperSuffix = string;
+export type CodeScanningAnalysisEnvironment = string;
 
 /** The full Git reference of the code scanning analysis file, formatted as `refs/heads/<branch name>`. */
-export type IMySuperPrefixCodeScanningAnalysisRefMySuperSuffix = string;
+export type CodeScanningAnalysisRef = string;
 
 /** A Base64 string representing the SARIF file to upload. You must first compress your SARIF file using [`gzip`](http://www.gnu.org/software/gzip/manual/gzip.html) and then translate the contents of the file into a Base64 encoding string. */
-export type IMySuperPrefixCodeScanningAnalysisSarifFileMySuperSuffix = string;
+export type CodeScanningAnalysisSarifFile = string;
 
-export interface IMySuperPrefixCodeScanningAnalysisToolMySuperSuffix {
+export interface CodeScanningAnalysisTool {
   /** The name of the tool used to generate the code scanning analysis alert. */
-  name?: IMySuperPrefixCodeScanningAnalysisToolNameMySuperSuffix;
+  name?: CodeScanningAnalysisToolName;
   /** The version of the tool used to detect the alert. */
   version?: string | null;
 }
 
 /** The name of the tool used to generate the code scanning analysis alert. */
-export type IMySuperPrefixCodeScanningAnalysisToolNameMySuperSuffix = string;
+export type CodeScanningAnalysisToolName = string;
 
 /**
  * Code Search Result Item
  * Code Search Result Item
  */
-export interface IMySuperPrefixCodeSearchResultItemMySuperSuffix {
+export interface CodeSearchResultItem {
   file_size?: number;
   /** @format uri */
   git_url: string;
@@ -7135,10 +1095,10 @@ export interface IMySuperPrefixCodeSearchResultItemMySuperSuffix {
   name: string;
   path: string;
   /** Minimal Repository */
-  repository: IMySuperPrefixMinimalRepositoryMySuperSuffix;
+  repository: MinimalRepository;
   score: number;
   sha: string;
-  text_matches?: IMySuperPrefixSearchResultTextMatchesMySuperSuffix;
+  text_matches?: SearchResultTextMatches;
   /** @format uri */
   url: string;
 }
@@ -7147,7 +1107,7 @@ export interface IMySuperPrefixCodeSearchResultItemMySuperSuffix {
  * Collaborator
  * Collaborator
  */
-export interface IMySuperPrefixCollaboratorMySuperSuffix {
+export interface Collaborator {
   /**
    * @format uri
    * @example "https://github.com/images/error/octocat_happy.gif"
@@ -7214,7 +1174,7 @@ export interface IMySuperPrefixCollaboratorMySuperSuffix {
   url: string;
 }
 
-export interface IMySuperPrefixCombinedBillingUsageMySuperSuffix {
+export interface CombinedBillingUsage {
   /** Numbers of days left in billing cycle. */
   days_left_in_billing_cycle: number;
   /** Estimated storage space (GB) used in billing cycle. */
@@ -7227,14 +1187,14 @@ export interface IMySuperPrefixCombinedBillingUsageMySuperSuffix {
  * Combined Commit Status
  * Combined Commit Status
  */
-export interface IMySuperPrefixCombinedCommitStatusMySuperSuffix {
+export interface CombinedCommitStatus {
   /** @format uri */
   commit_url: string;
   /** Minimal Repository */
-  repository: IMySuperPrefixMinimalRepositoryMySuperSuffix;
+  repository: MinimalRepository;
   sha: string;
   state: string;
-  statuses: IMySuperPrefixSimpleCommitStatusMySuperSuffix[];
+  statuses: SimpleCommitStatus[];
   total_count: number;
   /** @format uri */
   url: string;
@@ -7244,8 +1204,8 @@ export interface IMySuperPrefixCombinedCommitStatusMySuperSuffix {
  * Commit
  * Commit
  */
-export interface IMySuperPrefixCommitMySuperSuffix {
-  author: IMySuperPrefixSimpleUserMySuperSuffix | null;
+export interface Commit {
+  author: SimpleUser | null;
   /**
    * @format uri
    * @example "https://api.github.com/repos/octocat/Hello-World/commits/6dcb09b5b57875f334f61aebed695e2e4193db5e/comments"
@@ -7257,8 +1217,8 @@ export interface IMySuperPrefixCommitMySuperSuffix {
      * @example "https://api.github.com/repos/octocat/Hello-World/commits/6dcb09b5b57875f334f61aebed695e2e4193db5e"
      */
     url: string;
-    author: IMySuperPrefixGitUserMySuperSuffix | null;
-    committer: IMySuperPrefixGitUserMySuperSuffix | null;
+    author: GitUser | null;
+    committer: GitUser | null;
     /** @example "Fix all the bugs" */
     message: string;
     /** @example 0 */
@@ -7272,9 +1232,9 @@ export interface IMySuperPrefixCommitMySuperSuffix {
        */
       url: string;
     };
-    verification?: IMySuperPrefixVerificationMySuperSuffix;
+    verification?: Verification;
   };
-  committer: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  committer: SimpleUser | null;
   files?: {
     filename?: string;
     additions?: number;
@@ -7330,7 +1290,7 @@ export interface IMySuperPrefixCommitMySuperSuffix {
  * Commit Activity
  * Commit Activity
  */
-export interface IMySuperPrefixCommitActivityMySuperSuffix {
+export interface CommitActivity {
   /** @example [0,3,26,20,39,1,0] */
   days: number[];
   /** @example 89 */
@@ -7343,9 +1303,9 @@ export interface IMySuperPrefixCommitActivityMySuperSuffix {
  * Commit Comment
  * Commit Comment
  */
-export interface IMySuperPrefixCommitCommentMySuperSuffix {
+export interface CommitComment {
   /** How the author is associated with the repository. */
-  author_association: IMySuperPrefixAuthorAssociationMySuperSuffix;
+  author_association: AuthorAssociation;
   body: string;
   commit_id: string;
   /** @format date-time */
@@ -7357,39 +1317,39 @@ export interface IMySuperPrefixCommitCommentMySuperSuffix {
   node_id: string;
   path: string | null;
   position: number | null;
-  reactions?: IMySuperPrefixReactionRollupMySuperSuffix;
+  reactions?: ReactionRollup;
   /** @format date-time */
   updated_at: string;
   /** @format uri */
   url: string;
-  user: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  user: SimpleUser | null;
 }
 
 /**
  * Commit Comparison
  * Commit Comparison
  */
-export interface IMySuperPrefixCommitComparisonMySuperSuffix {
+export interface CommitComparison {
   /** @example 4 */
   ahead_by: number;
   /** Commit */
-  base_commit: IMySuperPrefixCommitMySuperSuffix;
+  base_commit: Commit;
   /** @example 5 */
   behind_by: number;
-  commits: IMySuperPrefixCommitMySuperSuffix[];
+  commits: Commit[];
   /**
    * @format uri
    * @example "https://github.com/octocat/Hello-World/compare/master...topic.diff"
    */
   diff_url: string;
-  files: IMySuperPrefixDiffEntryMySuperSuffix[];
+  files: DiffEntry[];
   /**
    * @format uri
    * @example "https://github.com/octocat/Hello-World/compare/master...topic"
    */
   html_url: string;
   /** Commit */
-  merge_base_commit: IMySuperPrefixCommitMySuperSuffix;
+  merge_base_commit: Commit;
   /**
    * @format uri
    * @example "https://github.com/octocat/Hello-World/compare/master...topic.patch"
@@ -7415,8 +1375,8 @@ export interface IMySuperPrefixCommitComparisonMySuperSuffix {
  * Commit Search Result Item
  * Commit Search Result Item
  */
-export interface IMySuperPrefixCommitSearchResultItemMySuperSuffix {
-  author: IMySuperPrefixSimpleUserMySuperSuffix | null;
+export interface CommitSearchResultItem {
+  author: SimpleUser | null;
   /** @format uri */
   comments_url: string;
   commit: {
@@ -7426,7 +1386,7 @@ export interface IMySuperPrefixCommitSearchResultItemMySuperSuffix {
       /** @format date-time */
       date: string;
     };
-    committer: IMySuperPrefixGitUserMySuperSuffix | null;
+    committer: GitUser | null;
     comment_count: number;
     message: string;
     tree: {
@@ -7436,9 +1396,9 @@ export interface IMySuperPrefixCommitSearchResultItemMySuperSuffix {
     };
     /** @format uri */
     url: string;
-    verification?: IMySuperPrefixVerificationMySuperSuffix;
+    verification?: Verification;
   };
-  committer: IMySuperPrefixGitUserMySuperSuffix | null;
+  committer: GitUser | null;
   /** @format uri */
   html_url: string;
   node_id: string;
@@ -7448,16 +1408,16 @@ export interface IMySuperPrefixCommitSearchResultItemMySuperSuffix {
     sha?: string;
   }[];
   /** Minimal Repository */
-  repository: IMySuperPrefixMinimalRepositoryMySuperSuffix;
+  repository: MinimalRepository;
   score: number;
   sha: string;
-  text_matches?: IMySuperPrefixSearchResultTextMatchesMySuperSuffix;
+  text_matches?: SearchResultTextMatches;
   /** @format uri */
   url: string;
 }
 
 /** Community Health File */
-export interface IMySuperPrefixCommunityHealthFileMySuperSuffix {
+export interface CommunityHealthFile {
   /** @format uri */
   html_url: string;
   /** @format uri */
@@ -7468,7 +1428,7 @@ export interface IMySuperPrefixCommunityHealthFileMySuperSuffix {
  * Community Profile
  * Community Profile
  */
-export interface IMySuperPrefixCommunityProfileMySuperSuffix {
+export interface CommunityProfile {
   /** @example true */
   content_reports_enabled?: boolean;
   /** @example "My first repository on GitHub!" */
@@ -7476,12 +1436,12 @@ export interface IMySuperPrefixCommunityProfileMySuperSuffix {
   /** @example "example.com" */
   documentation: string | null;
   files: {
-    code_of_conduct: IMySuperPrefixCodeOfConductSimpleMySuperSuffix | null;
-    license: IMySuperPrefixLicenseSimpleMySuperSuffix | null;
-    contributing: IMySuperPrefixCommunityHealthFileMySuperSuffix | null;
-    readme: IMySuperPrefixCommunityHealthFileMySuperSuffix | null;
-    issue_template: IMySuperPrefixCommunityHealthFileMySuperSuffix | null;
-    pull_request_template: IMySuperPrefixCommunityHealthFileMySuperSuffix | null;
+    code_of_conduct: CodeOfConductSimple | null;
+    license: LicenseSimple | null;
+    contributing: CommunityHealthFile | null;
+    readme: CommunityHealthFile | null;
+    issue_template: CommunityHealthFile | null;
+    pull_request_template: CommunityHealthFile | null;
   };
   /** @example 100 */
   health_percentage: number;
@@ -7496,7 +1456,7 @@ export interface IMySuperPrefixCommunityProfileMySuperSuffix {
  * Content Directory
  * A list of directory items
  */
-export type IMySuperPrefixContentDirectoryMySuperSuffix = {
+export type ContentDirectory = {
   type: string;
   size: number;
   name: string;
@@ -7525,7 +1485,7 @@ export type IMySuperPrefixContentDirectoryMySuperSuffix = {
  * Content File
  * Content File
  */
-export interface IMySuperPrefixContentFileMySuperSuffix {
+export interface ContentFile {
   _links: {
     /** @format uri */
     git: string | null;
@@ -7559,7 +1519,7 @@ export interface IMySuperPrefixContentFileMySuperSuffix {
  * ContentReferenceAttachment
  * Content Reference attachments allow you to provide context around URLs posted in comments
  */
-export interface IMySuperPrefixContentReferenceAttachmentMySuperSuffix {
+export interface ContentReferenceAttachment {
   /**
    * The body of the attachment
    * @maxLength 262144
@@ -7588,7 +1548,7 @@ export interface IMySuperPrefixContentReferenceAttachmentMySuperSuffix {
  * Symlink Content
  * An object describing a symlink
  */
-export interface IMySuperPrefixContentSubmoduleMySuperSuffix {
+export interface ContentSubmodule {
   _links: {
     /** @format uri */
     git: string | null;
@@ -7618,7 +1578,7 @@ export interface IMySuperPrefixContentSubmoduleMySuperSuffix {
  * Symlink Content
  * An object describing a symlink
  */
-export interface IMySuperPrefixContentSymlinkMySuperSuffix {
+export interface ContentSymlink {
   _links: {
     /** @format uri */
     git: string | null;
@@ -7647,7 +1607,7 @@ export interface IMySuperPrefixContentSymlinkMySuperSuffix {
  * Content Traffic
  * Content Traffic
  */
-export interface IMySuperPrefixContentTrafficMySuperSuffix {
+export interface ContentTraffic {
   /** @example 3542 */
   count: number;
   /** @example "/github/hubot" */
@@ -7662,7 +1622,7 @@ export interface IMySuperPrefixContentTrafficMySuperSuffix {
  * Content Tree
  * Content Tree
  */
-export interface IMySuperPrefixContentTreeMySuperSuffix {
+export interface ContentTree {
   _links: {
     /** @format uri */
     git: string | null;
@@ -7714,7 +1674,7 @@ export interface IMySuperPrefixContentTreeMySuperSuffix {
  * Contributor
  * Contributor
  */
-export interface IMySuperPrefixContributorMySuperSuffix {
+export interface Contributor {
   /** @format uri */
   avatar_url?: string;
   contributions: number;
@@ -7750,8 +1710,8 @@ export interface IMySuperPrefixContributorMySuperSuffix {
  * Contributor Activity
  * Contributor Activity
  */
-export interface IMySuperPrefixContributorActivityMySuperSuffix {
-  author: IMySuperPrefixSimpleUserMySuperSuffix | null;
+export interface ContributorActivity {
+  author: SimpleUser | null;
   /** @example 135 */
   total: number;
   /** @example [{"w":"1367712000","a":6898,"d":77,"c":10}] */
@@ -7767,7 +1727,7 @@ export interface IMySuperPrefixContributorActivityMySuperSuffix {
  * Credential Authorization
  * Credential Authorization
  */
-export interface IMySuperPrefixCredentialAuthorizationMySuperSuffix {
+export interface CredentialAuthorization {
   /** @example 12345678 */
   authorized_credential_id?: number | null;
   /**
@@ -7828,7 +1788,7 @@ export interface IMySuperPrefixCredentialAuthorizationMySuperSuffix {
  * Deploy Key
  * An SSH key granting access to a single repository.
  */
-export interface IMySuperPrefixDeployKeyMySuperSuffix {
+export interface DeployKey {
   created_at: string;
   id: number;
   key: string;
@@ -7842,13 +1802,13 @@ export interface IMySuperPrefixDeployKeyMySuperSuffix {
  * Deployment
  * A request for a specific ref(branch,sha,tag) to be deployed
  */
-export interface IMySuperPrefixDeploymentMySuperSuffix {
+export interface Deployment {
   /**
    * @format date-time
    * @example "2012-07-20T01:19:13Z"
    */
   created_at: string;
-  creator: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  creator: SimpleUser | null;
   /** @example "Deploy request from hubot" */
   description: string | null;
   /**
@@ -7866,7 +1826,7 @@ export interface IMySuperPrefixDeploymentMySuperSuffix {
   /** @example "staging" */
   original_environment?: string;
   payload: object;
-  performed_via_github_app?: IMySuperPrefixIntegrationMySuperSuffix | null;
+  performed_via_github_app?: Integration | null;
   /**
    * Specifies if the given environment is one that end-users directly interact with. Default: false.
    * @example true
@@ -7915,13 +1875,13 @@ export interface IMySuperPrefixDeploymentMySuperSuffix {
  * Deployment Status
  * The status of a deployment.
  */
-export interface IMySuperPrefixDeploymentStatusMySuperSuffix {
+export interface DeploymentStatus {
   /**
    * @format date-time
    * @example "2012-07-20T01:19:13Z"
    */
   created_at: string;
-  creator: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  creator: SimpleUser | null;
   /**
    * @format uri
    * @example "https://api.github.com/repos/octocat/example/deployments/42"
@@ -7958,7 +1918,7 @@ export interface IMySuperPrefixDeploymentStatusMySuperSuffix {
   log_url?: string;
   /** @example "MDE2OkRlcGxveW1lbnRTdGF0dXMx" */
   node_id: string;
-  performed_via_github_app?: IMySuperPrefixIntegrationMySuperSuffix | null;
+  performed_via_github_app?: Integration | null;
   /**
    * @format uri
    * @example "https://api.github.com/repos/octocat/example"
@@ -7992,7 +1952,7 @@ export interface IMySuperPrefixDeploymentStatusMySuperSuffix {
  * Diff Entry
  * Diff Entry
  */
-export interface IMySuperPrefixDiffEntryMySuperSuffix {
+export interface DiffEntry {
   /** @example 103 */
   additions: number;
   /**
@@ -8030,7 +1990,7 @@ export interface IMySuperPrefixDiffEntryMySuperSuffix {
  * Email
  * Email
  */
-export interface IMySuperPrefixEmailMySuperSuffix {
+export interface Email {
   /**
    * @format email
    * @example "octocat@github.com"
@@ -8045,14 +2005,14 @@ export interface IMySuperPrefixEmailMySuperSuffix {
 }
 
 /** The policy that controls the organizations in the enterprise that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`. */
-export enum IMySuperPrefixEnabledOrganizationsMySuperSuffix {
+export enum EnabledOrganizations {
   All = "all",
   None = "none",
   Selected = "selected",
 }
 
 /** The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`. */
-export enum IMySuperPrefixEnabledRepositoriesMySuperSuffix {
+export enum EnabledRepositories {
   All = "all",
   None = "none",
   Selected = "selected",
@@ -8062,7 +2022,7 @@ export enum IMySuperPrefixEnabledRepositoriesMySuperSuffix {
  * Enterprise
  * An enterprise account
  */
-export interface IMySuperPrefixEnterpriseMySuperSuffix {
+export interface Enterprise {
   /** @format uri */
   avatar_url: string;
   /**
@@ -8110,20 +2070,20 @@ export interface IMySuperPrefixEnterpriseMySuperSuffix {
  * Event
  * Event
  */
-export interface IMySuperPrefixEventMySuperSuffix {
+export interface Event {
   /** Actor */
-  actor: IMySuperPrefixActorMySuperSuffix;
+  actor: Actor;
   /** @format date-time */
   created_at: string | null;
   id: string;
   /** Actor */
-  org?: IMySuperPrefixActorMySuperSuffix;
+  org?: Actor;
   payload: {
     action: string;
     /** Issue Simple */
-    issue?: IMySuperPrefixIssueSimpleMySuperSuffix;
+    issue?: IssueSimple;
     /** Comments provide a way for people to collaborate on an issue. */
-    comment?: IMySuperPrefixIssueCommentMySuperSuffix;
+    comment?: IssueComment;
     pages?: {
       page_name?: string;
       title?: string;
@@ -8147,23 +2107,23 @@ export interface IMySuperPrefixEventMySuperSuffix {
  * Feed
  * Feed
  */
-export interface IMySuperPrefixFeedMySuperSuffix {
+export interface Feed {
   _links: {
     /** Hypermedia Link with Type */
-    timeline: IMySuperPrefixLinkWithTypeMySuperSuffix;
+    timeline: LinkWithType;
     /** Hypermedia Link with Type */
-    user: IMySuperPrefixLinkWithTypeMySuperSuffix;
+    user: LinkWithType;
     /** Hypermedia Link with Type */
-    security_advisories?: IMySuperPrefixLinkWithTypeMySuperSuffix;
+    security_advisories?: LinkWithType;
     /** Hypermedia Link with Type */
-    current_user?: IMySuperPrefixLinkWithTypeMySuperSuffix;
+    current_user?: LinkWithType;
     /** Hypermedia Link with Type */
-    current_user_public?: IMySuperPrefixLinkWithTypeMySuperSuffix;
+    current_user_public?: LinkWithType;
     /** Hypermedia Link with Type */
-    current_user_actor?: IMySuperPrefixLinkWithTypeMySuperSuffix;
+    current_user_actor?: LinkWithType;
     /** Hypermedia Link with Type */
-    current_user_organization?: IMySuperPrefixLinkWithTypeMySuperSuffix;
-    current_user_organizations?: IMySuperPrefixLinkWithTypeMySuperSuffix[];
+    current_user_organization?: LinkWithType;
+    current_user_organizations?: LinkWithType[];
   };
   /** @example "https://github.com/octocat.private.actor?token=abc123" */
   current_user_actor_url?: string;
@@ -8187,7 +2147,7 @@ export interface IMySuperPrefixFeedMySuperSuffix {
  * File Commit
  * File Commit
  */
-export interface IMySuperPrefixFileCommitMySuperSuffix {
+export interface FileCommit {
   commit: {
     sha?: string;
     node_id?: string;
@@ -8242,7 +2202,7 @@ export interface IMySuperPrefixFileCommitMySuperSuffix {
  * Full Repository
  * Full Repository
  */
-export interface IMySuperPrefixFullRepositoryMySuperSuffix {
+export interface FullRepository {
   /** @example true */
   allow_merge_commit?: boolean;
   /** @example true */
@@ -8371,7 +2331,7 @@ export interface IMySuperPrefixFullRepositoryMySuperSuffix {
    * @example "http://api.github.com/repos/octocat/Hello-World/languages"
    */
   languages_url: string;
-  license: IMySuperPrefixLicenseSimpleMySuperSuffix | null;
+  license: LicenseSimple | null;
   master_branch?: string;
   /**
    * @format uri
@@ -8396,10 +2356,10 @@ export interface IMySuperPrefixFullRepositoryMySuperSuffix {
   open_issues: number;
   /** @example 0 */
   open_issues_count: number;
-  organization?: IMySuperPrefixSimpleUserMySuperSuffix | null;
-  owner: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  organization?: SimpleUser | null;
+  owner: SimpleUser | null;
   /** A git repository */
-  parent?: IMySuperPrefixRepositoryMySuperSuffix;
+  parent?: Repository;
   permissions?: {
     admin: boolean;
     pull: boolean;
@@ -8418,7 +2378,7 @@ export interface IMySuperPrefixFullRepositoryMySuperSuffix {
   /** @example 108 */
   size: number;
   /** A git repository */
-  source?: IMySuperPrefixRepositoryMySuperSuffix;
+  source?: Repository;
   /** @example "git@github.com:octocat/Hello-World.git" */
   ssh_url: string;
   /** @example 80 */
@@ -8458,7 +2418,7 @@ export interface IMySuperPrefixFullRepositoryMySuperSuffix {
    */
   teams_url: string;
   temp_clone_token?: string | null;
-  template_repository?: IMySuperPrefixRepositoryMySuperSuffix | null;
+  template_repository?: Repository | null;
   /** @example ["octocat","atom","electron","API"] */
   topics?: string[];
   /** @example "http://api.github.com/repos/octocat/Hello-World/git/trees{/sha}" */
@@ -8487,9 +2447,9 @@ export interface IMySuperPrefixFullRepositoryMySuperSuffix {
  * Gist Comment
  * A comment made to a gist.
  */
-export interface IMySuperPrefixGistCommentMySuperSuffix {
+export interface GistComment {
   /** How the author is associated with the repository. */
-  author_association: IMySuperPrefixAuthorAssociationMySuperSuffix;
+  author_association: AuthorAssociation;
   /**
    * The comment text.
    * @maxLength 65535
@@ -8515,14 +2475,14 @@ export interface IMySuperPrefixGistCommentMySuperSuffix {
    * @example "https://api.github.com/gists/a6db0bec360bb87e9418/comments/1"
    */
   url: string;
-  user: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  user: SimpleUser | null;
 }
 
 /**
  * Gist Commit
  * Gist Commit
  */
-export interface IMySuperPrefixGistCommitMySuperSuffix {
+export interface GistCommit {
   change_status: {
     total?: number;
     additions?: number;
@@ -8538,7 +2498,7 @@ export interface IMySuperPrefixGistCommitMySuperSuffix {
    * @example "https://api.github.com/gists/aa5a315d61ae9438b18d/57a7f021a713b1c5a6a199b54cc514735d2d462f"
    */
   url: string;
-  user: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  user: SimpleUser | null;
   /** @example "57a7f021a713b1c5a6a199b54cc514735d2d462f" */
   version: string;
 }
@@ -8547,7 +2507,7 @@ export interface IMySuperPrefixGistCommitMySuperSuffix {
  * Gist Simple
  * Gist Simple
  */
-export interface IMySuperPrefixGistSimpleMySuperSuffix {
+export interface GistSimple {
   comments?: number;
   comments_url?: string;
   commits_url?: string;
@@ -8572,7 +2532,7 @@ export interface IMySuperPrefixGistSimpleMySuperSuffix {
   id?: string;
   node_id?: string;
   /** Simple User */
-  owner?: IMySuperPrefixSimpleUserMySuperSuffix;
+  owner?: SimpleUser;
   public?: boolean;
   truncated?: boolean;
   updated_at?: string;
@@ -8584,7 +2544,7 @@ export interface IMySuperPrefixGistSimpleMySuperSuffix {
  * Git Commit
  * Low-level Git commit operations within a repository
  */
-export interface IMySuperPrefixGitCommitMySuperSuffix {
+export interface GitCommit {
   /** Identifying information for the git-user */
   author: {
     /**
@@ -8670,7 +2630,7 @@ export interface IMySuperPrefixGitCommitMySuperSuffix {
  * Git Reference
  * Git references within a repository
  */
-export interface IMySuperPrefixGitRefMySuperSuffix {
+export interface GitRef {
   node_id: string;
   object: {
     type: string;
@@ -8693,7 +2653,7 @@ export interface IMySuperPrefixGitRefMySuperSuffix {
  * Git Tag
  * Metadata for a Git tag
  */
-export interface IMySuperPrefixGitTagMySuperSuffix {
+export interface GitTag {
   /**
    * Message describing the purpose of the tag
    * @example "Initial public release"
@@ -8725,14 +2685,14 @@ export interface IMySuperPrefixGitTagMySuperSuffix {
    * @example "https://api.github.com/repositories/42/git/tags/940bd336248efae0f9ee5bc7b2d5c985887b16ac"
    */
   url: string;
-  verification?: IMySuperPrefixVerificationMySuperSuffix;
+  verification?: Verification;
 }
 
 /**
  * Git Tree
  * The hierarchy between files in a Git repository.
  */
-export interface IMySuperPrefixGitTreeMySuperSuffix {
+export interface GitTree {
   sha: string;
   /**
    * Objects specifying a tree structure
@@ -8761,7 +2721,7 @@ export interface IMySuperPrefixGitTreeMySuperSuffix {
  * Git User
  * Metaproperties for Git author/committer information.
  */
-export interface IMySuperPrefixGitUserMySuperSuffix {
+export interface GitUser {
   /** @example ""2007-10-29T02:42:39.000-07:00"" */
   date?: string;
   /** @example ""chris@ozmm.org"" */
@@ -8774,7 +2734,7 @@ export interface IMySuperPrefixGitUserMySuperSuffix {
  * Gitignore Template
  * Gitignore Template
  */
-export interface IMySuperPrefixGitignoreTemplateMySuperSuffix {
+export interface GitignoreTemplate {
   /** @example "C" */
   name: string;
   /**
@@ -8804,7 +2764,7 @@ export interface IMySuperPrefixGitignoreTemplateMySuperSuffix {
  * GPG Key
  * A unique encryption key
  */
-export interface IMySuperPrefixGpgKeyMySuperSuffix {
+export interface GpgKey {
   /** @example true */
   can_certify: boolean;
   can_encrypt_comms: boolean;
@@ -8853,7 +2813,7 @@ export interface IMySuperPrefixGpgKeyMySuperSuffix {
  * GroupMapping
  * External Groups to be mapped to a team for membership
  */
-export interface IMySuperPrefixGroupMappingMySuperSuffix {
+export interface GroupMapping {
   /**
    * a description of the group
    * @example "A group of Developers working on AzureAD SAML SSO"
@@ -8906,7 +2866,7 @@ export interface IMySuperPrefixGroupMappingMySuperSuffix {
  * Webhook
  * Webhooks for repositories.
  */
-export interface IMySuperPrefixHookMySuperSuffix {
+export interface Hook {
   /**
    * Determines whether the hook is actually triggered on pushes.
    * @example true
@@ -8922,15 +2882,15 @@ export interface IMySuperPrefixHookMySuperSuffix {
     /** @example ""foo"" */
     subdomain?: string;
     /** The URL to which the payloads will be delivered. */
-    url?: IMySuperPrefixWebhookConfigUrlMySuperSuffix;
+    url?: WebhookConfigUrl;
     /** Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** */
-    insecure_ssl?: IMySuperPrefixWebhookConfigInsecureSslMySuperSuffix;
+    insecure_ssl?: WebhookConfigInsecureSsl;
     /** The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. */
-    content_type?: IMySuperPrefixWebhookConfigContentTypeMySuperSuffix;
+    content_type?: WebhookConfigContentType;
     /** @example ""sha256"" */
     digest?: string;
     /** If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value for [delivery signature headers](https://docs.github.com/webhooks/event-payloads/#delivery-headers). */
-    secret?: IMySuperPrefixWebhookConfigSecretMySuperSuffix;
+    secret?: WebhookConfigSecret;
     /** @example ""abc"" */
     token?: string;
   };
@@ -8949,7 +2909,7 @@ export interface IMySuperPrefixHookMySuperSuffix {
    * @example 42
    */
   id: number;
-  last_response: IMySuperPrefixHookResponseMySuperSuffix;
+  last_response: HookResponse;
   /**
    * The name of a valid service, use 'web' for a webhook.
    * @example "web"
@@ -8979,7 +2939,7 @@ export interface IMySuperPrefixHookMySuperSuffix {
 }
 
 /** Hook Response */
-export interface IMySuperPrefixHookResponseMySuperSuffix {
+export interface HookResponse {
   code: number | null;
   message: string | null;
   status: string | null;
@@ -8989,7 +2949,7 @@ export interface IMySuperPrefixHookResponseMySuperSuffix {
  * Hovercard
  * Hovercard
  */
-export interface IMySuperPrefixHovercardMySuperSuffix {
+export interface Hovercard {
   contexts: {
     message: string;
     octicon: string;
@@ -9000,7 +2960,7 @@ export interface IMySuperPrefixHovercardMySuperSuffix {
  * Import
  * A repository import from an external source.
  */
-export interface IMySuperPrefixImportMySuperSuffix {
+export interface Import {
   authors_count?: number | null;
   /** @format uri */
   authors_url: string;
@@ -9055,17 +3015,13 @@ export interface IMySuperPrefixImportMySuperSuffix {
  * Installation
  * Installation
  */
-export interface IMySuperPrefixInstallationMySuperSuffix {
+export interface Installation {
   /**
    * @format uri
    * @example "https://api.github.com/installations/1/access_tokens"
    */
   access_tokens_url: string;
-  account:
-    | IMySuperPrefixSimpleUserMySuperSuffix
-    | IMySuperPrefixEnterpriseMySuperSuffix
-    | (IMySuperPrefixSimpleUserMySuperSuffix & IMySuperPrefixEnterpriseMySuperSuffix)
-    | null;
+  account: SimpleUser | Enterprise | (SimpleUser & Enterprise) | null;
   /** @example 1 */
   app_id: number;
   /** @example "github-actions" */
@@ -9113,7 +3069,7 @@ export interface IMySuperPrefixInstallationMySuperSuffix {
   single_file_paths?: string[];
   /** @format date-time */
   suspended_at?: string | null;
-  suspended_by?: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  suspended_by?: SimpleUser | null;
   /** The ID of the user or organization this token is being scoped to. */
   target_id: number;
   /** @example "Organization" */
@@ -9126,7 +3082,7 @@ export interface IMySuperPrefixInstallationMySuperSuffix {
  * Installation Token
  * Authentication token for a GitHub App installed on a user or org.
  */
-export interface IMySuperPrefixInstallationTokenMySuperSuffix {
+export interface InstallationToken {
   expires_at: string;
   /** @example true */
   has_multiple_single_files?: boolean;
@@ -9138,7 +3094,7 @@ export interface IMySuperPrefixInstallationTokenMySuperSuffix {
     /** @example "read" */
     single_file?: string;
   };
-  repositories?: IMySuperPrefixRepositoryMySuperSuffix[];
+  repositories?: Repository[];
   repository_selection?: "all" | "selected";
   /** @example "README.md" */
   single_file?: string;
@@ -9151,7 +3107,7 @@ export interface IMySuperPrefixInstallationTokenMySuperSuffix {
  * GitHub app
  * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
  */
-export interface IMySuperPrefixIntegrationMySuperSuffix {
+export interface Integration {
   /** @example ""Iv1.25b5d1e65ffc4022"" */
   client_id?: string;
   /** @example ""1d4b2097ac622ba702d19de498f005747a8b21d3"" */
@@ -9195,7 +3151,7 @@ export interface IMySuperPrefixIntegrationMySuperSuffix {
   name: string;
   /** @example "MDExOkludGVncmF0aW9uMQ==" */
   node_id: string;
-  owner: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  owner: SimpleUser | null;
   /** @example ""-----BEGIN RSA PRIVATE KEY-----\nMIIEogIBAAKCAQEArYxrNYD/iT5CZVpRJu4rBKmmze3PVmT/gCo2ATUvDvZTPTey\nxcGJ3vvrJXazKk06pN05TN29o98jrYz4cengG3YGsXPNEpKsIrEl8NhbnxapEnM9\nJCMRe0P5JcPsfZlX6hmiT7136GRWiGOUba2X9+HKh8QJVLG5rM007TBER9/z9mWm\nrJuNh+m5l320oBQY/Qq3A7wzdEfZw8qm/mIN0FCeoXH1L6B8xXWaAYBwhTEh6SSn\nZHlO1Xu1JWDmAvBCi0RO5aRSKM8q9QEkvvHP4yweAtK3N8+aAbZ7ovaDhyGz8r6r\nzhU1b8Uo0Z2ysf503WqzQgIajr7Fry7/kUwpgQIDAQABAoIBADwJp80Ko1xHPZDy\nfcCKBDfIuPvkmSW6KumbsLMaQv1aGdHDwwTGv3t0ixSay8CGlxMRtRDyZPib6SvQ\n6OH/lpfpbMdW2ErkksgtoIKBVrDilfrcAvrNZu7NxRNbhCSvN8q0s4ICecjbbVQh\nnueSdlA6vGXbW58BHMq68uRbHkP+k+mM9U0mDJ1HMch67wlg5GbayVRt63H7R2+r\nVxcna7B80J/lCEjIYZznawgiTvp3MSanTglqAYi+m1EcSsP14bJIB9vgaxS79kTu\noiSo93leJbBvuGo8QEiUqTwMw4tDksmkLsoqNKQ1q9P7LZ9DGcujtPy4EZsamSJT\ny8OJt0ECgYEA2lxOxJsQk2kI325JgKFjo92mQeUObIvPfSNWUIZQDTjniOI6Gv63\nGLWVFrZcvQBWjMEQraJA9xjPbblV8PtfO87MiJGLWCHFxmPz2dzoedN+2Coxom8m\nV95CLz8QUShuao6u/RYcvUaZEoYs5bHcTmy5sBK80JyEmafJPtCQVxMCgYEAy3ar\nZr3yv4xRPEPMat4rseswmuMooSaK3SKub19WFI5IAtB/e7qR1Rj9JhOGcZz+OQrl\nT78O2OFYlgOIkJPvRMrPpK5V9lslc7tz1FSh3BZMRGq5jSyD7ETSOQ0c8T2O/s7v\nbeEPbVbDe4mwvM24XByH0GnWveVxaDl51ABD65sCgYB3ZAspUkOA5egVCh8kNpnd\nSd6SnuQBE3ySRlT2WEnCwP9Ph6oPgn+oAfiPX4xbRqkL8q/k0BdHQ4h+zNwhk7+h\nWtPYRAP1Xxnc/F+jGjb+DVaIaKGU18MWPg7f+FI6nampl3Q0KvfxwX0GdNhtio8T\nTj1E+SnFwh56SRQuxSh2gwKBgHKjlIO5NtNSflsUYFM+hyQiPiqnHzddfhSG+/3o\nm5nNaSmczJesUYreH5San7/YEy2UxAugvP7aSY2MxB+iGsiJ9WD2kZzTUlDZJ7RV\nUzWsoqBR+eZfVJ2FUWWvy8TpSG6trh4dFxImNtKejCR1TREpSiTV3Zb1dmahK9GV\nrK9NAoGAbBxRLoC01xfxCTgt5BDiBcFVh4fp5yYKwavJPLzHSpuDOrrI9jDn1oKN\nonq5sDU1i391zfQvdrbX4Ova48BN+B7p63FocP/MK5tyyBoT8zQEk2+vWDOw7H/Z\nu5dTCPxTIsoIwUw1I+7yIxqJzLPFgR2gVBwY1ra/8iAqCj+zeBw=\n-----END RSA PRIVATE KEY-----\n"" */
   pem?: string;
   /**
@@ -9229,7 +3185,7 @@ export interface IMySuperPrefixIntegrationMySuperSuffix {
  * The duration of the interaction restriction. Can be one of: `one_day`, `three_days`, `one_week`, `one_month`, `six_months`. Default: `one_day`.
  * @example "one_month"
  */
-export enum IMySuperPrefixInteractionExpiryMySuperSuffix {
+export enum InteractionExpiry {
   OneDay = "one_day",
   ThreeDays = "three_days",
   OneWeek = "one_week",
@@ -9241,7 +3197,7 @@ export enum IMySuperPrefixInteractionExpiryMySuperSuffix {
  * The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
  * @example "collaborators_only"
  */
-export enum IMySuperPrefixInteractionGroupMySuperSuffix {
+export enum InteractionGroup {
   ExistingUsers = "existing_users",
   ContributorsOnly = "contributors_only",
   CollaboratorsOnly = "collaborators_only",
@@ -9251,25 +3207,25 @@ export enum IMySuperPrefixInteractionGroupMySuperSuffix {
  * Interaction Restrictions
  * Limit interactions to a specific type of user for a specified duration
  */
-export interface IMySuperPrefixInteractionLimitMySuperSuffix {
+export interface InteractionLimit {
   /** The duration of the interaction restriction. Can be one of: `one_day`, `three_days`, `one_week`, `one_month`, `six_months`. Default: `one_day`. */
-  expiry?: IMySuperPrefixInteractionExpiryMySuperSuffix;
+  expiry?: InteractionExpiry;
   /** The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`. */
-  limit: IMySuperPrefixInteractionGroupMySuperSuffix;
+  limit: InteractionGroup;
 }
 
 /**
  * Interaction Limits
  * Interaction limit settings.
  */
-export interface IMySuperPrefixInteractionLimitResponseMySuperSuffix {
+export interface InteractionLimitResponse {
   /**
    * @format date-time
    * @example "2018-08-17T04:18:39Z"
    */
   expires_at: string;
   /** The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`. */
-  limit: IMySuperPrefixInteractionGroupMySuperSuffix;
+  limit: InteractionGroup;
   /** @example "repository" */
   origin: string;
 }
@@ -9278,12 +3234,12 @@ export interface IMySuperPrefixInteractionLimitResponseMySuperSuffix {
  * Issue
  * Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
  */
-export interface IMySuperPrefixIssueMySuperSuffix {
+export interface Issue {
   active_lock_reason?: string | null;
-  assignee: IMySuperPrefixSimpleUserMySuperSuffix | null;
-  assignees?: IMySuperPrefixSimpleUserMySuperSuffix[] | null;
+  assignee: SimpleUser | null;
+  assignees?: SimpleUser[] | null;
   /** How the author is associated with the repository. */
-  author_association: IMySuperPrefixAuthorAssociationMySuperSuffix;
+  author_association: AuthorAssociation;
   /**
    * Contents of the issue
    * @example "It looks like the new widget form is broken on Safari. When I try and create the widget, Safari crashes. This is reproducible on 10.8, but not 10.9. Maybe a browser bug?"
@@ -9293,7 +3249,7 @@ export interface IMySuperPrefixIssueMySuperSuffix {
   body_text?: string;
   /** @format date-time */
   closed_at: string | null;
-  closed_by?: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  closed_by?: SimpleUser | null;
   comments: number;
   /** @format uri */
   comments_url: string;
@@ -9323,14 +3279,14 @@ export interface IMySuperPrefixIssueMySuperSuffix {
   )[];
   labels_url: string;
   locked: boolean;
-  milestone: IMySuperPrefixMilestoneMySuperSuffix | null;
+  milestone: Milestone | null;
   node_id: string;
   /**
    * Number uniquely identifying the issue within its repository
    * @example 42
    */
   number: number;
-  performed_via_github_app?: IMySuperPrefixIntegrationMySuperSuffix | null;
+  performed_via_github_app?: Integration | null;
   pull_request?: {
     /** @format date-time */
     merged_at?: string | null;
@@ -9343,9 +3299,9 @@ export interface IMySuperPrefixIssueMySuperSuffix {
     /** @format uri */
     url: string | null;
   };
-  reactions?: IMySuperPrefixReactionRollupMySuperSuffix;
+  reactions?: ReactionRollup;
   /** A git repository */
-  repository?: IMySuperPrefixRepositoryMySuperSuffix;
+  repository?: Repository;
   /** @format uri */
   repository_url: string;
   /**
@@ -9368,16 +3324,16 @@ export interface IMySuperPrefixIssueMySuperSuffix {
    * @example "https://api.github.com/repositories/42/issues/1"
    */
   url: string;
-  user: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  user: SimpleUser | null;
 }
 
 /**
  * Issue Comment
  * Comments provide a way for people to collaborate on an issue.
  */
-export interface IMySuperPrefixIssueCommentMySuperSuffix {
+export interface IssueComment {
   /** How the author is associated with the repository. */
-  author_association: IMySuperPrefixAuthorAssociationMySuperSuffix;
+  author_association: AuthorAssociation;
   /**
    * Contents of the issue comment
    * @example "What version of Safari were you using when you observed this bug?"
@@ -9400,8 +3356,8 @@ export interface IMySuperPrefixIssueCommentMySuperSuffix {
   /** @format uri */
   issue_url: string;
   node_id: string;
-  performed_via_github_app?: IMySuperPrefixIntegrationMySuperSuffix | null;
-  reactions?: IMySuperPrefixReactionRollupMySuperSuffix;
+  performed_via_github_app?: Integration | null;
+  reactions?: ReactionRollup;
   /**
    * @format date-time
    * @example "2011-04-14T16:00:49Z"
@@ -9413,19 +3369,19 @@ export interface IMySuperPrefixIssueCommentMySuperSuffix {
    * @example "https://api.github.com/repositories/42/issues/comments/1"
    */
   url: string;
-  user: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  user: SimpleUser | null;
 }
 
 /**
  * Issue Event
  * Issue Event
  */
-export interface IMySuperPrefixIssueEventMySuperSuffix {
-  actor: IMySuperPrefixSimpleUserMySuperSuffix | null;
-  assignee?: IMySuperPrefixSimpleUserMySuperSuffix | null;
-  assigner?: IMySuperPrefixSimpleUserMySuperSuffix | null;
+export interface IssueEvent {
+  actor: SimpleUser | null;
+  assignee?: SimpleUser | null;
+  assigner?: SimpleUser | null;
   /** How the author is associated with the repository. */
-  author_association?: IMySuperPrefixAuthorAssociationMySuperSuffix;
+  author_association?: AuthorAssociation;
   /** @example "6dcb09b5b57875f334f61aebed695e2e4193db5e" */
   commit_id: string | null;
   /** @example "https://api.github.com/repos/octocat/Hello-World/commits/6dcb09b5b57875f334f61aebed695e2e4193db5e" */
@@ -9435,28 +3391,28 @@ export interface IMySuperPrefixIssueEventMySuperSuffix {
    * @example "2011-04-14T16:00:49Z"
    */
   created_at: string;
-  dismissed_review?: IMySuperPrefixIssueEventDismissedReviewMySuperSuffix;
+  dismissed_review?: IssueEventDismissedReview;
   /** @example "closed" */
   event: string;
   /** @example 1 */
   id: number;
   /** Issue Simple */
-  issue?: IMySuperPrefixIssueSimpleMySuperSuffix;
+  issue?: IssueSimple;
   /** Issue Event Label */
-  label?: IMySuperPrefixIssueEventLabelMySuperSuffix;
+  label?: IssueEventLabel;
   lock_reason?: string | null;
   /** Issue Event Milestone */
-  milestone?: IMySuperPrefixIssueEventMilestoneMySuperSuffix;
+  milestone?: IssueEventMilestone;
   /** @example "MDEwOklzc3VlRXZlbnQx" */
   node_id: string;
   /** Issue Event Project Card */
-  project_card?: IMySuperPrefixIssueEventProjectCardMySuperSuffix;
+  project_card?: IssueEventProjectCard;
   /** Issue Event Rename */
-  rename?: IMySuperPrefixIssueEventRenameMySuperSuffix;
-  requested_reviewer?: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  rename?: IssueEventRename;
+  requested_reviewer?: SimpleUser | null;
   /** Groups of organization members that gives permissions on specified repositories. */
-  requested_team?: IMySuperPrefixTeamMySuperSuffix;
-  review_requester?: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  requested_team?: Team;
+  review_requester?: SimpleUser | null;
   /**
    * @format uri
    * @example "https://api.github.com/repos/octocat/Hello-World/issues/events/1"
@@ -9465,7 +3421,7 @@ export interface IMySuperPrefixIssueEventMySuperSuffix {
 }
 
 /** Issue Event Dismissed Review */
-export interface IMySuperPrefixIssueEventDismissedReviewMySuperSuffix {
+export interface IssueEventDismissedReview {
   dismissal_commit_id?: string | null;
   dismissal_message: string | null;
   review_id: number;
@@ -9476,11 +3432,11 @@ export interface IMySuperPrefixIssueEventDismissedReviewMySuperSuffix {
  * Issue Event for Issue
  * Issue Event for Issue
  */
-export interface IMySuperPrefixIssueEventForIssueMySuperSuffix {
+export interface IssueEventForIssue {
   /** Simple User */
-  actor?: IMySuperPrefixSimpleUserMySuperSuffix;
+  actor?: SimpleUser;
   /** How the author is associated with the repository. */
-  author_association?: IMySuperPrefixAuthorAssociationMySuperSuffix;
+  author_association?: AuthorAssociation;
   /** @example "":+1:"" */
   body?: string;
   /** @example ""<p>Accusantium fugiat cumque. Autem qui nostrum. Atque quae ullam.</p>"" */
@@ -9518,7 +3474,7 @@ export interface IMySuperPrefixIssueEventForIssueMySuperSuffix {
  * Issue Event Label
  * Issue Event Label
  */
-export interface IMySuperPrefixIssueEventLabelMySuperSuffix {
+export interface IssueEventLabel {
   color: string | null;
   name: string | null;
 }
@@ -9527,7 +3483,7 @@ export interface IMySuperPrefixIssueEventLabelMySuperSuffix {
  * Issue Event Milestone
  * Issue Event Milestone
  */
-export interface IMySuperPrefixIssueEventMilestoneMySuperSuffix {
+export interface IssueEventMilestone {
   title: string;
 }
 
@@ -9535,7 +3491,7 @@ export interface IMySuperPrefixIssueEventMilestoneMySuperSuffix {
  * Issue Event Project Card
  * Issue Event Project Card
  */
-export interface IMySuperPrefixIssueEventProjectCardMySuperSuffix {
+export interface IssueEventProjectCard {
   column_name: string;
   id: number;
   previous_column_name?: string;
@@ -9550,7 +3506,7 @@ export interface IMySuperPrefixIssueEventProjectCardMySuperSuffix {
  * Issue Event Rename
  * Issue Event Rename
  */
-export interface IMySuperPrefixIssueEventRenameMySuperSuffix {
+export interface IssueEventRename {
   from: string;
   to: string;
 }
@@ -9559,12 +3515,12 @@ export interface IMySuperPrefixIssueEventRenameMySuperSuffix {
  * Issue Search Result Item
  * Issue Search Result Item
  */
-export interface IMySuperPrefixIssueSearchResultItemMySuperSuffix {
+export interface IssueSearchResultItem {
   active_lock_reason?: string | null;
-  assignee: IMySuperPrefixSimpleUserMySuperSuffix | null;
-  assignees?: IMySuperPrefixSimpleUserMySuperSuffix[] | null;
+  assignee: SimpleUser | null;
+  assignees?: SimpleUser[] | null;
   /** How the author is associated with the repository. */
-  author_association: IMySuperPrefixAuthorAssociationMySuperSuffix;
+  author_association: AuthorAssociation;
   body?: string;
   body_html?: string;
   body_text?: string;
@@ -9592,10 +3548,10 @@ export interface IMySuperPrefixIssueSearchResultItemMySuperSuffix {
   }[];
   labels_url: string;
   locked: boolean;
-  milestone: IMySuperPrefixMilestoneMySuperSuffix | null;
+  milestone: Milestone | null;
   node_id: string;
   number: number;
-  performed_via_github_app?: IMySuperPrefixIntegrationMySuperSuffix | null;
+  performed_via_github_app?: Integration | null;
   pull_request?: {
     /** @format date-time */
     merged_at?: string | null;
@@ -9609,12 +3565,12 @@ export interface IMySuperPrefixIssueSearchResultItemMySuperSuffix {
     url: string | null;
   };
   /** A git repository */
-  repository?: IMySuperPrefixRepositoryMySuperSuffix;
+  repository?: Repository;
   /** @format uri */
   repository_url: string;
   score: number;
   state: string;
-  text_matches?: IMySuperPrefixSearchResultTextMatchesMySuperSuffix;
+  text_matches?: SearchResultTextMatches;
   /** @format uri */
   timeline_url?: string;
   title: string;
@@ -9622,20 +3578,20 @@ export interface IMySuperPrefixIssueSearchResultItemMySuperSuffix {
   updated_at: string;
   /** @format uri */
   url: string;
-  user: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  user: SimpleUser | null;
 }
 
 /**
  * Issue Simple
  * Issue Simple
  */
-export interface IMySuperPrefixIssueSimpleMySuperSuffix {
+export interface IssueSimple {
   /** @example "too heated" */
   active_lock_reason?: string | null;
-  assignee: IMySuperPrefixSimpleUserMySuperSuffix | null;
-  assignees?: IMySuperPrefixSimpleUserMySuperSuffix[] | null;
+  assignee: SimpleUser | null;
+  assignees?: SimpleUser[] | null;
   /** How the author is associated with the repository. */
-  author_association: IMySuperPrefixAuthorAssociationMySuperSuffix;
+  author_association: AuthorAssociation;
   /** @example "I'm having a problem with this." */
   body?: string;
   body_html?: string;
@@ -9666,17 +3622,17 @@ export interface IMySuperPrefixIssueSimpleMySuperSuffix {
   html_url: string;
   /** @example 1 */
   id: number;
-  labels: IMySuperPrefixLabelMySuperSuffix[];
+  labels: Label[];
   /** @example "https://api.github.com/repos/octocat/Hello-World/issues/1347/labels{/name}" */
   labels_url: string;
   /** @example true */
   locked: boolean;
-  milestone: IMySuperPrefixMilestoneMySuperSuffix | null;
+  milestone: Milestone | null;
   /** @example "MDU6SXNzdWUx" */
   node_id: string;
   /** @example 1347 */
   number: number;
-  performed_via_github_app?: IMySuperPrefixIntegrationMySuperSuffix | null;
+  performed_via_github_app?: Integration | null;
   pull_request?: {
     /** @format date-time */
     merged_at?: string | null;
@@ -9690,7 +3646,7 @@ export interface IMySuperPrefixIssueSimpleMySuperSuffix {
     url: string | null;
   };
   /** A git repository */
-  repository?: IMySuperPrefixRepositoryMySuperSuffix;
+  repository?: Repository;
   /**
    * @format uri
    * @example "https://api.github.com/repos/octocat/Hello-World"
@@ -9712,14 +3668,14 @@ export interface IMySuperPrefixIssueSimpleMySuperSuffix {
    * @example "https://api.github.com/repos/octocat/Hello-World/issues/1347"
    */
   url: string;
-  user: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  user: SimpleUser | null;
 }
 
 /**
  * Job
  * Information of a job execution in a workflow run
  */
-export interface IMySuperPrefixJobMySuperSuffix {
+export interface Job {
   /** @example "https://api.github.com/repos/github/hello-world/check-runs/4" */
   check_run_url: string;
   /**
@@ -9810,7 +3766,7 @@ export interface IMySuperPrefixJobMySuperSuffix {
  * Key
  * Key
  */
-export interface IMySuperPrefixKeyMySuperSuffix {
+export interface Key {
   /** @format date-time */
   created_at: string;
   id: number;
@@ -9826,7 +3782,7 @@ export interface IMySuperPrefixKeyMySuperSuffix {
  * Key Simple
  * Key Simple
  */
-export interface IMySuperPrefixKeySimpleMySuperSuffix {
+export interface KeySimple {
   id: number;
   key: string;
 }
@@ -9835,7 +3791,7 @@ export interface IMySuperPrefixKeySimpleMySuperSuffix {
  * Label
  * Color-coded labels help you categorize and filter your issues (just like labels in Gmail).
  */
-export interface IMySuperPrefixLabelMySuperSuffix {
+export interface Label {
   /**
    * 6-character hex code, without the leading #, identifying the color
    * @example "FFFFFF"
@@ -9866,7 +3822,7 @@ export interface IMySuperPrefixLabelMySuperSuffix {
  * Label Search Result Item
  * Label Search Result Item
  */
-export interface IMySuperPrefixLabelSearchResultItemMySuperSuffix {
+export interface LabelSearchResultItem {
   color: string;
   default: boolean;
   description: string | null;
@@ -9874,7 +3830,7 @@ export interface IMySuperPrefixLabelSearchResultItemMySuperSuffix {
   name: string;
   node_id: string;
   score: number;
-  text_matches?: IMySuperPrefixSearchResultTextMatchesMySuperSuffix;
+  text_matches?: SearchResultTextMatches;
   /** @format uri */
   url: string;
 }
@@ -9883,13 +3839,13 @@ export interface IMySuperPrefixLabelSearchResultItemMySuperSuffix {
  * Language
  * Language
  */
-export type IMySuperPrefixLanguageMySuperSuffix = Record<string, number>;
+export type Language = Record<string, number>;
 
 /**
  * License
  * License
  */
-export interface IMySuperPrefixLicenseMySuperSuffix {
+export interface License {
   /**
    * @example "
    *
@@ -9953,7 +3909,7 @@ export interface IMySuperPrefixLicenseMySuperSuffix {
  * License Content
  * License Content
  */
-export interface IMySuperPrefixLicenseContentMySuperSuffix {
+export interface LicenseContent {
   _links: {
     /** @format uri */
     git: string | null;
@@ -9970,7 +3926,7 @@ export interface IMySuperPrefixLicenseContentMySuperSuffix {
   git_url: string | null;
   /** @format uri */
   html_url: string | null;
-  license: IMySuperPrefixLicenseSimpleMySuperSuffix | null;
+  license: LicenseSimple | null;
   name: string;
   path: string;
   sha: string;
@@ -9984,7 +3940,7 @@ export interface IMySuperPrefixLicenseContentMySuperSuffix {
  * License Simple
  * License Simple
  */
-export interface IMySuperPrefixLicenseSimpleMySuperSuffix {
+export interface LicenseSimple {
   /** @format uri */
   html_url?: string;
   /** @example "mit" */
@@ -10006,7 +3962,7 @@ export interface IMySuperPrefixLicenseSimpleMySuperSuffix {
  * Link
  * Hypermedia Link
  */
-export interface IMySuperPrefixLinkMySuperSuffix {
+export interface Link {
   href: string;
 }
 
@@ -10014,13 +3970,13 @@ export interface IMySuperPrefixLinkMySuperSuffix {
  * Link With Type
  * Hypermedia Link with Type
  */
-export interface IMySuperPrefixLinkWithTypeMySuperSuffix {
+export interface LinkWithType {
   href: string;
   type: string;
 }
 
 /** Marketplace Account */
-export interface IMySuperPrefixMarketplaceAccountMySuperSuffix {
+export interface MarketplaceAccount {
   /** @format email */
   email?: string | null;
   id: number;
@@ -10037,7 +3993,7 @@ export interface IMySuperPrefixMarketplaceAccountMySuperSuffix {
  * Marketplace Listing Plan
  * Marketplace Listing Plan
  */
-export interface IMySuperPrefixMarketplaceListingPlanMySuperSuffix {
+export interface MarketplaceListingPlan {
   /**
    * @format uri
    * @example "https://api.github.com/marketplace_listing/plans/1313/accounts"
@@ -10075,7 +4031,7 @@ export interface IMySuperPrefixMarketplaceListingPlanMySuperSuffix {
  * Marketplace Purchase
  * Marketplace Purchase
  */
-export interface IMySuperPrefixMarketplacePurchaseMySuperSuffix {
+export interface MarketplacePurchase {
   id: number;
   login: string;
   marketplace_pending_change?: {
@@ -10084,7 +4040,7 @@ export interface IMySuperPrefixMarketplacePurchaseMySuperSuffix {
     unit_count?: number | null;
     id?: number;
     /** Marketplace Listing Plan */
-    plan?: IMySuperPrefixMarketplaceListingPlanMySuperSuffix;
+    plan?: MarketplaceListingPlan;
   };
   marketplace_purchase: {
     billing_cycle?: string;
@@ -10095,7 +4051,7 @@ export interface IMySuperPrefixMarketplacePurchaseMySuperSuffix {
     free_trial_ends_on?: string | null;
     updated_at?: string;
     /** Marketplace Listing Plan */
-    plan?: IMySuperPrefixMarketplaceListingPlanMySuperSuffix;
+    plan?: MarketplaceListingPlan;
   };
   organization_billing_email?: string;
   type: string;
@@ -10106,7 +4062,7 @@ export interface IMySuperPrefixMarketplacePurchaseMySuperSuffix {
  * Migration
  * A migration.
  */
-export interface IMySuperPrefixMigrationMySuperSuffix {
+export interface Migration {
   /** @format uri */
   archive_url?: string;
   /**
@@ -10123,8 +4079,8 @@ export interface IMySuperPrefixMigrationMySuperSuffix {
   /** @example true */
   lock_repositories: boolean;
   node_id: string;
-  owner: IMySuperPrefixSimpleUserMySuperSuffix | null;
-  repositories: IMySuperPrefixRepositoryMySuperSuffix[];
+  owner: SimpleUser | null;
+  repositories: Repository[];
   /** @example "pending" */
   state: string;
   /**
@@ -10143,7 +4099,7 @@ export interface IMySuperPrefixMigrationMySuperSuffix {
  * Milestone
  * A collection of related issues and pull requests.
  */
-export interface IMySuperPrefixMilestoneMySuperSuffix {
+export interface Milestone {
   /**
    * @format date-time
    * @example "2013-02-12T13:22:01Z"
@@ -10156,7 +4112,7 @@ export interface IMySuperPrefixMilestoneMySuperSuffix {
    * @example "2011-04-10T20:09:31Z"
    */
   created_at: string;
-  creator: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  creator: SimpleUser | null;
   /** @example "Tracking milestone for version 1.0" */
   description: string | null;
   /**
@@ -10212,7 +4168,7 @@ export interface IMySuperPrefixMilestoneMySuperSuffix {
  * Minimal Repository
  * Minimal Repository
  */
-export interface IMySuperPrefixMinimalRepositoryMySuperSuffix {
+export interface MinimalRepository {
   /** @example "http://api.github.com/repos/octocat/Hello-World/{archive_format}{/ref}" */
   archive_url: string;
   archived?: boolean;
@@ -10341,7 +4297,7 @@ export interface IMySuperPrefixMinimalRepositoryMySuperSuffix {
   /** @example 0 */
   open_issues?: number;
   open_issues_count?: number;
-  owner: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  owner: SimpleUser | null;
   permissions?: {
     admin?: boolean;
     push?: boolean;
@@ -10390,7 +4346,7 @@ export interface IMySuperPrefixMinimalRepositoryMySuperSuffix {
    */
   teams_url: string;
   temp_clone_token?: string;
-  template_repository?: IMySuperPrefixRepositoryMySuperSuffix | null;
+  template_repository?: Repository | null;
   topics?: string[];
   /** @example "http://api.github.com/repos/octocat/Hello-World/git/trees{/sha}" */
   trees_url: string;
@@ -10414,7 +4370,7 @@ export interface IMySuperPrefixMinimalRepositoryMySuperSuffix {
  * Org Hook
  * Org Hook
  */
-export interface IMySuperPrefixOrgHookMySuperSuffix {
+export interface OrgHook {
   /** @example true */
   active: boolean;
   config: {
@@ -10460,9 +4416,9 @@ export interface IMySuperPrefixOrgHookMySuperSuffix {
  * Org Membership
  * Org Membership
  */
-export interface IMySuperPrefixOrgMembershipMySuperSuffix {
+export interface OrgMembership {
   /** Organization Simple */
-  organization: IMySuperPrefixOrganizationSimpleMySuperSuffix;
+  organization: OrganizationSimple;
   /**
    * @format uri
    * @example "https://api.github.com/orgs/octocat"
@@ -10480,14 +4436,14 @@ export interface IMySuperPrefixOrgMembershipMySuperSuffix {
    * @example "https://api.github.com/orgs/octocat/memberships/defunkt"
    */
   url: string;
-  user: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  user: SimpleUser | null;
 }
 
 /**
  * Actions Secret for an Organization
  * Secrets for GitHub Actions for an organization.
  */
-export interface IMySuperPrefixOrganizationActionsSecretMySuperSuffix {
+export interface OrganizationActionsSecret {
   /** @format date-time */
   created_at: string;
   /**
@@ -10510,7 +4466,7 @@ export interface IMySuperPrefixOrganizationActionsSecretMySuperSuffix {
  * Organization Full
  * Organization Full
  */
-export interface IMySuperPrefixOrganizationFullMySuperSuffix {
+export interface OrganizationFull {
   /** @example "https://github.com/images/error/octocat_happy.gif" */
   avatar_url: string;
   /**
@@ -10633,7 +4589,7 @@ export interface IMySuperPrefixOrganizationFullMySuperSuffix {
  * Organization Invitation
  * Organization Invitation
  */
-export interface IMySuperPrefixOrganizationInvitationMySuperSuffix {
+export interface OrganizationInvitation {
   created_at: string;
   email: string | null;
   failed_at?: string;
@@ -10643,7 +4599,7 @@ export interface IMySuperPrefixOrganizationInvitationMySuperSuffix {
   /** @example ""https://api.github.com/organizations/16/invitations/1/teams"" */
   invitation_teams_url?: string;
   /** Simple User */
-  inviter: IMySuperPrefixSimpleUserMySuperSuffix;
+  inviter: SimpleUser;
   login: string | null;
   /** @example ""MDIyOk9yZ2FuaXphdGlvbkludml0YXRpb24x"" */
   node_id: string;
@@ -10655,7 +4611,7 @@ export interface IMySuperPrefixOrganizationInvitationMySuperSuffix {
  * Organization Simple
  * Organization Simple
  */
-export interface IMySuperPrefixOrganizationSimpleMySuperSuffix {
+export interface OrganizationSimple {
   /** @example "https://github.com/images/error/octocat_happy.gif" */
   avatar_url: string;
   /** @example "A great organization" */
@@ -10691,7 +4647,7 @@ export interface IMySuperPrefixOrganizationSimpleMySuperSuffix {
   url: string;
 }
 
-export interface IMySuperPrefixPackagesBillingUsageMySuperSuffix {
+export interface PackagesBillingUsage {
   /** Free storage space (GB) for GitHub Packages. */
   included_gigabytes_bandwidth: number;
   /** Sum of the free and paid storage space (GB) for GitHuub Packages. */
@@ -10704,7 +4660,7 @@ export interface IMySuperPrefixPackagesBillingUsageMySuperSuffix {
  * GitHub Pages
  * The configuration for GitHub Pages for a repository.
  */
-export interface IMySuperPrefixPageMySuperSuffix {
+export interface Page {
   /**
    * Whether the Page has a custom 404 page.
    * @default false
@@ -10727,7 +4683,7 @@ export interface IMySuperPrefixPageMySuperSuffix {
    * @example true
    */
   public: boolean;
-  source?: IMySuperPrefixPagesSourceHashMySuperSuffix;
+  source?: PagesSourceHash;
   /**
    * The status of the most recent build of the Page.
    * @example "built"
@@ -10745,7 +4701,7 @@ export interface IMySuperPrefixPageMySuperSuffix {
  * Page Build
  * Page Build
  */
-export interface IMySuperPrefixPageBuildMySuperSuffix {
+export interface PageBuild {
   commit: string;
   /** @format date-time */
   created_at: string;
@@ -10753,7 +4709,7 @@ export interface IMySuperPrefixPageBuildMySuperSuffix {
   error: {
     message: string | null;
   };
-  pusher: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  pusher: SimpleUser | null;
   status: string;
   /** @format date-time */
   updated_at: string;
@@ -10765,7 +4721,7 @@ export interface IMySuperPrefixPageBuildMySuperSuffix {
  * Page Build Status
  * Page Build Status
  */
-export interface IMySuperPrefixPageBuildStatusMySuperSuffix {
+export interface PageBuildStatus {
   /** @example "queued" */
   status: string;
   /**
@@ -10776,13 +4732,13 @@ export interface IMySuperPrefixPageBuildStatusMySuperSuffix {
 }
 
 /** Pages Source Hash */
-export interface IMySuperPrefixPagesSourceHashMySuperSuffix {
+export interface PagesSourceHash {
   branch: string;
   path: string;
 }
 
 /** Participation Stats */
-export interface IMySuperPrefixParticipationStatsMySuperSuffix {
+export interface ParticipationStats {
   all: number[];
   owner: number[];
 }
@@ -10791,7 +4747,7 @@ export interface IMySuperPrefixParticipationStatsMySuperSuffix {
  * Porter Author
  * Porter Author
  */
-export interface IMySuperPrefixPorterAuthorMySuperSuffix {
+export interface PorterAuthor {
   email: string;
   id: number;
   /** @format uri */
@@ -10807,7 +4763,7 @@ export interface IMySuperPrefixPorterAuthorMySuperSuffix {
  * Porter Large File
  * Porter Large File
  */
-export interface IMySuperPrefixPorterLargeFileMySuperSuffix {
+export interface PorterLargeFile {
   oid: string;
   path: string;
   ref_name: string;
@@ -10818,7 +4774,7 @@ export interface IMySuperPrefixPorterLargeFileMySuperSuffix {
  * Private User
  * Private User
  */
-export interface IMySuperPrefixPrivateUserMySuperSuffix {
+export interface PrivateUser {
   /**
    * @format uri
    * @example "https://github.com/images/error/octocat_happy.gif"
@@ -10942,7 +4898,7 @@ export interface IMySuperPrefixPrivateUserMySuperSuffix {
  * Project
  * Projects are a way to organize columns and cards of work.
  */
-export interface IMySuperPrefixProjectMySuperSuffix {
+export interface Project {
   /**
    * Body of the project
    * @example "This project represents the sprint of the first week in January"
@@ -10958,7 +4914,7 @@ export interface IMySuperPrefixProjectMySuperSuffix {
    * @example "2011-04-10T20:09:31Z"
    */
   created_at: string;
-  creator: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  creator: SimpleUser | null;
   /**
    * @format uri
    * @example "https://github.com/api-playground/projects-test/projects/12"
@@ -11005,7 +4961,7 @@ export interface IMySuperPrefixProjectMySuperSuffix {
  * Project Card
  * Project cards represent a scope of work.
  */
-export interface IMySuperPrefixProjectCardMySuperSuffix {
+export interface ProjectCard {
   /**
    * Whether or not the card is archived
    * @example false
@@ -11026,7 +4982,7 @@ export interface IMySuperPrefixProjectCardMySuperSuffix {
    * @example "2016-09-05T14:21:06Z"
    */
   created_at: string;
-  creator: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  creator: SimpleUser | null;
   /**
    * The project card's ID
    * @example 42
@@ -11057,7 +5013,7 @@ export interface IMySuperPrefixProjectCardMySuperSuffix {
  * Project Column
  * Project columns contain cards of work.
  */
-export interface IMySuperPrefixProjectColumnMySuperSuffix {
+export interface ProjectColumn {
   /**
    * @format uri
    * @example "https://api.github.com/projects/columns/367/cards"
@@ -11101,7 +5057,7 @@ export interface IMySuperPrefixProjectColumnMySuperSuffix {
  * Protected Branch
  * Branch protections protect branches
  */
-export interface IMySuperPrefixProtectedBranchMySuperSuffix {
+export interface ProtectedBranch {
   allow_deletions?: {
     enabled: boolean;
   };
@@ -11129,8 +5085,8 @@ export interface IMySuperPrefixProtectedBranchMySuperSuffix {
       users_url: string;
       /** @format uri */
       teams_url: string;
-      users: IMySuperPrefixSimpleUserMySuperSuffix[];
-      teams: IMySuperPrefixTeamMySuperSuffix[];
+      users: SimpleUser[];
+      teams: Team[];
     };
   };
   required_signatures?: {
@@ -11143,9 +5099,9 @@ export interface IMySuperPrefixProtectedBranchMySuperSuffix {
     enabled: boolean;
   };
   /** Status Check Policy */
-  required_status_checks?: IMySuperPrefixStatusCheckPolicyMySuperSuffix;
+  required_status_checks?: StatusCheckPolicy;
   /** Branch Restriction Policy */
-  restrictions?: IMySuperPrefixBranchRestrictionPolicyMySuperSuffix;
+  restrictions?: BranchRestrictionPolicy;
   /** @format uri */
   url: string;
 }
@@ -11154,7 +5110,7 @@ export interface IMySuperPrefixProtectedBranchMySuperSuffix {
  * Protected Branch Admin Enforced
  * Protected Branch Admin Enforced
  */
-export interface IMySuperPrefixProtectedBranchAdminEnforcedMySuperSuffix {
+export interface ProtectedBranchAdminEnforced {
   /** @example true */
   enabled: boolean;
   /**
@@ -11168,14 +5124,14 @@ export interface IMySuperPrefixProtectedBranchAdminEnforcedMySuperSuffix {
  * Protected Branch Pull Request Review
  * Protected Branch Pull Request Review
  */
-export interface IMySuperPrefixProtectedBranchPullRequestReviewMySuperSuffix {
+export interface ProtectedBranchPullRequestReview {
   /** @example true */
   dismiss_stale_reviews: boolean;
   dismissal_restrictions?: {
     /** The list of users with review dismissal access. */
-    users?: IMySuperPrefixSimpleUserMySuperSuffix[];
+    users?: SimpleUser[];
     /** The list of teams with review dismissal access. */
-    teams?: IMySuperPrefixTeamMySuperSuffix[];
+    teams?: Team[];
     /** @example ""https://api.github.com/repos/the-org/an-org-repo/branches/master/protection/dismissal_restrictions"" */
     url?: string;
     /** @example ""https://api.github.com/repos/the-org/an-org-repo/branches/master/protection/dismissal_restrictions/users"" */
@@ -11202,7 +5158,7 @@ export interface IMySuperPrefixProtectedBranchPullRequestReviewMySuperSuffix {
  * Public User
  * Public User
  */
-export interface IMySuperPrefixPublicUserMySuperSuffix {
+export interface PublicUser {
   /** @format uri */
   avatar_url: string;
   bio: string | null;
@@ -11270,35 +5226,35 @@ export interface IMySuperPrefixPublicUserMySuperSuffix {
  * Pull Request
  * Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
  */
-export interface IMySuperPrefixPullRequestMySuperSuffix {
+export interface PullRequest {
   _links: {
     /** Hypermedia Link */
-    comments: IMySuperPrefixLinkMySuperSuffix;
+    comments: Link;
     /** Hypermedia Link */
-    commits: IMySuperPrefixLinkMySuperSuffix;
+    commits: Link;
     /** Hypermedia Link */
-    statuses: IMySuperPrefixLinkMySuperSuffix;
+    statuses: Link;
     /** Hypermedia Link */
-    html: IMySuperPrefixLinkMySuperSuffix;
+    html: Link;
     /** Hypermedia Link */
-    issue: IMySuperPrefixLinkMySuperSuffix;
+    issue: Link;
     /** Hypermedia Link */
-    review_comments: IMySuperPrefixLinkMySuperSuffix;
+    review_comments: Link;
     /** Hypermedia Link */
-    review_comment: IMySuperPrefixLinkMySuperSuffix;
+    review_comment: Link;
     /** Hypermedia Link */
-    self: IMySuperPrefixLinkMySuperSuffix;
+    self: Link;
   };
   /** @example "too heated" */
   active_lock_reason?: string | null;
   /** @example 100 */
   additions: number;
-  assignee: IMySuperPrefixSimpleUserMySuperSuffix | null;
-  assignees?: IMySuperPrefixSimpleUserMySuperSuffix[] | null;
+  assignee: SimpleUser | null;
+  assignees?: SimpleUser[] | null;
   /** How the author is associated with the repository. */
-  author_association: IMySuperPrefixAuthorAssociationMySuperSuffix;
+  author_association: AuthorAssociation;
   /** The status of auto merging a pull request. */
-  auto_merge: IMySuperPrefixAutoMergeMySuperSuffix;
+  auto_merge: AutoMerge;
   base: {
     label: string;
     ref: string;
@@ -11420,7 +5376,7 @@ export interface IMySuperPrefixPullRequestMySuperSuffix {
       allow_merge_commit?: boolean;
       allow_squash_merge?: boolean;
       allow_rebase_merge?: boolean;
-      license: IMySuperPrefixLicenseSimpleMySuperSuffix | null;
+      license: LicenseSimple | null;
       /** @format date-time */
       pushed_at: string;
       size: number;
@@ -11720,8 +5676,8 @@ export interface IMySuperPrefixPullRequestMySuperSuffix {
    * @example "2011-01-26T19:01:12Z"
    */
   merged_at: string | null;
-  merged_by: IMySuperPrefixSimpleUserMySuperSuffix | null;
-  milestone: IMySuperPrefixMilestoneMySuperSuffix | null;
+  merged_by: SimpleUser | null;
+  milestone: Milestone | null;
   /** @example "MDExOlB1bGxSZXF1ZXN0MQ==" */
   node_id: string;
   /**
@@ -11736,8 +5692,8 @@ export interface IMySuperPrefixPullRequestMySuperSuffix {
   patch_url: string;
   /** @example true */
   rebaseable?: boolean | null;
-  requested_reviewers?: IMySuperPrefixSimpleUserMySuperSuffix[] | null;
-  requested_teams?: IMySuperPrefixTeamSimpleMySuperSuffix[] | null;
+  requested_reviewers?: SimpleUser[] | null;
+  requested_teams?: TeamSimple[] | null;
   /** @example "https://api.github.com/repos/octocat/Hello-World/pulls/comments{/number}" */
   review_comment_url: string;
   /** @example 0 */
@@ -11772,21 +5728,21 @@ export interface IMySuperPrefixPullRequestMySuperSuffix {
    * @example "https://api.github.com/repos/octocat/Hello-World/pulls/1347"
    */
   url: string;
-  user: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  user: SimpleUser | null;
 }
 
 /**
  * Pull Request Merge Result
  * Pull Request Merge Result
  */
-export interface IMySuperPrefixPullRequestMergeResultMySuperSuffix {
+export interface PullRequestMergeResult {
   merged: boolean;
   message: string;
   sha: string;
 }
 
 /** Pull Request Minimal */
-export interface IMySuperPrefixPullRequestMinimalMySuperSuffix {
+export interface PullRequestMinimal {
   base: {
     ref: string;
     sha: string;
@@ -11814,7 +5770,7 @@ export interface IMySuperPrefixPullRequestMinimalMySuperSuffix {
  * Pull Request Review
  * Pull Request Reviews are reviews on pull requests.
  */
-export interface IMySuperPrefixPullRequestReviewMySuperSuffix {
+export interface PullRequestReview {
   _links: {
     html: {
       href: string;
@@ -11824,7 +5780,7 @@ export interface IMySuperPrefixPullRequestReviewMySuperSuffix {
     };
   };
   /** How the author is associated with the repository. */
-  author_association: IMySuperPrefixAuthorAssociationMySuperSuffix;
+  author_association: AuthorAssociation;
   /**
    * The text of the review.
    * @example "This looks great."
@@ -11858,14 +5814,14 @@ export interface IMySuperPrefixPullRequestReviewMySuperSuffix {
   state: string;
   /** @format date-time */
   submitted_at?: string;
-  user: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  user: SimpleUser | null;
 }
 
 /**
  * Pull Request Review Comment
  * Pull Request Review Comments are comments on a portion of the Pull Request's diff.
  */
-export interface IMySuperPrefixPullRequestReviewCommentMySuperSuffix {
+export interface PullRequestReviewComment {
   _links: {
     self: {
       /**
@@ -11890,7 +5846,7 @@ export interface IMySuperPrefixPullRequestReviewCommentMySuperSuffix {
     };
   };
   /** How the author is associated with the repository. */
-  author_association: IMySuperPrefixAuthorAssociationMySuperSuffix;
+  author_association: AuthorAssociation;
   /**
    * The text of the comment.
    * @example "We should probably include a check for null values here."
@@ -11982,7 +5938,7 @@ export interface IMySuperPrefixPullRequestReviewCommentMySuperSuffix {
    * @example "https://api.github.com/repos/octocat/Hello-World/pulls/1"
    */
   pull_request_url: string;
-  reactions?: IMySuperPrefixReactionRollupMySuperSuffix;
+  reactions?: ReactionRollup;
   /**
    * The side of the diff to which the comment applies. The side of the last line of the range for a multi-line comment
    * @default "RIGHT"
@@ -12009,56 +5965,56 @@ export interface IMySuperPrefixPullRequestReviewCommentMySuperSuffix {
    */
   url: string;
   /** Simple User */
-  user: IMySuperPrefixSimpleUserMySuperSuffix;
+  user: SimpleUser;
 }
 
 /**
  * Pull Request Review Request
  * Pull Request Review Request
  */
-export interface IMySuperPrefixPullRequestReviewRequestMySuperSuffix {
-  teams: IMySuperPrefixTeamSimpleMySuperSuffix[];
-  users: IMySuperPrefixSimpleUserMySuperSuffix[];
+export interface PullRequestReviewRequest {
+  teams: TeamSimple[];
+  users: SimpleUser[];
 }
 
 /**
  * Pull Request Simple
  * Pull Request Simple
  */
-export interface IMySuperPrefixPullRequestSimpleMySuperSuffix {
+export interface PullRequestSimple {
   _links: {
     /** Hypermedia Link */
-    comments: IMySuperPrefixLinkMySuperSuffix;
+    comments: Link;
     /** Hypermedia Link */
-    commits: IMySuperPrefixLinkMySuperSuffix;
+    commits: Link;
     /** Hypermedia Link */
-    statuses: IMySuperPrefixLinkMySuperSuffix;
+    statuses: Link;
     /** Hypermedia Link */
-    html: IMySuperPrefixLinkMySuperSuffix;
+    html: Link;
     /** Hypermedia Link */
-    issue: IMySuperPrefixLinkMySuperSuffix;
+    issue: Link;
     /** Hypermedia Link */
-    review_comments: IMySuperPrefixLinkMySuperSuffix;
+    review_comments: Link;
     /** Hypermedia Link */
-    review_comment: IMySuperPrefixLinkMySuperSuffix;
+    review_comment: Link;
     /** Hypermedia Link */
-    self: IMySuperPrefixLinkMySuperSuffix;
+    self: Link;
   };
   /** @example "too heated" */
   active_lock_reason?: string | null;
-  assignee: IMySuperPrefixSimpleUserMySuperSuffix | null;
-  assignees?: IMySuperPrefixSimpleUserMySuperSuffix[] | null;
+  assignee: SimpleUser | null;
+  assignees?: SimpleUser[] | null;
   /** How the author is associated with the repository. */
-  author_association: IMySuperPrefixAuthorAssociationMySuperSuffix;
+  author_association: AuthorAssociation;
   /** The status of auto merging a pull request. */
-  auto_merge: IMySuperPrefixAutoMergeMySuperSuffix;
+  auto_merge: AutoMerge;
   base: {
     label: string;
     ref: string;
     /** A git repository */
-    repo: IMySuperPrefixRepositoryMySuperSuffix;
+    repo: Repository;
     sha: string;
-    user: IMySuperPrefixSimpleUserMySuperSuffix | null;
+    user: SimpleUser | null;
   };
   /** @example "Please pull these awesome changes" */
   body: string | null;
@@ -12096,9 +6052,9 @@ export interface IMySuperPrefixPullRequestSimpleMySuperSuffix {
     label: string;
     ref: string;
     /** A git repository */
-    repo: IMySuperPrefixRepositoryMySuperSuffix;
+    repo: Repository;
     sha: string;
-    user: IMySuperPrefixSimpleUserMySuperSuffix | null;
+    user: SimpleUser | null;
   };
   /**
    * @format uri
@@ -12130,7 +6086,7 @@ export interface IMySuperPrefixPullRequestSimpleMySuperSuffix {
    * @example "2011-01-26T19:01:12Z"
    */
   merged_at: string | null;
-  milestone: IMySuperPrefixMilestoneMySuperSuffix | null;
+  milestone: Milestone | null;
   /** @example "MDExOlB1bGxSZXF1ZXN0MQ==" */
   node_id: string;
   /** @example 1347 */
@@ -12140,8 +6096,8 @@ export interface IMySuperPrefixPullRequestSimpleMySuperSuffix {
    * @example "https://github.com/octocat/Hello-World/pull/1347.patch"
    */
   patch_url: string;
-  requested_reviewers?: IMySuperPrefixSimpleUserMySuperSuffix[] | null;
-  requested_teams?: IMySuperPrefixTeamSimpleMySuperSuffix[] | null;
+  requested_reviewers?: SimpleUser[] | null;
+  requested_teams?: TeamSimple[] | null;
   /** @example "https://api.github.com/repos/octocat/Hello-World/pulls/comments{/number}" */
   review_comment_url: string;
   /**
@@ -12168,11 +6124,11 @@ export interface IMySuperPrefixPullRequestSimpleMySuperSuffix {
    * @example "https://api.github.com/repos/octocat/Hello-World/pulls/1347"
    */
   url: string;
-  user: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  user: SimpleUser | null;
 }
 
 /** Rate Limit */
-export interface IMySuperPrefixRateLimitMySuperSuffix {
+export interface RateLimit {
   limit: number;
   remaining: number;
   reset: number;
@@ -12182,15 +6138,15 @@ export interface IMySuperPrefixRateLimitMySuperSuffix {
  * Rate Limit Overview
  * Rate Limit Overview
  */
-export interface IMySuperPrefixRateLimitOverviewMySuperSuffix {
-  rate: IMySuperPrefixRateLimitMySuperSuffix;
+export interface RateLimitOverview {
+  rate: RateLimit;
   resources: {
-    core: IMySuperPrefixRateLimitMySuperSuffix;
-    graphql?: IMySuperPrefixRateLimitMySuperSuffix;
-    search: IMySuperPrefixRateLimitMySuperSuffix;
-    source_import?: IMySuperPrefixRateLimitMySuperSuffix;
-    integration_manifest?: IMySuperPrefixRateLimitMySuperSuffix;
-    code_scanning_upload?: IMySuperPrefixRateLimitMySuperSuffix;
+    core: RateLimit;
+    graphql?: RateLimit;
+    search: RateLimit;
+    source_import?: RateLimit;
+    integration_manifest?: RateLimit;
+    code_scanning_upload?: RateLimit;
   };
 }
 
@@ -12198,7 +6154,7 @@ export interface IMySuperPrefixRateLimitOverviewMySuperSuffix {
  * Reaction
  * Reactions to conversations provide a way to help people express their feelings more simply and effectively.
  */
-export interface IMySuperPrefixReactionMySuperSuffix {
+export interface Reaction {
   /**
    * The reaction to use
    * @example "heart"
@@ -12213,11 +6169,11 @@ export interface IMySuperPrefixReactionMySuperSuffix {
   id: number;
   /** @example "MDg6UmVhY3Rpb24x" */
   node_id: string;
-  user: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  user: SimpleUser | null;
 }
 
 /** Reaction Rollup */
-export interface IMySuperPrefixReactionRollupMySuperSuffix {
+export interface ReactionRollup {
   "+1": number;
   "-1": number;
   confused: number;
@@ -12235,7 +6191,7 @@ export interface IMySuperPrefixReactionRollupMySuperSuffix {
  * Referrer Traffic
  * Referrer Traffic
  */
-export interface IMySuperPrefixReferrerTrafficMySuperSuffix {
+export interface ReferrerTraffic {
   /** @example 4 */
   count: number;
   /** @example "Google" */
@@ -12248,12 +6204,12 @@ export interface IMySuperPrefixReferrerTrafficMySuperSuffix {
  * Release
  * A release.
  */
-export interface IMySuperPrefixReleaseMySuperSuffix {
-  assets: IMySuperPrefixReleaseAssetMySuperSuffix[];
+export interface Release {
+  assets: ReleaseAsset[];
   /** @format uri */
   assets_url: string;
   /** Simple User */
-  author: IMySuperPrefixSimpleUserMySuperSuffix;
+  author: SimpleUser;
   body?: string | null;
   body_html?: string;
   body_text?: string;
@@ -12299,7 +6255,7 @@ export interface IMySuperPrefixReleaseMySuperSuffix {
  * Release Asset
  * Data related to a release.
  */
-export interface IMySuperPrefixReleaseAssetMySuperSuffix {
+export interface ReleaseAsset {
   /** @format uri */
   browser_download_url: string;
   content_type: string;
@@ -12319,7 +6275,7 @@ export interface IMySuperPrefixReleaseAssetMySuperSuffix {
   state: "uploaded" | "open";
   /** @format date-time */
   updated_at: string;
-  uploader: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  uploader: SimpleUser | null;
   /** @format uri */
   url: string;
 }
@@ -12328,7 +6284,7 @@ export interface IMySuperPrefixReleaseAssetMySuperSuffix {
  * Repo Search Result Item
  * Repo Search Result Item
  */
-export interface IMySuperPrefixRepoSearchResultItemMySuperSuffix {
+export interface RepoSearchResultItem {
   allow_merge_commit?: boolean;
   allow_rebase_merge?: boolean;
   allow_squash_merge?: boolean;
@@ -12388,7 +6344,7 @@ export interface IMySuperPrefixRepoSearchResultItemMySuperSuffix {
   language: string | null;
   /** @format uri */
   languages_url: string;
-  license: IMySuperPrefixLicenseSimpleMySuperSuffix | null;
+  license: LicenseSimple | null;
   master_branch?: string;
   /** @format uri */
   merges_url: string;
@@ -12400,7 +6356,7 @@ export interface IMySuperPrefixRepoSearchResultItemMySuperSuffix {
   notifications_url: string;
   open_issues: number;
   open_issues_count: number;
-  owner: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  owner: SimpleUser | null;
   permissions?: {
     admin: boolean;
     pull: boolean;
@@ -12429,7 +6385,7 @@ export interface IMySuperPrefixRepoSearchResultItemMySuperSuffix {
   /** @format uri */
   teams_url: string;
   temp_clone_token?: string;
-  text_matches?: IMySuperPrefixSearchResultTextMatchesMySuperSuffix;
+  text_matches?: SearchResultTextMatches;
   topics?: string[];
   trees_url: string;
   /** @format date-time */
@@ -12444,7 +6400,7 @@ export interface IMySuperPrefixRepoSearchResultItemMySuperSuffix {
  * Repository
  * A git repository
  */
-export interface IMySuperPrefixRepositoryMySuperSuffix {
+export interface Repository {
   /**
    * Whether to allow merge commits for pull requests.
    * @default true
@@ -12614,7 +6570,7 @@ export interface IMySuperPrefixRepositoryMySuperSuffix {
    * @example "http://api.github.com/repos/octocat/Hello-World/languages"
    */
   languages_url: string;
-  license: IMySuperPrefixLicenseSimpleMySuperSuffix | null;
+  license: LicenseSimple | null;
   master_branch?: string;
   /**
    * @format uri
@@ -12641,7 +6597,7 @@ export interface IMySuperPrefixRepositoryMySuperSuffix {
   open_issues: number;
   /** @example 0 */
   open_issues_count: number;
-  owner: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  owner: SimpleUser | null;
   permissions?: {
     admin: boolean;
     pull: boolean;
@@ -12837,16 +6793,16 @@ export interface IMySuperPrefixRepositoryMySuperSuffix {
  * Repository Collaborator Permission
  * Repository Collaborator Permission
  */
-export interface IMySuperPrefixRepositoryCollaboratorPermissionMySuperSuffix {
+export interface RepositoryCollaboratorPermission {
   permission: string;
-  user: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  user: SimpleUser | null;
 }
 
 /**
  * Repository Invitation
  * Repository invitations let you manage who you collaborate with.
  */
-export interface IMySuperPrefixRepositoryInvitationMySuperSuffix {
+export interface RepositoryInvitation {
   /**
    * @format date-time
    * @example "2016-06-13T14:52:50-05:00"
@@ -12861,8 +6817,8 @@ export interface IMySuperPrefixRepositoryInvitationMySuperSuffix {
    * @example 42
    */
   id: number;
-  invitee: IMySuperPrefixSimpleUserMySuperSuffix | null;
-  inviter: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  invitee: SimpleUser | null;
+  inviter: SimpleUser | null;
   node_id: string;
   /**
    * The permission associated with the invitation.
@@ -12870,7 +6826,7 @@ export interface IMySuperPrefixRepositoryInvitationMySuperSuffix {
    */
   permissions: "read" | "write" | "admin";
   /** Minimal Repository */
-  repository: IMySuperPrefixMinimalRepositoryMySuperSuffix;
+  repository: MinimalRepository;
   /**
    * URL for the repository invitation
    * @example "https://api.github.com/user/repository-invitations/1"
@@ -12882,7 +6838,7 @@ export interface IMySuperPrefixRepositoryInvitationMySuperSuffix {
  * Repository Invitation
  * Repository invitations let you manage who you collaborate with.
  */
-export interface IMySuperPrefixRepositorySubscriptionMySuperSuffix {
+export interface RepositorySubscription {
   /**
    * @format date-time
    * @example "2012-10-06T21:34:12Z"
@@ -12912,17 +6868,17 @@ export interface IMySuperPrefixRepositorySubscriptionMySuperSuffix {
  * Legacy Review Comment
  * Legacy Review Comment
  */
-export interface IMySuperPrefixReviewCommentMySuperSuffix {
+export interface ReviewComment {
   _links: {
     /** Hypermedia Link */
-    self: IMySuperPrefixLinkMySuperSuffix;
+    self: Link;
     /** Hypermedia Link */
-    html: IMySuperPrefixLinkMySuperSuffix;
+    html: Link;
     /** Hypermedia Link */
-    pull_request: IMySuperPrefixLinkMySuperSuffix;
+    pull_request: Link;
   };
   /** How the author is associated with the repository. */
-  author_association: IMySuperPrefixAuthorAssociationMySuperSuffix;
+  author_association: AuthorAssociation;
   /** @example "Great stuff" */
   body: string;
   body_html?: string;
@@ -13002,14 +6958,14 @@ export interface IMySuperPrefixReviewCommentMySuperSuffix {
    * @example "https://api.github.com/repos/octocat/Hello-World/pulls/comments/1"
    */
   url: string;
-  user: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  user: SimpleUser | null;
 }
 
 /**
  * Self hosted runners
  * A self hosted runner
  */
-export interface IMySuperPrefixRunnerMySuperSuffix {
+export interface Runner {
   busy: boolean;
   /**
    * The id of the runner.
@@ -13045,14 +7001,14 @@ export interface IMySuperPrefixRunnerMySuperSuffix {
  * Runner Application
  * Runner Application
  */
-export interface IMySuperPrefixRunnerApplicationMySuperSuffix {
+export interface RunnerApplication {
   architecture: string;
   download_url: string;
   filename: string;
   os: string;
 }
 
-export interface IMySuperPrefixRunnerGroupsEnterpriseMySuperSuffix {
+export interface RunnerGroupsEnterprise {
   allows_public_repositories: boolean;
   default: boolean;
   id: number;
@@ -13062,7 +7018,7 @@ export interface IMySuperPrefixRunnerGroupsEnterpriseMySuperSuffix {
   visibility: string;
 }
 
-export interface IMySuperPrefixRunnerGroupsOrgMySuperSuffix {
+export interface RunnerGroupsOrg {
   allows_public_repositories: boolean;
   default: boolean;
   id: number;
@@ -13075,7 +7031,7 @@ export interface IMySuperPrefixRunnerGroupsOrgMySuperSuffix {
   visibility: string;
 }
 
-export interface IMySuperPrefixScimEnterpriseGroupMySuperSuffix {
+export interface ScimEnterpriseGroup {
   displayName?: string;
   externalId?: string | null;
   id: string;
@@ -13093,7 +7049,7 @@ export interface IMySuperPrefixScimEnterpriseGroupMySuperSuffix {
   schemas: string[];
 }
 
-export interface IMySuperPrefixScimEnterpriseUserMySuperSuffix {
+export interface ScimEnterpriseUser {
   active?: boolean;
   emails?: {
     value?: string;
@@ -13123,7 +7079,7 @@ export interface IMySuperPrefixScimEnterpriseUserMySuperSuffix {
  * Scim Error
  * Scim Error
  */
-export interface IMySuperPrefixScimErrorMySuperSuffix {
+export interface ScimError {
   detail?: string | null;
   documentation_url?: string | null;
   message?: string | null;
@@ -13132,7 +7088,7 @@ export interface IMySuperPrefixScimErrorMySuperSuffix {
   status?: number;
 }
 
-export interface IMySuperPrefixScimGroupListEnterpriseMySuperSuffix {
+export interface ScimGroupListEnterprise {
   Resources: {
     schemas: string[];
     id: string;
@@ -13160,7 +7116,7 @@ export interface IMySuperPrefixScimGroupListEnterpriseMySuperSuffix {
  * SCIM /Users
  * SCIM /Users provisioning endpoints
  */
-export interface IMySuperPrefixScimUserMySuperSuffix {
+export interface ScimUser {
   /**
    * The active status of the User.
    * @example true
@@ -13248,8 +7204,8 @@ export interface IMySuperPrefixScimUserMySuperSuffix {
  * SCIM User List
  * SCIM User List
  */
-export interface IMySuperPrefixScimUserListMySuperSuffix {
-  Resources: IMySuperPrefixScimUserMySuperSuffix[];
+export interface ScimUserList {
+  Resources: ScimUser[];
   /** @example 10 */
   itemsPerPage: number;
   /**
@@ -13263,7 +7219,7 @@ export interface IMySuperPrefixScimUserListMySuperSuffix {
   totalResults: number;
 }
 
-export interface IMySuperPrefixScimUserListEnterpriseMySuperSuffix {
+export interface ScimUserListEnterprise {
   Resources: {
     schemas: string[];
     id: string;
@@ -13296,13 +7252,13 @@ export interface IMySuperPrefixScimUserListEnterpriseMySuperSuffix {
 }
 
 /** Scoped Installation */
-export interface IMySuperPrefixScopedInstallationMySuperSuffix {
+export interface ScopedInstallation {
   /** Simple User */
-  account: IMySuperPrefixSimpleUserMySuperSuffix;
+  account: SimpleUser;
   /** @example true */
   has_multiple_single_files?: boolean;
   /** The permissions granted to the user-to-server access token. */
-  permissions: IMySuperPrefixAppPermissionsMySuperSuffix;
+  permissions: AppPermissions;
   /**
    * @format uri
    * @example "https://api.github.com/users/octocat/repos"
@@ -13317,7 +7273,7 @@ export interface IMySuperPrefixScopedInstallationMySuperSuffix {
 }
 
 /** Search Result Text Matches */
-export type IMySuperPrefixSearchResultTextMatchesMySuperSuffix = {
+export type SearchResultTextMatches = {
   object_url?: string;
   object_type?: string | null;
   property?: string;
@@ -13328,47 +7284,42 @@ export type IMySuperPrefixSearchResultTextMatchesMySuperSuffix = {
   }[];
 }[];
 
-export interface IMySuperPrefixSecretScanningAlertMySuperSuffix {
+export interface SecretScanningAlert {
   /** The time that the alert was created in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. */
-  created_at?: IMySuperPrefixAlertCreatedAtMySuperSuffix;
+  created_at?: AlertCreatedAt;
   /** The GitHub URL of the alert resource. */
-  html_url?: IMySuperPrefixAlertHtmlUrlMySuperSuffix;
+  html_url?: AlertHtmlUrl;
   /** The security alert number. */
-  number?: IMySuperPrefixAlertNumberMySuperSuffix;
+  number?: AlertNumber;
   /** **Required when the `state` is `resolved`.** The reason for resolving the alert. Can be one of `false_positive`, `wont_fix`, `revoked`, or `used_in_tests`. */
-  resolution?: IMySuperPrefixSecretScanningAlertResolutionMySuperSuffix;
+  resolution?: SecretScanningAlertResolution;
   /**
    * The time that the alert was resolved in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
    * @format date-time
    */
   resolved_at?: string | null;
   /** Simple User */
-  resolved_by?: IMySuperPrefixSimpleUserMySuperSuffix;
+  resolved_by?: SimpleUser;
   /** The secret that was detected. */
   secret?: string;
   /** The type of secret that secret scanning detected. */
   secret_type?: string;
   /** Sets the state of the secret scanning alert. Can be either `open` or `resolved`. You must provide `resolution` when you set the state to `resolved`. */
-  state?: IMySuperPrefixSecretScanningAlertStateMySuperSuffix;
+  state?: SecretScanningAlertState;
   /** The REST API URL of the alert resource. */
-  url?: IMySuperPrefixAlertUrlMySuperSuffix;
+  url?: AlertUrl;
 }
 
 /** **Required when the `state` is `resolved`.** The reason for resolving the alert. Can be one of `false_positive`, `wont_fix`, `revoked`, or `used_in_tests`. */
-export type IMySuperPrefixSecretScanningAlertResolutionMySuperSuffix =
-  | "false_positive"
-  | "wont_fix"
-  | "revoked"
-  | "used_in_tests"
-  | null;
+export type SecretScanningAlertResolution = "false_positive" | "wont_fix" | "revoked" | "used_in_tests" | null;
 
 /** Sets the state of the secret scanning alert. Can be either `open` or `resolved`. You must provide `resolution` when you set the state to `resolved`. */
-export enum IMySuperPrefixSecretScanningAlertStateMySuperSuffix {
+export enum SecretScanningAlertState {
   Open = "open",
   Resolved = "resolved",
 }
 
-export interface IMySuperPrefixSelectedActionsMySuperSuffix {
+export interface SelectedActions {
   /** Whether GitHub-owned actions are allowed. For example, this includes the actions in the `actions` organization. */
   github_owned_allowed: boolean;
   /** Specifies a list of string-matching patterns to allow specific action(s). Wildcards, tags, and SHAs are allowed. For example, `monalisa/octocat@*`, `monalisa/octocat@v2`, `monalisa/*`." */
@@ -13378,13 +7329,13 @@ export interface IMySuperPrefixSelectedActionsMySuperSuffix {
 }
 
 /** The API URL to use to get or set the actions that are allowed to run, when `allowed_actions` is set to `selected`. */
-export type IMySuperPrefixSelectedActionsUrlMySuperSuffix = string;
+export type SelectedActionsUrl = string;
 
 /**
  * Short Blob
  * Short Blob
  */
-export interface IMySuperPrefixShortBlobMySuperSuffix {
+export interface ShortBlob {
   sha: string;
   url: string;
 }
@@ -13393,7 +7344,7 @@ export interface IMySuperPrefixShortBlobMySuperSuffix {
  * Short Branch
  * Short Branch
  */
-export interface IMySuperPrefixShortBranchMySuperSuffix {
+export interface ShortBranch {
   commit: {
     sha: string;
     /** @format uri */
@@ -13402,7 +7353,7 @@ export interface IMySuperPrefixShortBranchMySuperSuffix {
   name: string;
   protected: boolean;
   /** Branch Protection */
-  protection?: IMySuperPrefixBranchProtectionMySuperSuffix;
+  protection?: BranchProtection;
   /** @format uri */
   protection_url?: string;
 }
@@ -13411,7 +7362,7 @@ export interface IMySuperPrefixShortBranchMySuperSuffix {
  * Simple Commit
  * Simple Commit
  */
-export interface IMySuperPrefixSimpleCommitMySuperSuffix {
+export interface SimpleCommit {
   author: {
     name: string;
     email: string;
@@ -13428,7 +7379,7 @@ export interface IMySuperPrefixSimpleCommitMySuperSuffix {
 }
 
 /** Simple Commit Status */
-export interface IMySuperPrefixSimpleCommitStatusMySuperSuffix {
+export interface SimpleCommitStatus {
   /** @format uri */
   avatar_url: string | null;
   context: string;
@@ -13451,7 +7402,7 @@ export interface IMySuperPrefixSimpleCommitStatusMySuperSuffix {
  * Simple User
  * Simple User
  */
-export type IMySuperPrefixSimpleUserMySuperSuffix = {
+export type SimpleUser = {
   /**
    * @format uri
    * @example "https://github.com/images/error/octocat_happy.gif"
@@ -13519,19 +7470,19 @@ export type IMySuperPrefixSimpleUserMySuperSuffix = {
  * Stargazer
  * Stargazer
  */
-export interface IMySuperPrefixStargazerMySuperSuffix {
+export interface Stargazer {
   /** @format date-time */
   starred_at: string;
-  user: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  user: SimpleUser | null;
 }
 
 /**
  * Starred Repository
  * Starred Repository
  */
-export interface IMySuperPrefixStarredRepositoryMySuperSuffix {
+export interface StarredRepository {
   /** A git repository */
-  repo: IMySuperPrefixRepositoryMySuperSuffix;
+  repo: Repository;
   /** @format date-time */
   starred_at: string;
 }
@@ -13540,12 +7491,12 @@ export interface IMySuperPrefixStarredRepositoryMySuperSuffix {
  * Status
  * The status of a commit.
  */
-export interface IMySuperPrefixStatusMySuperSuffix {
+export interface Status {
   avatar_url: string | null;
   context: string;
   created_at: string;
   /** Simple User */
-  creator: IMySuperPrefixSimpleUserMySuperSuffix;
+  creator: SimpleUser;
   description: string;
   id: number;
   node_id: string;
@@ -13559,7 +7510,7 @@ export interface IMySuperPrefixStatusMySuperSuffix {
  * Status Check Policy
  * Status Check Policy
  */
-export interface IMySuperPrefixStatusCheckPolicyMySuperSuffix {
+export interface StatusCheckPolicy {
   /** @example ["continuous-integration/travis-ci"] */
   contexts: string[];
   /**
@@ -13580,7 +7531,7 @@ export interface IMySuperPrefixStatusCheckPolicyMySuperSuffix {
  * Tag
  * Tag
  */
-export interface IMySuperPrefixTagMySuperSuffix {
+export interface Tag {
   commit: {
     sha: string;
     /** @format uri */
@@ -13605,7 +7556,7 @@ export interface IMySuperPrefixTagMySuperSuffix {
  * Team
  * Groups of organization members that gives permissions on specified repositories.
  */
-export interface IMySuperPrefixTeamMySuperSuffix {
+export interface Team {
   description: string | null;
   /**
    * @format uri
@@ -13616,7 +7567,7 @@ export interface IMySuperPrefixTeamMySuperSuffix {
   members_url: string;
   name: string;
   node_id: string;
-  parent?: IMySuperPrefixTeamSimpleMySuperSuffix | null;
+  parent?: TeamSimple | null;
   permission: string;
   privacy?: string;
   /** @format uri */
@@ -13630,8 +7581,8 @@ export interface IMySuperPrefixTeamMySuperSuffix {
  * Team Discussion
  * A team discussion is a persistent record of a free-form conversation within a team.
  */
-export interface IMySuperPrefixTeamDiscussionMySuperSuffix {
-  author: IMySuperPrefixSimpleUserMySuperSuffix | null;
+export interface TeamDiscussion {
+  author: SimpleUser | null;
   /**
    * The main text of the discussion.
    * @example "Please suggest improvements to our workflow in comments."
@@ -13680,7 +7631,7 @@ export interface IMySuperPrefixTeamDiscussionMySuperSuffix {
    * @example true
    */
   private: boolean;
-  reactions?: IMySuperPrefixReactionRollupMySuperSuffix;
+  reactions?: ReactionRollup;
   /**
    * @format uri
    * @example "https://api.github.com/organizations/1/team/2343027"
@@ -13707,8 +7658,8 @@ export interface IMySuperPrefixTeamDiscussionMySuperSuffix {
  * Team Discussion Comment
  * A reply to a discussion within a team.
  */
-export interface IMySuperPrefixTeamDiscussionCommentMySuperSuffix {
-  author: IMySuperPrefixSimpleUserMySuperSuffix | null;
+export interface TeamDiscussionComment {
+  author: SimpleUser | null;
   /**
    * The main text of the comment.
    * @example "I agree with this suggestion."
@@ -13745,7 +7696,7 @@ export interface IMySuperPrefixTeamDiscussionCommentMySuperSuffix {
    * @example 42
    */
   number: number;
-  reactions?: IMySuperPrefixReactionRollupMySuperSuffix;
+  reactions?: ReactionRollup;
   /**
    * @format date-time
    * @example "2018-01-15T23:53:58Z"
@@ -13762,7 +7713,7 @@ export interface IMySuperPrefixTeamDiscussionCommentMySuperSuffix {
  * Full Team
  * Groups of organization members that gives permissions on specified repositories.
  */
-export interface IMySuperPrefixTeamFullMySuperSuffix {
+export interface TeamFull {
   /**
    * @format date-time
    * @example "2017-07-14T16:53:42Z"
@@ -13797,8 +7748,8 @@ export interface IMySuperPrefixTeamFullMySuperSuffix {
   /** @example "MDQ6VGVhbTE=" */
   node_id: string;
   /** Organization Full */
-  organization: IMySuperPrefixOrganizationFullMySuperSuffix;
-  parent?: IMySuperPrefixTeamSimpleMySuperSuffix | null;
+  organization: OrganizationFull;
+  parent?: TeamSimple | null;
   /**
    * Permission that the team will have for its repositories
    * @example "push"
@@ -13835,7 +7786,7 @@ export interface IMySuperPrefixTeamFullMySuperSuffix {
  * Team Membership
  * Team Membership
  */
-export interface IMySuperPrefixTeamMembershipMySuperSuffix {
+export interface TeamMembership {
   /**
    * The role of the user in the team.
    * @default "member"
@@ -13851,12 +7802,12 @@ export interface IMySuperPrefixTeamMembershipMySuperSuffix {
  * Team Project
  * A team's access to a project.
  */
-export interface IMySuperPrefixTeamProjectMySuperSuffix {
+export interface TeamProject {
   body: string | null;
   columns_url: string;
   created_at: string;
   /** Simple User */
-  creator: IMySuperPrefixSimpleUserMySuperSuffix;
+  creator: SimpleUser;
   html_url: string;
   id: number;
   name: string;
@@ -13881,7 +7832,7 @@ export interface IMySuperPrefixTeamProjectMySuperSuffix {
  * Team Repository
  * A team's access to a repository.
  */
-export interface IMySuperPrefixTeamRepositoryMySuperSuffix {
+export interface TeamRepository {
   /**
    * Whether to allow merge commits for pull requests.
    * @default true
@@ -14051,7 +8002,7 @@ export interface IMySuperPrefixTeamRepositoryMySuperSuffix {
    * @example "http://api.github.com/repos/octocat/Hello-World/languages"
    */
   languages_url: string;
-  license: IMySuperPrefixLicenseSimpleMySuperSuffix | null;
+  license: LicenseSimple | null;
   master_branch?: string;
   /**
    * @format uri
@@ -14078,7 +8029,7 @@ export interface IMySuperPrefixTeamRepositoryMySuperSuffix {
   open_issues: number;
   /** @example 0 */
   open_issues_count: number;
-  owner: IMySuperPrefixSimpleUserMySuperSuffix | null;
+  owner: SimpleUser | null;
   permissions?: {
     admin: boolean;
     pull: boolean;
@@ -14140,7 +8091,7 @@ export interface IMySuperPrefixTeamRepositoryMySuperSuffix {
    */
   teams_url: string;
   temp_clone_token?: string;
-  template_repository?: IMySuperPrefixRepositoryMySuperSuffix | null;
+  template_repository?: Repository | null;
   topics?: string[];
   /** @example "http://api.github.com/repos/octocat/Hello-World/git/trees{/sha}" */
   trees_url: string;
@@ -14168,7 +8119,7 @@ export interface IMySuperPrefixTeamRepositoryMySuperSuffix {
  * Team Simple
  * Groups of organization members that gives permissions on specified repositories.
  */
-export type IMySuperPrefixTeamSimpleMySuperSuffix = {
+export type TeamSimple = {
   /**
    * Description of the team
    * @example "A great team."
@@ -14227,12 +8178,12 @@ export type IMySuperPrefixTeamSimpleMySuperSuffix = {
  * Thread
  * Thread
  */
-export interface IMySuperPrefixThreadMySuperSuffix {
+export interface Thread {
   id: string;
   last_read_at: string | null;
   reason: string;
   /** Minimal Repository */
-  repository: IMySuperPrefixMinimalRepositoryMySuperSuffix;
+  repository: MinimalRepository;
   subject: {
     title: string;
     url: string;
@@ -14250,7 +8201,7 @@ export interface IMySuperPrefixThreadMySuperSuffix {
  * Thread Subscription
  * Thread Subscription
  */
-export interface IMySuperPrefixThreadSubscriptionMySuperSuffix {
+export interface ThreadSubscription {
   /**
    * @format date-time
    * @example "2012-10-06T21:34:12Z"
@@ -14281,7 +8232,7 @@ export interface IMySuperPrefixThreadSubscriptionMySuperSuffix {
  * Topic
  * A topic aggregates entities that are related to a subject.
  */
-export interface IMySuperPrefixTopicMySuperSuffix {
+export interface Topic {
   names: string[];
 }
 
@@ -14289,7 +8240,7 @@ export interface IMySuperPrefixTopicMySuperSuffix {
  * Topic Search Result Item
  * Topic Search Result Item
  */
-export interface IMySuperPrefixTopicSearchResultItemMySuperSuffix {
+export interface TopicSearchResultItem {
   aliases?:
     | {
         topic_relation?: {
@@ -14324,13 +8275,13 @@ export interface IMySuperPrefixTopicSearchResultItemMySuperSuffix {
   repository_count?: number | null;
   score: number;
   short_description: string | null;
-  text_matches?: IMySuperPrefixSearchResultTextMatchesMySuperSuffix;
+  text_matches?: SearchResultTextMatches;
   /** @format date-time */
   updated_at: string;
 }
 
 /** Traffic */
-export interface IMySuperPrefixTrafficMySuperSuffix {
+export interface Traffic {
   count: number;
   /** @format date-time */
   timestamp: string;
@@ -14341,8 +8292,8 @@ export interface IMySuperPrefixTrafficMySuperSuffix {
  * User Marketplace Purchase
  * User Marketplace Purchase
  */
-export interface IMySuperPrefixUserMarketplacePurchaseMySuperSuffix {
-  account: IMySuperPrefixMarketplaceAccountMySuperSuffix;
+export interface UserMarketplacePurchase {
+  account: MarketplaceAccount;
   /** @example "monthly" */
   billing_cycle: string;
   /**
@@ -14358,7 +8309,7 @@ export interface IMySuperPrefixUserMarketplacePurchaseMySuperSuffix {
   /** @example true */
   on_free_trial: boolean;
   /** Marketplace Listing Plan */
-  plan: IMySuperPrefixMarketplaceListingPlanMySuperSuffix;
+  plan: MarketplaceListingPlan;
   unit_count: number | null;
   /**
    * @format date-time
@@ -14371,7 +8322,7 @@ export interface IMySuperPrefixUserMarketplacePurchaseMySuperSuffix {
  * User Search Result Item
  * User Search Result Item
  */
-export interface IMySuperPrefixUserSearchResultItemMySuperSuffix {
+export interface UserSearchResultItem {
   /** @format uri */
   avatar_url: string;
   bio?: string | null;
@@ -14412,7 +8363,7 @@ export interface IMySuperPrefixUserSearchResultItemMySuperSuffix {
   subscriptions_url: string;
   /** @format date-time */
   suspended_at?: string | null;
-  text_matches?: IMySuperPrefixSearchResultTextMatchesMySuperSuffix;
+  text_matches?: SearchResultTextMatches;
   type: string;
   /** @format date-time */
   updated_at?: string;
@@ -14424,7 +8375,7 @@ export interface IMySuperPrefixUserSearchResultItemMySuperSuffix {
  * Validation Error
  * Validation Error
  */
-export interface IMySuperPrefixValidationErrorMySuperSuffix {
+export interface ValidationError {
   documentation_url: string;
   errors?: {
     resource?: string;
@@ -14441,14 +8392,14 @@ export interface IMySuperPrefixValidationErrorMySuperSuffix {
  * Validation Error Simple
  * Validation Error Simple
  */
-export interface IMySuperPrefixValidationErrorSimpleMySuperSuffix {
+export interface ValidationErrorSimple {
   documentation_url: string;
   errors?: string[];
   message: string;
 }
 
 /** Verification */
-export interface IMySuperPrefixVerificationMySuperSuffix {
+export interface Verification {
   payload: string | null;
   reason: string;
   signature: string | null;
@@ -14459,59 +8410,59 @@ export interface IMySuperPrefixVerificationMySuperSuffix {
  * View Traffic
  * View Traffic
  */
-export interface IMySuperPrefixViewTrafficMySuperSuffix {
+export interface ViewTraffic {
   /** @example 14850 */
   count: number;
   /** @example 3782 */
   uniques: number;
-  views: IMySuperPrefixTrafficMySuperSuffix[];
+  views: Traffic[];
 }
 
 /**
  * Webhook Configuration
  * Configuration object of the webhook
  */
-export interface IMySuperPrefixWebhookConfigMySuperSuffix {
+export interface WebhookConfig {
   /** The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. */
-  content_type?: IMySuperPrefixWebhookConfigContentTypeMySuperSuffix;
+  content_type?: WebhookConfigContentType;
   /** Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** */
-  insecure_ssl?: IMySuperPrefixWebhookConfigInsecureSslMySuperSuffix;
+  insecure_ssl?: WebhookConfigInsecureSsl;
   /** If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value for [delivery signature headers](https://docs.github.com/webhooks/event-payloads/#delivery-headers). */
-  secret?: IMySuperPrefixWebhookConfigSecretMySuperSuffix;
+  secret?: WebhookConfigSecret;
   /** The URL to which the payloads will be delivered. */
-  url?: IMySuperPrefixWebhookConfigUrlMySuperSuffix;
+  url?: WebhookConfigUrl;
 }
 
 /**
  * The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`.
  * @example ""json""
  */
-export type IMySuperPrefixWebhookConfigContentTypeMySuperSuffix = string;
+export type WebhookConfigContentType = string;
 
 /**
  * Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.**
  * @example ""0""
  */
-export type IMySuperPrefixWebhookConfigInsecureSslMySuperSuffix = string;
+export type WebhookConfigInsecureSsl = string;
 
 /**
  * If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value for [delivery signature headers](https://docs.github.com/webhooks/event-payloads/#delivery-headers).
  * @example ""********""
  */
-export type IMySuperPrefixWebhookConfigSecretMySuperSuffix = string;
+export type WebhookConfigSecret = string;
 
 /**
  * The URL to which the payloads will be delivered.
  * @format uri
  * @example "https://example.com/webhook"
  */
-export type IMySuperPrefixWebhookConfigUrlMySuperSuffix = string;
+export type WebhookConfigUrl = string;
 
 /**
  * Workflow
  * A GitHub Actions workflow
  */
-export interface IMySuperPrefixWorkflowMySuperSuffix {
+export interface Workflow {
   /** @example "https://github.com/actions/setup-ruby/workflows/CI/badge.svg" */
   badge_url: string;
   /**
@@ -14549,7 +8500,7 @@ export interface IMySuperPrefixWorkflowMySuperSuffix {
  * Workflow Run
  * An invocation of a workflow
  */
-export interface IMySuperPrefixWorkflowRunMySuperSuffix {
+export interface WorkflowRun {
   /**
    * The URL to the artifacts for the workflow run.
    * @example "https://api.github.com/repos/github/hello-world/actions/runs/5/rerun/artifacts"
@@ -14574,9 +8525,9 @@ export interface IMySuperPrefixWorkflowRunMySuperSuffix {
   /** @example "master" */
   head_branch: string | null;
   /** Simple Commit */
-  head_commit: IMySuperPrefixSimpleCommitMySuperSuffix;
+  head_commit: SimpleCommit;
   /** Minimal Repository */
-  head_repository: IMySuperPrefixMinimalRepositoryMySuperSuffix;
+  head_repository: MinimalRepository;
   /** @example 5 */
   head_repository_id?: number;
   /**
@@ -14608,9 +8559,9 @@ export interface IMySuperPrefixWorkflowRunMySuperSuffix {
   name?: string;
   /** @example "MDEwOkNoZWNrU3VpdGU1" */
   node_id: string;
-  pull_requests: IMySuperPrefixPullRequestMinimalMySuperSuffix[] | null;
+  pull_requests: PullRequestMinimal[] | null;
   /** Minimal Repository */
-  repository: IMySuperPrefixMinimalRepositoryMySuperSuffix;
+  repository: MinimalRepository;
   /**
    * The URL to rerun the workflow run.
    * @example "https://api.github.com/repos/github/hello-world/actions/runs/5/rerun"
@@ -14646,7 +8597,7 @@ export interface IMySuperPrefixWorkflowRunMySuperSuffix {
  * Workflow Run Usage
  * Workflow Run Usage
  */
-export interface IMySuperPrefixWorkflowRunUsageMySuperSuffix {
+export interface WorkflowRunUsage {
   billable: {
     UBUNTU?: {
       total_ms: number;
@@ -14668,7 +8619,7 @@ export interface IMySuperPrefixWorkflowRunUsageMySuperSuffix {
  * Workflow Usage
  * Workflow Usage
  */
-export interface IMySuperPrefixWorkflowUsageMySuperSuffix {
+export interface WorkflowUsage {
   billable: {
     UBUNTU?: {
       total_ms?: number;
@@ -15000,7 +8951,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/app
      */
     appsGetAuthenticated: (params: RequestParams = {}) =>
-      this.request<IMySuperPrefixIntegrationMySuperSuffix, any>({
+      this.request<Integration, any>({
         path: `/app`,
         method: "GET",
         format: "json",
@@ -15016,7 +8967,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/app/hook/config
      */
     appsGetWebhookConfigForApp: (params: RequestParams = {}) =>
-      this.request<IMySuperPrefixWebhookConfigMySuperSuffix, any>({
+      this.request<WebhookConfig, any>({
         path: `/app/hook/config`,
         method: "GET",
         format: "json",
@@ -15032,10 +8983,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PATCH:/app/hook/config
      */
     appsUpdateWebhookConfigForApp: (
-      data: IMySuperPrefixAppsUpdateWebhookConfigForAppPayloadMySuperSuffix,
+      data: {
+        /** The URL to which the payloads will be delivered. */
+        url?: WebhookConfigUrl;
+        /** The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. */
+        content_type?: WebhookConfigContentType;
+        /** If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value for [delivery signature headers](https://docs.github.com/webhooks/event-payloads/#delivery-headers). */
+        secret?: WebhookConfigSecret;
+        /** Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** */
+        insecure_ssl?: WebhookConfigInsecureSsl;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixWebhookConfigMySuperSuffix, any>({
+      this.request<WebhookConfig, any>({
         path: `/app/hook/config`,
         method: "PATCH",
         body: data,
@@ -15053,10 +9013,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/app/installations
      */
     appsListInstallations: (
-      query: IMySuperPrefixAppsListInstallationsParamsMySuperSuffix,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+        /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+        since?: string;
+        outdated?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixInstallationMySuperSuffix[], any>({
+      this.request<Installation[], any>({
         path: `/app/installations`,
         method: "GET",
         query: query,
@@ -15074,8 +9048,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     appsGetInstallation: (installationId: number, params: RequestParams = {}) =>
       this.request<
-        IMySuperPrefixInstallationMySuperSuffix,
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        Installation,
+        | BasicError
         | {
             message: string;
             documentation_url: string;
@@ -15096,7 +9070,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/app/installations/{installation_id}
      */
     appsDeleteInstallation: (installationId: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/app/installations/${installationId}`,
         method: "DELETE",
         ...params,
@@ -15112,17 +9086,27 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     appsCreateInstallationAccessToken: (
       installationId: number,
-      data: IMySuperPrefixAppsCreateInstallationAccessTokenPayloadMySuperSuffix,
+      data: {
+        /** List of repository names that the token should have access to */
+        repositories?: string[];
+        /**
+         * List of repository IDs that the token should have access to
+         * @example [1]
+         */
+        repository_ids?: number[];
+        /** The permissions granted to the user-to-server access token. */
+        permissions?: AppPermissions;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixInstallationTokenMySuperSuffix,
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        InstallationToken,
+        | BasicError
         | {
             message: string;
             documentation_url: string;
           }
-        | IMySuperPrefixValidationErrorMySuperSuffix
+        | ValidationError
       >({
         path: `/app/installations/${installationId}/access_tokens`,
         method: "POST",
@@ -15141,7 +9125,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/app/installations/{installation_id}/suspended
      */
     appsSuspendInstallation: (installationId: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/app/installations/${installationId}/suspended`,
         method: "PUT",
         ...params,
@@ -15156,7 +9140,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/app/installations/{installation_id}/suspended
      */
     appsUnsuspendInstallation: (installationId: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/app/installations/${installationId}/suspended`,
         method: "DELETE",
         ...params,
@@ -15173,14 +9157,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     appsCreateFromManifest: (code: string, params: RequestParams = {}) =>
       this.request<
-        IMySuperPrefixIntegrationMySuperSuffix & {
+        Integration & {
           client_id: string;
           client_secret: string;
           webhook_secret: string;
           pem: string;
           [key: string]: any;
         },
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorSimpleMySuperSuffix
+        BasicError | ValidationErrorSimple
       >({
         path: `/app-manifests/${code}/conversions`,
         method: "POST",
@@ -15199,10 +9183,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     oauthAuthorizationsListGrants: (
-      query: IMySuperPrefixOauthAuthorizationsListGrantsParamsMySuperSuffix,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixApplicationGrantMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<ApplicationGrant[], BasicError>({
         path: `/applications/grants`,
         method: "GET",
         query: query,
@@ -15220,7 +9215,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     oauthAuthorizationsGetGrant: (grantId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixApplicationGrantMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<ApplicationGrant, BasicError>({
         path: `/applications/grants/${grantId}`,
         method: "GET",
         format: "json",
@@ -15237,7 +9232,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     oauthAuthorizationsDeleteGrant: (grantId: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/applications/grants/${grantId}`,
         method: "DELETE",
         ...params,
@@ -15253,10 +9248,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     appsDeleteAuthorization: (
       clientId: string,
-      data: IMySuperPrefixAppsDeleteAuthorizationPayloadMySuperSuffix,
+      data: {
+        /** The OAuth access token used to authenticate to the GitHub API. */
+        access_token?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<void, IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<void, ValidationError>({
         path: `/applications/${clientId}/grant`,
         method: "DELETE",
         body: data,
@@ -15290,13 +9288,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     appsCheckToken: (
       clientId: string,
-      data: IMySuperPrefixAppsCheckTokenPayloadMySuperSuffix,
+      data: {
+        /** The access_token of the OAuth application. */
+        access_token: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixAuthorizationMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<Authorization, BasicError | ValidationError>({
         path: `/applications/${clientId}/token`,
         method: "POST",
         body: data,
@@ -15315,10 +9313,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     appsResetToken: (
       clientId: string,
-      data: IMySuperPrefixAppsResetTokenPayloadMySuperSuffix,
+      data: {
+        /** The access_token of the OAuth application. */
+        access_token: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixAuthorizationMySuperSuffix, IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<Authorization, ValidationError>({
         path: `/applications/${clientId}/token`,
         method: "PATCH",
         body: data,
@@ -15337,10 +9338,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     appsDeleteToken: (
       clientId: string,
-      data: IMySuperPrefixAppsDeleteTokenPayloadMySuperSuffix,
+      data: {
+        /** The OAuth access token used to authenticate to the GitHub API. */
+        access_token?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<void, IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<void, ValidationError>({
         path: `/applications/${clientId}/token`,
         method: "DELETE",
         body: data,
@@ -15358,13 +9362,35 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     appsScopeToken: (
       clientId: string,
-      data: IMySuperPrefixAppsScopeTokenPayloadMySuperSuffix,
+      data: {
+        /**
+         * **Required.** The OAuth access token used to authenticate to the GitHub API.
+         * @example "e72e16c7e42f292c6912e7710c838347ae178b4a"
+         */
+        access_token?: string;
+        /**
+         * The name of the user or organization to scope the user-to-server access token to. **Required** unless `target_id` is specified.
+         * @example "octocat"
+         */
+        target?: string;
+        /**
+         * The ID of the user or organization to scope the user-to-server access token to. **Required** unless `target` is specified.
+         * @example 1
+         */
+        target_id?: number;
+        /** The list of repository IDs to scope the user-to-server access token to. `repositories` may not be specified if `repository_ids` is specified. */
+        repositories?: string[];
+        /**
+         * The list of repository names to scope the user-to-server access token to. `repository_ids` may not be specified if `repositories` is specified.
+         * @example [1]
+         */
+        repository_ids?: number[];
+        /** The permissions granted to the user-to-server access token. */
+        permissions?: AppPermissions;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixAuthorizationMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<Authorization, BasicError | ValidationError>({
         path: `/applications/${clientId}/token/scoped`,
         method: "POST",
         body: data,
@@ -15383,7 +9409,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     appsCheckAuthorization: (clientId: string, accessToken: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixAuthorizationMySuperSuffix | null, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Authorization | null, BasicError>({
         path: `/applications/${clientId}/tokens/${accessToken}`,
         method: "GET",
         format: "json",
@@ -15400,7 +9426,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     appsResetAuthorization: (clientId: string, accessToken: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixAuthorizationMySuperSuffix, any>({
+      this.request<Authorization, any>({
         path: `/applications/${clientId}/tokens/${accessToken}`,
         method: "POST",
         format: "json",
@@ -15434,8 +9460,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     appsGetBySlug: (appSlug: string, params: RequestParams = {}) =>
       this.request<
-        IMySuperPrefixIntegrationMySuperSuffix,
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        Integration,
+        | BasicError
         | {
             message: string;
             documentation_url: string;
@@ -15458,10 +9484,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     oauthAuthorizationsListAuthorizations: (
-      query: IMySuperPrefixOauthAuthorizationsListAuthorizationsParamsMySuperSuffix,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixAuthorizationMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Authorization[], BasicError>({
         path: `/authorizations`,
         method: "GET",
         query: query,
@@ -15479,13 +9516,35 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     oauthAuthorizationsCreateAuthorization: (
-      data: IMySuperPrefixOauthAuthorizationsCreateAuthorizationPayloadMySuperSuffix,
+      data: {
+        /**
+         * A list of scopes that this authorization is in.
+         * @example ["public_repo","user"]
+         */
+        scopes?: string[] | null;
+        /**
+         * A note to remind you what the OAuth token is for.
+         * @example "Update all gems"
+         */
+        note?: string;
+        /** A URL to remind you what app the OAuth token is for. */
+        note_url?: string;
+        /**
+         * The OAuth app client key for which to create the token.
+         * @maxLength 20
+         */
+        client_id?: string;
+        /**
+         * The OAuth app client secret for which to create the token.
+         * @maxLength 40
+         */
+        client_secret?: string;
+        /** A unique string to distinguish an authorization from others created for the same client ID and user. */
+        fingerprint?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixAuthorizationMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<Authorization, BasicError | ValidationError>({
         path: `/authorizations`,
         method: "POST",
         body: data,
@@ -15505,13 +9564,30 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     oauthAuthorizationsGetOrCreateAuthorizationForApp: (
       clientId: string,
-      data: IMySuperPrefixOauthAuthorizationsGetOrCreateAuthorizationForAppPayloadMySuperSuffix,
+      data: {
+        /**
+         * The OAuth app client secret for which to create the token.
+         * @maxLength 40
+         */
+        client_secret: string;
+        /**
+         * A list of scopes that this authorization is in.
+         * @example ["public_repo","user"]
+         */
+        scopes?: string[] | null;
+        /**
+         * A note to remind you what the OAuth token is for.
+         * @example "Update all gems"
+         */
+        note?: string;
+        /** A URL to remind you what app the OAuth token is for. */
+        note_url?: string;
+        /** A unique string to distinguish an authorization from others created for the same client ID and user. */
+        fingerprint?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixAuthorizationMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<Authorization, BasicError | ValidationError>({
         path: `/authorizations/clients/${clientId}`,
         method: "PUT",
         body: data,
@@ -15532,10 +9608,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     oauthAuthorizationsGetOrCreateAuthorizationForAppAndFingerprint: (
       clientId: string,
       fingerprint: string,
-      data: IMySuperPrefixOauthAuthorizationsGetOrCreateAuthorizationForAppAndFingerprintPayloadMySuperSuffix,
+      data: {
+        /**
+         * The OAuth app client secret for which to create the token.
+         * @maxLength 40
+         */
+        client_secret: string;
+        /**
+         * A list of scopes that this authorization is in.
+         * @example ["public_repo","user"]
+         */
+        scopes?: string[] | null;
+        /**
+         * A note to remind you what the OAuth token is for.
+         * @example "Update all gems"
+         */
+        note?: string;
+        /** A URL to remind you what app the OAuth token is for. */
+        note_url?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixAuthorizationMySuperSuffix, IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<Authorization, ValidationError>({
         path: `/authorizations/clients/${clientId}/${fingerprint}`,
         method: "PUT",
         body: data,
@@ -15554,7 +9648,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     oauthAuthorizationsGetAuthorization: (authorizationId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixAuthorizationMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Authorization, BasicError>({
         path: `/authorizations/${authorizationId}`,
         method: "GET",
         format: "json",
@@ -15572,10 +9666,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     oauthAuthorizationsUpdateAuthorization: (
       authorizationId: number,
-      data: IMySuperPrefixOauthAuthorizationsUpdateAuthorizationPayloadMySuperSuffix,
+      data: {
+        /**
+         * A list of scopes that this authorization is in.
+         * @example ["public_repo","user"]
+         */
+        scopes?: string[] | null;
+        /** A list of scopes to add to this authorization. */
+        add_scopes?: string[];
+        /** A list of scopes to remove from this authorization. */
+        remove_scopes?: string[];
+        /**
+         * A note to remind you what the OAuth token is for.
+         * @example "Update all gems"
+         */
+        note?: string;
+        /** A URL to remind you what app the OAuth token is for. */
+        note_url?: string;
+        /** A unique string to distinguish an authorization from others created for the same client ID and user. */
+        fingerprint?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixAuthorizationMySuperSuffix, IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<Authorization, ValidationError>({
         path: `/authorizations/${authorizationId}`,
         method: "PATCH",
         body: data,
@@ -15594,7 +9707,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     oauthAuthorizationsDeleteAuthorization: (authorizationId: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/authorizations/${authorizationId}`,
         method: "DELETE",
         ...params,
@@ -15611,7 +9724,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     codesOfConductGetAllCodesOfConduct: (params: RequestParams = {}) =>
       this.request<
-        IMySuperPrefixCodeOfConductMySuperSuffix[],
+        CodeOfConduct[],
         {
           message: string;
           documentation_url: string;
@@ -15633,8 +9746,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     codesOfConductGetConductCode: (key: string, params: RequestParams = {}) =>
       this.request<
-        IMySuperPrefixCodeOfConductMySuperSuffix,
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        CodeOfConduct,
+        | BasicError
         | {
             message: string;
             documentation_url: string;
@@ -15657,17 +9770,30 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     appsCreateContentAttachment: (
       contentReferenceId: number,
-      data: IMySuperPrefixAppsCreateContentAttachmentPayloadMySuperSuffix,
+      data: {
+        /**
+         * The title of the attachment
+         * @maxLength 1024
+         * @example "Title of the attachment"
+         */
+        title: string;
+        /**
+         * The body of the attachment
+         * @maxLength 262144
+         * @example "Body of the attachment"
+         */
+        body: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixContentReferenceAttachmentMySuperSuffix,
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        ContentReferenceAttachment,
+        | BasicError
         | {
             message: string;
             documentation_url: string;
           }
-        | IMySuperPrefixValidationErrorMySuperSuffix
+        | ValidationError
       >({
         path: `/content_references/${contentReferenceId}/attachments`,
         method: "POST",
@@ -15704,7 +9830,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/enterprises/{enterprise}/actions/permissions
      */
     enterpriseAdminGetGithubActionsPermissionsEnterprise: (enterprise: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixActionsEnterprisePermissionsMySuperSuffix, any>({
+      this.request<ActionsEnterprisePermissions, any>({
         path: `/enterprises/${enterprise}/actions/permissions`,
         method: "GET",
         format: "json",
@@ -15721,7 +9847,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     enterpriseAdminSetGithubActionsPermissionsEnterprise: (
       enterprise: string,
-      data: IMySuperPrefixEnterpriseAdminSetGithubActionsPermissionsEnterprisePayloadMySuperSuffix,
+      data: {
+        /** The policy that controls the organizations in the enterprise that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`. */
+        enabled_organizations: EnabledOrganizations;
+        /** The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`. */
+        allowed_actions?: AllowedActions;
+      },
       params: RequestParams = {},
     ) =>
       this.request<void, any>({
@@ -15741,16 +9872,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/enterprises/{enterprise}/actions/permissions/organizations
      */
     enterpriseAdminListSelectedOrganizationsEnabledGithubActionsEnterprise: (
-      {
-        enterprise,
-        ...query
-      }: IMySuperPrefixEnterpriseAdminListSelectedOrganizationsEnabledGithubActionsEnterpriseParamsMySuperSuffix,
+      enterprise: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         {
           total_count: number;
-          organizations: IMySuperPrefixOrganizationSimpleMySuperSuffix[];
+          organizations: OrganizationSimple[];
         },
         any
       >({
@@ -15771,7 +9911,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     enterpriseAdminSetSelectedOrganizationsEnabledGithubActionsEnterprise: (
       enterprise: string,
-      data: IMySuperPrefixEnterpriseAdminSetSelectedOrganizationsEnabledGithubActionsEnterprisePayloadMySuperSuffix,
+      data: {
+        /** List of organization IDs to enable for GitHub Actions. */
+        selected_organization_ids: number[];
+      },
       params: RequestParams = {},
     ) =>
       this.request<void, any>({
@@ -15829,7 +9972,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/enterprises/{enterprise}/actions/permissions/selected-actions
      */
     enterpriseAdminGetAllowedActionsEnterprise: (enterprise: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixSelectedActionsMySuperSuffix, any>({
+      this.request<SelectedActions, any>({
         path: `/enterprises/${enterprise}/actions/permissions/selected-actions`,
         method: "GET",
         format: "json",
@@ -15846,7 +9989,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     enterpriseAdminSetAllowedActionsEnterprise: (
       enterprise: string,
-      data: IMySuperPrefixSelectedActionsMySuperSuffix,
+      data: SelectedActions,
       params: RequestParams = {},
     ) =>
       this.request<void, any>({
@@ -15866,13 +10009,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/enterprises/{enterprise}/actions/runner-groups
      */
     enterpriseAdminListSelfHostedRunnerGroupsForEnterprise: (
-      { enterprise, ...query }: IMySuperPrefixEnterpriseAdminListSelfHostedRunnerGroupsForEnterpriseParamsMySuperSuffix,
+      enterprise: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         {
           total_count: number;
-          runner_groups: IMySuperPrefixRunnerGroupsEnterpriseMySuperSuffix[];
+          runner_groups: RunnerGroupsEnterprise[];
         },
         any
       >({
@@ -15893,10 +10048,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     enterpriseAdminCreateSelfHostedRunnerGroupForEnterprise: (
       enterprise: string,
-      data: IMySuperPrefixEnterpriseAdminCreateSelfHostedRunnerGroupForEnterprisePayloadMySuperSuffix,
+      data: {
+        /** Name of the runner group. */
+        name: string;
+        /** Visibility of a runner group. You can select all organizations or select individual organization. Can be one of: `all` or `selected` */
+        visibility?: "selected" | "all";
+        /** List of organization IDs that can access the runner group. */
+        selected_organization_ids?: number[];
+        /** List of runner IDs to add to the runner group. */
+        runners?: number[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixRunnerGroupsEnterpriseMySuperSuffix, any>({
+      this.request<RunnerGroupsEnterprise, any>({
         path: `/enterprises/${enterprise}/actions/runner-groups`,
         method: "POST",
         body: data,
@@ -15918,7 +10082,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       runnerGroupId: number,
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixRunnerGroupsEnterpriseMySuperSuffix, any>({
+      this.request<RunnerGroupsEnterprise, any>({
         path: `/enterprises/${enterprise}/actions/runner-groups/${runnerGroupId}`,
         method: "GET",
         format: "json",
@@ -15936,10 +10100,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     enterpriseAdminUpdateSelfHostedRunnerGroupForEnterprise: (
       enterprise: string,
       runnerGroupId: number,
-      data: IMySuperPrefixEnterpriseAdminUpdateSelfHostedRunnerGroupForEnterprisePayloadMySuperSuffix,
+      data: {
+        /** Name of the runner group. */
+        name?: string;
+        /**
+         * Visibility of a runner group. You can select all organizations or select individual organizations. Can be one of: `all` or `selected`
+         * @default "all"
+         */
+        visibility?: "selected" | "all";
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixRunnerGroupsEnterpriseMySuperSuffix, any>({
+      this.request<RunnerGroupsEnterprise, any>({
         path: `/enterprises/${enterprise}/actions/runner-groups/${runnerGroupId}`,
         method: "PATCH",
         body: data,
@@ -15976,17 +10148,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations
      */
     enterpriseAdminListOrgAccessToSelfHostedRunnerGroupInEnterprise: (
-      {
-        enterprise,
-        runnerGroupId,
-        ...query
-      }: IMySuperPrefixEnterpriseAdminListOrgAccessToSelfHostedRunnerGroupInEnterpriseParamsMySuperSuffix,
+      enterprise: string,
+      runnerGroupId: number,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         {
           total_count: number;
-          organizations: IMySuperPrefixOrganizationSimpleMySuperSuffix[];
+          organizations: OrganizationSimple[];
         },
         any
       >({
@@ -16008,7 +10189,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     enterpriseAdminSetOrgAccessToSelfHostedRunnerGroupInEnterprise: (
       enterprise: string,
       runnerGroupId: number,
-      data: IMySuperPrefixEnterpriseAdminSetOrgAccessToSelfHostedRunnerGroupInEnterprisePayloadMySuperSuffix,
+      data: {
+        /** List of organization IDs that can access the runner group. */
+        selected_organization_ids: number[];
+      },
       params: RequestParams = {},
     ) =>
       this.request<void, any>({
@@ -16068,17 +10252,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners
      */
     enterpriseAdminListSelfHostedRunnersInGroupForEnterprise: (
-      {
-        enterprise,
-        runnerGroupId,
-        ...query
-      }: IMySuperPrefixEnterpriseAdminListSelfHostedRunnersInGroupForEnterpriseParamsMySuperSuffix,
+      enterprise: string,
+      runnerGroupId: number,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         {
           total_count: number;
-          runners: IMySuperPrefixRunnerMySuperSuffix[];
+          runners: Runner[];
         },
         any
       >({
@@ -16100,7 +10293,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     enterpriseAdminSetSelfHostedRunnersInGroupForEnterprise: (
       enterprise: string,
       runnerGroupId: number,
-      data: IMySuperPrefixEnterpriseAdminSetSelfHostedRunnersInGroupForEnterprisePayloadMySuperSuffix,
+      data: {
+        /** List of runner IDs to add to the runner group. */
+        runners: number[];
+      },
       params: RequestParams = {},
     ) =>
       this.request<void, any>({
@@ -16160,13 +10356,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/enterprises/{enterprise}/actions/runners
      */
     enterpriseAdminListSelfHostedRunnersForEnterprise: (
-      { enterprise, ...query }: IMySuperPrefixEnterpriseAdminListSelfHostedRunnersForEnterpriseParamsMySuperSuffix,
+      enterprise: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         {
           total_count?: number;
-          runners?: IMySuperPrefixRunnerMySuperSuffix[];
+          runners?: Runner[];
         },
         any
       >({
@@ -16186,7 +10394,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/enterprises/{enterprise}/actions/runners/downloads
      */
     enterpriseAdminListRunnerApplicationsForEnterprise: (enterprise: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixRunnerApplicationMySuperSuffix[], any>({
+      this.request<RunnerApplication[], any>({
         path: `/enterprises/${enterprise}/actions/runners/downloads`,
         method: "GET",
         format: "json",
@@ -16202,7 +10410,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/enterprises/{enterprise}/actions/runners/registration-token
      */
     enterpriseAdminCreateRegistrationTokenForEnterprise: (enterprise: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixAuthenticationTokenMySuperSuffix, any>({
+      this.request<AuthenticationToken, any>({
         path: `/enterprises/${enterprise}/actions/runners/registration-token`,
         method: "POST",
         format: "json",
@@ -16218,7 +10426,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/enterprises/{enterprise}/actions/runners/remove-token
      */
     enterpriseAdminCreateRemoveTokenForEnterprise: (enterprise: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixAuthenticationTokenMySuperSuffix, any>({
+      this.request<AuthenticationToken, any>({
         path: `/enterprises/${enterprise}/actions/runners/remove-token`,
         method: "POST",
         format: "json",
@@ -16238,7 +10446,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       runnerId: number,
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixRunnerMySuperSuffix, any>({
+      this.request<Runner, any>({
         path: `/enterprises/${enterprise}/actions/runners/${runnerId}`,
         method: "GET",
         format: "json",
@@ -16273,10 +10481,39 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/enterprises/{enterprise}/audit-log
      */
     auditLogGetAuditLog: (
-      { enterprise, ...query }: IMySuperPrefixAuditLogGetAuditLogParamsMySuperSuffix,
+      enterprise: string,
+      query?: {
+        /** A search phrase. For more information, see [Searching the audit log](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization#searching-the-audit-log). */
+        phrase?: string;
+        /**
+         * The event types to include:
+         *
+         * - `web` - returns web (non-Git) events
+         * - `git` - returns Git events
+         * - `all` - returns both web and Git events
+         *
+         * The default is `web`.
+         */
+        include?: "web" | "git" | "all";
+        /** A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor. */
+        after?: string;
+        /** A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor. */
+        before?: string;
+        /**
+         * The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+         *
+         * The default is `desc`.
+         */
+        order?: "desc" | "asc";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixAuditLogEventMySuperSuffix[], any>({
+      this.request<AuditLogEvent[], any>({
         path: `/enterprises/${enterprise}/audit-log`,
         method: "GET",
         query: query,
@@ -16293,7 +10530,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/enterprises/{enterprise}/settings/billing/actions
      */
     billingGetGithubActionsBillingGhe: (enterprise: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixActionsBillingUsageMySuperSuffix, any>({
+      this.request<ActionsBillingUsage, any>({
         path: `/enterprises/${enterprise}/settings/billing/actions`,
         method: "GET",
         format: "json",
@@ -16309,7 +10546,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/enterprises/{enterprise}/settings/billing/packages
      */
     billingGetGithubPackagesBillingGhe: (enterprise: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixPackagesBillingUsageMySuperSuffix, any>({
+      this.request<PackagesBillingUsage, any>({
         path: `/enterprises/${enterprise}/settings/billing/packages`,
         method: "GET",
         format: "json",
@@ -16325,7 +10562,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/enterprises/{enterprise}/settings/billing/shared-storage
      */
     billingGetSharedStorageBillingGhe: (enterprise: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixCombinedBillingUsageMySuperSuffix, any>({
+      this.request<CombinedBillingUsage, any>({
         path: `/enterprises/${enterprise}/settings/billing/shared-storage`,
         method: "GET",
         format: "json",
@@ -16342,12 +10579,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/events
      */
     activityListPublicEvents: (
-      query: IMySuperPrefixActivityListPublicEventsParamsMySuperSuffix,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixEventMySuperSuffix[],
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        Event[],
+        | BasicError
         | {
             code?: string;
             message?: string;
@@ -16371,7 +10619,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/feeds
      */
     activityGetFeeds: (params: RequestParams = {}) =>
-      this.request<IMySuperPrefixFeedMySuperSuffix, any>({
+      this.request<Feed, any>({
         path: `/feeds`,
         method: "GET",
         format: "json",
@@ -16387,8 +10635,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary List gists for the authenticated user
      * @request GET:/gists
      */
-    gistsList: (query: IMySuperPrefixGistsListParamsMySuperSuffix, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixBaseGistMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+    gistsList: (
+      query?: {
+        /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+        since?: string;
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<BaseGist[], BasicError>({
         path: `/gists`,
         method: "GET",
         query: query,
@@ -16404,11 +10668,30 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Create a gist
      * @request POST:/gists
      */
-    gistsCreate: (data: IMySuperPrefixGistsCreatePayloadMySuperSuffix, params: RequestParams = {}) =>
-      this.request<
-        IMySuperPrefixGistSimpleMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+    gistsCreate: (
+      data: {
+        /**
+         * Description of the gist
+         * @example "Example Ruby script"
+         */
+        description?: string;
+        /**
+         * Names and content for the files that make up the gist
+         * @example {"hello.rb":{"content":"puts \"Hello, World!\""}}
+         */
+        files: Record<
+          string,
+          {
+            /** Content of the file */
+            content: string;
+          }
+        >;
+        /** Flag indicating whether the gist is public */
+        public?: boolean | "true" | "false";
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<GistSimple, BasicError | ValidationError>({
         path: `/gists`,
         method: "POST",
         body: data,
@@ -16425,11 +10708,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary List public gists
      * @request GET:/gists/public
      */
-    gistsListPublic: (query: IMySuperPrefixGistsListPublicParamsMySuperSuffix, params: RequestParams = {}) =>
-      this.request<
-        IMySuperPrefixBaseGistMySuperSuffix[],
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+    gistsListPublic: (
+      query?: {
+        /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+        since?: string;
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<BaseGist[], BasicError | ValidationError>({
         path: `/gists/public`,
         method: "GET",
         query: query,
@@ -16445,8 +10741,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary List starred gists
      * @request GET:/gists/starred
      */
-    gistsListStarred: (query: IMySuperPrefixGistsListStarredParamsMySuperSuffix, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixBaseGistMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+    gistsListStarred: (
+      query?: {
+        /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+        since?: string;
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<BaseGist[], BasicError>({
         path: `/gists/starred`,
         method: "GET",
         query: query,
@@ -16464,7 +10776,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     gistsGet: (gistId: string, params: RequestParams = {}) =>
       this.request<
-        IMySuperPrefixGistSimpleMySuperSuffix,
+        GistSimple,
         | {
             block?: {
               reason?: string;
@@ -16474,7 +10786,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
             message?: string;
             documentation_url?: string;
           }
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        | BasicError
       >({
         path: `/gists/${gistId}`,
         method: "GET",
@@ -16490,11 +10802,31 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Update a gist
      * @request PATCH:/gists/{gist_id}
      */
-    gistsUpdate: (gistId: string, data: IMySuperPrefixGistsUpdatePayloadMySuperSuffix, params: RequestParams = {}) =>
-      this.request<
-        IMySuperPrefixGistSimpleMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+    gistsUpdate: (
+      gistId: string,
+      data: null & {
+        /**
+         * Description of the gist
+         * @example "Example Ruby script"
+         */
+        description?: string;
+        /**
+         * Names of files to be updated
+         * @example {"hello.rb":{"content":"blah","filename":"goodbye.rb"}}
+         */
+        files?: Record<
+          string,
+          (object | null) & {
+            /** The new content of the file */
+            content?: string;
+            /** The new filename for the file */
+            filename?: string | null;
+          }
+        >;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<GistSimple, BasicError | ValidationError>({
         path: `/gists/${gistId}`,
         method: "PATCH",
         body: data,
@@ -16512,7 +10844,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/gists/{gist_id}
      */
     gistsDelete: (gistId: string, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/gists/${gistId}`,
         method: "DELETE",
         ...params,
@@ -16527,10 +10859,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/gists/{gist_id}/comments
      */
     gistsListComments: (
-      { gistId, ...query }: IMySuperPrefixGistsListCommentsParamsMySuperSuffix,
+      gistId: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixGistCommentMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<GistComment[], BasicError>({
         path: `/gists/${gistId}/comments`,
         method: "GET",
         query: query,
@@ -16548,10 +10892,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     gistsCreateComment: (
       gistId: string,
-      data: IMySuperPrefixGistsCreateCommentPayloadMySuperSuffix,
+      data: {
+        /**
+         * The comment text.
+         * @maxLength 65535
+         * @example "Body of the attachment"
+         */
+        body: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixGistCommentMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<GistComment, BasicError>({
         path: `/gists/${gistId}/comments`,
         method: "POST",
         body: data,
@@ -16570,7 +10921,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     gistsGetComment: (gistId: string, commentId: number, params: RequestParams = {}) =>
       this.request<
-        IMySuperPrefixGistCommentMySuperSuffix,
+        GistComment,
         | {
             block?: {
               reason?: string;
@@ -16580,7 +10931,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
             message?: string;
             documentation_url?: string;
           }
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        | BasicError
       >({
         path: `/gists/${gistId}/comments/${commentId}`,
         method: "GET",
@@ -16599,10 +10950,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     gistsUpdateComment: (
       gistId: string,
       commentId: number,
-      data: IMySuperPrefixGistsUpdateCommentPayloadMySuperSuffix,
+      data: {
+        /**
+         * The comment text.
+         * @maxLength 65535
+         * @example "Body of the attachment"
+         */
+        body: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixGistCommentMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<GistComment, BasicError>({
         path: `/gists/${gistId}/comments/${commentId}`,
         method: "PATCH",
         body: data,
@@ -16620,7 +10978,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/gists/{gist_id}/comments/{comment_id}
      */
     gistsDeleteComment: (gistId: string, commentId: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/gists/${gistId}/comments/${commentId}`,
         method: "DELETE",
         ...params,
@@ -16635,10 +10993,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/gists/{gist_id}/commits
      */
     gistsListCommits: (
-      { gistId, ...query }: IMySuperPrefixGistsListCommitsParamsMySuperSuffix,
+      gistId: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixGistCommitMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<GistCommit[], BasicError>({
         path: `/gists/${gistId}/commits`,
         method: "GET",
         query: query,
@@ -16655,10 +11025,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/gists/{gist_id}/forks
      */
     gistsListForks: (
-      { gistId, ...query }: IMySuperPrefixGistsListForksParamsMySuperSuffix,
+      gistId: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixGistSimpleMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<GistSimple[], BasicError>({
         path: `/gists/${gistId}/forks`,
         method: "GET",
         query: query,
@@ -16675,10 +11057,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/gists/{gist_id}/forks
      */
     gistsFork: (gistId: string, params: RequestParams = {}) =>
-      this.request<
-        IMySuperPrefixBaseGistMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<BaseGist, BasicError | ValidationError>({
         path: `/gists/${gistId}/forks`,
         method: "POST",
         format: "json",
@@ -16694,7 +11073,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/gists/{gist_id}/star
      */
     gistsCheckIsStarred: (gistId: string, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix | object>({
+      this.request<void, BasicError | object>({
         path: `/gists/${gistId}/star`,
         method: "GET",
         ...params,
@@ -16709,7 +11088,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/gists/{gist_id}/star
      */
     gistsStar: (gistId: string, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/gists/${gistId}/star`,
         method: "PUT",
         ...params,
@@ -16724,7 +11103,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/gists/{gist_id}/star
      */
     gistsUnstar: (gistId: string, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/gists/${gistId}/star`,
         method: "DELETE",
         ...params,
@@ -16739,10 +11118,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/gists/{gist_id}/{sha}
      */
     gistsGetRevision: (gistId: string, sha: string, params: RequestParams = {}) =>
-      this.request<
-        IMySuperPrefixGistSimpleMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<GistSimple, BasicError | ValidationError>({
         path: `/gists/${gistId}/${sha}`,
         method: "GET",
         format: "json",
@@ -16775,7 +11151,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/gitignore/templates/{name}
      */
     gitignoreGetTemplate: (name: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixGitignoreTemplateMySuperSuffix, any>({
+      this.request<GitignoreTemplate, any>({
         path: `/gitignore/templates/${name}`,
         method: "GET",
         format: "json",
@@ -16792,17 +11168,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/installation/repositories
      */
     appsListReposAccessibleToInstallation: (
-      query: IMySuperPrefixAppsListReposAccessibleToInstallationParamsMySuperSuffix,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         {
           total_count: number;
-          repositories: IMySuperPrefixRepositoryMySuperSuffix[];
+          repositories: Repository[];
           /** @example "selected" */
           repository_selection?: string;
         },
-        IMySuperPrefixBasicErrorMySuperSuffix
+        BasicError
       >({
         path: `/installation/repositories`,
         method: "GET",
@@ -16835,11 +11222,55 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary List issues assigned to the authenticated user
      * @request GET:/issues
      */
-    issuesList: (query: IMySuperPrefixIssuesListParamsMySuperSuffix, params: RequestParams = {}) =>
-      this.request<
-        IMySuperPrefixIssueMySuperSuffix[],
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+    issuesList: (
+      query?: {
+        /**
+         * Indicates which sorts of issues to return. Can be one of:
+         * \* `assigned`: Issues assigned to you
+         * \* `created`: Issues created by you
+         * \* `mentioned`: Issues mentioning you
+         * \* `subscribed`: Issues you're subscribed to updates for
+         * \* `all`: All issues the authenticated user can see, regardless of participation or creation
+         * @default "assigned"
+         */
+        filter?: "assigned" | "created" | "mentioned" | "subscribed" | "all";
+        /**
+         * Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
+         * @default "open"
+         */
+        state?: "open" | "closed" | "all";
+        /** A list of comma separated label names. Example: `bug,ui,@high` */
+        labels?: string;
+        /**
+         * What to sort results by. Can be either `created`, `updated`, `comments`.
+         * @default "created"
+         */
+        sort?: "created" | "updated" | "comments";
+        /**
+         * One of `asc` (ascending) or `desc` (descending).
+         * @default "desc"
+         */
+        direction?: "asc" | "desc";
+        /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+        since?: string;
+        collab?: boolean;
+        orgs?: boolean;
+        owned?: boolean;
+        pulls?: boolean;
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<Issue[], BasicError | ValidationError>({
         path: `/issues`,
         method: "GET",
         query: query,
@@ -16857,10 +11288,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/licenses
      */
     licensesGetAllCommonlyUsed: (
-      query: IMySuperPrefixLicensesGetAllCommonlyUsedParamsMySuperSuffix,
+      query?: {
+        featured?: boolean;
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixLicenseSimpleMySuperSuffix[], any>({
+      this.request<LicenseSimple[], any>({
         path: `/licenses`,
         method: "GET",
         query: query,
@@ -16877,7 +11315,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/licenses/{license}
      */
     licensesGet: (license: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixLicenseMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<License, BasicError>({
         path: `/licenses/${license}`,
         method: "GET",
         format: "json",
@@ -16893,8 +11331,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Render a Markdown document
      * @request POST:/markdown
      */
-    markdownRender: (data: IMySuperPrefixMarkdownRenderPayloadMySuperSuffix, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixWebhookConfigUrlMySuperSuffix, any>({
+    markdownRender: (
+      data: {
+        /** The Markdown text to render in HTML. */
+        text: string;
+        /**
+         * The rendering mode.
+         * @default "markdown"
+         * @example "markdown"
+         */
+        mode?: "markdown" | "gfm";
+        /** The repository context to use when creating references in `gfm` mode. */
+        context?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<WebhookConfigUrl, any>({
         path: `/markdown`,
         method: "POST",
         body: data,
@@ -16910,8 +11362,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Render a Markdown document in raw mode
      * @request POST:/markdown/raw
      */
-    markdownRenderRaw: (data: IMySuperPrefixMarkdownRenderRawPayloadMySuperSuffix, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixWebhookConfigUrlMySuperSuffix, any>({
+    markdownRenderRaw: (data: WebhookConfigUrl, params: RequestParams = {}) =>
+      this.request<WebhookConfigUrl, any>({
         path: `/markdown/raw`,
         method: "POST",
         body: data,
@@ -16929,7 +11381,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/marketplace_listing/accounts/{account_id}
      */
     appsGetSubscriptionPlanForAccount: (accountId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixMarketplacePurchaseMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<MarketplacePurchase, BasicError>({
         path: `/marketplace_listing/accounts/${accountId}`,
         method: "GET",
         format: "json",
@@ -16944,8 +11396,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary List plans
      * @request GET:/marketplace_listing/plans
      */
-    appsListPlans: (query: IMySuperPrefixAppsListPlansParamsMySuperSuffix, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixMarketplaceListingPlanMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+    appsListPlans: (
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<MarketplaceListingPlan[], BasicError>({
         path: `/marketplace_listing/plans`,
         method: "GET",
         query: query,
@@ -16962,13 +11428,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/marketplace_listing/plans/{plan_id}/accounts
      */
     appsListAccountsForPlan: (
-      { planId, ...query }: IMySuperPrefixAppsListAccountsForPlanParamsMySuperSuffix,
+      planId: number,
+      query?: {
+        /**
+         * One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
+         * @default "created"
+         */
+        sort?: "created" | "updated";
+        /** To return the oldest accounts first, set to `asc`. Can be one of `asc` or `desc`. Ignored without the `sort` parameter. */
+        direction?: "asc" | "desc";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixMarketplacePurchaseMySuperSuffix[],
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<MarketplacePurchase[], BasicError | ValidationError>({
         path: `/marketplace_listing/plans/${planId}/accounts`,
         method: "GET",
         query: query,
@@ -16985,7 +11467,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/marketplace_listing/stubbed/accounts/{account_id}
      */
     appsGetSubscriptionPlanForAccountStubbed: (accountId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixMarketplacePurchaseMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix | void>({
+      this.request<MarketplacePurchase, BasicError | void>({
         path: `/marketplace_listing/stubbed/accounts/${accountId}`,
         method: "GET",
         format: "json",
@@ -17000,8 +11482,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary List plans (stubbed)
      * @request GET:/marketplace_listing/stubbed/plans
      */
-    appsListPlansStubbed: (query: IMySuperPrefixAppsListPlansStubbedParamsMySuperSuffix, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixMarketplaceListingPlanMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+    appsListPlansStubbed: (
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<MarketplaceListingPlan[], BasicError>({
         path: `/marketplace_listing/stubbed/plans`,
         method: "GET",
         query: query,
@@ -17018,10 +11514,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/marketplace_listing/stubbed/plans/{plan_id}/accounts
      */
     appsListAccountsForPlanStubbed: (
-      { planId, ...query }: IMySuperPrefixAppsListAccountsForPlanStubbedParamsMySuperSuffix,
+      planId: number,
+      query?: {
+        /**
+         * One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
+         * @default "created"
+         */
+        sort?: "created" | "updated";
+        /** To return the oldest accounts first, set to `asc`. Can be one of `asc` or `desc`. Ignored without the `sort` parameter. */
+        direction?: "asc" | "desc";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixMarketplacePurchaseMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<MarketplacePurchase[], BasicError>({
         path: `/marketplace_listing/stubbed/plans/${planId}/accounts`,
         method: "GET",
         query: query,
@@ -17039,7 +11554,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/meta
      */
     metaGet: (params: RequestParams = {}) =>
-      this.request<IMySuperPrefixApiOverviewMySuperSuffix, any>({
+      this.request<ApiOverview, any>({
         path: `/meta`,
         method: "GET",
         format: "json",
@@ -17056,10 +11571,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/networks/{owner}/{repo}/events
      */
     activityListPublicEventsForRepoNetwork: (
-      { owner, repo, ...query }: IMySuperPrefixActivityListPublicEventsForRepoNetworkParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixEventMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Event[], BasicError>({
         path: `/networks/${owner}/${repo}/events`,
         method: "GET",
         query: query,
@@ -17077,13 +11605,35 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/notifications
      */
     activityListNotificationsForAuthenticatedUser: (
-      query: IMySuperPrefixActivityListNotificationsForAuthenticatedUserParamsMySuperSuffix,
+      query?: {
+        /**
+         * If `true`, show notifications marked as read.
+         * @default false
+         */
+        all?: boolean;
+        /**
+         * If `true`, only shows notifications in which the user is directly participating or mentioned.
+         * @default false
+         */
+        participating?: boolean;
+        /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+        since?: string;
+        /** Only show notifications updated before the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+        before?: string;
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixThreadMySuperSuffix[],
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<Thread[], BasicError | ValidationError>({
         path: `/notifications`,
         method: "GET",
         query: query,
@@ -17100,14 +11650,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/notifications
      */
     activityMarkNotificationsAsRead: (
-      data: IMySuperPrefixActivityMarkNotificationsAsReadPayloadMySuperSuffix,
+      data: {
+        /**
+         * Describes the last point that notifications were checked.
+         * @format date-time
+         */
+        last_read_at?: string;
+        /** Whether the notification has been read. */
+        read?: boolean;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         {
           message?: string;
         },
-        IMySuperPrefixBasicErrorMySuperSuffix
+        BasicError
       >({
         path: `/notifications`,
         method: "PUT",
@@ -17126,7 +11684,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/notifications/threads/{thread_id}
      */
     activityGetThread: (threadId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixThreadMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Thread, BasicError>({
         path: `/notifications/threads/${threadId}`,
         method: "GET",
         format: "json",
@@ -17142,7 +11700,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PATCH:/notifications/threads/{thread_id}
      */
     activityMarkThreadAsRead: (threadId: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/notifications/threads/${threadId}`,
         method: "PATCH",
         ...params,
@@ -17157,7 +11715,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/notifications/threads/{thread_id}/subscription
      */
     activityGetThreadSubscriptionForAuthenticatedUser: (threadId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixThreadSubscriptionMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<ThreadSubscription, BasicError>({
         path: `/notifications/threads/${threadId}/subscription`,
         method: "GET",
         format: "json",
@@ -17174,10 +11732,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     activitySetThreadSubscription: (
       threadId: number,
-      data: IMySuperPrefixActivitySetThreadSubscriptionPayloadMySuperSuffix,
+      data: {
+        /**
+         * Whether to block all notifications from a thread.
+         * @default false
+         */
+        ignored?: boolean;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixThreadSubscriptionMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<ThreadSubscription, BasicError>({
         path: `/notifications/threads/${threadId}/subscription`,
         method: "PUT",
         body: data,
@@ -17195,7 +11759,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/notifications/threads/{thread_id}/subscription
      */
     activityDeleteThreadSubscription: (threadId: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/notifications/threads/${threadId}/subscription`,
         method: "DELETE",
         ...params,
@@ -17210,8 +11774,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Get Octocat
      * @request GET:/octocat
      */
-    metaGetOctocat: (query: IMySuperPrefixMetaGetOctocatParamsMySuperSuffix, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixWebhookConfigUrlMySuperSuffix, any>({
+    metaGetOctocat: (
+      query?: {
+        /** The words to show in Octocat's speech bubble */
+        s?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<WebhookConfigUrl, any>({
         path: `/octocat`,
         method: "GET",
         query: query,
@@ -17227,8 +11797,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary List organizations
      * @request GET:/organizations
      */
-    orgsList: (query: IMySuperPrefixOrgsListParamsMySuperSuffix, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixOrganizationSimpleMySuperSuffix[], any>({
+    orgsList: (
+      query?: {
+        /** An organization ID. Only return organizations with an ID greater than this ID. */
+        since?: number;
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<OrganizationSimple[], any>({
         path: `/organizations`,
         method: "GET",
         query: query,
@@ -17246,7 +11827,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}
      */
     orgsGet: (org: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixOrganizationFullMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<OrganizationFull, BasicError>({
         path: `/orgs/${org}`,
         method: "GET",
         format: "json",
@@ -17261,15 +11842,108 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Update an organization
      * @request PATCH:/orgs/{org}
      */
-    orgsUpdate: (org: string, data: IMySuperPrefixOrgsUpdatePayloadMySuperSuffix, params: RequestParams = {}) =>
+    orgsUpdate: (
+      org: string,
+      data: {
+        /** Billing email address. This address is not publicized. */
+        billing_email?: string;
+        /** The company name. */
+        company?: string;
+        /** The publicly visible email address. */
+        email?: string;
+        /** The Twitter username of the company. */
+        twitter_username?: string;
+        /** The location. */
+        location?: string;
+        /** The shorthand name of the company. */
+        name?: string;
+        /** The description of the company. */
+        description?: string;
+        /** Toggles whether an organization can use organization projects. */
+        has_organization_projects?: boolean;
+        /** Toggles whether repositories that belong to the organization can use repository projects. */
+        has_repository_projects?: boolean;
+        /**
+         * Default permission level members have for organization repositories:
+         * \* `read` - can pull, but not push to or administer this repository.
+         * \* `write` - can pull and push, but not administer this repository.
+         * \* `admin` - can pull, push, and administer this repository.
+         * \* `none` - no permissions granted by default.
+         * @default "read"
+         */
+        default_repository_permission?: "read" | "write" | "admin" | "none";
+        /**
+         * Toggles the ability of non-admin organization members to create repositories. Can be one of:
+         * \* `true` - all organization members can create repositories.
+         * \* `false` - only organization owners can create repositories.
+         * Default: `true`
+         * **Note:** A parameter can override this parameter. See `members_allowed_repository_creation_type` in this table for details. **Note:** A parameter can override this parameter. See `members_allowed_repository_creation_type` in this table for details.
+         * @default true
+         */
+        members_can_create_repositories?: boolean;
+        /**
+         * Toggles whether organization members can create internal repositories, which are visible to all enterprise members. You can only allow members to create internal repositories if your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. Can be one of:
+         * \* `true` - all organization members can create internal repositories.
+         * \* `false` - only organization owners can create internal repositories.
+         * Default: `true`. For more information, see "[Restricting repository creation in your organization](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)" in the GitHub Help documentation.
+         */
+        members_can_create_internal_repositories?: boolean;
+        /**
+         * Toggles whether organization members can create private repositories, which are visible to organization members with permission. Can be one of:
+         * \* `true` - all organization members can create private repositories.
+         * \* `false` - only organization owners can create private repositories.
+         * Default: `true`. For more information, see "[Restricting repository creation in your organization](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)" in the GitHub Help documentation.
+         */
+        members_can_create_private_repositories?: boolean;
+        /**
+         * Toggles whether organization members can create public repositories, which are visible to anyone. Can be one of:
+         * \* `true` - all organization members can create public repositories.
+         * \* `false` - only organization owners can create public repositories.
+         * Default: `true`. For more information, see "[Restricting repository creation in your organization](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)" in the GitHub Help documentation.
+         */
+        members_can_create_public_repositories?: boolean;
+        /**
+         * Specifies which types of repositories non-admin organization members can create. Can be one of:
+         * \* `all` - all organization members can create public and private repositories.
+         * \* `private` - members can create private repositories. This option is only available to repositories that are part of an organization on GitHub Enterprise Cloud.
+         * \* `none` - only admin members can create repositories.
+         * **Note:** This parameter is deprecated and will be removed in the future. Its return value ignores internal repositories. Using this parameter overrides values set in `members_can_create_repositories`. See the parameter deprecation notice in the operation description for details.
+         */
+        members_allowed_repository_creation_type?: "all" | "private" | "none";
+        /**
+         * Toggles whether organization members can create GitHub Pages sites. Can be one of:
+         * \* `true` - all organization members can create GitHub Pages sites.
+         * \* `false` - no organization members can create GitHub Pages sites. Existing published sites will not be impacted.
+         * @default true
+         */
+        members_can_create_pages?: boolean;
+        /**
+         * Toggles whether organization members can create public GitHub Pages sites. Can be one of:
+         * \* `true` - all organization members can create public GitHub Pages sites.
+         * \* `false` - no organization members can create public GitHub Pages sites. Existing published sites will not be impacted.
+         * @default true
+         */
+        members_can_create_public_pages?: boolean;
+        /**
+         * Toggles whether organization members can create private GitHub Pages sites. Can be one of:
+         * \* `true` - all organization members can create private GitHub Pages sites.
+         * \* `false` - no organization members can create private GitHub Pages sites. Existing published sites will not be impacted.
+         * @default true
+         */
+        members_can_create_private_pages?: boolean;
+        /** @example ""http://github.blog"" */
+        blog?: string;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<
-        IMySuperPrefixOrganizationFullMySuperSuffix,
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        OrganizationFull,
+        | BasicError
         | {
             message: string;
             documentation_url: string;
           }
-        | (IMySuperPrefixValidationErrorMySuperSuffix | IMySuperPrefixValidationErrorSimpleMySuperSuffix)
+        | (ValidationError | ValidationErrorSimple)
       >({
         path: `/orgs/${org}`,
         method: "PATCH",
@@ -17288,7 +11962,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/actions/permissions
      */
     actionsGetGithubActionsPermissionsOrganization: (org: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixActionsOrganizationPermissionsMySuperSuffix, any>({
+      this.request<ActionsOrganizationPermissions, any>({
         path: `/orgs/${org}/actions/permissions`,
         method: "GET",
         format: "json",
@@ -17305,7 +11979,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     actionsSetGithubActionsPermissionsOrganization: (
       org: string,
-      data: IMySuperPrefixActionsSetGithubActionsPermissionsOrganizationPayloadMySuperSuffix,
+      data: {
+        /** The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`. */
+        enabled_repositories: EnabledRepositories;
+        /** The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`. */
+        allowed_actions?: AllowedActions;
+      },
       params: RequestParams = {},
     ) =>
       this.request<void, any>({
@@ -17325,16 +12004,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/actions/permissions/repositories
      */
     actionsListSelectedRepositoriesEnabledGithubActionsOrganization: (
-      {
-        org,
-        ...query
-      }: IMySuperPrefixActionsListSelectedRepositoriesEnabledGithubActionsOrganizationParamsMySuperSuffix,
+      org: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         {
           total_count: number;
-          repositories: IMySuperPrefixRepositoryMySuperSuffix[];
+          repositories: Repository[];
         },
         any
       >({
@@ -17355,7 +12043,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     actionsSetSelectedRepositoriesEnabledGithubActionsOrganization: (
       org: string,
-      data: IMySuperPrefixActionsSetSelectedRepositoriesEnabledGithubActionsOrganizationPayloadMySuperSuffix,
+      data: {
+        /** List of repository IDs to enable for GitHub Actions. */
+        selected_repository_ids: number[];
+      },
       params: RequestParams = {},
     ) =>
       this.request<void, any>({
@@ -17413,7 +12104,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/actions/permissions/selected-actions
      */
     actionsGetAllowedActionsOrganization: (org: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixSelectedActionsMySuperSuffix, any>({
+      this.request<SelectedActions, any>({
         path: `/orgs/${org}/actions/permissions/selected-actions`,
         method: "GET",
         format: "json",
@@ -17428,11 +12119,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Set allowed actions for an organization
      * @request PUT:/orgs/{org}/actions/permissions/selected-actions
      */
-    actionsSetAllowedActionsOrganization: (
-      org: string,
-      data: IMySuperPrefixSelectedActionsMySuperSuffix,
-      params: RequestParams = {},
-    ) =>
+    actionsSetAllowedActionsOrganization: (org: string, data: SelectedActions, params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/orgs/${org}/actions/permissions/selected-actions`,
         method: "PUT",
@@ -17450,13 +12137,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/actions/runner-groups
      */
     actionsListSelfHostedRunnerGroupsForOrg: (
-      { org, ...query }: IMySuperPrefixActionsListSelfHostedRunnerGroupsForOrgParamsMySuperSuffix,
+      org: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         {
           total_count: number;
-          runner_groups: IMySuperPrefixRunnerGroupsOrgMySuperSuffix[];
+          runner_groups: RunnerGroupsOrg[];
         },
         any
       >({
@@ -17477,10 +12176,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     actionsCreateSelfHostedRunnerGroupForOrg: (
       org: string,
-      data: IMySuperPrefixActionsCreateSelfHostedRunnerGroupForOrgPayloadMySuperSuffix,
+      data: {
+        /** Name of the runner group. */
+        name: string;
+        /**
+         * Visibility of a runner group. You can select all repositories, select individual repositories, or limit access to private repositories. Can be one of: `all`, `selected`, or `private`.
+         * @default "all"
+         */
+        visibility?: "selected" | "all" | "private";
+        /** List of repository IDs that can access the runner group. */
+        selected_repository_ids?: number[];
+        /** List of runner IDs to add to the runner group. */
+        runners?: number[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixRunnerGroupsOrgMySuperSuffix, any>({
+      this.request<RunnerGroupsOrg, any>({
         path: `/orgs/${org}/actions/runner-groups`,
         method: "POST",
         body: data,
@@ -17498,7 +12209,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/actions/runner-groups/{runner_group_id}
      */
     actionsGetSelfHostedRunnerGroupForOrg: (org: string, runnerGroupId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixRunnerGroupsOrgMySuperSuffix, any>({
+      this.request<RunnerGroupsOrg, any>({
         path: `/orgs/${org}/actions/runner-groups/${runnerGroupId}`,
         method: "GET",
         format: "json",
@@ -17516,10 +12227,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     actionsUpdateSelfHostedRunnerGroupForOrg: (
       org: string,
       runnerGroupId: number,
-      data: IMySuperPrefixActionsUpdateSelfHostedRunnerGroupForOrgPayloadMySuperSuffix,
+      data: {
+        /** Name of the runner group. */
+        name?: string;
+        /** Visibility of a runner group. You can select all repositories, select individual repositories, or all private repositories. Can be one of: `all`, `selected`, or `private`. */
+        visibility?: "selected" | "all" | "private";
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixRunnerGroupsOrgMySuperSuffix, any>({
+      this.request<RunnerGroupsOrg, any>({
         path: `/orgs/${org}/actions/runner-groups/${runnerGroupId}`,
         method: "PATCH",
         body: data,
@@ -17559,7 +12275,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<
         {
           total_count: number;
-          repositories: IMySuperPrefixRepositoryMySuperSuffix[];
+          repositories: Repository[];
         },
         any
       >({
@@ -17580,7 +12296,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     actionsSetRepoAccessToSelfHostedRunnerGroupInOrg: (
       org: string,
       runnerGroupId: number,
-      data: IMySuperPrefixActionsSetRepoAccessToSelfHostedRunnerGroupInOrgPayloadMySuperSuffix,
+      data: {
+        /** List of repository IDs that can access the runner group. */
+        selected_repository_ids: number[];
+      },
       params: RequestParams = {},
     ) =>
       this.request<void, any>({
@@ -17640,13 +12359,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/actions/runner-groups/{runner_group_id}/runners
      */
     actionsListSelfHostedRunnersInGroupForOrg: (
-      { org, runnerGroupId, ...query }: IMySuperPrefixActionsListSelfHostedRunnersInGroupForOrgParamsMySuperSuffix,
+      org: string,
+      runnerGroupId: number,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         {
           total_count: number;
-          runners: IMySuperPrefixRunnerMySuperSuffix[];
+          runners: Runner[];
         },
         any
       >({
@@ -17668,7 +12400,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     actionsSetSelfHostedRunnersInGroupForOrg: (
       org: string,
       runnerGroupId: number,
-      data: IMySuperPrefixActionsSetSelfHostedRunnersInGroupForOrgPayloadMySuperSuffix,
+      data: {
+        /** List of runner IDs to add to the runner group. */
+        runners: number[];
+      },
       params: RequestParams = {},
     ) =>
       this.request<void, any>({
@@ -17728,13 +12463,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/actions/runners
      */
     actionsListSelfHostedRunnersForOrg: (
-      { org, ...query }: IMySuperPrefixActionsListSelfHostedRunnersForOrgParamsMySuperSuffix,
+      org: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         {
           total_count: number;
-          runners: IMySuperPrefixRunnerMySuperSuffix[];
+          runners: Runner[];
         },
         any
       >({
@@ -17754,7 +12501,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/actions/runners/downloads
      */
     actionsListRunnerApplicationsForOrg: (org: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixRunnerApplicationMySuperSuffix[], any>({
+      this.request<RunnerApplication[], any>({
         path: `/orgs/${org}/actions/runners/downloads`,
         method: "GET",
         format: "json",
@@ -17770,7 +12517,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/orgs/{org}/actions/runners/registration-token
      */
     actionsCreateRegistrationTokenForOrg: (org: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixAuthenticationTokenMySuperSuffix, any>({
+      this.request<AuthenticationToken, any>({
         path: `/orgs/${org}/actions/runners/registration-token`,
         method: "POST",
         format: "json",
@@ -17786,7 +12533,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/orgs/{org}/actions/runners/remove-token
      */
     actionsCreateRemoveTokenForOrg: (org: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixAuthenticationTokenMySuperSuffix, any>({
+      this.request<AuthenticationToken, any>({
         path: `/orgs/${org}/actions/runners/remove-token`,
         method: "POST",
         format: "json",
@@ -17802,7 +12549,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/actions/runners/{runner_id}
      */
     actionsGetSelfHostedRunnerForOrg: (org: string, runnerId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixRunnerMySuperSuffix, any>({
+      this.request<Runner, any>({
         path: `/orgs/${org}/actions/runners/${runnerId}`,
         method: "GET",
         format: "json",
@@ -17833,13 +12580,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/actions/secrets
      */
     actionsListOrgSecrets: (
-      { org, ...query }: IMySuperPrefixActionsListOrgSecretsParamsMySuperSuffix,
+      org: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         {
           total_count: number;
-          secrets: IMySuperPrefixOrganizationActionsSecretMySuperSuffix[];
+          secrets: OrganizationActionsSecret[];
         },
         any
       >({
@@ -17859,7 +12618,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/actions/secrets/public-key
      */
     actionsGetOrgPublicKey: (org: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixActionsPublicKeyMySuperSuffix, any>({
+      this.request<ActionsPublicKey, any>({
         path: `/orgs/${org}/actions/secrets/public-key`,
         method: "GET",
         format: "json",
@@ -17875,7 +12634,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/actions/secrets/{secret_name}
      */
     actionsGetOrgSecret: (org: string, secretName: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixOrganizationActionsSecretMySuperSuffix, any>({
+      this.request<OrganizationActionsSecret, any>({
         path: `/orgs/${org}/actions/secrets/${secretName}`,
         method: "GET",
         format: "json",
@@ -17893,7 +12652,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     actionsCreateOrUpdateOrgSecret: (
       org: string,
       secretName: string,
-      data: IMySuperPrefixActionsCreateOrUpdateOrgSecretPayloadMySuperSuffix,
+      data: {
+        /** Value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get an organization public key](https://docs.github.com/rest/reference/actions#get-an-organization-public-key) endpoint. */
+        encrypted_value?: string;
+        /** ID of the key you used to encrypt the secret. */
+        key_id?: string;
+        /**
+         * Configures the access that repositories have to the organization secret. Can be one of:
+         * \- `all` - All repositories in an organization can access the secret.
+         * \- `private` - Private repositories in an organization can access the secret.
+         * \- `selected` - Only specific repositories can access the secret.
+         */
+        visibility?: "all" | "private" | "selected";
+        /** An array of repository ids that can access the organization secret. You can only provide a list of repository ids when the `visibility` is set to `selected`. You can manage the list of selected repositories using the [List selected repositories for an organization secret](https://docs.github.com/rest/reference/actions#list-selected-repositories-for-an-organization-secret), [Set selected repositories for an organization secret](https://docs.github.com/rest/reference/actions#set-selected-repositories-for-an-organization-secret), and [Remove selected repository from an organization secret](https://docs.github.com/rest/reference/actions#remove-selected-repository-from-an-organization-secret) endpoints. */
+        selected_repository_ids?: string[];
+      },
       params: RequestParams = {},
     ) =>
       this.request<void, any>({
@@ -17931,7 +12704,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<
         {
           total_count: number;
-          repositories: IMySuperPrefixMinimalRepositoryMySuperSuffix[];
+          repositories: MinimalRepository[];
         },
         any
       >({
@@ -17952,7 +12725,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     actionsSetSelectedReposForOrgSecret: (
       org: string,
       secretName: string,
-      data: IMySuperPrefixActionsSetSelectedReposForOrgSecretPayloadMySuperSuffix,
+      data: {
+        /** An array of repository ids that can access the organization secret. You can only provide a list of repository ids when the `visibility` is set to `selected`. You can add and remove individual repositories using the [Set selected repositories for an organization secret](https://docs.github.com/rest/reference/actions#set-selected-repositories-for-an-organization-secret) and [Remove selected repository from an organization secret](https://docs.github.com/rest/reference/actions#remove-selected-repository-from-an-organization-secret) endpoints. */
+        selected_repository_ids?: number[];
+      },
       params: RequestParams = {},
     ) =>
       this.request<void, any>({
@@ -18012,10 +12788,39 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/audit-log
      */
     orgsGetAuditLog: (
-      { org, ...query }: IMySuperPrefixOrgsGetAuditLogParamsMySuperSuffix,
+      org: string,
+      query?: {
+        /** A search phrase. For more information, see [Searching the audit log](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization#searching-the-audit-log). */
+        phrase?: string;
+        /**
+         * The event types to include:
+         *
+         * - `web` - returns web (non-Git) events
+         * - `git` - returns Git events
+         * - `all` - returns both web and Git events
+         *
+         * The default is `web`.
+         */
+        include?: "web" | "git" | "all";
+        /** A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor. */
+        after?: string;
+        /** A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor. */
+        before?: string;
+        /**
+         * The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+         *
+         * The default is `desc`.
+         */
+        order?: "desc" | "asc";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixAuditLogEventMySuperSuffix[], any>({
+      this.request<AuditLogEvent[], any>({
         path: `/orgs/${org}/audit-log`,
         method: "GET",
         query: query,
@@ -18033,7 +12838,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     orgsListBlockedUsers: (org: string, params: RequestParams = {}) =>
       this.request<
-        IMySuperPrefixSimpleUserMySuperSuffix[],
+        SimpleUser[],
         {
           message: string;
           documentation_url: string;
@@ -18054,7 +12859,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/blocks/{username}
      */
     orgsCheckBlockedUser: (org: string, username: string, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/orgs/${org}/blocks/${username}`,
         method: "GET",
         ...params,
@@ -18069,7 +12874,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/orgs/{org}/blocks/{username}
      */
     orgsBlockUser: (org: string, username: string, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<void, ValidationError>({
         path: `/orgs/${org}/blocks/${username}`,
         method: "PUT",
         ...params,
@@ -18099,7 +12904,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/credential-authorizations
      */
     orgsListSamlSsoAuthorizations: (org: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixCredentialAuthorizationMySuperSuffix[], any>({
+      this.request<CredentialAuthorization[], any>({
         path: `/orgs/${org}/credential-authorizations`,
         method: "GET",
         format: "json",
@@ -18115,7 +12920,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/orgs/{org}/credential-authorizations/{credential_id}
      */
     orgsRemoveSamlSsoAuthorization: (org: string, credentialId: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/orgs/${org}/credential-authorizations/${credentialId}`,
         method: "DELETE",
         ...params,
@@ -18130,10 +12935,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/events
      */
     activityListPublicOrgEvents: (
-      { org, ...query }: IMySuperPrefixActivityListPublicOrgEventsParamsMySuperSuffix,
+      org: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixEventMySuperSuffix[], any>({
+      this.request<Event[], any>({
         path: `/orgs/${org}/events`,
         method: "GET",
         query: query,
@@ -18150,10 +12967,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/failed_invitations
      */
     orgsListFailedInvitations: (
-      { org, ...query }: IMySuperPrefixOrgsListFailedInvitationsParamsMySuperSuffix,
+      org: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixOrganizationInvitationMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<OrganizationInvitation[], BasicError>({
         path: `/orgs/${org}/failed_invitations`,
         method: "GET",
         query: query,
@@ -18170,10 +12999,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/hooks
      */
     orgsListWebhooks: (
-      { org, ...query }: IMySuperPrefixOrgsListWebhooksParamsMySuperSuffix,
+      org: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixOrgHookMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<OrgHook[], BasicError>({
         path: `/orgs/${org}/hooks`,
         method: "GET",
         query: query,
@@ -18191,13 +13032,38 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     orgsCreateWebhook: (
       org: string,
-      data: IMySuperPrefixOrgsCreateWebhookPayloadMySuperSuffix,
+      data: {
+        /** Must be passed as "web". */
+        name: string;
+        /** Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#create-hook-config-params). */
+        config: {
+          /** The URL to which the payloads will be delivered. */
+          url: WebhookConfigUrl;
+          /** The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. */
+          content_type?: WebhookConfigContentType;
+          /** If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value for [delivery signature headers](https://docs.github.com/webhooks/event-payloads/#delivery-headers). */
+          secret?: WebhookConfigSecret;
+          /** Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** */
+          insecure_ssl?: WebhookConfigInsecureSsl;
+          /** @example ""kdaigle"" */
+          username?: string;
+          /** @example ""password"" */
+          password?: string;
+        };
+        /**
+         * Determines what [events](https://docs.github.com/webhooks/event-payloads) the hook is triggered for.
+         * @default ["push"]
+         */
+        events?: string[];
+        /**
+         * Determines if notifications are sent when the webhook is triggered. Set to `true` to send notifications.
+         * @default true
+         */
+        active?: boolean;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixOrgHookMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<OrgHook, BasicError | ValidationError>({
         path: `/orgs/${org}/hooks`,
         method: "POST",
         body: data,
@@ -18215,7 +13081,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/hooks/{hook_id}
      */
     orgsGetWebhook: (org: string, hookId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixOrgHookMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<OrgHook, BasicError>({
         path: `/orgs/${org}/hooks/${hookId}`,
         method: "GET",
         format: "json",
@@ -18233,13 +13099,34 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     orgsUpdateWebhook: (
       org: string,
       hookId: number,
-      data: IMySuperPrefixOrgsUpdateWebhookPayloadMySuperSuffix,
+      data: {
+        /** Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#update-hook-config-params). */
+        config?: {
+          /** The URL to which the payloads will be delivered. */
+          url: WebhookConfigUrl;
+          /** The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. */
+          content_type?: WebhookConfigContentType;
+          /** If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value for [delivery signature headers](https://docs.github.com/webhooks/event-payloads/#delivery-headers). */
+          secret?: WebhookConfigSecret;
+          /** Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** */
+          insecure_ssl?: WebhookConfigInsecureSsl;
+        };
+        /**
+         * Determines what [events](https://docs.github.com/webhooks/event-payloads) the hook is triggered for.
+         * @default ["push"]
+         */
+        events?: string[];
+        /**
+         * Determines if notifications are sent when the webhook is triggered. Set to `true` to send notifications.
+         * @default true
+         */
+        active?: boolean;
+        /** @example ""web"" */
+        name?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixOrgHookMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<OrgHook, BasicError | ValidationError>({
         path: `/orgs/${org}/hooks/${hookId}`,
         method: "PATCH",
         body: data,
@@ -18257,7 +13144,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/orgs/{org}/hooks/{hook_id}
      */
     orgsDeleteWebhook: (org: string, hookId: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/orgs/${org}/hooks/${hookId}`,
         method: "DELETE",
         ...params,
@@ -18272,7 +13159,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/hooks/{hook_id}/config
      */
     orgsGetWebhookConfigForOrg: (org: string, hookId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixWebhookConfigMySuperSuffix, any>({
+      this.request<WebhookConfig, any>({
         path: `/orgs/${org}/hooks/${hookId}/config`,
         method: "GET",
         format: "json",
@@ -18290,10 +13177,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     orgsUpdateWebhookConfigForOrg: (
       org: string,
       hookId: number,
-      data: IMySuperPrefixOrgsUpdateWebhookConfigForOrgPayloadMySuperSuffix,
+      data: {
+        /** The URL to which the payloads will be delivered. */
+        url?: WebhookConfigUrl;
+        /** The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. */
+        content_type?: WebhookConfigContentType;
+        /** If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value for [delivery signature headers](https://docs.github.com/webhooks/event-payloads/#delivery-headers). */
+        secret?: WebhookConfigSecret;
+        /** Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** */
+        insecure_ssl?: WebhookConfigInsecureSsl;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixWebhookConfigMySuperSuffix, any>({
+      this.request<WebhookConfig, any>({
         path: `/orgs/${org}/hooks/${hookId}/config`,
         method: "PATCH",
         body: data,
@@ -18311,7 +13207,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/orgs/{org}/hooks/{hook_id}/pings
      */
     orgsPingWebhook: (org: string, hookId: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/orgs/${org}/hooks/${hookId}/pings`,
         method: "POST",
         ...params,
@@ -18326,7 +13222,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/installation
      */
     appsGetOrgInstallation: (org: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixInstallationMySuperSuffix, any>({
+      this.request<Installation, any>({
         path: `/orgs/${org}/installation`,
         method: "GET",
         format: "json",
@@ -18342,13 +13238,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/installations
      */
     orgsListAppInstallations: (
-      { org, ...query }: IMySuperPrefixOrgsListAppInstallationsParamsMySuperSuffix,
+      org: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         {
           total_count: number;
-          installations: IMySuperPrefixInstallationMySuperSuffix[];
+          installations: Installation[];
         },
         any
       >({
@@ -18368,7 +13276,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/interaction-limits
      */
     interactionsGetRestrictionsForOrg: (org: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixInteractionLimitResponseMySuperSuffix, any>({
+      this.request<InteractionLimitResponse, any>({
         path: `/orgs/${org}/interaction-limits`,
         method: "GET",
         format: "json",
@@ -18383,12 +13291,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Set interaction restrictions for an organization
      * @request PUT:/orgs/{org}/interaction-limits
      */
-    interactionsSetRestrictionsForOrg: (
-      org: string,
-      data: IMySuperPrefixInteractionLimitMySuperSuffix,
-      params: RequestParams = {},
-    ) =>
-      this.request<IMySuperPrefixInteractionLimitResponseMySuperSuffix, IMySuperPrefixValidationErrorMySuperSuffix>({
+    interactionsSetRestrictionsForOrg: (org: string, data: InteractionLimit, params: RequestParams = {}) =>
+      this.request<InteractionLimitResponse, ValidationError>({
         path: `/orgs/${org}/interaction-limits`,
         method: "PUT",
         body: data,
@@ -18421,10 +13325,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/invitations
      */
     orgsListPendingInvitations: (
-      { org, ...query }: IMySuperPrefixOrgsListPendingInvitationsParamsMySuperSuffix,
+      org: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixOrganizationInvitationMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<OrganizationInvitation[], BasicError>({
         path: `/orgs/${org}/invitations`,
         method: "GET",
         query: query,
@@ -18442,13 +13358,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     orgsCreateInvitation: (
       org: string,
-      data: IMySuperPrefixOrgsCreateInvitationPayloadMySuperSuffix,
+      data: {
+        /** **Required unless you provide `email`**. GitHub user ID for the person you are inviting. */
+        invitee_id?: number;
+        /** **Required unless you provide `invitee_id`**. Email address of the person you are inviting, which can be an existing GitHub user. */
+        email?: string;
+        /**
+         * Specify role for new member. Can be one of:
+         * \* `admin` - Organization owners with full administrative rights to the organization and complete access to all repositories and teams.
+         * \* `direct_member` - Non-owner organization members with ability to see other members and join teams by invitation.
+         * \* `billing_manager` - Non-owner organization members with ability to manage the billing settings of your organization.
+         * @default "direct_member"
+         */
+        role?: "admin" | "direct_member" | "billing_manager";
+        /** Specify IDs for the teams you want to invite new members to. */
+        team_ids?: number[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixOrganizationInvitationMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<OrganizationInvitation, BasicError | ValidationError>({
         path: `/orgs/${org}/invitations`,
         method: "POST",
         body: data,
@@ -18466,7 +13394,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/orgs/{org}/invitations/{invitation_id}
      */
     orgsCancelInvitation: (org: string, invitationId: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<void, BasicError | ValidationError>({
         path: `/orgs/${org}/invitations/${invitationId}`,
         method: "DELETE",
         ...params,
@@ -18481,10 +13409,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/invitations/{invitation_id}/teams
      */
     orgsListInvitationTeams: (
-      { org, invitationId, ...query }: IMySuperPrefixOrgsListInvitationTeamsParamsMySuperSuffix,
+      org: string,
+      invitationId: number,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixTeamMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Team[], BasicError>({
         path: `/orgs/${org}/invitations/${invitationId}/teams`,
         method: "GET",
         query: query,
@@ -18501,10 +13442,51 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/issues
      */
     issuesListForOrg: (
-      { org, ...query }: IMySuperPrefixIssuesListForOrgParamsMySuperSuffix,
+      org: string,
+      query?: {
+        /**
+         * Indicates which sorts of issues to return. Can be one of:
+         * \* `assigned`: Issues assigned to you
+         * \* `created`: Issues created by you
+         * \* `mentioned`: Issues mentioning you
+         * \* `subscribed`: Issues you're subscribed to updates for
+         * \* `all`: All issues the authenticated user can see, regardless of participation or creation
+         * @default "assigned"
+         */
+        filter?: "assigned" | "created" | "mentioned" | "subscribed" | "all";
+        /**
+         * Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
+         * @default "open"
+         */
+        state?: "open" | "closed" | "all";
+        /** A list of comma separated label names. Example: `bug,ui,@high` */
+        labels?: string;
+        /**
+         * What to sort results by. Can be either `created`, `updated`, `comments`.
+         * @default "created"
+         */
+        sort?: "created" | "updated" | "comments";
+        /**
+         * One of `asc` (ascending) or `desc` (descending).
+         * @default "desc"
+         */
+        direction?: "asc" | "desc";
+        /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+        since?: string;
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixIssueMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Issue[], BasicError>({
         path: `/orgs/${org}/issues`,
         method: "GET",
         query: query,
@@ -18521,10 +13503,37 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/members
      */
     orgsListMembers: (
-      { org, ...query }: IMySuperPrefixOrgsListMembersParamsMySuperSuffix,
+      org: string,
+      query?: {
+        /**
+         * Filter members returned in the list. Can be one of:
+         * \* `2fa_disabled` - Members without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled. Available for organization owners.
+         * \* `all` - All members the authenticated user can see.
+         * @default "all"
+         */
+        filter?: "2fa_disabled" | "all";
+        /**
+         * Filter members returned by their role. Can be one of:
+         * \* `all` - All members of the organization, regardless of role.
+         * \* `admin` - Organization owners.
+         * \* `member` - Non-owner organization members.
+         * @default "all"
+         */
+        role?: "all" | "admin" | "member";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixSimpleUserMySuperSuffix[], void | IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<SimpleUser[], void | ValidationError>({
         path: `/orgs/${org}/members`,
         method: "GET",
         query: query,
@@ -18556,7 +13565,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/orgs/{org}/members/{username}
      */
     orgsRemoveMember: (org: string, username: string, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/orgs/${org}/members/${username}`,
         method: "DELETE",
         ...params,
@@ -18571,7 +13580,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/memberships/{username}
      */
     orgsGetMembershipForUser: (org: string, username: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixOrgMembershipMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<OrgMembership, BasicError>({
         path: `/orgs/${org}/memberships/${username}`,
         method: "GET",
         format: "json",
@@ -18589,13 +13598,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     orgsSetMembershipForUser: (
       org: string,
       username: string,
-      data: IMySuperPrefixOrgsSetMembershipForUserPayloadMySuperSuffix,
+      data: {
+        /**
+         * The role to give the user in the organization. Can be one of:
+         * \* `admin` - The user will become an owner of the organization.
+         * \* `member` - The user will become a non-owner member of the organization.
+         * @default "member"
+         */
+        role?: "admin" | "member";
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixOrgMembershipMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<OrgMembership, BasicError | ValidationError>({
         path: `/orgs/${org}/memberships/${username}`,
         method: "PUT",
         body: data,
@@ -18613,7 +13627,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/orgs/{org}/memberships/{username}
      */
     orgsRemoveMembershipForUser: (org: string, username: string, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/orgs/${org}/memberships/${username}`,
         method: "DELETE",
         ...params,
@@ -18628,10 +13642,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/migrations
      */
     migrationsListForOrg: (
-      { org, ...query }: IMySuperPrefixMigrationsListForOrgParamsMySuperSuffix,
+      org: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixMigrationMySuperSuffix[], any>({
+      this.request<Migration[], any>({
         path: `/orgs/${org}/migrations`,
         method: "GET",
         query: query,
@@ -18649,13 +13675,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     migrationsStartForOrg: (
       org: string,
-      data: IMySuperPrefixMigrationsStartForOrgPayloadMySuperSuffix,
+      data: {
+        /** A list of arrays indicating which repositories should be migrated. */
+        repositories: string[];
+        /**
+         * Indicates whether repositories should be locked (to prevent manipulation) while migrating data.
+         * @default false
+         */
+        lock_repositories?: boolean;
+        /**
+         * Indicates whether attachments should be excluded from the migration (to reduce migration archive file size).
+         * @default false
+         */
+        exclude_attachments?: boolean;
+        exclude?: string[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixMigrationMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<Migration, BasicError | ValidationError>({
         path: `/orgs/${org}/migrations`,
         method: "POST",
         body: data,
@@ -18673,7 +13710,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/migrations/{migration_id}
      */
     migrationsGetStatusForOrg: (org: string, migrationId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixMigrationMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Migration, BasicError>({
         path: `/orgs/${org}/migrations/${migrationId}`,
         method: "GET",
         format: "json",
@@ -18689,7 +13726,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/migrations/{migration_id}/archive
      */
     migrationsDownloadArchiveForOrg: (org: string, migrationId: number, params: RequestParams = {}) =>
-      this.request<any, void | IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<any, void | BasicError>({
         path: `/orgs/${org}/migrations/${migrationId}/archive`,
         method: "GET",
         ...params,
@@ -18704,7 +13741,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/orgs/{org}/migrations/{migration_id}/archive
      */
     migrationsDeleteArchiveForOrg: (org: string, migrationId: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/orgs/${org}/migrations/${migrationId}/archive`,
         method: "DELETE",
         ...params,
@@ -18719,7 +13756,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/orgs/{org}/migrations/{migration_id}/repos/{repo_name}/lock
      */
     migrationsUnlockRepoForOrg: (org: string, migrationId: number, repoName: string, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/orgs/${org}/migrations/${migrationId}/repos/${repoName}/lock`,
         method: "DELETE",
         ...params,
@@ -18734,10 +13771,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/migrations/{migration_id}/repositories
      */
     migrationsListReposForOrg: (
-      { org, migrationId, ...query }: IMySuperPrefixMigrationsListReposForOrgParamsMySuperSuffix,
+      org: string,
+      migrationId: number,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixMinimalRepositoryMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<MinimalRepository[], BasicError>({
         path: `/orgs/${org}/migrations/${migrationId}/repositories`,
         method: "GET",
         query: query,
@@ -18754,10 +13804,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/outside_collaborators
      */
     orgsListOutsideCollaborators: (
-      { org, ...query }: IMySuperPrefixOrgsListOutsideCollaboratorsParamsMySuperSuffix,
+      org: string,
+      query?: {
+        /**
+         * Filter the list of outside collaborators. Can be one of:
+         * \* `2fa_disabled`: Outside collaborators without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled.
+         * \* `all`: All outside collaborators.
+         * @default "all"
+         */
+        filter?: "2fa_disabled" | "all";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixSimpleUserMySuperSuffix[], any>({
+      this.request<SimpleUser[], any>({
         path: `/orgs/${org}/outside_collaborators`,
         method: "GET",
         query: query,
@@ -18780,7 +13849,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
             message?: string;
             documentation_url?: string;
           }
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        | BasicError
       >({
         path: `/orgs/${org}/outside_collaborators/${username}`,
         method: "PUT",
@@ -18817,10 +13886,27 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/projects
      */
     projectsListForOrg: (
-      { org, ...query }: IMySuperPrefixProjectsListForOrgParamsMySuperSuffix,
+      org: string,
+      query?: {
+        /**
+         * Indicates the state of the projects to return. Can be either `open`, `closed`, or `all`.
+         * @default "open"
+         */
+        state?: "open" | "closed" | "all";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixProjectMySuperSuffix[], IMySuperPrefixValidationErrorSimpleMySuperSuffix>({
+      this.request<Project[], ValidationErrorSimple>({
         path: `/orgs/${org}/projects`,
         method: "GET",
         query: query,
@@ -18838,13 +13924,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     projectsCreateForOrg: (
       org: string,
-      data: IMySuperPrefixProjectsCreateForOrgPayloadMySuperSuffix,
+      data: {
+        /** The name of the project. */
+        name: string;
+        /** The description of the project. */
+        body?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixProjectMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorSimpleMySuperSuffix
-      >({
+      this.request<Project, BasicError | ValidationErrorSimple>({
         path: `/orgs/${org}/projects`,
         method: "POST",
         body: data,
@@ -18862,10 +13950,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/public_members
      */
     orgsListPublicMembers: (
-      { org, ...query }: IMySuperPrefixOrgsListPublicMembersParamsMySuperSuffix,
+      org: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixSimpleUserMySuperSuffix[], any>({
+      this.request<SimpleUser[], any>({
         path: `/orgs/${org}/public_members`,
         method: "GET",
         query: query,
@@ -18897,7 +13997,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/orgs/{org}/public_members/{username}
      */
     orgsSetPublicMembershipForAuthenticatedUser: (org: string, username: string, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/orgs/${org}/public_members/${username}`,
         method: "PUT",
         ...params,
@@ -18927,10 +14027,31 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/repos
      */
     reposListForOrg: (
-      { org, ...query }: IMySuperPrefixReposListForOrgParamsMySuperSuffix,
+      org: string,
+      query?: {
+        /** Specifies the types of repositories you want returned. Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`, `internal`. Default: `all`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `type` can also be `internal`. */
+        type?: "all" | "public" | "private" | "forks" | "sources" | "member" | "internal";
+        /**
+         * Can be one of `created`, `updated`, `pushed`, `full_name`.
+         * @default "created"
+         */
+        sort?: "created" | "updated" | "pushed" | "full_name";
+        /** Can be one of `asc` or `desc`. Default: when using `full_name`: `asc`, otherwise `desc` */
+        direction?: "asc" | "desc";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixMinimalRepositoryMySuperSuffix[], any>({
+      this.request<MinimalRepository[], any>({
         path: `/orgs/${org}/repos`,
         method: "GET",
         query: query,
@@ -18948,13 +14069,78 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     reposCreateInOrg: (
       org: string,
-      data: IMySuperPrefixReposCreateInOrgPayloadMySuperSuffix,
+      data: {
+        /** The name of the repository. */
+        name: string;
+        /** A short description of the repository. */
+        description?: string;
+        /** A URL with more information about the repository. */
+        homepage?: string;
+        /**
+         * Either `true` to create a private repository or `false` to create a public one.
+         * @default false
+         */
+        private?: boolean;
+        /**
+         * Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)" in the GitHub Help documentation.
+         * The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header.
+         */
+        visibility?: "public" | "private" | "visibility" | "internal";
+        /**
+         * Either `true` to enable issues for this repository or `false` to disable them.
+         * @default true
+         */
+        has_issues?: boolean;
+        /**
+         * Either `true` to enable projects for this repository or `false` to disable them. **Note:** If you're creating a repository in an organization that has disabled repository projects, the default is `false`, and if you pass `true`, the API returns an error.
+         * @default true
+         */
+        has_projects?: boolean;
+        /**
+         * Either `true` to enable the wiki for this repository or `false` to disable it.
+         * @default true
+         */
+        has_wiki?: boolean;
+        /**
+         * Either `true` to make this repo available as a template repository or `false` to prevent it.
+         * @default false
+         */
+        is_template?: boolean;
+        /** The id of the team that will be granted access to this repository. This is only valid when creating a repository in an organization. */
+        team_id?: number;
+        /**
+         * Pass `true` to create an initial commit with empty README.
+         * @default false
+         */
+        auto_init?: boolean;
+        /** Desired language or platform [.gitignore template](https://github.com/github/gitignore) to apply. Use the name of the template without the extension. For example, "Haskell". */
+        gitignore_template?: string;
+        /** Choose an [open source license template](https://choosealicense.com/) that best suits your needs, and then use the [license keyword](https://help.github.com/articles/licensing-a-repository/#searching-github-by-license-type) as the `license_template` string. For example, "mit" or "mpl-2.0". */
+        license_template?: string;
+        /**
+         * Either `true` to allow squash-merging pull requests, or `false` to prevent squash-merging.
+         * @default true
+         */
+        allow_squash_merge?: boolean;
+        /**
+         * Either `true` to allow merging pull requests with a merge commit, or `false` to prevent merging pull requests with merge commits.
+         * @default true
+         */
+        allow_merge_commit?: boolean;
+        /**
+         * Either `true` to allow rebase-merging pull requests, or `false` to prevent rebase-merging.
+         * @default true
+         */
+        allow_rebase_merge?: boolean;
+        /**
+         * Either `true` to allow automatically deleting head branches when pull requests are merged, or `false` to prevent automatic deletion.
+         * @default false
+         */
+        delete_branch_on_merge?: boolean;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixRepositoryMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<Repository, BasicError | ValidationError>({
         path: `/orgs/${org}/repos`,
         method: "POST",
         body: data,
@@ -18972,7 +14158,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/settings/billing/actions
      */
     billingGetGithubActionsBillingOrg: (org: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixActionsBillingUsageMySuperSuffix, any>({
+      this.request<ActionsBillingUsage, any>({
         path: `/orgs/${org}/settings/billing/actions`,
         method: "GET",
         format: "json",
@@ -18988,7 +14174,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/settings/billing/packages
      */
     billingGetGithubPackagesBillingOrg: (org: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixPackagesBillingUsageMySuperSuffix, any>({
+      this.request<PackagesBillingUsage, any>({
         path: `/orgs/${org}/settings/billing/packages`,
         method: "GET",
         format: "json",
@@ -19004,7 +14190,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/settings/billing/shared-storage
      */
     billingGetSharedStorageBillingOrg: (org: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixCombinedBillingUsageMySuperSuffix, any>({
+      this.request<CombinedBillingUsage, any>({
         path: `/orgs/${org}/settings/billing/shared-storage`,
         method: "GET",
         format: "json",
@@ -19020,10 +14206,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/team-sync/groups
      */
     teamsListIdpGroupsForOrg: (
-      { org, ...query }: IMySuperPrefixTeamsListIdpGroupsForOrgParamsMySuperSuffix,
+      org: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixGroupMappingMySuperSuffix, any>({
+      this.request<GroupMapping, any>({
         path: `/orgs/${org}/team-sync/groups`,
         method: "GET",
         query: query,
@@ -19039,8 +14237,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary List teams
      * @request GET:/orgs/{org}/teams
      */
-    teamsList: ({ org, ...query }: IMySuperPrefixTeamsListParamsMySuperSuffix, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixTeamMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+    teamsList: (
+      org: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<Team[], BasicError>({
         path: `/orgs/${org}/teams`,
         method: "GET",
         query: query,
@@ -19056,11 +14269,42 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Create a team
      * @request POST:/orgs/{org}/teams
      */
-    teamsCreate: (org: string, data: IMySuperPrefixTeamsCreatePayloadMySuperSuffix, params: RequestParams = {}) =>
-      this.request<
-        IMySuperPrefixTeamFullMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+    teamsCreate: (
+      org: string,
+      data: {
+        /** The name of the team. */
+        name: string;
+        /** The description of the team. */
+        description?: string;
+        /** List GitHub IDs for organization members who will become team maintainers. */
+        maintainers?: string[];
+        /** The full name (e.g., "organization-name/repository-name") of repositories to add the team to. */
+        repo_names?: string[];
+        /**
+         * The level of privacy this team should have. The options are:
+         * **For a non-nested team:**
+         * \* `secret` - only visible to organization owners and members of this team.
+         * \* `closed` - visible to all members of this organization.
+         * Default: `secret`
+         * **For a parent or child team:**
+         * \* `closed` - visible to all members of this organization.
+         * Default for child team: `closed`
+         */
+        privacy?: "secret" | "closed";
+        /**
+         * **Deprecated**. The permission that new repositories will be added to the team with when none is specified. Can be one of:
+         * \* `pull` - team members can pull, but not push to or administer newly-added repositories.
+         * \* `push` - team members can pull and push, but not administer newly-added repositories.
+         * \* `admin` - team members can pull, push and administer newly-added repositories.
+         * @default "pull"
+         */
+        permission?: "pull" | "push" | "admin";
+        /** The ID of a team to set as the parent team. */
+        parent_team_id?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<TeamFull, BasicError | ValidationError>({
         path: `/orgs/${org}/teams`,
         method: "POST",
         body: data,
@@ -19078,7 +14322,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/teams/{team_slug}
      */
     teamsGetByName: (org: string, teamSlug: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixTeamFullMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<TeamFull, BasicError>({
         path: `/orgs/${org}/teams/${teamSlug}`,
         method: "GET",
         format: "json",
@@ -19096,10 +14340,34 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     teamsUpdateInOrg: (
       org: string,
       teamSlug: string,
-      data: IMySuperPrefixTeamsUpdateInOrgPayloadMySuperSuffix,
+      data: {
+        /** The name of the team. */
+        name: string;
+        /** The description of the team. */
+        description?: string;
+        /**
+         * The level of privacy this team should have. Editing teams without specifying this parameter leaves `privacy` intact. When a team is nested, the `privacy` for parent teams cannot be `secret`. The options are:
+         * **For a non-nested team:**
+         * \* `secret` - only visible to organization owners and members of this team.
+         * \* `closed` - visible to all members of this organization.
+         * **For a parent or child team:**
+         * \* `closed` - visible to all members of this organization.
+         */
+        privacy?: "secret" | "closed";
+        /**
+         * **Deprecated**. The permission that new repositories will be added to the team with when none is specified. Can be one of:
+         * \* `pull` - team members can pull, but not push to or administer newly-added repositories.
+         * \* `push` - team members can pull and push, but not administer newly-added repositories.
+         * \* `admin` - team members can pull, push and administer newly-added repositories.
+         * @default "pull"
+         */
+        permission?: "pull" | "push" | "admin";
+        /** The ID of a team to set as the parent team. */
+        parent_team_id?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixTeamFullMySuperSuffix, any>({
+      this.request<TeamFull, any>({
         path: `/orgs/${org}/teams/${teamSlug}`,
         method: "PATCH",
         body: data,
@@ -19132,10 +14400,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/teams/{team_slug}/discussions
      */
     teamsListDiscussionsInOrg: (
-      { org, teamSlug, ...query }: IMySuperPrefixTeamsListDiscussionsInOrgParamsMySuperSuffix,
+      org: string,
+      teamSlug: string,
+      query?: {
+        /**
+         * One of `asc` (ascending) or `desc` (descending).
+         * @default "desc"
+         */
+        direction?: "asc" | "desc";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixTeamDiscussionMySuperSuffix[], any>({
+      this.request<TeamDiscussion[], any>({
         path: `/orgs/${org}/teams/${teamSlug}/discussions`,
         method: "GET",
         query: query,
@@ -19154,10 +14440,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     teamsCreateDiscussionInOrg: (
       org: string,
       teamSlug: string,
-      data: IMySuperPrefixTeamsCreateDiscussionInOrgPayloadMySuperSuffix,
+      data: {
+        /** The discussion post's title. */
+        title: string;
+        /** The discussion post's body text. */
+        body: string;
+        /**
+         * Private posts are only visible to team members, organization owners, and team maintainers. Public posts are visible to all members of the organization. Set to `true` to create a private post.
+         * @default false
+         */
+        private?: boolean;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixTeamDiscussionMySuperSuffix, any>({
+      this.request<TeamDiscussion, any>({
         path: `/orgs/${org}/teams/${teamSlug}/discussions`,
         method: "POST",
         body: data,
@@ -19175,7 +14471,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}
      */
     teamsGetDiscussionInOrg: (org: string, teamSlug: string, discussionNumber: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixTeamDiscussionMySuperSuffix, any>({
+      this.request<TeamDiscussion, any>({
         path: `/orgs/${org}/teams/${teamSlug}/discussions/${discussionNumber}`,
         method: "GET",
         format: "json",
@@ -19194,10 +14490,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       org: string,
       teamSlug: string,
       discussionNumber: number,
-      data: IMySuperPrefixTeamsUpdateDiscussionInOrgPayloadMySuperSuffix,
+      data: {
+        /** The discussion post's title. */
+        title?: string;
+        /** The discussion post's body text. */
+        body?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixTeamDiscussionMySuperSuffix, any>({
+      this.request<TeamDiscussion, any>({
         path: `/orgs/${org}/teams/${teamSlug}/discussions/${discussionNumber}`,
         method: "PATCH",
         body: data,
@@ -19230,10 +14531,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments
      */
     teamsListDiscussionCommentsInOrg: (
-      { org, teamSlug, discussionNumber, ...query }: IMySuperPrefixTeamsListDiscussionCommentsInOrgParamsMySuperSuffix,
+      org: string,
+      teamSlug: string,
+      discussionNumber: number,
+      query?: {
+        /**
+         * One of `asc` (ascending) or `desc` (descending).
+         * @default "desc"
+         */
+        direction?: "asc" | "desc";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixTeamDiscussionCommentMySuperSuffix[], any>({
+      this.request<TeamDiscussionComment[], any>({
         path: `/orgs/${org}/teams/${teamSlug}/discussions/${discussionNumber}/comments`,
         method: "GET",
         query: query,
@@ -19253,10 +14573,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       org: string,
       teamSlug: string,
       discussionNumber: number,
-      data: IMySuperPrefixTeamsCreateDiscussionCommentInOrgPayloadMySuperSuffix,
+      data: {
+        /** The discussion comment's body text. */
+        body: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixTeamDiscussionCommentMySuperSuffix, any>({
+      this.request<TeamDiscussionComment, any>({
         path: `/orgs/${org}/teams/${teamSlug}/discussions/${discussionNumber}/comments`,
         method: "POST",
         body: data,
@@ -19280,7 +14603,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       commentNumber: number,
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixTeamDiscussionCommentMySuperSuffix, any>({
+      this.request<TeamDiscussionComment, any>({
         path: `/orgs/${org}/teams/${teamSlug}/discussions/${discussionNumber}/comments/${commentNumber}`,
         method: "GET",
         format: "json",
@@ -19300,10 +14623,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       teamSlug: string,
       discussionNumber: number,
       commentNumber: number,
-      data: IMySuperPrefixTeamsUpdateDiscussionCommentInOrgPayloadMySuperSuffix,
+      data: {
+        /** The discussion comment's body text. */
+        body: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixTeamDiscussionCommentMySuperSuffix, any>({
+      this.request<TeamDiscussionComment, any>({
         path: `/orgs/${org}/teams/${teamSlug}/discussions/${discussionNumber}/comments/${commentNumber}`,
         method: "PATCH",
         body: data,
@@ -19342,16 +14668,27 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions
      */
     reactionsListForTeamDiscussionCommentInOrg: (
-      {
-        org,
-        teamSlug,
-        discussionNumber,
-        commentNumber,
-        ...query
-      }: IMySuperPrefixReactionsListForTeamDiscussionCommentInOrgParamsMySuperSuffix,
+      org: string,
+      teamSlug: string,
+      discussionNumber: number,
+      commentNumber: number,
+      query?: {
+        /** Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion comment. */
+        content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixReactionMySuperSuffix[], any>({
+      this.request<Reaction[], any>({
         path: `/orgs/${org}/teams/${teamSlug}/discussions/${discussionNumber}/comments/${commentNumber}/reactions`,
         method: "GET",
         query: query,
@@ -19372,10 +14709,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       teamSlug: string,
       discussionNumber: number,
       commentNumber: number,
-      data: IMySuperPrefixReactionsCreateForTeamDiscussionCommentInOrgPayloadMySuperSuffix,
+      data: {
+        /** The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion comment. */
+        content: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixReactionMySuperSuffix, any>({
+      this.request<Reaction, any>({
         path: `/orgs/${org}/teams/${teamSlug}/discussions/${discussionNumber}/comments/${commentNumber}/reactions`,
         method: "POST",
         body: data,
@@ -19415,15 +14755,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions
      */
     reactionsListForTeamDiscussionInOrg: (
-      {
-        org,
-        teamSlug,
-        discussionNumber,
-        ...query
-      }: IMySuperPrefixReactionsListForTeamDiscussionInOrgParamsMySuperSuffix,
+      org: string,
+      teamSlug: string,
+      discussionNumber: number,
+      query?: {
+        /** Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion. */
+        content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixReactionMySuperSuffix[], any>({
+      this.request<Reaction[], any>({
         path: `/orgs/${org}/teams/${teamSlug}/discussions/${discussionNumber}/reactions`,
         method: "GET",
         query: query,
@@ -19443,10 +14794,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       org: string,
       teamSlug: string,
       discussionNumber: number,
-      data: IMySuperPrefixReactionsCreateForTeamDiscussionInOrgPayloadMySuperSuffix,
+      data: {
+        /** The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion. */
+        content: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixReactionMySuperSuffix, any>({
+      this.request<Reaction, any>({
         path: `/orgs/${org}/teams/${teamSlug}/discussions/${discussionNumber}/reactions`,
         method: "POST",
         body: data,
@@ -19485,10 +14839,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/teams/{team_slug}/invitations
      */
     teamsListPendingInvitationsInOrg: (
-      { org, teamSlug, ...query }: IMySuperPrefixTeamsListPendingInvitationsInOrgParamsMySuperSuffix,
+      org: string,
+      teamSlug: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixOrganizationInvitationMySuperSuffix[], any>({
+      this.request<OrganizationInvitation[], any>({
         path: `/orgs/${org}/teams/${teamSlug}/invitations`,
         method: "GET",
         query: query,
@@ -19505,10 +14872,31 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/teams/{team_slug}/members
      */
     teamsListMembersInOrg: (
-      { org, teamSlug, ...query }: IMySuperPrefixTeamsListMembersInOrgParamsMySuperSuffix,
+      org: string,
+      teamSlug: string,
+      query?: {
+        /**
+         * Filters members returned by their role in the team. Can be one of:
+         * \* `member` - normal members of the team.
+         * \* `maintainer` - team maintainers.
+         * \* `all` - all members of the team.
+         * @default "all"
+         */
+        role?: "member" | "maintainer" | "all";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixSimpleUserMySuperSuffix[], any>({
+      this.request<SimpleUser[], any>({
         path: `/orgs/${org}/teams/${teamSlug}/members`,
         method: "GET",
         query: query,
@@ -19525,7 +14913,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/teams/{team_slug}/memberships/{username}
      */
     teamsGetMembershipForUserInOrg: (org: string, teamSlug: string, username: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixTeamMembershipMySuperSuffix, void>({
+      this.request<TeamMembership, void>({
         path: `/orgs/${org}/teams/${teamSlug}/memberships/${username}`,
         method: "GET",
         format: "json",
@@ -19544,11 +14932,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       org: string,
       teamSlug: string,
       username: string,
-      data: IMySuperPrefixTeamsAddOrUpdateMembershipForUserInOrgPayloadMySuperSuffix,
+      data: {
+        /**
+         * The role that this user should have in the team. Can be one of:
+         * \* `member` - a normal member of the team.
+         * \* `maintainer` - a team maintainer. Able to add/remove other team members, promote other team members to team maintainer, and edit the team's name and description.
+         * @default "member"
+         */
+        role?: "member" | "maintainer";
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixTeamMembershipMySuperSuffix,
+        TeamMembership,
         void | {
           message?: string;
           errors?: {
@@ -19590,10 +14986,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/teams/{team_slug}/projects
      */
     teamsListProjectsInOrg: (
-      { org, teamSlug, ...query }: IMySuperPrefixTeamsListProjectsInOrgParamsMySuperSuffix,
+      org: string,
+      teamSlug: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixTeamProjectMySuperSuffix[], any>({
+      this.request<TeamProject[], any>({
         path: `/orgs/${org}/teams/${teamSlug}/projects`,
         method: "GET",
         query: query,
@@ -19615,7 +15024,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       projectId: number,
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixTeamProjectMySuperSuffix, void>({
+      this.request<TeamProject, void>({
         path: `/orgs/${org}/teams/${teamSlug}/projects/${projectId}`,
         method: "GET",
         format: "json",
@@ -19634,7 +15043,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       org: string,
       teamSlug: string,
       projectId: number,
-      data: IMySuperPrefixTeamsAddOrUpdateProjectPermissionsInOrgPayloadMySuperSuffix,
+      data: {
+        /**
+         * The permission to grant to the team for this project. Can be one of:
+         * \* `read` - team members can read, but not write to or administer this project.
+         * \* `write` - team members can read and write, but not administer this project.
+         * \* `admin` - team members can read, write and administer this project.
+         * Default: the team's `permission` attribute will be used to determine what permission to grant the team on this project. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
+         */
+        permission?: "read" | "write" | "admin";
+      },
       params: RequestParams = {},
     ) =>
       this.request<
@@ -19675,10 +15093,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/teams/{team_slug}/repos
      */
     teamsListReposInOrg: (
-      { org, teamSlug, ...query }: IMySuperPrefixTeamsListReposInOrgParamsMySuperSuffix,
+      org: string,
+      teamSlug: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixMinimalRepositoryMySuperSuffix[], any>({
+      this.request<MinimalRepository[], any>({
         path: `/orgs/${org}/teams/${teamSlug}/repos`,
         method: "GET",
         query: query,
@@ -19701,7 +15132,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixTeamRepositoryMySuperSuffix, void>({
+      this.request<TeamRepository, void>({
         path: `/orgs/${org}/teams/${teamSlug}/repos/${owner}/${repo}`,
         method: "GET",
         format: "json",
@@ -19721,7 +15152,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       teamSlug: string,
       owner: string,
       repo: string,
-      data: IMySuperPrefixTeamsAddOrUpdateRepoPermissionsInOrgPayloadMySuperSuffix,
+      data: {
+        /**
+         * The permission to grant the team on this repository. Can be one of:
+         * \* `pull` - team members can pull, but not push to or administer this repository.
+         * \* `push` - team members can pull and push, but not administer this repository.
+         * \* `admin` - team members can pull, push and administer this repository.
+         * \* `maintain` - team members can manage the repository without access to sensitive or destructive actions. Recommended for project managers. Only applies to repositories owned by organizations.
+         * \* `triage` - team members can proactively manage issues and pull requests without write access. Recommended for contributors who triage a repository. Only applies to repositories owned by organizations.
+         *
+         * If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
+         */
+        permission?: "pull" | "push" | "admin" | "maintain" | "triage";
+      },
       params: RequestParams = {},
     ) =>
       this.request<void, any>({
@@ -19756,7 +15199,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/teams/{team_slug}/team-sync/group-mappings
      */
     teamsListIdpGroupsInOrg: (org: string, teamSlug: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixGroupMappingMySuperSuffix, any>({
+      this.request<GroupMapping, any>({
         path: `/orgs/${org}/teams/${teamSlug}/team-sync/group-mappings`,
         method: "GET",
         format: "json",
@@ -19774,10 +15217,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     teamsCreateOrUpdateIdpGroupConnectionsInOrg: (
       org: string,
       teamSlug: string,
-      data: IMySuperPrefixTeamsCreateOrUpdateIdpGroupConnectionsInOrgPayloadMySuperSuffix,
+      data: {
+        /** The IdP groups you want to connect to a GitHub team. When updating, the new `groups` object will replace the original one. You must include any existing groups that you don't want to remove. */
+        groups: {
+          /** ID of the IdP group. */
+          group_id: string;
+          /** Name of the IdP group. */
+          group_name: string;
+          /** Description of the IdP group. */
+          group_description: string;
+        }[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixGroupMappingMySuperSuffix, any>({
+      this.request<GroupMapping, any>({
         path: `/orgs/${org}/teams/${teamSlug}/team-sync/group-mappings`,
         method: "PATCH",
         body: data,
@@ -19795,10 +15248,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/teams/{team_slug}/teams
      */
     teamsListChildInOrg: (
-      { org, teamSlug, ...query }: IMySuperPrefixTeamsListChildInOrgParamsMySuperSuffix,
+      org: string,
+      teamSlug: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixTeamMySuperSuffix[], any>({
+      this.request<Team[], any>({
         path: `/orgs/${org}/teams/${teamSlug}/teams`,
         method: "GET",
         query: query,
@@ -19816,7 +15282,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/projects/columns/cards/{card_id}
      */
     projectsGetCard: (cardId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixProjectCardMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<ProjectCard, BasicError>({
         path: `/projects/columns/cards/${cardId}`,
         method: "GET",
         format: "json",
@@ -19833,13 +15299,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     projectsUpdateCard: (
       cardId: number,
-      data: IMySuperPrefixProjectsUpdateCardPayloadMySuperSuffix,
+      data: {
+        /**
+         * The project card's note
+         * @example "Update all gems"
+         */
+        note?: string | null;
+        /**
+         * Whether or not the card is archived
+         * @example false
+         */
+        archived?: boolean;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixProjectCardMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorSimpleMySuperSuffix
-      >({
+      this.request<ProjectCard, BasicError | ValidationErrorSimple>({
         path: `/projects/columns/cards/${cardId}`,
         method: "PATCH",
         body: data,
@@ -19859,7 +15333,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     projectsDeleteCard: (cardId: number, params: RequestParams = {}) =>
       this.request<
         void,
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        | BasicError
         | {
             message?: string;
             documentation_url?: string;
@@ -19881,12 +15355,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     projectsMoveCard: (
       cardId: number,
-      data: IMySuperPrefixProjectsMoveCardPayloadMySuperSuffix,
+      data: {
+        /**
+         * The position of the card in a column
+         * @pattern ^(?:top|bottom|after:\d+)$
+         * @example "bottom"
+         */
+        position: string;
+        /**
+         * The unique identifier of the column the card should be moved to
+         * @example 42
+         */
+        column_id?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         object,
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        | BasicError
         | {
             message?: string;
             documentation_url?: string;
@@ -19897,7 +15383,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
               field?: string;
             }[];
           }
-        | IMySuperPrefixValidationErrorMySuperSuffix
+        | ValidationError
         | {
             code?: string;
             message?: string;
@@ -19925,7 +15411,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/projects/columns/{column_id}
      */
     projectsGetColumn: (columnId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixProjectColumnMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<ProjectColumn, BasicError>({
         path: `/projects/columns/${columnId}`,
         method: "GET",
         format: "json",
@@ -19942,10 +15428,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     projectsUpdateColumn: (
       columnId: number,
-      data: IMySuperPrefixProjectsUpdateColumnPayloadMySuperSuffix,
+      data: {
+        /**
+         * Name of the project column
+         * @example "Remaining tasks"
+         */
+        name: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixProjectColumnMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<ProjectColumn, BasicError>({
         path: `/projects/columns/${columnId}`,
         method: "PATCH",
         body: data,
@@ -19963,7 +15455,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/projects/columns/{column_id}
      */
     projectsDeleteColumn: (columnId: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/projects/columns/${columnId}`,
         method: "DELETE",
         ...params,
@@ -19978,10 +15470,27 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/projects/columns/{column_id}/cards
      */
     projectsListCards: (
-      { columnId, ...query }: IMySuperPrefixProjectsListCardsParamsMySuperSuffix,
+      columnId: number,
+      query?: {
+        /**
+         * Filters the project cards that are returned by the card's state. Can be one of `all`,`archived`, or `not_archived`.
+         * @default "not_archived"
+         */
+        archived_state?: "all" | "archived" | "not_archived";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixProjectCardMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<ProjectCard[], BasicError>({
         path: `/projects/columns/${columnId}/cards`,
         method: "GET",
         query: query,
@@ -19999,13 +15508,32 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     projectsCreateCard: (
       columnId: number,
-      data: IMySuperPrefixProjectsCreateCardPayloadMySuperSuffix,
+      data:
+        | {
+            /**
+             * The project card's note
+             * @example "Update all gems"
+             */
+            note: string | null;
+          }
+        | {
+            /**
+             * The unique identifier of the content associated with the card
+             * @example 42
+             */
+            content_id: number;
+            /**
+             * The piece of content associated with the card
+             * @example "PullRequest"
+             */
+            content_type: string;
+          },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixProjectCardMySuperSuffix,
-        | IMySuperPrefixBasicErrorMySuperSuffix
-        | (IMySuperPrefixValidationErrorMySuperSuffix | IMySuperPrefixValidationErrorSimpleMySuperSuffix)
+        ProjectCard,
+        | BasicError
+        | (ValidationError | ValidationErrorSimple)
         | {
             code?: string;
             message?: string;
@@ -20034,10 +15562,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     projectsMoveColumn: (
       columnId: number,
-      data: IMySuperPrefixProjectsMoveColumnPayloadMySuperSuffix,
+      data: {
+        /**
+         * The position of the column in a project
+         * @pattern ^(?:first|last|after:\d+)$
+         * @example "last"
+         */
+        position: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<object, IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorSimpleMySuperSuffix>({
+      this.request<object, BasicError | ValidationErrorSimple>({
         path: `/projects/columns/${columnId}/moves`,
         method: "POST",
         body: data,
@@ -20055,7 +15590,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/projects/{project_id}
      */
     projectsGet: (projectId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixProjectMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Project, BasicError>({
         path: `/projects/${projectId}`,
         method: "GET",
         format: "json",
@@ -20072,19 +15607,39 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     projectsUpdate: (
       projectId: number,
-      data: IMySuperPrefixProjectsUpdatePayloadMySuperSuffix,
+      data: {
+        /**
+         * Name of the project
+         * @example "Week One Sprint"
+         */
+        name?: string;
+        /**
+         * Body of the project
+         * @example "This project represents the sprint of the first week in January"
+         */
+        body?: string | null;
+        /**
+         * State of the project; either 'open' or 'closed'
+         * @example "open"
+         */
+        state?: string;
+        /** The baseline permission that all organization members have on this project */
+        organization_permission?: "read" | "write" | "admin" | "none";
+        /** Whether or not this project can be seen by everyone. */
+        private?: boolean;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixProjectMySuperSuffix,
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        Project,
+        | BasicError
         | {
             message?: string;
             documentation_url?: string;
             errors?: string[];
           }
         | void
-        | IMySuperPrefixValidationErrorSimpleMySuperSuffix
+        | ValidationErrorSimple
       >({
         path: `/projects/${projectId}`,
         method: "PATCH",
@@ -20105,7 +15660,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     projectsDelete: (projectId: number, params: RequestParams = {}) =>
       this.request<
         void,
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        | BasicError
         | {
             message?: string;
             documentation_url?: string;
@@ -20126,17 +15681,37 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/projects/{project_id}/collaborators
      */
     projectsListCollaborators: (
-      { projectId, ...query }: IMySuperPrefixProjectsListCollaboratorsParamsMySuperSuffix,
+      projectId: number,
+      query?: {
+        /**
+         * Filters the collaborators by their affiliation. Can be one of:
+         * \* `outside`: Outside collaborators of a project that are not a member of the project's organization.
+         * \* `direct`: Collaborators with permissions to a project, regardless of organization membership status.
+         * \* `all`: All collaborators the authenticated user can see.
+         * @default "all"
+         */
+        affiliation?: "outside" | "direct" | "all";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixSimpleUserMySuperSuffix[],
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        SimpleUser[],
+        | BasicError
         | {
             message: string;
             documentation_url: string;
           }
-        | IMySuperPrefixValidationErrorMySuperSuffix
+        | ValidationError
       >({
         path: `/projects/${projectId}/collaborators`,
         method: "GET",
@@ -20156,17 +15731,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     projectsAddCollaborator: (
       projectId: number,
       username: string,
-      data: IMySuperPrefixProjectsAddCollaboratorPayloadMySuperSuffix,
+      data: {
+        /**
+         * The permission to grant the collaborator.
+         * @default "write"
+         * @example "write"
+         */
+        permission?: "read" | "write" | "admin";
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         void,
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        | BasicError
         | {
             message: string;
             documentation_url: string;
           }
-        | IMySuperPrefixValidationErrorMySuperSuffix
+        | ValidationError
       >({
         path: `/projects/${projectId}/collaborators/${username}`,
         method: "PUT",
@@ -20186,12 +15768,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     projectsRemoveCollaborator: (projectId: number, username: string, params: RequestParams = {}) =>
       this.request<
         void,
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        | BasicError
         | {
             message: string;
             documentation_url: string;
           }
-        | IMySuperPrefixValidationErrorMySuperSuffix
+        | ValidationError
       >({
         path: `/projects/${projectId}/collaborators/${username}`,
         method: "DELETE",
@@ -20208,13 +15790,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     projectsGetPermissionForUser: (projectId: number, username: string, params: RequestParams = {}) =>
       this.request<
-        IMySuperPrefixRepositoryCollaboratorPermissionMySuperSuffix,
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        RepositoryCollaboratorPermission,
+        | BasicError
         | {
             message: string;
             documentation_url: string;
           }
-        | IMySuperPrefixValidationErrorMySuperSuffix
+        | ValidationError
       >({
         path: `/projects/${projectId}/collaborators/${username}/permission`,
         method: "GET",
@@ -20231,10 +15813,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/projects/{project_id}/columns
      */
     projectsListColumns: (
-      { projectId, ...query }: IMySuperPrefixProjectsListColumnsParamsMySuperSuffix,
+      projectId: number,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixProjectColumnMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<ProjectColumn[], BasicError>({
         path: `/projects/${projectId}/columns`,
         method: "GET",
         query: query,
@@ -20252,13 +15846,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     projectsCreateColumn: (
       projectId: number,
-      data: IMySuperPrefixProjectsCreateColumnPayloadMySuperSuffix,
+      data: {
+        /**
+         * Name of the project column
+         * @example "Remaining tasks"
+         */
+        name: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixProjectColumnMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorSimpleMySuperSuffix
-      >({
+      this.request<ProjectColumn, BasicError | ValidationErrorSimple>({
         path: `/projects/${projectId}/columns`,
         method: "POST",
         body: data,
@@ -20277,7 +15874,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/rate_limit
      */
     rateLimitGet: (params: RequestParams = {}) =>
-      this.request<IMySuperPrefixRateLimitOverviewMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<RateLimitOverview, BasicError>({
         path: `/rate_limit`,
         method: "GET",
         format: "json",
@@ -20297,7 +15894,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     reactionsDeleteLegacy: (reactionId: number, params: RequestParams = {}) =>
       this.request<
         void,
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        | BasicError
         | {
             message: string;
             documentation_url: string;
@@ -20318,7 +15915,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}
      */
     reposGet: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixFullRepositoryMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<FullRepository, BasicError>({
         path: `/repos/${owner}/${repo}`,
         method: "GET",
         format: "json",
@@ -20336,13 +15933,72 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     reposUpdate: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixReposUpdatePayloadMySuperSuffix,
+      data: {
+        /** The name of the repository. */
+        name?: string;
+        /** A short description of the repository. */
+        description?: string;
+        /** A URL with more information about the repository. */
+        homepage?: string;
+        /**
+         * Either `true` to make the repository private or `false` to make it public. Default: `false`.
+         * **Note**: You will get a `422` error if the organization restricts [changing repository visibility](https://help.github.com/articles/repository-permission-levels-for-an-organization#changing-the-visibility-of-repositories) to organization owners and a non-owner tries to change the value of private. **Note**: You will get a `422` error if the organization restricts [changing repository visibility](https://help.github.com/articles/repository-permission-levels-for-an-organization#changing-the-visibility-of-repositories) to organization owners and a non-owner tries to change the value of private.
+         * @default false
+         */
+        private?: boolean;
+        /** Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. The `visibility` parameter overrides the `private` parameter when you use both along with the `nebula-preview` preview header. */
+        visibility?: "public" | "private" | "visibility" | "internal";
+        /**
+         * Either `true` to enable issues for this repository or `false` to disable them.
+         * @default true
+         */
+        has_issues?: boolean;
+        /**
+         * Either `true` to enable projects for this repository or `false` to disable them. **Note:** If you're creating a repository in an organization that has disabled repository projects, the default is `false`, and if you pass `true`, the API returns an error.
+         * @default true
+         */
+        has_projects?: boolean;
+        /**
+         * Either `true` to enable the wiki for this repository or `false` to disable it.
+         * @default true
+         */
+        has_wiki?: boolean;
+        /**
+         * Either `true` to make this repo available as a template repository or `false` to prevent it.
+         * @default false
+         */
+        is_template?: boolean;
+        /** Updates the default branch for this repository. */
+        default_branch?: string;
+        /**
+         * Either `true` to allow squash-merging pull requests, or `false` to prevent squash-merging.
+         * @default true
+         */
+        allow_squash_merge?: boolean;
+        /**
+         * Either `true` to allow merging pull requests with a merge commit, or `false` to prevent merging pull requests with merge commits.
+         * @default true
+         */
+        allow_merge_commit?: boolean;
+        /**
+         * Either `true` to allow rebase-merging pull requests, or `false` to prevent rebase-merging.
+         * @default true
+         */
+        allow_rebase_merge?: boolean;
+        /**
+         * Either `true` to allow automatically deleting head branches when pull requests are merged, or `false` to prevent automatic deletion.
+         * @default false
+         */
+        delete_branch_on_merge?: boolean;
+        /**
+         * `true` to archive this repository. **Note**: You cannot unarchive repositories through the API.
+         * @default false
+         */
+        archived?: boolean;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixFullRepositoryMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<FullRepository, BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}`,
         method: "PATCH",
         body: data,
@@ -20366,7 +16022,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
             message?: string;
             documentation_url?: string;
           }
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        | BasicError
       >({
         path: `/repos/${owner}/${repo}`,
         method: "DELETE",
@@ -20382,13 +16038,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/actions/artifacts
      */
     actionsListArtifactsForRepo: (
-      { owner, repo, ...query }: IMySuperPrefixActionsListArtifactsForRepoParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         {
           total_count: number;
-          artifacts: IMySuperPrefixArtifactMySuperSuffix[];
+          artifacts: Artifact[];
         },
         any
       >({
@@ -20408,7 +16077,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/actions/artifacts/{artifact_id}
      */
     actionsGetArtifact: (owner: string, repo: string, artifactId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixArtifactMySuperSuffix, any>({
+      this.request<Artifact, any>({
         path: `/repos/${owner}/${repo}/actions/artifacts/${artifactId}`,
         method: "GET",
         format: "json",
@@ -20460,7 +16129,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/actions/jobs/{job_id}
      */
     actionsGetJobForWorkflowRun: (owner: string, repo: string, jobId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixJobMySuperSuffix, any>({
+      this.request<Job, any>({
         path: `/repos/${owner}/${repo}/actions/jobs/${jobId}`,
         method: "GET",
         format: "json",
@@ -20491,7 +16160,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/actions/permissions
      */
     actionsGetGithubActionsPermissionsRepository: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixActionsRepositoryPermissionsMySuperSuffix, any>({
+      this.request<ActionsRepositoryPermissions, any>({
         path: `/repos/${owner}/${repo}/actions/permissions`,
         method: "GET",
         format: "json",
@@ -20509,7 +16178,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     actionsSetGithubActionsPermissionsRepository: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixActionsSetGithubActionsPermissionsRepositoryPayloadMySuperSuffix,
+      data: {
+        /** Whether GitHub Actions is enabled on the repository. */
+        enabled: ActionsEnabled;
+        /** The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`. */
+        allowed_actions?: AllowedActions;
+      },
       params: RequestParams = {},
     ) =>
       this.request<void, any>({
@@ -20529,7 +16203,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/actions/permissions/selected-actions
      */
     actionsGetAllowedActionsRepository: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixSelectedActionsMySuperSuffix, any>({
+      this.request<SelectedActions, any>({
         path: `/repos/${owner}/${repo}/actions/permissions/selected-actions`,
         method: "GET",
         format: "json",
@@ -20547,7 +16221,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     actionsSetAllowedActionsRepository: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixSelectedActionsMySuperSuffix,
+      data: SelectedActions,
       params: RequestParams = {},
     ) =>
       this.request<void, any>({
@@ -20567,13 +16241,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/actions/runners
      */
     actionsListSelfHostedRunnersForRepo: (
-      { owner, repo, ...query }: IMySuperPrefixActionsListSelfHostedRunnersForRepoParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         {
           total_count: number;
-          runners: IMySuperPrefixRunnerMySuperSuffix[];
+          runners: Runner[];
         },
         any
       >({
@@ -20593,7 +16280,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/actions/runners/downloads
      */
     actionsListRunnerApplicationsForRepo: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixRunnerApplicationMySuperSuffix[], any>({
+      this.request<RunnerApplication[], any>({
         path: `/repos/${owner}/${repo}/actions/runners/downloads`,
         method: "GET",
         format: "json",
@@ -20609,7 +16296,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/repos/{owner}/{repo}/actions/runners/registration-token
      */
     actionsCreateRegistrationTokenForRepo: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixAuthenticationTokenMySuperSuffix, any>({
+      this.request<AuthenticationToken, any>({
         path: `/repos/${owner}/${repo}/actions/runners/registration-token`,
         method: "POST",
         format: "json",
@@ -20625,7 +16312,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/repos/{owner}/{repo}/actions/runners/remove-token
      */
     actionsCreateRemoveTokenForRepo: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixAuthenticationTokenMySuperSuffix, any>({
+      this.request<AuthenticationToken, any>({
         path: `/repos/${owner}/${repo}/actions/runners/remove-token`,
         method: "POST",
         format: "json",
@@ -20641,7 +16328,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/actions/runners/{runner_id}
      */
     actionsGetSelfHostedRunnerForRepo: (owner: string, repo: string, runnerId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixRunnerMySuperSuffix, any>({
+      this.request<Runner, any>({
         path: `/repos/${owner}/${repo}/actions/runners/${runnerId}`,
         method: "GET",
         format: "json",
@@ -20677,13 +16364,34 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/actions/runs
      */
     actionsListWorkflowRunsForRepo: (
-      { owner, repo, ...query }: IMySuperPrefixActionsListWorkflowRunsForRepoParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /** Returns someone's workflow runs. Use the login for the user who created the `push` associated with the check suite or workflow run. */
+        actor?: string;
+        /** Returns workflow runs associated with a branch. Use the name of the branch of the `push`. */
+        branch?: string;
+        /** Returns workflow run triggered by the event you specify. For example, `push`, `pull_request` or `issue`. For more information, see "[Events that trigger workflows](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows)." */
+        event?: string;
+        /** Returns workflow runs associated with the check run `status` or `conclusion` you specify. For example, a conclusion can be `success` or a status can be `completed`. For more information, see the `status` and `conclusion` options available in "[Create a check run](https://docs.github.com/rest/reference/checks#create-a-check-run)." */
+        status?: "completed" | "status" | "conclusion";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         {
           total_count: number;
-          workflow_runs: IMySuperPrefixWorkflowRunMySuperSuffix[];
+          workflow_runs: WorkflowRun[];
         },
         any
       >({
@@ -20703,7 +16411,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/actions/runs/{run_id}
      */
     actionsGetWorkflowRun: (owner: string, repo: string, runId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixWorkflowRunMySuperSuffix, any>({
+      this.request<WorkflowRun, any>({
         path: `/repos/${owner}/${repo}/actions/runs/${runId}`,
         method: "GET",
         format: "json",
@@ -20734,13 +16442,27 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/actions/runs/{run_id}/artifacts
      */
     actionsListWorkflowRunArtifacts: (
-      { owner, repo, runId, ...query }: IMySuperPrefixActionsListWorkflowRunArtifactsParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      runId: number,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         {
           total_count: number;
-          artifacts: IMySuperPrefixArtifactMySuperSuffix[];
+          artifacts: Artifact[];
         },
         any
       >({
@@ -20775,13 +16497,34 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/actions/runs/{run_id}/jobs
      */
     actionsListJobsForWorkflowRun: (
-      { owner, repo, runId, ...query }: IMySuperPrefixActionsListJobsForWorkflowRunParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      runId: number,
+      query?: {
+        /**
+         * Filters jobs by their `completed_at` timestamp. Can be one of:
+         * \* `latest`: Returns jobs from the most recent execution of the workflow run.
+         * \* `all`: Returns all jobs for a workflow run, including from old executions of the workflow run.
+         * @default "latest"
+         */
+        filter?: "latest" | "all";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         {
           total_count: number;
-          jobs: IMySuperPrefixJobMySuperSuffix[];
+          jobs: Job[];
         },
         any
       >({
@@ -20846,7 +16589,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/actions/runs/{run_id}/timing
      */
     actionsGetWorkflowRunUsage: (owner: string, repo: string, runId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixWorkflowRunUsageMySuperSuffix, any>({
+      this.request<WorkflowRunUsage, any>({
         path: `/repos/${owner}/${repo}/actions/runs/${runId}/timing`,
         method: "GET",
         format: "json",
@@ -20862,13 +16605,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/actions/secrets
      */
     actionsListRepoSecrets: (
-      { owner, repo, ...query }: IMySuperPrefixActionsListRepoSecretsParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         {
           total_count: number;
-          secrets: IMySuperPrefixActionsSecretMySuperSuffix[];
+          secrets: ActionsSecret[];
         },
         any
       >({
@@ -20888,7 +16644,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/actions/secrets/public-key
      */
     actionsGetRepoPublicKey: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixActionsPublicKeyMySuperSuffix, any>({
+      this.request<ActionsPublicKey, any>({
         path: `/repos/${owner}/${repo}/actions/secrets/public-key`,
         method: "GET",
         format: "json",
@@ -20904,7 +16660,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/actions/secrets/{secret_name}
      */
     actionsGetRepoSecret: (owner: string, repo: string, secretName: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixActionsSecretMySuperSuffix, any>({
+      this.request<ActionsSecret, any>({
         path: `/repos/${owner}/${repo}/actions/secrets/${secretName}`,
         method: "GET",
         format: "json",
@@ -20923,7 +16679,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       secretName: string,
-      data: IMySuperPrefixActionsCreateOrUpdateRepoSecretPayloadMySuperSuffix,
+      data: {
+        /** Value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get a repository public key](https://docs.github.com/rest/reference/actions#get-a-repository-public-key) endpoint. */
+        encrypted_value?: string;
+        /** ID of the key you used to encrypt the secret. */
+        key_id?: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<void, any>({
@@ -20958,13 +16719,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/actions/workflows
      */
     actionsListRepoWorkflows: (
-      { owner, repo, ...query }: IMySuperPrefixActionsListRepoWorkflowsParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         {
           total_count: number;
-          workflows: IMySuperPrefixWorkflowMySuperSuffix[];
+          workflows: Workflow[];
         },
         any
       >({
@@ -20984,7 +16758,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/actions/workflows/{workflow_id}
      */
     actionsGetWorkflow: (owner: string, repo: string, workflowId: number | string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixWorkflowMySuperSuffix, any>({
+      this.request<Workflow, any>({
         path: `/repos/${owner}/${repo}/actions/workflows/${workflowId}`,
         method: "GET",
         format: "json",
@@ -21018,7 +16792,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       workflowId: number | string,
-      data: IMySuperPrefixActionsCreateWorkflowDispatchPayloadMySuperSuffix,
+      data: {
+        /** The git reference for the workflow. The reference can be a branch or tag name. */
+        ref: string;
+        /** Input keys and values configured in the workflow file. The maximum number of properties is 10. Any default properties configured in the workflow file will be used when `inputs` are omitted. */
+        inputs?: Record<string, string>;
+      },
       params: RequestParams = {},
     ) =>
       this.request<void, any>({
@@ -21053,13 +16832,35 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs
      */
     actionsListWorkflowRuns: (
-      { owner, repo, workflowId, ...query }: IMySuperPrefixActionsListWorkflowRunsParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      workflowId: number | string,
+      query?: {
+        /** Returns someone's workflow runs. Use the login for the user who created the `push` associated with the check suite or workflow run. */
+        actor?: string;
+        /** Returns workflow runs associated with a branch. Use the name of the branch of the `push`. */
+        branch?: string;
+        /** Returns workflow run triggered by the event you specify. For example, `push`, `pull_request` or `issue`. For more information, see "[Events that trigger workflows](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows)." */
+        event?: string;
+        /** Returns workflow runs associated with the check run `status` or `conclusion` you specify. For example, a conclusion can be `success` or a status can be `completed`. For more information, see the `status` and `conclusion` options available in "[Create a check run](https://docs.github.com/rest/reference/checks#create-a-check-run)." */
+        status?: "completed" | "status" | "conclusion";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         {
           total_count: number;
-          workflow_runs: IMySuperPrefixWorkflowRunMySuperSuffix[];
+          workflow_runs: WorkflowRun[];
         },
         any
       >({
@@ -21079,7 +16880,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/actions/workflows/{workflow_id}/timing
      */
     actionsGetWorkflowUsage: (owner: string, repo: string, workflowId: number | string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixWorkflowUsageMySuperSuffix, any>({
+      this.request<WorkflowUsage, any>({
         path: `/repos/${owner}/${repo}/actions/workflows/${workflowId}/timing`,
         method: "GET",
         format: "json",
@@ -21095,10 +16896,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/assignees
      */
     issuesListAssignees: (
-      { owner, repo, ...query }: IMySuperPrefixIssuesListAssigneesParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixSimpleUserMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<SimpleUser[], BasicError>({
         path: `/repos/${owner}/${repo}/assignees`,
         method: "GET",
         query: query,
@@ -21115,7 +16929,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/assignees/{assignee}
      */
     issuesCheckUserCanBeAssigned: (owner: string, repo: string, assignee: string, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/repos/${owner}/${repo}/assignees/${assignee}`,
         method: "GET",
         ...params,
@@ -21160,10 +16974,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/branches
      */
     reposListBranches: (
-      { owner, repo, ...query }: IMySuperPrefixReposListBranchesParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /** Setting to `true` returns only protected branches. When set to `false`, only unprotected branches are returned. Omitting this parameter returns all branches. */
+        protected?: boolean;
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixShortBranchMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<ShortBranch[], BasicError>({
         path: `/repos/${owner}/${repo}/branches`,
         method: "GET",
         query: query,
@@ -21181,8 +17010,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     reposGetBranch: (owner: string, repo: string, branch: string, params: RequestParams = {}) =>
       this.request<
-        IMySuperPrefixBranchWithProtectionMySuperSuffix,
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        BranchWithProtection,
+        | BasicError
         | {
             message: string;
             documentation_url: string;
@@ -21203,7 +17032,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/branches/{branch}/protection
      */
     reposGetBranchProtection: (owner: string, repo: string, branch: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixBranchProtectionMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<BranchProtection, BasicError>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection`,
         method: "GET",
         format: "json",
@@ -21222,17 +17051,58 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       branch: string,
-      data: IMySuperPrefixReposUpdateBranchProtectionPayloadMySuperSuffix,
+      data: {
+        /** Require status checks to pass before merging. Set to `null` to disable. */
+        required_status_checks: {
+          /** Require branches to be up to date before merging. */
+          strict: boolean;
+          /** The list of status checks to require in order to merge into this branch */
+          contexts: string[];
+        } | null;
+        /** Enforce all configured restrictions for administrators. Set to `true` to enforce required status checks for repository administrators. Set to `null` to disable. */
+        enforce_admins: boolean | null;
+        /** Require at least one approving review on a pull request, before merging. Set to `null` to disable. */
+        required_pull_request_reviews: {
+          /** Specify which users and teams can dismiss pull request reviews. Pass an empty `dismissal_restrictions` object to disable. User and team `dismissal_restrictions` are only available for organization-owned repositories. Omit this parameter for personal repositories. */
+          dismissal_restrictions?: {
+            /** The list of user `login`s with dismissal access */
+            users?: string[];
+            /** The list of team `slug`s with dismissal access */
+            teams?: string[];
+          };
+          /** Set to `true` if you want to automatically dismiss approving reviews when someone pushes a new commit. */
+          dismiss_stale_reviews?: boolean;
+          /** Blocks merging pull requests until [code owners](https://help.github.com/articles/about-code-owners/) review them. */
+          require_code_owner_reviews?: boolean;
+          /** Specify the number of reviewers required to approve pull requests. Use a number between 1 and 6. */
+          required_approving_review_count?: number;
+        } | null;
+        /** Restrict who can push to the protected branch. User, app, and team `restrictions` are only available for organization-owned repositories. Set to `null` to disable. */
+        restrictions: {
+          /** The list of user `login`s with push access */
+          users: string[];
+          /** The list of team `slug`s with push access */
+          teams: string[];
+          /** The list of app `slug`s with push access */
+          apps?: string[];
+        } | null;
+        /** Enforces a linear commit Git history, which prevents anyone from pushing merge commits to a branch. Set to `true` to enforce a linear commit history. Set to `false` to disable a linear commit Git history. Your repository must allow squash merging or rebase merging before you can enable a linear commit history. Default: `false`. For more information, see "[Requiring a linear commit history](https://help.github.com/github/administering-a-repository/requiring-a-linear-commit-history)" in the GitHub Help documentation. */
+        required_linear_history?: boolean;
+        /** Permits force pushes to the protected branch by anyone with write access to the repository. Set to `true` to allow force pushes. Set to `false` or `null` to block force pushes. Default: `false`. For more information, see "[Enabling force pushes to a protected branch](https://help.github.com/en/github/administering-a-repository/enabling-force-pushes-to-a-protected-branch)" in the GitHub Help documentation." */
+        allow_force_pushes?: boolean | null;
+        /** Allows deletion of the protected branch by anyone with write access to the repository. Set to `false` to prevent deletion of the protected branch. Default: `false`. For more information, see "[Enabling force pushes to a protected branch](https://help.github.com/en/github/administering-a-repository/enabling-force-pushes-to-a-protected-branch)" in the GitHub Help documentation. */
+        allow_deletions?: boolean;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixProtectedBranchMySuperSuffix,
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        ProtectedBranch,
+        | BasicError
         | {
             message: string;
             documentation_url: string;
           }
-        | IMySuperPrefixValidationErrorSimpleMySuperSuffix
+        | ValidationErrorSimple
       >({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection`,
         method: "PUT",
@@ -21251,7 +17121,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/repos/{owner}/{repo}/branches/{branch}/protection
      */
     reposDeleteBranchProtection: (owner: string, repo: string, branch: string, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection`,
         method: "DELETE",
         ...params,
@@ -21266,7 +17136,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins
      */
     reposGetAdminBranchProtection: (owner: string, repo: string, branch: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixProtectedBranchAdminEnforcedMySuperSuffix, any>({
+      this.request<ProtectedBranchAdminEnforced, any>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection/enforce_admins`,
         method: "GET",
         format: "json",
@@ -21282,7 +17152,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins
      */
     reposSetAdminBranchProtection: (owner: string, repo: string, branch: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixProtectedBranchAdminEnforcedMySuperSuffix, any>({
+      this.request<ProtectedBranchAdminEnforced, any>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection/enforce_admins`,
         method: "POST",
         format: "json",
@@ -21298,7 +17168,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins
      */
     reposDeleteAdminBranchProtection: (owner: string, repo: string, branch: string, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection/enforce_admins`,
         method: "DELETE",
         ...params,
@@ -21313,7 +17183,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews
      */
     reposGetPullRequestReviewProtection: (owner: string, repo: string, branch: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixProtectedBranchPullRequestReviewMySuperSuffix, any>({
+      this.request<ProtectedBranchPullRequestReview, any>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection/required_pull_request_reviews`,
         method: "GET",
         format: "json",
@@ -21332,13 +17202,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       branch: string,
-      data: IMySuperPrefixReposUpdatePullRequestReviewProtectionPayloadMySuperSuffix,
+      data: {
+        /** Specify which users and teams can dismiss pull request reviews. Pass an empty `dismissal_restrictions` object to disable. User and team `dismissal_restrictions` are only available for organization-owned repositories. Omit this parameter for personal repositories. */
+        dismissal_restrictions?: {
+          /** The list of user `login`s with dismissal access */
+          users?: string[];
+          /** The list of team `slug`s with dismissal access */
+          teams?: string[];
+        };
+        /** Set to `true` if you want to automatically dismiss approving reviews when someone pushes a new commit. */
+        dismiss_stale_reviews?: boolean;
+        /** Blocks merging pull requests until [code owners](https://help.github.com/articles/about-code-owners/) have reviewed. */
+        require_code_owner_reviews?: boolean;
+        /** Specifies the number of reviewers required to approve pull requests. Use a number between 1 and 6. */
+        required_approving_review_count?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixProtectedBranchPullRequestReviewMySuperSuffix,
-        IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<ProtectedBranchPullRequestReview, ValidationError>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection/required_pull_request_reviews`,
         method: "PATCH",
         body: data,
@@ -21356,7 +17237,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews
      */
     reposDeletePullRequestReviewProtection: (owner: string, repo: string, branch: string, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection/required_pull_request_reviews`,
         method: "DELETE",
         ...params,
@@ -21371,7 +17252,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/branches/{branch}/protection/required_signatures
      */
     reposGetCommitSignatureProtection: (owner: string, repo: string, branch: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixProtectedBranchAdminEnforcedMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<ProtectedBranchAdminEnforced, BasicError>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection/required_signatures`,
         method: "GET",
         format: "json",
@@ -21387,7 +17268,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/repos/{owner}/{repo}/branches/{branch}/protection/required_signatures
      */
     reposCreateCommitSignatureProtection: (owner: string, repo: string, branch: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixProtectedBranchAdminEnforcedMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<ProtectedBranchAdminEnforced, BasicError>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection/required_signatures`,
         method: "POST",
         format: "json",
@@ -21403,7 +17284,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/repos/{owner}/{repo}/branches/{branch}/protection/required_signatures
      */
     reposDeleteCommitSignatureProtection: (owner: string, repo: string, branch: string, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection/required_signatures`,
         method: "DELETE",
         ...params,
@@ -21418,7 +17299,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks
      */
     reposGetStatusChecksProtection: (owner: string, repo: string, branch: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixStatusCheckPolicyMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<StatusCheckPolicy, BasicError>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection/required_status_checks`,
         method: "GET",
         format: "json",
@@ -21437,13 +17318,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       branch: string,
-      data: IMySuperPrefixReposUpdateStatusCheckProtectionPayloadMySuperSuffix,
+      data: {
+        /** Require branches to be up to date before merging. */
+        strict?: boolean;
+        /** The list of status checks to require in order to merge into this branch */
+        contexts?: string[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixStatusCheckPolicyMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<StatusCheckPolicy, BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection/required_status_checks`,
         method: "PATCH",
         body: data,
@@ -21476,7 +17359,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts
      */
     reposGetAllStatusCheckContexts: (owner: string, repo: string, branch: string, params: RequestParams = {}) =>
-      this.request<string[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<string[], BasicError>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection/required_status_checks/contexts`,
         method: "GET",
         format: "json",
@@ -21495,10 +17378,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       branch: string,
-      data: IMySuperPrefixReposAddStatusCheckContextsPayloadMySuperSuffix,
+      data: {
+        /** contexts parameter */
+        contexts: string[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<string[], IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<string[], BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection/required_status_checks/contexts`,
         method: "POST",
         body: data,
@@ -21519,10 +17405,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       branch: string,
-      data: IMySuperPrefixReposSetStatusCheckContextsPayloadMySuperSuffix,
+      data: {
+        /** contexts parameter */
+        contexts: string[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<string[], IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<string[], BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection/required_status_checks/contexts`,
         method: "PUT",
         body: data,
@@ -21543,10 +17432,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       branch: string,
-      data: IMySuperPrefixReposRemoveStatusCheckContextsPayloadMySuperSuffix,
+      data: {
+        /** contexts parameter */
+        contexts: string[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<string[], IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<string[], BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection/required_status_checks/contexts`,
         method: "DELETE",
         body: data,
@@ -21564,7 +17456,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/branches/{branch}/protection/restrictions
      */
     reposGetAccessRestrictions: (owner: string, repo: string, branch: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixBranchRestrictionPolicyMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<BranchRestrictionPolicy, BasicError>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection/restrictions`,
         method: "GET",
         format: "json",
@@ -21600,7 +17492,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       branch: string,
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixIntegrationMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Integration[], BasicError>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection/restrictions/apps`,
         method: "GET",
         format: "json",
@@ -21619,10 +17511,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       branch: string,
-      data: IMySuperPrefixReposAddAppAccessRestrictionsPayloadMySuperSuffix,
+      data: {
+        /** apps parameter */
+        apps: string[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixIntegrationMySuperSuffix[], IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<Integration[], ValidationError>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection/restrictions/apps`,
         method: "POST",
         body: data,
@@ -21643,10 +17538,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       branch: string,
-      data: IMySuperPrefixReposSetAppAccessRestrictionsPayloadMySuperSuffix,
+      data: {
+        /** apps parameter */
+        apps: string[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixIntegrationMySuperSuffix[], IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<Integration[], ValidationError>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection/restrictions/apps`,
         method: "PUT",
         body: data,
@@ -21667,10 +17565,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       branch: string,
-      data: IMySuperPrefixReposRemoveAppAccessRestrictionsPayloadMySuperSuffix,
+      data: {
+        /** apps parameter */
+        apps: string[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixIntegrationMySuperSuffix[], IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<Integration[], ValidationError>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection/restrictions/apps`,
         method: "DELETE",
         body: data,
@@ -21693,7 +17594,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       branch: string,
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixTeamMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Team[], BasicError>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection/restrictions/teams`,
         method: "GET",
         format: "json",
@@ -21712,10 +17613,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       branch: string,
-      data: IMySuperPrefixReposAddTeamAccessRestrictionsPayloadMySuperSuffix,
+      data: {
+        /** teams parameter */
+        teams: string[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixTeamMySuperSuffix[], IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<Team[], ValidationError>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection/restrictions/teams`,
         method: "POST",
         body: data,
@@ -21736,10 +17640,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       branch: string,
-      data: IMySuperPrefixReposSetTeamAccessRestrictionsPayloadMySuperSuffix,
+      data: {
+        /** teams parameter */
+        teams: string[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixTeamMySuperSuffix[], IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<Team[], ValidationError>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection/restrictions/teams`,
         method: "PUT",
         body: data,
@@ -21760,10 +17667,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       branch: string,
-      data: IMySuperPrefixReposRemoveTeamAccessRestrictionsPayloadMySuperSuffix,
+      data: {
+        /** teams parameter */
+        teams: string[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixTeamMySuperSuffix[], IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<Team[], ValidationError>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection/restrictions/teams`,
         method: "DELETE",
         body: data,
@@ -21786,7 +17696,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       branch: string,
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixSimpleUserMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<SimpleUser[], BasicError>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection/restrictions/users`,
         method: "GET",
         format: "json",
@@ -21805,10 +17715,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       branch: string,
-      data: IMySuperPrefixReposAddUserAccessRestrictionsPayloadMySuperSuffix,
+      data: {
+        /** users parameter */
+        users: string[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixSimpleUserMySuperSuffix[], IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<SimpleUser[], ValidationError>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection/restrictions/users`,
         method: "POST",
         body: data,
@@ -21829,10 +17742,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       branch: string,
-      data: IMySuperPrefixReposSetUserAccessRestrictionsPayloadMySuperSuffix,
+      data: {
+        /** users parameter */
+        users: string[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixSimpleUserMySuperSuffix[], IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<SimpleUser[], ValidationError>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection/restrictions/users`,
         method: "PUT",
         body: data,
@@ -21853,10 +17769,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       branch: string,
-      data: IMySuperPrefixReposRemoveUserAccessRestrictionsPayloadMySuperSuffix,
+      data: {
+        /** users parameter */
+        users: string[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixSimpleUserMySuperSuffix[], IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<SimpleUser[], ValidationError>({
         path: `/repos/${owner}/${repo}/branches/${branch}/protection/restrictions/users`,
         method: "DELETE",
         body: data,
@@ -21877,13 +17796,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       branch: string,
-      data: IMySuperPrefixReposRenameBranchPayloadMySuperSuffix,
+      data: {
+        /** The new name of the branch. */
+        new_name: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixBranchWithProtectionMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<BranchWithProtection, BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/branches/${branch}/rename`,
         method: "POST",
         body: data,
@@ -21903,10 +17822,118 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     checksCreate: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixChecksCreatePayloadMySuperSuffix,
+      data: (
+        | {
+            status?: "completed";
+            [key: string]: any;
+          }
+        | {
+            status?: "queued" | "in_progress";
+            [key: string]: any;
+          }
+        | ({
+            status?: "completed";
+            [key: string]: any;
+          } & {
+            status?: "queued" | "in_progress";
+            [key: string]: any;
+          })
+      ) & {
+        /** The name of the check. For example, "code-coverage". */
+        name: string;
+        /** The SHA of the commit. */
+        head_sha: string;
+        /** The URL of the integrator's site that has the full details of the check. If the integrator does not provide this, then the homepage of the GitHub app is used. */
+        details_url?: string;
+        /** A reference for the run on the integrator's system. */
+        external_id?: string;
+        /**
+         * The current status. Can be one of `queued`, `in_progress`, or `completed`.
+         * @default "queued"
+         */
+        status?: "queued" | "in_progress" | "completed";
+        /** The time that the check run began. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+        started_at?: string;
+        /**
+         * **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `success`, `failure`, `neutral`, `cancelled`, `skipped`, `timed_out`, or `action_required`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.
+         * **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. Only GitHub can change a check run conclusion to `stale`.
+         */
+        conclusion?: "success" | "failure" | "neutral" | "cancelled" | "skipped" | "timed_out" | "action_required";
+        /** The time the check completed. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+        completed_at?: string;
+        /** Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object) description. */
+        output?: {
+          /** The title of the check run. */
+          title: string;
+          /**
+           * The summary of the check run. This parameter supports Markdown.
+           * @maxLength 65535
+           */
+          summary: string;
+          /**
+           * The details of the check run. This parameter supports Markdown.
+           * @maxLength 65535
+           */
+          text?: string;
+          /**
+           * Adds information from your analysis to specific lines of code. Annotations are visible on GitHub in the **Checks** and **Files changed** tab of the pull request. The Checks API limits the number of annotations to a maximum of 50 per API request. To create more than 50 annotations, you have to make multiple requests to the [Update a check run](https://docs.github.com/rest/reference/checks#update-a-check-run) endpoint. Each time you update the check run, annotations are appended to the list of annotations that already exist for the check run. For details about how you can view annotations on GitHub, see "[About status checks](https://help.github.com/articles/about-status-checks#checks)". See the [`annotations` object](https://docs.github.com/rest/reference/checks#annotations-object) description for details about how to use this parameter.
+           * @maxItems 50
+           */
+          annotations?: {
+            /** The path of the file to add an annotation to. For example, `assets/css/main.css`. */
+            path: string;
+            /** The start line of the annotation. */
+            start_line: number;
+            /** The end line of the annotation. */
+            end_line: number;
+            /** The start column of the annotation. Annotations only support `start_column` and `end_column` on the same line. Omit this parameter if `start_line` and `end_line` have different values. */
+            start_column?: number;
+            /** The end column of the annotation. Annotations only support `start_column` and `end_column` on the same line. Omit this parameter if `start_line` and `end_line` have different values. */
+            end_column?: number;
+            /** The level of the annotation. Can be one of `notice`, `warning`, or `failure`. */
+            annotation_level: "notice" | "warning" | "failure";
+            /** A short description of the feedback for these lines of code. The maximum size is 64 KB. */
+            message: string;
+            /** The title that represents the annotation. The maximum size is 255 characters. */
+            title?: string;
+            /** Details about this annotation. The maximum size is 64 KB. */
+            raw_details?: string;
+          }[];
+          /** Adds images to the output displayed in the GitHub pull request UI. See the [`images` object](https://docs.github.com/rest/reference/checks#images-object) description for details. */
+          images?: {
+            /** The alternative text for the image. */
+            alt: string;
+            /** The full URL of the image. */
+            image_url: string;
+            /** A short image description. */
+            caption?: string;
+          }[];
+        };
+        /**
+         * Displays a button on GitHub that can be clicked to alert your app to do additional tasks. For example, a code linting app can display a button that automatically fixes detected errors. The button created in this object is displayed after the check run completes. When a user clicks the button, GitHub sends the [`check_run.requested_action` webhook](https://docs.github.com/webhooks/event-payloads/#check_run) to your app. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://docs.github.com/rest/reference/checks#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)." To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)."
+         * @maxItems 3
+         */
+        actions?: {
+          /**
+           * The text to be displayed on a button in the web UI. The maximum size is 20 characters.
+           * @maxLength 20
+           */
+          label: string;
+          /**
+           * A short explanation of what this action would do. The maximum size is 40 characters.
+           * @maxLength 40
+           */
+          description: string;
+          /**
+           * A reference for the action on the integrator's system. The maximum size is 20 characters.
+           * @maxLength 20
+           */
+          identifier: string;
+        }[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixCheckRunMySuperSuffix, any>({
+      this.request<CheckRun, any>({
         path: `/repos/${owner}/${repo}/check-runs`,
         method: "POST",
         body: data,
@@ -21924,7 +17951,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/check-runs/{check_run_id}
      */
     checksGet: (owner: string, repo: string, checkRunId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixCheckRunMySuperSuffix, any>({
+      this.request<CheckRun, any>({
         path: `/repos/${owner}/${repo}/check-runs/${checkRunId}`,
         method: "GET",
         format: "json",
@@ -21943,10 +17970,113 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       checkRunId: number,
-      data: IMySuperPrefixChecksUpdatePayloadMySuperSuffix,
+      data: (
+        | {
+            status?: "completed";
+            [key: string]: any;
+          }
+        | {
+            status?: "queued" | "in_progress";
+            [key: string]: any;
+          }
+        | ({
+            status?: "completed";
+            [key: string]: any;
+          } & {
+            status?: "queued" | "in_progress";
+            [key: string]: any;
+          })
+      ) & {
+        /** The name of the check. For example, "code-coverage". */
+        name?: string;
+        /** The URL of the integrator's site that has the full details of the check. */
+        details_url?: string;
+        /** A reference for the run on the integrator's system. */
+        external_id?: string;
+        /** This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+        started_at?: string;
+        /** The current status. Can be one of `queued`, `in_progress`, or `completed`. */
+        status?: "queued" | "in_progress" | "completed";
+        /**
+         * **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `success`, `failure`, `neutral`, `cancelled`, `skipped`, `timed_out`, or `action_required`.
+         * **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. Only GitHub can change a check run conclusion to `stale`.
+         */
+        conclusion?: "success" | "failure" | "neutral" | "cancelled" | "skipped" | "timed_out" | "action_required";
+        /** The time the check completed. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+        completed_at?: string;
+        /** Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object-1) description. */
+        output?: {
+          /** **Required**. */
+          title?: string;
+          /**
+           * Can contain Markdown.
+           * @maxLength 65535
+           */
+          summary: string;
+          /**
+           * Can contain Markdown.
+           * @maxLength 65535
+           */
+          text?: string;
+          /**
+           * Adds information from your analysis to specific lines of code. Annotations are visible in GitHub's pull request UI. Annotations are visible in GitHub's pull request UI. The Checks API limits the number of annotations to a maximum of 50 per API request. To create more than 50 annotations, you have to make multiple requests to the [Update a check run](https://docs.github.com/rest/reference/checks#update-a-check-run) endpoint. Each time you update the check run, annotations are appended to the list of annotations that already exist for the check run. For details about annotations in the UI, see "[About status checks](https://help.github.com/articles/about-status-checks#checks)". See the [`annotations` object](https://docs.github.com/rest/reference/checks#annotations-object-1) description for details.
+           * @maxItems 50
+           */
+          annotations?: {
+            /** The path of the file to add an annotation to. For example, `assets/css/main.css`. */
+            path: string;
+            /** The start line of the annotation. */
+            start_line: number;
+            /** The end line of the annotation. */
+            end_line: number;
+            /** The start column of the annotation. Annotations only support `start_column` and `end_column` on the same line. Omit this parameter if `start_line` and `end_line` have different values. */
+            start_column?: number;
+            /** The end column of the annotation. Annotations only support `start_column` and `end_column` on the same line. Omit this parameter if `start_line` and `end_line` have different values. */
+            end_column?: number;
+            /** The level of the annotation. Can be one of `notice`, `warning`, or `failure`. */
+            annotation_level: "notice" | "warning" | "failure";
+            /** A short description of the feedback for these lines of code. The maximum size is 64 KB. */
+            message: string;
+            /** The title that represents the annotation. The maximum size is 255 characters. */
+            title?: string;
+            /** Details about this annotation. The maximum size is 64 KB. */
+            raw_details?: string;
+          }[];
+          /** Adds images to the output displayed in the GitHub pull request UI. See the [`images` object](https://docs.github.com/rest/reference/checks#annotations-object-1) description for details. */
+          images?: {
+            /** The alternative text for the image. */
+            alt: string;
+            /** The full URL of the image. */
+            image_url: string;
+            /** A short image description. */
+            caption?: string;
+          }[];
+        };
+        /**
+         * Possible further actions the integrator can perform, which a user may trigger. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://docs.github.com/rest/reference/checks#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)."
+         * @maxItems 3
+         */
+        actions?: {
+          /**
+           * The text to be displayed on a button in the web UI. The maximum size is 20 characters.
+           * @maxLength 20
+           */
+          label: string;
+          /**
+           * A short explanation of what this action would do. The maximum size is 40 characters.
+           * @maxLength 40
+           */
+          description: string;
+          /**
+           * A reference for the action on the integrator's system. The maximum size is 20 characters.
+           * @maxLength 20
+           */
+          identifier: string;
+        }[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixCheckRunMySuperSuffix, any>({
+      this.request<CheckRun, any>({
         path: `/repos/${owner}/${repo}/check-runs/${checkRunId}`,
         method: "PATCH",
         body: data,
@@ -21964,10 +18094,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/check-runs/{check_run_id}/annotations
      */
     checksListAnnotations: (
-      { owner, repo, checkRunId, ...query }: IMySuperPrefixChecksListAnnotationsParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      checkRunId: number,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixCheckAnnotationMySuperSuffix[], any>({
+      this.request<CheckAnnotation[], any>({
         path: `/repos/${owner}/${repo}/check-runs/${checkRunId}/annotations`,
         method: "GET",
         query: query,
@@ -21986,10 +18130,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     checksCreateSuite: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixChecksCreateSuitePayloadMySuperSuffix,
+      data: {
+        /** The sha of the head commit. */
+        head_sha: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixCheckSuiteMySuperSuffix, any>({
+      this.request<CheckSuite, any>({
         path: `/repos/${owner}/${repo}/check-suites`,
         method: "POST",
         body: data,
@@ -22009,10 +18156,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     checksSetSuitesPreferences: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixChecksSetSuitesPreferencesPayloadMySuperSuffix,
+      data: {
+        /** Enables or disables automatic creation of CheckSuite events upon pushes to the repository. Enabled by default. See the [`auto_trigger_checks` object](https://docs.github.com/rest/reference/checks#auto_trigger_checks-object) description for details. */
+        auto_trigger_checks?: {
+          /** The `id` of the GitHub App. */
+          app_id: number;
+          /**
+           * Set to `true` to enable automatic creation of CheckSuite events upon pushes to the repository, or `false` to disable them.
+           * @default true
+           */
+          setting: boolean;
+        }[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixCheckSuitePreferenceMySuperSuffix, any>({
+      this.request<CheckSuitePreference, any>({
         path: `/repos/${owner}/${repo}/check-suites/preferences`,
         method: "PATCH",
         body: data,
@@ -22030,7 +18188,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/check-suites/{check_suite_id}
      */
     checksGetSuite: (owner: string, repo: string, checkSuiteId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixCheckSuiteMySuperSuffix, any>({
+      this.request<CheckSuite, any>({
         path: `/repos/${owner}/${repo}/check-suites/${checkSuiteId}`,
         method: "GET",
         format: "json",
@@ -22046,13 +18204,36 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/check-suites/{check_suite_id}/check-runs
      */
     checksListForSuite: (
-      { owner, repo, checkSuiteId, ...query }: IMySuperPrefixChecksListForSuiteParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      checkSuiteId: number,
+      query?: {
+        /** Returns check runs with the specified `name`. */
+        check_name?: string;
+        /** Returns check runs with the specified `status`. Can be one of `queued`, `in_progress`, or `completed`. */
+        status?: "queued" | "in_progress" | "completed";
+        /**
+         * Filters check runs by their `completed_at` timestamp. Can be one of `latest` (returning the most recent check runs) or `all`.
+         * @default "latest"
+         */
+        filter?: "latest" | "all";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         {
           total_count: number;
-          check_runs: IMySuperPrefixCheckRunMySuperSuffix[];
+          check_runs: CheckRun[];
         },
         any
       >({
@@ -22087,11 +18268,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/code-scanning/alerts
      */
     codeScanningListAlertsForRepo: (
-      { owner, repo, ...query }: IMySuperPrefixCodeScanningListAlertsForRepoParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /** Set to `open`, `fixed`, or `dismissed` to list code scanning alerts in a specific state. */
+        state?: CodeScanningAlertState;
+        /** Set a full Git reference to list alerts for a specific branch. The `ref` must be formatted as `refs/heads/<branch name>`. */
+        ref?: CodeScanningAlertRef;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixCodeScanningAlertCodeScanningAlertItemsMySuperSuffix[],
+        CodeScanningAlertCodeScanningAlertItems[],
         void | {
           code?: string;
           message?: string;
@@ -22115,9 +18303,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     codeScanningGetAlert: (owner: string, repo: string, alertNumber: number, params: RequestParams = {}) =>
       this.request<
-        IMySuperPrefixCodeScanningAlertCodeScanningAlertMySuperSuffix,
+        CodeScanningAlertCodeScanningAlert,
         | void
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        | BasicError
         | {
             code?: string;
             message?: string;
@@ -22141,11 +18329,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     codeScanningUpdateAlert: (
       owner: string,
       repo: string,
-      alertNumber: IMySuperPrefixAlertNumberMySuperSuffix,
-      data: IMySuperPrefixCodeScanningUpdateAlertPayloadMySuperSuffix,
+      alertNumber: AlertNumber,
+      data: {
+        /** Sets the state of the code scanning alert. Can be one of `open` or `dismissed`. You must provide `dismissed_reason` when you set the state to `dismissed`. */
+        state: CodeScanningAlertSetState;
+        /** **Required when the state is dismissed.** The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`. */
+        dismissed_reason?: CodeScanningAlertDismissedReason;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixCodeScanningAlertCodeScanningAlertMySuperSuffix, void>({
+      this.request<CodeScanningAlertCodeScanningAlert, void>({
         path: `/repos/${owner}/${repo}/code-scanning/alerts/${alertNumber}`,
         method: "PATCH",
         body: data,
@@ -22163,10 +18356,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/code-scanning/analyses
      */
     codeScanningListRecentAnalyses: (
-      { owner, repo, ...query }: IMySuperPrefixCodeScanningListRecentAnalysesParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /** Set a full Git reference to list alerts for a specific branch. The `ref` must be formatted as `refs/heads/<branch name>`. */
+        ref?: CodeScanningAnalysisRef;
+        /** Set a single code scanning tool name to filter alerts by tool. */
+        tool_name?: CodeScanningAnalysisToolName;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixCodeScanningAnalysisCodeScanningAnalysisMySuperSuffix[], void>({
+      this.request<CodeScanningAnalysisCodeScanningAnalysis[], void>({
         path: `/repos/${owner}/${repo}/code-scanning/analyses`,
         method: "GET",
         query: query,
@@ -22185,7 +18385,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     codeScanningUploadSarif: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixCodeScanningUploadSarifPayloadMySuperSuffix,
+      data: {
+        /** The commit SHA of the code scanning analysis file. */
+        commit_sha: CodeScanningAnalysisCommitSha;
+        /** The full Git reference of the code scanning analysis file, formatted as `refs/heads/<branch name>`. */
+        ref: CodeScanningAnalysisRef;
+        /** A Base64 string representing the SARIF file to upload. You must first compress your SARIF file using [`gzip`](http://www.gnu.org/software/gzip/manual/gzip.html) and then translate the contents of the file into a Base64 encoding string. */
+        sarif: CodeScanningAnalysisSarifFile;
+        /**
+         * The base directory used in the analysis, as it appears in the SARIF file.
+         * This property is used to convert file paths from absolute to relative, so that alerts can be mapped to their correct location in the repository.
+         * @format uri
+         * @example "file:///github/workspace/"
+         */
+        checkout_uri?: string;
+        /**
+         * The time that the analysis run began. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+         * @format date
+         */
+        started_at?: string;
+        /** The name of the tool used to generate the code scanning analysis alert. */
+        tool_name: CodeScanningAnalysisToolName;
+      },
       params: RequestParams = {},
     ) =>
       this.request<void, void>({
@@ -22205,10 +18426,31 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/collaborators
      */
     reposListCollaborators: (
-      { owner, repo, ...query }: IMySuperPrefixReposListCollaboratorsParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * Filter collaborators returned by their affiliation. Can be one of:
+         * \* `outside`: All outside collaborators of an organization-owned repository.
+         * \* `direct`: All collaborators with permissions to an organization-owned repository, regardless of organization membership status.
+         * \* `all`: All collaborators the authenticated user can see.
+         * @default "all"
+         */
+        affiliation?: "outside" | "direct" | "all";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixCollaboratorMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Collaborator[], BasicError>({
         path: `/repos/${owner}/${repo}/collaborators`,
         method: "GET",
         query: query,
@@ -22243,13 +18485,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       username: string,
-      data: IMySuperPrefixReposAddCollaboratorPayloadMySuperSuffix,
+      data: {
+        /**
+         * The permission to grant the collaborator. **Only valid on organization-owned repositories.** Can be one of:
+         * \* `pull` - can pull, but not push to or administer this repository.
+         * \* `push` - can pull and push, but not administer this repository.
+         * \* `admin` - can pull, push and administer this repository.
+         * \* `maintain` - Recommended for project managers who need to manage the repository without access to sensitive or destructive actions.
+         * \* `triage` - Recommended for contributors who need to proactively manage issues and pull requests without write access.
+         * @default "push"
+         */
+        permission?: "pull" | "push" | "admin" | "maintain" | "triage";
+        /** @example ""push"" */
+        permissions?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixRepositoryInvitationMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<RepositoryInvitation, BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/collaborators/${username}`,
         method: "PUT",
         body: data,
@@ -22282,7 +18534,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/collaborators/{username}/permission
      */
     reposGetCollaboratorPermissionLevel: (owner: string, repo: string, username: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixRepositoryCollaboratorPermissionMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<RepositoryCollaboratorPermission, BasicError>({
         path: `/repos/${owner}/${repo}/collaborators/${username}/permission`,
         method: "GET",
         format: "json",
@@ -22298,10 +18550,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/comments
      */
     reposListCommitCommentsForRepo: (
-      { owner, repo, ...query }: IMySuperPrefixReposListCommitCommentsForRepoParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixCommitCommentMySuperSuffix[], any>({
+      this.request<CommitComment[], any>({
         path: `/repos/${owner}/${repo}/comments`,
         method: "GET",
         query: query,
@@ -22318,7 +18583,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/comments/{comment_id}
      */
     reposGetCommitComment: (owner: string, repo: string, commentId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixCommitCommentMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<CommitComment, BasicError>({
         path: `/repos/${owner}/${repo}/comments/${commentId}`,
         method: "GET",
         format: "json",
@@ -22337,10 +18602,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       commentId: number,
-      data: IMySuperPrefixReposUpdateCommitCommentPayloadMySuperSuffix,
+      data: {
+        /** The contents of the comment */
+        body: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixCommitCommentMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<CommitComment, BasicError>({
         path: `/repos/${owner}/${repo}/comments/${commentId}`,
         method: "PATCH",
         body: data,
@@ -22358,7 +18626,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/repos/{owner}/{repo}/comments/{comment_id}
      */
     reposDeleteCommitComment: (owner: string, repo: string, commentId: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/repos/${owner}/${repo}/comments/${commentId}`,
         method: "DELETE",
         ...params,
@@ -22373,12 +18641,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/comments/{comment_id}/reactions
      */
     reactionsListForCommitComment: (
-      { owner, repo, commentId, ...query }: IMySuperPrefixReactionsListForCommitCommentParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      commentId: number,
+      query?: {
+        /** Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a commit comment. */
+        content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixReactionMySuperSuffix[],
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        Reaction[],
+        | BasicError
         | {
             message: string;
             documentation_url: string;
@@ -22403,16 +18687,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       commentId: number,
-      data: IMySuperPrefixReactionsCreateForCommitCommentPayloadMySuperSuffix,
+      data: {
+        /** The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the commit comment. */
+        content: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixReactionMySuperSuffix,
+        Reaction,
         | {
             message: string;
             documentation_url: string;
           }
-        | IMySuperPrefixValidationErrorMySuperSuffix
+        | ValidationError
       >({
         path: `/repos/${owner}/${repo}/comments/${commentId}/reactions`,
         method: "POST",
@@ -22452,10 +18739,33 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/commits
      */
     reposListCommits: (
-      { owner, repo, ...query }: IMySuperPrefixReposListCommitsParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /** SHA or branch to start listing commits from. Default: the repository’s default branch (usually `master`). */
+        sha?: string;
+        /** Only commits containing this file path will be returned. */
+        path?: string;
+        /** GitHub login or email address by which to filter by commit author. */
+        author?: string;
+        /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+        since?: string;
+        /** Only commits before this date will be returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+        until?: string;
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixCommitMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Commit[], BasicError>({
         path: `/repos/${owner}/${repo}/commits`,
         method: "GET",
         query: query,
@@ -22473,12 +18783,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     reposListBranchesForHeadCommit: (owner: string, repo: string, commitSha: string, params: RequestParams = {}) =>
       this.request<
-        IMySuperPrefixBranchShortMySuperSuffix[],
+        BranchShort[],
         | {
             message: string;
             documentation_url: string;
           }
-        | IMySuperPrefixValidationErrorMySuperSuffix
+        | ValidationError
       >({
         path: `/repos/${owner}/${repo}/commits/${commitSha}/branches-where-head`,
         method: "GET",
@@ -22495,10 +18805,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/commits/{commit_sha}/comments
      */
     reposListCommentsForCommit: (
-      { owner, repo, commitSha, ...query }: IMySuperPrefixReposListCommentsForCommitParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      commitSha: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixCommitCommentMySuperSuffix[], any>({
+      this.request<CommitComment[], any>({
         path: `/repos/${owner}/${repo}/commits/${commitSha}/comments`,
         method: "GET",
         query: query,
@@ -22518,13 +18842,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       commitSha: string,
-      data: IMySuperPrefixReposCreateCommitCommentPayloadMySuperSuffix,
+      data: {
+        /** The contents of the comment. */
+        body: string;
+        /** Relative path of the file to comment on. */
+        path?: string;
+        /** Line index in the diff to comment on. */
+        position?: number;
+        /** **Deprecated**. Use **position** parameter instead. Line number in the file to comment on. */
+        line?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixCommitCommentMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<CommitComment, BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/commits/${commitSha}/comments`,
         method: "POST",
         body: data,
@@ -22542,11 +18872,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/commits/{commit_sha}/pulls
      */
     reposListPullRequestsAssociatedWithCommit: (
-      { owner, repo, commitSha, ...query }: IMySuperPrefixReposListPullRequestsAssociatedWithCommitParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      commitSha: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixPullRequestSimpleMySuperSuffix[],
+        PullRequestSimple[],
         {
           message: string;
           documentation_url: string;
@@ -22568,10 +18912,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/commits/{ref}
      */
     reposGetCommit: (owner: string, repo: string, ref: string, params: RequestParams = {}) =>
-      this.request<
-        IMySuperPrefixCommitMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<Commit, BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/commits/${ref}`,
         method: "GET",
         format: "json",
@@ -22587,13 +18928,36 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/commits/{ref}/check-runs
      */
     checksListForRef: (
-      { owner, repo, ref, ...query }: IMySuperPrefixChecksListForRefParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      ref: string,
+      query?: {
+        /** Returns check runs with the specified `name`. */
+        check_name?: string;
+        /** Returns check runs with the specified `status`. Can be one of `queued`, `in_progress`, or `completed`. */
+        status?: "queued" | "in_progress" | "completed";
+        /**
+         * Filters check runs by their `completed_at` timestamp. Can be one of `latest` (returning the most recent check runs) or `all`.
+         * @default "latest"
+         */
+        filter?: "latest" | "all";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         {
           total_count: number;
-          check_runs: IMySuperPrefixCheckRunMySuperSuffix[];
+          check_runs: CheckRun[];
         },
         any
       >({
@@ -22613,13 +18977,34 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/commits/{ref}/check-suites
      */
     checksListSuitesForRef: (
-      { owner, repo, ref, ...query }: IMySuperPrefixChecksListSuitesForRefParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      ref: string,
+      query?: {
+        /**
+         * Filters check suites by GitHub App `id`.
+         * @example 1
+         */
+        app_id?: number;
+        /** Returns check runs with the specified `name`. */
+        check_name?: string;
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         {
           total_count: number;
-          check_suites: IMySuperPrefixCheckSuiteMySuperSuffix[];
+          check_suites: CheckSuite[];
         },
         any
       >({
@@ -22639,7 +19024,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/commits/{ref}/status
      */
     reposGetCombinedStatusForRef: (owner: string, repo: string, ref: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixCombinedCommitStatusMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<CombinedCommitStatus, BasicError>({
         path: `/repos/${owner}/${repo}/commits/${ref}/status`,
         method: "GET",
         format: "json",
@@ -22655,10 +19040,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/commits/{ref}/statuses
      */
     reposListCommitStatusesForRef: (
-      { owner, repo, ref, ...query }: IMySuperPrefixReposListCommitStatusesForRefParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      ref: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixStatusMySuperSuffix[], any>({
+      this.request<Status[], any>({
         path: `/repos/${owner}/${repo}/commits/${ref}/statuses`,
         method: "GET",
         query: query,
@@ -22675,7 +19074,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/community/code_of_conduct
      */
     codesOfConductGetForRepo: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixCodeOfConductMySuperSuffix, any>({
+      this.request<CodeOfConduct, any>({
         path: `/repos/${owner}/${repo}/community/code_of_conduct`,
         method: "GET",
         format: "json",
@@ -22691,7 +19090,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/community/profile
      */
     reposGetCommunityProfileMetrics: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixCommunityProfileMySuperSuffix, any>({
+      this.request<CommunityProfile, any>({
         path: `/repos/${owner}/${repo}/community/profile`,
         method: "GET",
         format: "json",
@@ -22707,7 +19106,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/compare/{base}...{head}
      */
     reposCompareCommits: (owner: string, repo: string, base: string, head: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixCommitComparisonMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<CommitComparison, BasicError>({
         path: `/repos/${owner}/${repo}/compare/${base}...${head}`,
         method: "GET",
         format: "json",
@@ -22723,10 +19122,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/contents/{path}
      */
     reposGetContent: (
-      { owner, repo, path, ...query }: IMySuperPrefixReposGetContentParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      path: string,
+      query?: {
+        /** The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`) */
+        ref?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixContentTreeMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<ContentTree, BasicError>({
         path: `/repos/${owner}/${repo}/contents/${path}`,
         method: "GET",
         query: query,
@@ -22746,13 +19151,37 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       path: string,
-      data: IMySuperPrefixReposCreateOrUpdateFileContentsPayloadMySuperSuffix,
+      data: {
+        /** The commit message. */
+        message: string;
+        /** The new file content, using Base64 encoding. */
+        content: string;
+        /** **Required if you are updating a file**. The blob SHA of the file being replaced. */
+        sha?: string;
+        /** The branch name. Default: the repository’s default branch (usually `master`) */
+        branch?: string;
+        /** The person that committed the file. Default: the authenticated user. */
+        committer?: {
+          /** The name of the author or committer of the commit. You'll receive a `422` status code if `name` is omitted. */
+          name: string;
+          /** The email of the author or committer of the commit. You'll receive a `422` status code if `email` is omitted. */
+          email: string;
+          /** @example ""2013-01-05T13:13:22+05:00"" */
+          date?: string;
+        };
+        /** The author of the file. Default: The `committer` or the authenticated user if you omit `committer`. */
+        author?: {
+          /** The name of the author or committer of the commit. You'll receive a `422` status code if `name` is omitted. */
+          name: string;
+          /** The email of the author or committer of the commit. You'll receive a `422` status code if `email` is omitted. */
+          email: string;
+          /** @example ""2013-01-15T17:13:22+05:00"" */
+          date?: string;
+        };
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixFileCommitMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<FileCommit, BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/contents/${path}`,
         method: "PUT",
         body: data,
@@ -22773,13 +19202,34 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       path: string,
-      data: IMySuperPrefixReposDeleteFilePayloadMySuperSuffix,
+      data: {
+        /** The commit message. */
+        message: string;
+        /** The blob SHA of the file being replaced. */
+        sha: string;
+        /** The branch name. Default: the repository’s default branch (usually `master`) */
+        branch?: string;
+        /** object containing information about the committer. */
+        committer?: {
+          /** The name of the author (or committer) of the commit */
+          name?: string;
+          /** The email of the author (or committer) of the commit */
+          email?: string;
+        };
+        /** object containing information about the author. */
+        author?: {
+          /** The name of the author (or committer) of the commit */
+          name?: string;
+          /** The email of the author (or committer) of the commit */
+          email?: string;
+        };
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixFileCommitMySuperSuffix,
-        | IMySuperPrefixBasicErrorMySuperSuffix
-        | IMySuperPrefixValidationErrorMySuperSuffix
+        FileCommit,
+        | BasicError
+        | ValidationError
         | {
             code?: string;
             message?: string;
@@ -22803,10 +19253,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/contributors
      */
     reposListContributors: (
-      { owner, repo, ...query }: IMySuperPrefixReposListContributorsParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /** Set to `1` or `true` to include anonymous contributors in results. */
+        anon?: string;
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixContributorMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Contributor[], BasicError>({
         path: `/repos/${owner}/${repo}/contributors`,
         method: "GET",
         query: query,
@@ -22823,10 +19288,43 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/deployments
      */
     reposListDeployments: (
-      { owner, repo, ...query }: IMySuperPrefixReposListDeploymentsParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * The SHA recorded at creation time.
+         * @default "none"
+         */
+        sha?: string;
+        /**
+         * The name of the ref. This can be a branch, tag, or SHA.
+         * @default "none"
+         */
+        ref?: string;
+        /**
+         * The name of the task for the deployment (e.g., `deploy` or `deploy:migrations`).
+         * @default "none"
+         */
+        task?: string;
+        /**
+         * The name of the environment that was deployed to (e.g., `staging` or `production`).
+         * @default "none"
+         */
+        environment?: string;
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixDeploymentMySuperSuffix[], any>({
+      this.request<Deployment[], any>({
         path: `/repos/${owner}/${repo}/deployments`,
         method: "GET",
         query: query,
@@ -22845,17 +19343,57 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     reposCreateDeployment: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixReposCreateDeploymentPayloadMySuperSuffix,
+      data: {
+        /** The ref to deploy. This can be a branch, tag, or SHA. */
+        ref: string;
+        /**
+         * Specifies a task to execute (e.g., `deploy` or `deploy:migrations`).
+         * @default "deploy"
+         */
+        task?: string;
+        /**
+         * Attempts to automatically merge the default branch into the requested ref, if it's behind the default branch.
+         * @default true
+         */
+        auto_merge?: boolean;
+        /** The [status](https://docs.github.com/rest/reference/repos#statuses) contexts to verify against commit status checks. If you omit this parameter, GitHub verifies all unique contexts before creating a deployment. To bypass checking entirely, pass an empty array. Defaults to all unique contexts. */
+        required_contexts?: string[];
+        /** JSON payload with extra information about the deployment. */
+        payload?: Record<string, any> | string;
+        /**
+         * Name for the target deployment environment (e.g., `production`, `staging`, `qa`).
+         * @default "production"
+         */
+        environment?: string;
+        /**
+         * Short description of the deployment.
+         * @default ""
+         */
+        description?: string | null;
+        /**
+         * Specifies if the given environment is specific to the deployment and will no longer exist at some point in the future. Default: `false`
+         * **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type. **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type.
+         * @default false
+         */
+        transient_environment?: boolean;
+        /**
+         * Specifies if the given environment is one that end-users directly interact with. Default: `true` when `environment` is `production` and `false` otherwise.
+         * **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type.
+         */
+        production_environment?: boolean;
+        /** @example ""1776-07-04T00:00:00.000-07:52"" */
+        created_at?: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixDeploymentMySuperSuffix,
+        Deployment,
         | {
             message?: string;
             /** @example ""https://docs.github.com/rest/reference/repos#create-a-deployment"" */
             documentation_url?: string;
           }
-        | IMySuperPrefixValidationErrorMySuperSuffix
+        | ValidationError
       >({
         path: `/repos/${owner}/${repo}/deployments`,
         method: "POST",
@@ -22874,7 +19412,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/deployments/{deployment_id}
      */
     reposGetDeployment: (owner: string, repo: string, deploymentId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixDeploymentMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Deployment, BasicError>({
         path: `/repos/${owner}/${repo}/deployments/${deploymentId}`,
         method: "GET",
         format: "json",
@@ -22890,7 +19428,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/repos/{owner}/{repo}/deployments/{deployment_id}
      */
     reposDeleteDeployment: (owner: string, repo: string, deploymentId: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorSimpleMySuperSuffix>({
+      this.request<void, BasicError | ValidationErrorSimple>({
         path: `/repos/${owner}/${repo}/deployments/${deploymentId}`,
         method: "DELETE",
         ...params,
@@ -22905,10 +19443,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/deployments/{deployment_id}/statuses
      */
     reposListDeploymentStatuses: (
-      { owner, repo, deploymentId, ...query }: IMySuperPrefixReposListDeploymentStatusesParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      deploymentId: number,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixDeploymentStatusMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<DeploymentStatus[], BasicError>({
         path: `/repos/${owner}/${repo}/deployments/${deploymentId}/statuses`,
         method: "GET",
         query: query,
@@ -22928,10 +19480,43 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       deploymentId: number,
-      data: IMySuperPrefixReposCreateDeploymentStatusPayloadMySuperSuffix,
+      data: {
+        /** The state of the status. Can be one of `error`, `failure`, `inactive`, `in_progress`, `queued` `pending`, or `success`. **Note:** To use the `inactive` state, you must provide the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type. To use the `in_progress` and `queued` states, you must provide the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type. When you set a transient deployment to `inactive`, the deployment will be shown as `destroyed` in GitHub. */
+        state: "error" | "failure" | "inactive" | "in_progress" | "queued" | "pending" | "success";
+        /**
+         * The target URL to associate with this status. This URL should contain output to keep the user updated while the task is running or serve as historical information for what happened in the deployment. **Note:** It's recommended to use the `log_url` parameter, which replaces `target_url`.
+         * @default ""
+         */
+        target_url?: string;
+        /**
+         * The full URL of the deployment's output. This parameter replaces `target_url`. We will continue to accept `target_url` to support legacy uses, but we recommend replacing `target_url` with `log_url`. Setting `log_url` will automatically set `target_url` to the same value. Default: `""`
+         * **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type. **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type.
+         * @default ""
+         */
+        log_url?: string;
+        /**
+         * A short description of the status. The maximum description length is 140 characters.
+         * @default ""
+         */
+        description?: string;
+        /** Name for the target deployment environment, which can be changed when setting a deploy status. For example, `production`, `staging`, or `qa`. **Note:** This parameter requires you to use the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type. */
+        environment?: "production" | "staging" | "qa";
+        /**
+         * Sets the URL for accessing your environment. Default: `""`
+         * **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type. **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type.
+         * @default ""
+         */
+        environment_url?: string;
+        /**
+         * Adds a new `inactive` status to all prior non-transient, non-production environment deployments with the same repository and `environment` name as the created status's deployment. An `inactive` status is only added to deployments that had a `success` state. Default: `true`
+         * **Note:** To add an `inactive` status to `production` environments, you must use the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type.
+         * **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type.
+         */
+        auto_inactive?: boolean;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixDeploymentStatusMySuperSuffix, IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<DeploymentStatus, ValidationError>({
         path: `/repos/${owner}/${repo}/deployments/${deploymentId}/statuses`,
         method: "POST",
         body: data,
@@ -22956,8 +19541,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixDeploymentStatusMySuperSuffix,
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        DeploymentStatus,
+        | BasicError
         | {
             message: string;
             documentation_url: string;
@@ -22980,10 +19565,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     reposCreateDispatchEvent: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixReposCreateDispatchEventPayloadMySuperSuffix,
+      data: {
+        /** A custom webhook event name. */
+        event_type: string;
+        /** JSON payload with extra information about the webhook event that your action or worklow may use. */
+        client_payload?: Record<string, any>;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<void, IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<void, ValidationError>({
         path: `/repos/${owner}/${repo}/dispatches`,
         method: "POST",
         body: data,
@@ -23000,10 +19590,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/events
      */
     activityListRepoEvents: (
-      { owner, repo, ...query }: IMySuperPrefixActivityListRepoEventsParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixEventMySuperSuffix[], any>({
+      this.request<Event[], any>({
         path: `/repos/${owner}/${repo}/events`,
         method: "GET",
         query: query,
@@ -23020,10 +19623,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/forks
      */
     reposListForks: (
-      { owner, repo, ...query }: IMySuperPrefixReposListForksParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * The sort order. Can be either `newest`, `oldest`, or `stargazers`.
+         * @default "newest"
+         */
+        sort?: "newest" | "oldest" | "stargazers";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixMinimalRepositoryMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<MinimalRepository[], BasicError>({
         path: `/repos/${owner}/${repo}/forks`,
         method: "GET",
         query: query,
@@ -23042,13 +19663,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     reposCreateFork: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixReposCreateForkPayloadMySuperSuffix,
+      data: {
+        /** Optional parameter to specify the organization name if forking into an organization. */
+        organization?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixRepositoryMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<Repository, BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/forks`,
         method: "POST",
         body: data,
@@ -23068,13 +19689,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     gitCreateBlob: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixGitCreateBlobPayloadMySuperSuffix,
+      data: {
+        /** The new blob's content. */
+        content: string;
+        /**
+         * The encoding used for `content`. Currently, `"utf-8"` and `"base64"` are supported.
+         * @default "utf-8"
+         */
+        encoding?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixShortBlobMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<ShortBlob, BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/git/blobs`,
         method: "POST",
         body: data,
@@ -23092,10 +19718,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/git/blobs/{file_sha}
      */
     gitGetBlob: (owner: string, repo: string, fileSha: string, params: RequestParams = {}) =>
-      this.request<
-        IMySuperPrefixBlobMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<Blob, BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/git/blobs/${fileSha}`,
         method: "GET",
         format: "json",
@@ -23113,13 +19736,37 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     gitCreateCommit: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixGitCreateCommitPayloadMySuperSuffix,
+      data: {
+        /** The commit message */
+        message: string;
+        /** The SHA of the tree object this commit points to */
+        tree: string;
+        /** The SHAs of the commits that were the parents of this commit. If omitted or empty, the commit will be written as a root commit. For a single parent, an array of one SHA should be provided; for a merge commit, an array of more than one should be provided. */
+        parents?: string[];
+        /** Information about the author of the commit. By default, the `author` will be the authenticated user and the current date. See the `author` and `committer` object below for details. */
+        author?: {
+          /** The name of the author (or committer) of the commit */
+          name?: string;
+          /** The email of the author (or committer) of the commit */
+          email?: string;
+          /** Indicates when this commit was authored (or committed). This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+          date?: string;
+        };
+        /** Information about the person who is making the commit. By default, `committer` will use the information set in `author`. See the `author` and `committer` object below for details. */
+        committer?: {
+          /** The name of the author (or committer) of the commit */
+          name?: string;
+          /** The email of the author (or committer) of the commit */
+          email?: string;
+          /** Indicates when this commit was authored (or committed). This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+          date?: string;
+        };
+        /** The [PGP signature](https://en.wikipedia.org/wiki/Pretty_Good_Privacy) of the commit. GitHub adds the signature to the `gpgsig` header of the created commit. For a commit signature to be verifiable by Git or GitHub, it must be an ASCII-armored detached PGP signature over the string commit as it would be written to the object database. To pass a `signature` parameter, you need to first manually create a valid PGP signature, which can be complicated. You may find it easier to [use the command line](https://git-scm.com/book/id/v2/Git-Tools-Signing-Your-Work) to create signed commits. */
+        signature?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixGitCommitMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<GitCommit, BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/git/commits`,
         method: "POST",
         body: data,
@@ -23137,7 +19784,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/git/commits/{commit_sha}
      */
     gitGetCommit: (owner: string, repo: string, commitSha: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixGitCommitMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<GitCommit, BasicError>({
         path: `/repos/${owner}/${repo}/git/commits/${commitSha}`,
         method: "GET",
         format: "json",
@@ -23153,10 +19800,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/git/matching-refs/{ref}
      */
     gitListMatchingRefs: (
-      { owner, repo, ref, ...query }: IMySuperPrefixGitListMatchingRefsParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      ref: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixGitRefMySuperSuffix[], any>({
+      this.request<GitRef[], any>({
         path: `/repos/${owner}/${repo}/git/matching-refs/${ref}`,
         method: "GET",
         query: query,
@@ -23173,7 +19834,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/git/ref/{ref}
      */
     gitGetRef: (owner: string, repo: string, ref: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixGitRefMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<GitRef, BasicError>({
         path: `/repos/${owner}/${repo}/git/ref/${ref}`,
         method: "GET",
         format: "json",
@@ -23191,10 +19852,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     gitCreateRef: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixGitCreateRefPayloadMySuperSuffix,
+      data: {
+        /** The name of the fully qualified reference (ie: `refs/heads/master`). If it doesn't start with 'refs' and have at least two slashes, it will be rejected. */
+        ref: string;
+        /** The SHA1 value for this reference. */
+        sha: string;
+        /** @example ""refs/heads/newbranch"" */
+        key?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixGitRefMySuperSuffix, IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<GitRef, ValidationError>({
         path: `/repos/${owner}/${repo}/git/refs`,
         method: "POST",
         body: data,
@@ -23215,10 +19883,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       ref: string,
-      data: IMySuperPrefixGitUpdateRefPayloadMySuperSuffix,
+      data: {
+        /** The SHA1 value to set this reference to */
+        sha: string;
+        /**
+         * Indicates whether to force the update or to make sure the update is a fast-forward update. Leaving this out or setting it to `false` will make sure you're not overwriting work.
+         * @default false
+         */
+        force?: boolean;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixGitRefMySuperSuffix, IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<GitRef, ValidationError>({
         path: `/repos/${owner}/${repo}/git/refs/${ref}`,
         method: "PATCH",
         body: data,
@@ -23236,7 +19912,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/repos/{owner}/{repo}/git/refs/{ref}
      */
     gitDeleteRef: (owner: string, repo: string, ref: string, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<void, ValidationError>({
         path: `/repos/${owner}/${repo}/git/refs/${ref}`,
         method: "DELETE",
         ...params,
@@ -23253,10 +19929,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     gitCreateTag: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixGitCreateTagPayloadMySuperSuffix,
+      data: {
+        /** The tag's name. This is typically a version (e.g., "v0.0.1"). */
+        tag: string;
+        /** The tag message. */
+        message: string;
+        /** The SHA of the git object this is tagging. */
+        object: string;
+        /** The type of the object we're tagging. Normally this is a `commit` but it can also be a `tree` or a `blob`. */
+        type: "commit" | "tree" | "blob";
+        /** An object with information about the individual creating the tag. */
+        tagger?: {
+          /** The name of the author of the tag */
+          name?: string;
+          /** The email of the author of the tag */
+          email?: string;
+          /** When this object was tagged. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+          date?: string;
+        };
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixGitTagMySuperSuffix, IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<GitTag, ValidationError>({
         path: `/repos/${owner}/${repo}/git/tags`,
         method: "POST",
         body: data,
@@ -23274,7 +19968,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/git/tags/{tag_sha}
      */
     gitGetTag: (owner: string, repo: string, tagSha: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixGitTagMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<GitTag, BasicError>({
         path: `/repos/${owner}/${repo}/git/tags/${tagSha}`,
         method: "GET",
         format: "json",
@@ -23292,13 +19986,37 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     gitCreateTree: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixGitCreateTreePayloadMySuperSuffix,
+      data: {
+        /** Objects (of `path`, `mode`, `type`, and `sha`) specifying a tree structure. */
+        tree: {
+          /** The file referenced in the tree. */
+          path?: string;
+          /** The file mode; one of `100644` for file (blob), `100755` for executable (blob), `040000` for subdirectory (tree), `160000` for submodule (commit), or `120000` for a blob that specifies the path of a symlink. */
+          mode?: "100644" | "100755" | "040000" | "160000" | "120000";
+          /** Either `blob`, `tree`, or `commit`. */
+          type?: "blob" | "tree" | "commit";
+          /**
+           * The SHA1 checksum ID of the object in the tree. Also called `tree.sha`. If the value is `null` then the file will be deleted.
+           *
+           * **Note:** Use either `tree.sha` or `content` to specify the contents of the entry. Using both `tree.sha` and `content` will return an error.
+           */
+          sha?: string | null;
+          /**
+           * The content you want this file to have. GitHub will write this blob out and use that SHA for this entry. Use either this, or `tree.sha`.
+           *
+           * **Note:** Use either `tree.sha` or `content` to specify the contents of the entry. Using both `tree.sha` and `content` will return an error.
+           */
+          content?: string;
+        }[];
+        /**
+         * The SHA1 of an existing Git tree object which will be used as the base for the new tree. If provided, a new Git tree object will be created from entries in the Git tree object pointed to by `base_tree` and entries defined in the `tree` parameter. Entries defined in the `tree` parameter will overwrite items from `base_tree` with the same `path`. If you're creating new changes on a branch, then normally you'd set `base_tree` to the SHA1 of the Git tree object of the current latest commit on the branch you're working on.
+         * If not provided, GitHub will create a new Git tree object from only the entries defined in the `tree` parameter. If you create a new commit pointing to such a tree, then all files which were a part of the parent commit's tree and were not defined in the `tree` parameter will be listed as deleted by the new commit.
+         */
+        base_tree?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixGitTreeMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<GitTree, BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/git/trees`,
         method: "POST",
         body: data,
@@ -23316,13 +20034,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/git/trees/{tree_sha}
      */
     gitGetTree: (
-      { owner, repo, treeSha, ...query }: IMySuperPrefixGitGetTreeParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      treeSha: string,
+      query?: {
+        /** Setting this parameter to any value returns the objects or subtrees referenced by the tree specified in `:tree_sha`. For example, setting `recursive` to any of the following will enable returning objects or subtrees: `0`, `1`, `"true"`, and `"false"`. Omit this parameter to prevent recursively returning objects or subtrees. */
+        recursive?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixGitTreeMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<GitTree, BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/git/trees/${treeSha}`,
         method: "GET",
         query: query,
@@ -23339,10 +20060,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/hooks
      */
     reposListWebhooks: (
-      { owner, repo, ...query }: IMySuperPrefixReposListWebhooksParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixHookMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Hook[], BasicError>({
         path: `/repos/${owner}/${repo}/hooks`,
         method: "GET",
         query: query,
@@ -23361,13 +20095,38 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     reposCreateWebhook: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixReposCreateWebhookPayloadMySuperSuffix,
+      data: {
+        /** Use `web` to create a webhook. Default: `web`. This parameter only accepts the value `web`. */
+        name?: string;
+        /** Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params). */
+        config: {
+          /** The URL to which the payloads will be delivered. */
+          url: WebhookConfigUrl;
+          /** The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. */
+          content_type?: WebhookConfigContentType;
+          /** If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value for [delivery signature headers](https://docs.github.com/webhooks/event-payloads/#delivery-headers). */
+          secret?: WebhookConfigSecret;
+          /** Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** */
+          insecure_ssl?: WebhookConfigInsecureSsl;
+          /** @example ""abc"" */
+          token?: string;
+          /** @example ""sha256"" */
+          digest?: string;
+        };
+        /**
+         * Determines what [events](https://docs.github.com/webhooks/event-payloads) the hook is triggered for.
+         * @default ["push"]
+         */
+        events?: string[];
+        /**
+         * Determines if notifications are sent when the webhook is triggered. Set to `true` to send notifications.
+         * @default true
+         */
+        active?: boolean;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixHookMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<Hook, BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/hooks`,
         method: "POST",
         body: data,
@@ -23385,7 +20144,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/hooks/{hook_id}
      */
     reposGetWebhook: (owner: string, repo: string, hookId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixHookMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Hook, BasicError>({
         path: `/repos/${owner}/${repo}/hooks/${hookId}`,
         method: "GET",
         format: "json",
@@ -23404,13 +20163,40 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       hookId: number,
-      data: IMySuperPrefixReposUpdateWebhookPayloadMySuperSuffix,
+      data: {
+        /** Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params). */
+        config?: {
+          /** The URL to which the payloads will be delivered. */
+          url: WebhookConfigUrl;
+          /** The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. */
+          content_type?: WebhookConfigContentType;
+          /** If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value for [delivery signature headers](https://docs.github.com/webhooks/event-payloads/#delivery-headers). */
+          secret?: WebhookConfigSecret;
+          /** Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** */
+          insecure_ssl?: WebhookConfigInsecureSsl;
+          /** @example ""bar@example.com"" */
+          address?: string;
+          /** @example ""The Serious Room"" */
+          room?: string;
+        };
+        /**
+         * Determines what [events](https://docs.github.com/webhooks/event-payloads) the hook is triggered for. This replaces the entire array of events.
+         * @default ["push"]
+         */
+        events?: string[];
+        /** Determines a list of events to be added to the list of events that the Hook triggers for. */
+        add_events?: string[];
+        /** Determines a list of events to be removed from the list of events that the Hook triggers for. */
+        remove_events?: string[];
+        /**
+         * Determines if notifications are sent when the webhook is triggered. Set to `true` to send notifications.
+         * @default true
+         */
+        active?: boolean;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixHookMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<Hook, BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/hooks/${hookId}`,
         method: "PATCH",
         body: data,
@@ -23428,7 +20214,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/repos/{owner}/{repo}/hooks/{hook_id}
      */
     reposDeleteWebhook: (owner: string, repo: string, hookId: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/repos/${owner}/${repo}/hooks/${hookId}`,
         method: "DELETE",
         ...params,
@@ -23443,7 +20229,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/hooks/{hook_id}/config
      */
     reposGetWebhookConfigForRepo: (owner: string, repo: string, hookId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixWebhookConfigMySuperSuffix, any>({
+      this.request<WebhookConfig, any>({
         path: `/repos/${owner}/${repo}/hooks/${hookId}/config`,
         method: "GET",
         format: "json",
@@ -23462,10 +20248,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       hookId: number,
-      data: IMySuperPrefixReposUpdateWebhookConfigForRepoPayloadMySuperSuffix,
+      data: {
+        /** The URL to which the payloads will be delivered. */
+        url?: WebhookConfigUrl;
+        /** The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. */
+        content_type?: WebhookConfigContentType;
+        /** If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value for [delivery signature headers](https://docs.github.com/webhooks/event-payloads/#delivery-headers). */
+        secret?: WebhookConfigSecret;
+        /** Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** */
+        insecure_ssl?: WebhookConfigInsecureSsl;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixWebhookConfigMySuperSuffix, any>({
+      this.request<WebhookConfig, any>({
         path: `/repos/${owner}/${repo}/hooks/${hookId}/config`,
         method: "PATCH",
         body: data,
@@ -23483,7 +20278,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/repos/{owner}/{repo}/hooks/{hook_id}/pings
      */
     reposPingWebhook: (owner: string, repo: string, hookId: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/repos/${owner}/${repo}/hooks/${hookId}/pings`,
         method: "POST",
         ...params,
@@ -23498,7 +20293,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/repos/{owner}/{repo}/hooks/{hook_id}/tests
      */
     reposTestPushWebhook: (owner: string, repo: string, hookId: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/repos/${owner}/${repo}/hooks/${hookId}/tests`,
         method: "POST",
         ...params,
@@ -23513,7 +20308,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/import
      */
     migrationsGetImportStatus: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixImportMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Import, BasicError>({
         path: `/repos/${owner}/${repo}/import`,
         method: "GET",
         format: "json",
@@ -23531,13 +20326,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     migrationsStartImport: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixMigrationsStartImportPayloadMySuperSuffix,
+      data: {
+        /** The URL of the originating repository. */
+        vcs_url: string;
+        /** The originating VCS type. Can be one of `subversion`, `git`, `mercurial`, or `tfvc`. Please be aware that without this parameter, the import job will take additional time to detect the VCS type before beginning the import. This detection step will be reflected in the response. */
+        vcs?: "subversion" | "git" | "mercurial" | "tfvc";
+        /** If authentication is required, the username to provide to `vcs_url`. */
+        vcs_username?: string;
+        /** If authentication is required, the password to provide to `vcs_url`. */
+        vcs_password?: string;
+        /** For a tfvc import, the name of the project that is being imported. */
+        tfvc_project?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixImportMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<Import, BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/import`,
         method: "PUT",
         body: data,
@@ -23557,10 +20360,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     migrationsUpdateImport: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixMigrationsUpdateImportPayloadMySuperSuffix,
+      data: {
+        /** The username to provide to the originating repository. */
+        vcs_username?: string;
+        /** The password to provide to the originating repository. */
+        vcs_password?: string;
+        /** @example ""git"" */
+        vcs?: string;
+        /** @example ""project1"" */
+        tfvc_project?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixImportMySuperSuffix, any>({
+      this.request<Import, any>({
         path: `/repos/${owner}/${repo}/import`,
         method: "PATCH",
         body: data,
@@ -23593,10 +20405,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/import/authors
      */
     migrationsGetCommitAuthors: (
-      { owner, repo, ...query }: IMySuperPrefixMigrationsGetCommitAuthorsParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /** A user ID. Only return users with an ID greater than this ID. */
+        since?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixPorterAuthorMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<PorterAuthor[], BasicError>({
         path: `/repos/${owner}/${repo}/import/authors`,
         method: "GET",
         query: query,
@@ -23616,13 +20433,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       authorId: number,
-      data: IMySuperPrefixMigrationsMapCommitAuthorPayloadMySuperSuffix,
+      data: {
+        /** The new Git author email. */
+        email?: string;
+        /** The new Git author name. */
+        name?: string;
+        /** @example ""can't touch this"" */
+        remote_id?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixPorterAuthorMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<PorterAuthor, BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/import/authors/${authorId}`,
         method: "PATCH",
         body: data,
@@ -23640,7 +20461,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/import/large_files
      */
     migrationsGetLargeFiles: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixPorterLargeFileMySuperSuffix[], any>({
+      this.request<PorterLargeFile[], any>({
         path: `/repos/${owner}/${repo}/import/large_files`,
         method: "GET",
         format: "json",
@@ -23658,10 +20479,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     migrationsSetLfsPreference: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixMigrationsSetLfsPreferencePayloadMySuperSuffix,
+      data: {
+        /** Can be one of `opt_in` (large files will be stored using Git LFS) or `opt_out` (large files will be removed during the import). */
+        use_lfs: "opt_in" | "opt_out";
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixImportMySuperSuffix, IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<Import, ValidationError>({
         path: `/repos/${owner}/${repo}/import/lfs`,
         method: "PATCH",
         body: data,
@@ -23679,7 +20503,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/installation
      */
     appsGetRepoInstallation: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixInstallationMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Installation, BasicError>({
         path: `/repos/${owner}/${repo}/installation`,
         method: "GET",
         format: "json",
@@ -23695,7 +20519,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/interaction-limits
      */
     interactionsGetRestrictionsForRepo: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixInteractionLimitResponseMySuperSuffix, any>({
+      this.request<InteractionLimitResponse, any>({
         path: `/repos/${owner}/${repo}/interaction-limits`,
         method: "GET",
         format: "json",
@@ -23713,10 +20537,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     interactionsSetRestrictionsForRepo: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixInteractionLimitMySuperSuffix,
+      data: InteractionLimit,
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixInteractionLimitResponseMySuperSuffix, void>({
+      this.request<InteractionLimitResponse, void>({
         path: `/repos/${owner}/${repo}/interaction-limits`,
         method: "PUT",
         body: data,
@@ -23749,10 +20573,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/invitations
      */
     reposListInvitations: (
-      { owner, repo, ...query }: IMySuperPrefixReposListInvitationsParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixRepositoryInvitationMySuperSuffix[], any>({
+      this.request<RepositoryInvitation[], any>({
         path: `/repos/${owner}/${repo}/invitations`,
         method: "GET",
         query: query,
@@ -23772,10 +20609,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       invitationId: number,
-      data: IMySuperPrefixReposUpdateInvitationPayloadMySuperSuffix,
+      data: {
+        /** The permissions that the associated user will have on the repository. Valid values are `read`, `write`, `maintain`, `triage`, and `admin`. */
+        permissions?: "read" | "write" | "maintain" | "triage" | "admin";
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixRepositoryInvitationMySuperSuffix, any>({
+      this.request<RepositoryInvitation, any>({
         path: `/repos/${owner}/${repo}/invitations/${invitationId}`,
         method: "PATCH",
         body: data,
@@ -23808,13 +20648,50 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/issues
      */
     issuesListForRepo: (
-      { owner, repo, ...query }: IMySuperPrefixIssuesListForRepoParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /** If an `integer` is passed, it should refer to a milestone by its `number` field. If the string `*` is passed, issues with any milestone are accepted. If the string `none` is passed, issues without milestones are returned. */
+        milestone?: string;
+        /**
+         * Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
+         * @default "open"
+         */
+        state?: "open" | "closed" | "all";
+        /** Can be the name of a user. Pass in `none` for issues with no assigned user, and `*` for issues assigned to any user. */
+        assignee?: string;
+        /** The user that created the issue. */
+        creator?: string;
+        /** A user that's mentioned in the issue. */
+        mentioned?: string;
+        /** A list of comma separated label names. Example: `bug,ui,@high` */
+        labels?: string;
+        /**
+         * What to sort results by. Can be either `created`, `updated`, `comments`.
+         * @default "created"
+         */
+        sort?: "created" | "updated" | "comments";
+        /**
+         * One of `asc` (ascending) or `desc` (descending).
+         * @default "desc"
+         */
+        direction?: "asc" | "desc";
+        /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+        since?: string;
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixIssueSimpleMySuperSuffix[],
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<IssueSimple[], BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/issues`,
         method: "GET",
         query: query,
@@ -23833,13 +20710,34 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     issuesCreate: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixIssuesCreatePayloadMySuperSuffix,
+      data: {
+        /** The title of the issue. */
+        title: string | number;
+        /** The contents of the issue. */
+        body?: string;
+        /** Login for the user that this issue should be assigned to. _NOTE: Only users with push access can set the assignee for new issues. The assignee is silently dropped otherwise. **This field is deprecated.**_ */
+        assignee?: string | null;
+        /** The `number` of the milestone to associate this issue with. _NOTE: Only users with push access can set the milestone for new issues. The milestone is silently dropped otherwise._ */
+        milestone?: string | number | null;
+        /** Labels to associate with this issue. _NOTE: Only users with push access can set labels for new issues. Labels are silently dropped otherwise._ */
+        labels?: (
+          | string
+          | {
+              id?: number;
+              name?: string;
+              description?: string | null;
+              color?: string | null;
+            }
+        )[];
+        /** Logins for Users to assign to this issue. _NOTE: Only users with push access can set assignees for new issues. Assignees are silently dropped otherwise._ */
+        assignees?: string[];
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixIssueMySuperSuffix,
-        | IMySuperPrefixBasicErrorMySuperSuffix
-        | IMySuperPrefixValidationErrorMySuperSuffix
+        Issue,
+        | BasicError
+        | ValidationError
         | {
             code?: string;
             message?: string;
@@ -23863,13 +20761,32 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/issues/comments
      */
     issuesListCommentsForRepo: (
-      { owner, repo, ...query }: IMySuperPrefixIssuesListCommentsForRepoParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
+         * @default "created"
+         */
+        sort?: "created" | "updated";
+        /** Either `asc` or `desc`. Ignored without the `sort` parameter. */
+        direction?: "asc" | "desc";
+        /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+        since?: string;
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixIssueCommentMySuperSuffix[],
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<IssueComment[], BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/issues/comments`,
         method: "GET",
         query: query,
@@ -23886,7 +20803,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/issues/comments/{comment_id}
      */
     issuesGetComment: (owner: string, repo: string, commentId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixIssueCommentMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<IssueComment, BasicError>({
         path: `/repos/${owner}/${repo}/issues/comments/${commentId}`,
         method: "GET",
         format: "json",
@@ -23905,10 +20822,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       commentId: number,
-      data: IMySuperPrefixIssuesUpdateCommentPayloadMySuperSuffix,
+      data: {
+        /** The contents of the comment. */
+        body: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixIssueCommentMySuperSuffix, IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<IssueComment, ValidationError>({
         path: `/repos/${owner}/${repo}/issues/comments/${commentId}`,
         method: "PATCH",
         body: data,
@@ -23941,12 +20861,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/issues/comments/{comment_id}/reactions
      */
     reactionsListForIssueComment: (
-      { owner, repo, commentId, ...query }: IMySuperPrefixReactionsListForIssueCommentParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      commentId: number,
+      query?: {
+        /** Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to an issue comment. */
+        content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixReactionMySuperSuffix[],
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        Reaction[],
+        | BasicError
         | {
             message: string;
             documentation_url: string;
@@ -23971,16 +20907,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       commentId: number,
-      data: IMySuperPrefixReactionsCreateForIssueCommentPayloadMySuperSuffix,
+      data: {
+        /** The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue comment. */
+        content: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixReactionMySuperSuffix,
+        Reaction,
         | {
             message: string;
             documentation_url: string;
           }
-        | IMySuperPrefixValidationErrorMySuperSuffix
+        | ValidationError
       >({
         path: `/repos/${owner}/${repo}/issues/comments/${commentId}/reactions`,
         method: "POST",
@@ -24020,10 +20959,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/issues/events
      */
     issuesListEventsForRepo: (
-      { owner, repo, ...query }: IMySuperPrefixIssuesListEventsForRepoParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixIssueEventMySuperSuffix[], IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<IssueEvent[], ValidationError>({
         path: `/repos/${owner}/${repo}/issues/events`,
         method: "GET",
         query: query,
@@ -24040,7 +20992,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/issues/events/{event_id}
      */
     issuesGetEvent: (owner: string, repo: string, eventId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixIssueEventMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<IssueEvent, BasicError>({
         path: `/repos/${owner}/${repo}/issues/events/${eventId}`,
         method: "GET",
         format: "json",
@@ -24056,7 +21008,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/issues/{issue_number}
      */
     issuesGet: (owner: string, repo: string, issueNumber: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixIssueMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Issue, BasicError>({
         path: `/repos/${owner}/${repo}/issues/${issueNumber}`,
         method: "GET",
         format: "json",
@@ -24075,13 +21027,36 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       issueNumber: number,
-      data: IMySuperPrefixIssuesUpdatePayloadMySuperSuffix,
+      data: {
+        /** The title of the issue. */
+        title?: string | number;
+        /** The contents of the issue. */
+        body?: string;
+        /** Login for the user that this issue should be assigned to. **This field is deprecated.** */
+        assignee?: string | null;
+        /** State of the issue. Either `open` or `closed`. */
+        state?: "open" | "closed";
+        /** The `number` of the milestone to associate this issue with or `null` to remove current. _NOTE: Only users with push access can set the milestone for issues. The milestone is silently dropped otherwise._ */
+        milestone?: string | number | null;
+        /** Labels to associate with this issue. Pass one or more Labels to _replace_ the set of Labels on this Issue. Send an empty array (`[]`) to clear all Labels from the Issue. _NOTE: Only users with push access can set labels for issues. Labels are silently dropped otherwise._ */
+        labels?: (
+          | string
+          | {
+              id?: number;
+              name?: string;
+              description?: string | null;
+              color?: string | null;
+            }
+        )[];
+        /** Logins for Users to assign to this issue. Pass one or more user logins to _replace_ the set of assignees on this Issue. Send an empty array (`[]`) to clear all assignees from the Issue. _NOTE: Only users with push access can set assignees for new issues. Assignees are silently dropped otherwise._ */
+        assignees?: string[];
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixIssueMySuperSuffix,
-        | IMySuperPrefixBasicErrorMySuperSuffix
-        | IMySuperPrefixValidationErrorMySuperSuffix
+        Issue,
+        | BasicError
+        | ValidationError
         | {
             code?: string;
             message?: string;
@@ -24108,10 +21083,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       issueNumber: number,
-      data: IMySuperPrefixIssuesAddAssigneesPayloadMySuperSuffix,
+      data: {
+        /** Usernames of people to assign this issue to. _NOTE: Only users with push access can add assignees to an issue. Assignees are silently ignored otherwise._ */
+        assignees?: string[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixIssueSimpleMySuperSuffix, any>({
+      this.request<IssueSimple, any>({
         path: `/repos/${owner}/${repo}/issues/${issueNumber}/assignees`,
         method: "POST",
         body: data,
@@ -24132,10 +21110,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       issueNumber: number,
-      data: IMySuperPrefixIssuesRemoveAssigneesPayloadMySuperSuffix,
+      data: {
+        /** Usernames of assignees to remove from an issue. _NOTE: Only users with push access can remove assignees from an issue. Assignees are silently ignored otherwise._ */
+        assignees?: string[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixIssueSimpleMySuperSuffix, any>({
+      this.request<IssueSimple, any>({
         path: `/repos/${owner}/${repo}/issues/${issueNumber}/assignees`,
         method: "DELETE",
         body: data,
@@ -24153,10 +21134,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/issues/{issue_number}/comments
      */
     issuesListComments: (
-      { owner, repo, issueNumber, ...query }: IMySuperPrefixIssuesListCommentsParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      issueNumber: number,
+      query?: {
+        /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+        since?: string;
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixIssueCommentMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<IssueComment[], BasicError>({
         path: `/repos/${owner}/${repo}/issues/${issueNumber}/comments`,
         method: "GET",
         query: query,
@@ -24176,13 +21173,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       issueNumber: number,
-      data: IMySuperPrefixIssuesCreateCommentPayloadMySuperSuffix,
+      data: {
+        /** The contents of the comment. */
+        body: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixIssueCommentMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<IssueComment, BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/issues/${issueNumber}/comments`,
         method: "POST",
         body: data,
@@ -24200,10 +21197,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/issues/{issue_number}/events
      */
     issuesListEvents: (
-      { owner, repo, issueNumber, ...query }: IMySuperPrefixIssuesListEventsParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      issueNumber: number,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixIssueEventForIssueMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<IssueEventForIssue[], BasicError>({
         path: `/repos/${owner}/${repo}/issues/${issueNumber}/events`,
         method: "GET",
         query: query,
@@ -24220,10 +21231,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/issues/{issue_number}/labels
      */
     issuesListLabelsOnIssue: (
-      { owner, repo, issueNumber, ...query }: IMySuperPrefixIssuesListLabelsOnIssueParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      issueNumber: number,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixLabelMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Label[], BasicError>({
         path: `/repos/${owner}/${repo}/issues/${issueNumber}/labels`,
         method: "GET",
         query: query,
@@ -24243,13 +21268,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       issueNumber: number,
-      data: IMySuperPrefixIssuesAddLabelsPayloadMySuperSuffix,
+      data: {
+        /** The name of the label to add to the issue. Must contain at least one label. **Note:** Alternatively, you can pass a single label as a `string` or an `array` of labels directly, but GitHub recommends passing an object with the `labels` key. */
+        labels: string[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixLabelMySuperSuffix[],
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<Label[], BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/issues/${issueNumber}/labels`,
         method: "POST",
         body: data,
@@ -24270,13 +21295,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       issueNumber: number,
-      data: IMySuperPrefixIssuesSetLabelsPayloadMySuperSuffix,
+      data: {
+        /** The names of the labels to add to the issue. You can pass an empty array to remove all labels. **Note:** Alternatively, you can pass a single label as a `string` or an `array` of labels directly, but GitHub recommends passing an object with the `labels` key. */
+        labels?: string[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixLabelMySuperSuffix[],
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<Label[], BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/issues/${issueNumber}/labels`,
         method: "PUT",
         body: data,
@@ -24294,7 +21319,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/repos/{owner}/{repo}/issues/{issue_number}/labels
      */
     issuesRemoveAllLabels: (owner: string, repo: string, issueNumber: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/repos/${owner}/${repo}/issues/${issueNumber}/labels`,
         method: "DELETE",
         ...params,
@@ -24309,7 +21334,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/repos/{owner}/{repo}/issues/{issue_number}/labels/{name}
      */
     issuesRemoveLabel: (owner: string, repo: string, issueNumber: number, name: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixLabelMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Label[], BasicError>({
         path: `/repos/${owner}/${repo}/issues/${issueNumber}/labels/${name}`,
         method: "DELETE",
         format: "json",
@@ -24328,10 +21353,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       issueNumber: number,
-      data: IMySuperPrefixIssuesLockPayloadMySuperSuffix,
+      data: {
+        /**
+         * The reason for locking the issue or pull request conversation. Lock will fail if you don't use one of these reasons:
+         * \* `off-topic`
+         * \* `too heated`
+         * \* `resolved`
+         * \* `spam`
+         */
+        lock_reason?: "off-topic" | "too heated" | "resolved" | "spam";
+      } | null,
       params: RequestParams = {},
     ) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<void, BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/issues/${issueNumber}/lock`,
         method: "PUT",
         body: data,
@@ -24348,7 +21382,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/repos/{owner}/{repo}/issues/{issue_number}/lock
      */
     issuesUnlock: (owner: string, repo: string, issueNumber: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/repos/${owner}/${repo}/issues/${issueNumber}/lock`,
         method: "DELETE",
         ...params,
@@ -24363,12 +21397,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/issues/{issue_number}/reactions
      */
     reactionsListForIssue: (
-      { owner, repo, issueNumber, ...query }: IMySuperPrefixReactionsListForIssueParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      issueNumber: number,
+      query?: {
+        /** Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to an issue. */
+        content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixReactionMySuperSuffix[],
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        Reaction[],
+        | BasicError
         | {
             message: string;
             documentation_url: string;
@@ -24393,16 +21443,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       issueNumber: number,
-      data: IMySuperPrefixReactionsCreateForIssuePayloadMySuperSuffix,
+      data: {
+        /** The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue. */
+        content: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixReactionMySuperSuffix,
+        Reaction,
         | {
             message: string;
             documentation_url: string;
           }
-        | IMySuperPrefixValidationErrorMySuperSuffix
+        | ValidationError
       >({
         path: `/repos/${owner}/${repo}/issues/${issueNumber}/reactions`,
         method: "POST",
@@ -24442,12 +21495,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/issues/{issue_number}/timeline
      */
     issuesListEventsForTimeline: (
-      { owner, repo, issueNumber, ...query }: IMySuperPrefixIssuesListEventsForTimelineParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      issueNumber: number,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixIssueEventForIssueMySuperSuffix[],
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        IssueEventForIssue[],
+        | BasicError
         | {
             message: string;
             documentation_url: string;
@@ -24469,10 +21536,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/keys
      */
     reposListDeployKeys: (
-      { owner, repo, ...query }: IMySuperPrefixReposListDeployKeysParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixDeployKeyMySuperSuffix[], any>({
+      this.request<DeployKey[], any>({
         path: `/repos/${owner}/${repo}/keys`,
         method: "GET",
         query: query,
@@ -24491,10 +21571,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     reposCreateDeployKey: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixReposCreateDeployKeyPayloadMySuperSuffix,
+      data: {
+        /** A name for the key. */
+        title?: string;
+        /** The contents of the key. */
+        key: string;
+        /**
+         * If `true`, the key will only be able to read repository contents. Otherwise, the key will be able to read and write.
+         *
+         * Deploy keys with write access can perform the same actions as an organization member with admin access, or a collaborator on a personal repository. For more information, see "[Repository permission levels for an organization](https://help.github.com/articles/repository-permission-levels-for-an-organization/)" and "[Permission levels for a user account repository](https://help.github.com/articles/permission-levels-for-a-user-account-repository/)."
+         */
+        read_only?: boolean;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixDeployKeyMySuperSuffix, IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<DeployKey, ValidationError>({
         path: `/repos/${owner}/${repo}/keys`,
         method: "POST",
         body: data,
@@ -24512,7 +21603,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/keys/{key_id}
      */
     reposGetDeployKey: (owner: string, repo: string, keyId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixDeployKeyMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<DeployKey, BasicError>({
         path: `/repos/${owner}/${repo}/keys/${keyId}`,
         method: "GET",
         format: "json",
@@ -24543,10 +21634,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/labels
      */
     issuesListLabelsForRepo: (
-      { owner, repo, ...query }: IMySuperPrefixIssuesListLabelsForRepoParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixLabelMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Label[], BasicError>({
         path: `/repos/${owner}/${repo}/labels`,
         method: "GET",
         query: query,
@@ -24565,13 +21669,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     issuesCreateLabel: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixIssuesCreateLabelPayloadMySuperSuffix,
+      data: {
+        /** The name of the label. Emoji can be added to label names, using either native emoji or colon-style markup. For example, typing `:strawberry:` will render the emoji ![:strawberry:](https://github.githubassets.com/images/icons/emoji/unicode/1f353.png ":strawberry:"). For a full list of available emoji and codes, see [emoji-cheat-sheet.com](http://emoji-cheat-sheet.com/). */
+        name: string;
+        /** The [hexadecimal color code](http://www.color-hex.com/) for the label, without the leading `#`. */
+        color?: string;
+        /** A short description of the label. */
+        description?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixLabelMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<Label, BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/labels`,
         method: "POST",
         body: data,
@@ -24589,7 +21697,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/labels/{name}
      */
     issuesGetLabel: (owner: string, repo: string, name: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixLabelMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Label, BasicError>({
         path: `/repos/${owner}/${repo}/labels/${name}`,
         method: "GET",
         format: "json",
@@ -24608,10 +21716,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       name: string,
-      data: IMySuperPrefixIssuesUpdateLabelPayloadMySuperSuffix,
+      data: {
+        /** The new name of the label. Emoji can be added to label names, using either native emoji or colon-style markup. For example, typing `:strawberry:` will render the emoji ![:strawberry:](https://github.githubassets.com/images/icons/emoji/unicode/1f353.png ":strawberry:"). For a full list of available emoji and codes, see [emoji-cheat-sheet.com](http://emoji-cheat-sheet.com/). */
+        new_name?: string;
+        /** The [hexadecimal color code](http://www.color-hex.com/) for the label, without the leading `#`. */
+        color?: string;
+        /** A short description of the label. */
+        description?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixLabelMySuperSuffix, any>({
+      this.request<Label, any>({
         path: `/repos/${owner}/${repo}/labels/${name}`,
         method: "PATCH",
         body: data,
@@ -24644,7 +21759,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/languages
      */
     reposListLanguages: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixLanguageMySuperSuffix, any>({
+      this.request<Language, any>({
         path: `/repos/${owner}/${repo}/languages`,
         method: "GET",
         format: "json",
@@ -24660,7 +21775,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/license
      */
     licensesGetForRepo: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixLicenseContentMySuperSuffix, any>({
+      this.request<LicenseContent, any>({
         path: `/repos/${owner}/${repo}/license`,
         method: "GET",
         format: "json",
@@ -24678,18 +21793,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     reposMerge: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixReposMergePayloadMySuperSuffix,
+      data: {
+        /** The name of the base branch that the head will be merged into. */
+        base: string;
+        /** The head to merge. This can be a branch name or a commit SHA1. */
+        head: string;
+        /** Commit message to use for the merge commit. If omitted, a default message will be used. */
+        commit_message?: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixCommitMySuperSuffix,
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        Commit,
+        | BasicError
         | {
             message?: string;
             /** @example ""https://docs.github.com/rest/reference/repos#perform-a-merge"" */
             documentation_url?: string;
           }
-        | IMySuperPrefixValidationErrorMySuperSuffix
+        | ValidationError
       >({
         path: `/repos/${owner}/${repo}/merges`,
         method: "POST",
@@ -24708,10 +21830,38 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/milestones
      */
     issuesListMilestones: (
-      { owner, repo, ...query }: IMySuperPrefixIssuesListMilestonesParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * The state of the milestone. Either `open`, `closed`, or `all`.
+         * @default "open"
+         */
+        state?: "open" | "closed" | "all";
+        /**
+         * What to sort results by. Either `due_on` or `completeness`.
+         * @default "due_on"
+         */
+        sort?: "due_on" | "completeness";
+        /**
+         * The direction of the sort. Either `asc` or `desc`.
+         * @default "asc"
+         */
+        direction?: "asc" | "desc";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixMilestoneMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Milestone[], BasicError>({
         path: `/repos/${owner}/${repo}/milestones`,
         method: "GET",
         query: query,
@@ -24730,13 +21880,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     issuesCreateMilestone: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixIssuesCreateMilestonePayloadMySuperSuffix,
+      data: {
+        /** The title of the milestone. */
+        title: string;
+        /**
+         * The state of the milestone. Either `open` or `closed`.
+         * @default "open"
+         */
+        state?: "open" | "closed";
+        /** A description of the milestone. */
+        description?: string;
+        /** The milestone due date. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+        due_on?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixMilestoneMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<Milestone, BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/milestones`,
         method: "POST",
         body: data,
@@ -24754,7 +21913,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/milestones/{milestone_number}
      */
     issuesGetMilestone: (owner: string, repo: string, milestoneNumber: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixMilestoneMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Milestone, BasicError>({
         path: `/repos/${owner}/${repo}/milestones/${milestoneNumber}`,
         method: "GET",
         format: "json",
@@ -24773,10 +21932,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       milestoneNumber: number,
-      data: IMySuperPrefixIssuesUpdateMilestonePayloadMySuperSuffix,
+      data: {
+        /** The title of the milestone. */
+        title?: string;
+        /**
+         * The state of the milestone. Either `open` or `closed`.
+         * @default "open"
+         */
+        state?: "open" | "closed";
+        /** A description of the milestone. */
+        description?: string;
+        /** The milestone due date. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+        due_on?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixMilestoneMySuperSuffix, any>({
+      this.request<Milestone, any>({
         path: `/repos/${owner}/${repo}/milestones/${milestoneNumber}`,
         method: "PATCH",
         body: data,
@@ -24794,7 +21965,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/repos/{owner}/{repo}/milestones/{milestone_number}
      */
     issuesDeleteMilestone: (owner: string, repo: string, milestoneNumber: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/repos/${owner}/${repo}/milestones/${milestoneNumber}`,
         method: "DELETE",
         ...params,
@@ -24809,10 +21980,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/milestones/{milestone_number}/labels
      */
     issuesListLabelsForMilestone: (
-      { owner, repo, milestoneNumber, ...query }: IMySuperPrefixIssuesListLabelsForMilestoneParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      milestoneNumber: number,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixLabelMySuperSuffix[], any>({
+      this.request<Label[], any>({
         path: `/repos/${owner}/${repo}/milestones/${milestoneNumber}/labels`,
         method: "GET",
         query: query,
@@ -24829,10 +22014,37 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/notifications
      */
     activityListRepoNotificationsForAuthenticatedUser: (
-      { owner, repo, ...query }: IMySuperPrefixActivityListRepoNotificationsForAuthenticatedUserParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * If `true`, show notifications marked as read.
+         * @default false
+         */
+        all?: boolean;
+        /**
+         * If `true`, only shows notifications in which the user is directly participating or mentioned.
+         * @default false
+         */
+        participating?: boolean;
+        /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+        since?: string;
+        /** Only show notifications updated before the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+        before?: string;
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixThreadMySuperSuffix[], any>({
+      this.request<Thread[], any>({
         path: `/repos/${owner}/${repo}/notifications`,
         method: "GET",
         query: query,
@@ -24851,7 +22063,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     activityMarkRepoNotificationsAsRead: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixActivityMarkRepoNotificationsAsReadPayloadMySuperSuffix,
+      data: {
+        /** Describes the last point that notifications were checked. Anything updated since this time will not be marked as read. If you omit this parameter, all notifications are marked as read. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. Default: The current timestamp. */
+        last_read_at?: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<void, any>({
@@ -24871,7 +22086,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/pages
      */
     reposGetPages: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixPageMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Page, BasicError>({
         path: `/repos/${owner}/${repo}/pages`,
         method: "GET",
         format: "json",
@@ -24889,17 +22104,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     reposCreatePagesSite: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixReposCreatePagesSitePayloadMySuperSuffix,
+      data: {
+        /** The source branch and directory used to publish your Pages site. */
+        source: {
+          /** The repository branch used to publish your site's source files. */
+          branch: string;
+          /**
+           * The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. Default: `/`
+           * @default "/"
+           */
+          path?: "/" | "/docs";
+        };
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixPageMySuperSuffix,
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        Page,
+        | BasicError
         | {
             message: string;
             documentation_url: string;
           }
-        | IMySuperPrefixValidationErrorMySuperSuffix
+        | ValidationError
       >({
         path: `/repos/${owner}/${repo}/pages`,
         method: "POST",
@@ -24920,10 +22146,36 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     reposUpdateInformationAboutPagesSite: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixReposUpdateInformationAboutPagesSitePayloadMySuperSuffix,
+      data: {
+        /** Specify a custom domain for the repository. Sending a `null` value will remove the custom domain. For more about custom domains, see "[Using a custom domain with GitHub Pages](https://help.github.com/articles/using-a-custom-domain-with-github-pages/)." */
+        cname?: string | null;
+        /** Configures access controls for the GitHub Pages site. If public is set to `true`, the site is accessible to anyone on the internet. If set to `false`, the site will only be accessible to users who have at least `read` access to the repository that published the site. This includes anyone in your Enterprise if the repository is set to `internal` visibility. This feature is only available to repositories in an organization on an Enterprise plan. */
+        public?: boolean;
+        /** Update the source for the repository. Must include the branch name, and may optionally specify the subdirectory `/docs`. Possible values are `"gh-pages"`, `"master"`, and `"master /docs"`. */
+        source:
+          | "gh-pages"
+          | "master"
+          | "master /docs"
+          | {
+              /** The repository branch used to publish your site's source files. */
+              branch: string;
+              /** The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. */
+              path: "/" | "/docs";
+            }
+          | (
+              | "gh-pages"
+              | "master"
+              | ("master /docs" & {
+                  /** The repository branch used to publish your site's source files. */
+                  branch: string;
+                  /** The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. */
+                  path: "/" | "/docs";
+                })
+            );
+      },
       params: RequestParams = {},
     ) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<void, BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/pages`,
         method: "PUT",
         body: data,
@@ -24942,12 +22194,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     reposDeletePagesSite: (owner: string, repo: string, params: RequestParams = {}) =>
       this.request<
         void,
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        | BasicError
         | {
             message: string;
             documentation_url: string;
           }
-        | IMySuperPrefixValidationErrorMySuperSuffix
+        | ValidationError
       >({
         path: `/repos/${owner}/${repo}/pages`,
         method: "DELETE",
@@ -24963,10 +22215,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/pages/builds
      */
     reposListPagesBuilds: (
-      { owner, repo, ...query }: IMySuperPrefixReposListPagesBuildsParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixPageBuildMySuperSuffix[], any>({
+      this.request<PageBuild[], any>({
         path: `/repos/${owner}/${repo}/pages/builds`,
         method: "GET",
         query: query,
@@ -24983,7 +22248,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/repos/{owner}/{repo}/pages/builds
      */
     reposRequestPagesBuild: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixPageBuildStatusMySuperSuffix, any>({
+      this.request<PageBuildStatus, any>({
         path: `/repos/${owner}/${repo}/pages/builds`,
         method: "POST",
         format: "json",
@@ -24999,7 +22264,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/pages/builds/latest
      */
     reposGetLatestPagesBuild: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixPageBuildMySuperSuffix, any>({
+      this.request<PageBuild, any>({
         path: `/repos/${owner}/${repo}/pages/builds/latest`,
         method: "GET",
         format: "json",
@@ -25015,7 +22280,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/pages/builds/{build_id}
      */
     reposGetPagesBuild: (owner: string, repo: string, buildId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixPageBuildMySuperSuffix, any>({
+      this.request<PageBuild, any>({
         path: `/repos/${owner}/${repo}/pages/builds/${buildId}`,
         method: "GET",
         format: "json",
@@ -25031,13 +22296,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/projects
      */
     projectsListForRepo: (
-      { owner, repo, ...query }: IMySuperPrefixProjectsListForRepoParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * Indicates the state of the projects to return. Can be either `open`, `closed`, or `all`.
+         * @default "open"
+         */
+        state?: "open" | "closed" | "all";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixProjectMySuperSuffix[],
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorSimpleMySuperSuffix
-      >({
+      this.request<Project[], BasicError | ValidationErrorSimple>({
         path: `/repos/${owner}/${repo}/projects`,
         method: "GET",
         query: query,
@@ -25056,13 +22336,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     projectsCreateForRepo: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixProjectsCreateForRepoPayloadMySuperSuffix,
+      data: {
+        /** The name of the project. */
+        name: string;
+        /** The description of the project. */
+        body?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixProjectMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorSimpleMySuperSuffix
-      >({
+      this.request<Project, BasicError | ValidationErrorSimple>({
         path: `/repos/${owner}/${repo}/projects`,
         method: "POST",
         body: data,
@@ -25079,8 +22361,40 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary List pull requests
      * @request GET:/repos/{owner}/{repo}/pulls
      */
-    pullsList: ({ owner, repo, ...query }: IMySuperPrefixPullsListParamsMySuperSuffix, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixPullRequestSimpleMySuperSuffix[], IMySuperPrefixValidationErrorMySuperSuffix>({
+    pullsList: (
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * Either `open`, `closed`, or `all` to filter by state.
+         * @default "open"
+         */
+        state?: "open" | "closed" | "all";
+        /** Filter pulls by head user or head organization and branch name in the format of `user:ref-name` or `organization:ref-name`. For example: `github:new-script-format` or `octocat:test-branch`. */
+        head?: string;
+        /** Filter pulls by base branch name. Example: `gh-pages`. */
+        base?: string;
+        /**
+         * What to sort results by. Can be either `created`, `updated`, `popularity` (comment count) or `long-running` (age, filtering by pulls updated in the last month).
+         * @default "created"
+         */
+        sort?: "created" | "updated" | "popularity" | "long-running";
+        /** The direction of the sort. Can be either `asc` or `desc`. Default: `desc` when sort is `created` or sort is not specified, otherwise `asc`. */
+        direction?: "asc" | "desc";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<PullRequestSimple[], ValidationError>({
         path: `/repos/${owner}/${repo}/pulls`,
         method: "GET",
         query: query,
@@ -25099,13 +22413,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     pullsCreate: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixPullsCreatePayloadMySuperSuffix,
+      data: {
+        /** The title of the new pull request. */
+        title?: string;
+        /** The name of the branch where your changes are implemented. For cross-repository pull requests in the same network, namespace `head` with a user like this: `username:branch`. */
+        head: string;
+        /** The name of the branch you want the changes pulled into. This should be an existing branch on the current repository. You cannot submit a pull request to one repository that requests a merge to a base of another repository. */
+        base: string;
+        /** The contents of the pull request. */
+        body?: string;
+        /** Indicates whether [maintainers can modify](https://help.github.com/articles/allowing-changes-to-a-pull-request-branch-created-from-a-fork/) the pull request. */
+        maintainer_can_modify?: boolean;
+        /** Indicates whether the pull request is a draft. See "[Draft Pull Requests](https://help.github.com/en/articles/about-pull-requests#draft-pull-requests)" in the GitHub Help documentation to learn more. */
+        draft?: boolean;
+        /** @example 1 */
+        issue?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixPullRequestMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<PullRequest, BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/pulls`,
         method: "POST",
         body: data,
@@ -25123,10 +22449,32 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/pulls/comments
      */
     pullsListReviewCommentsForRepo: (
-      { owner, repo, ...query }: IMySuperPrefixPullsListReviewCommentsForRepoParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
+         * @default "created"
+         */
+        sort?: "created" | "updated";
+        /** Can be either `asc` or `desc`. Ignored without `sort` parameter. */
+        direction?: "asc" | "desc";
+        /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+        since?: string;
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixPullRequestReviewCommentMySuperSuffix[], any>({
+      this.request<PullRequestReviewComment[], any>({
         path: `/repos/${owner}/${repo}/pulls/comments`,
         method: "GET",
         query: query,
@@ -25143,7 +22491,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/pulls/comments/{comment_id}
      */
     pullsGetReviewComment: (owner: string, repo: string, commentId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixPullRequestReviewCommentMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<PullRequestReviewComment, BasicError>({
         path: `/repos/${owner}/${repo}/pulls/comments/${commentId}`,
         method: "GET",
         format: "json",
@@ -25162,10 +22510,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       commentId: number,
-      data: IMySuperPrefixPullsUpdateReviewCommentPayloadMySuperSuffix,
+      data: {
+        /** The text of the reply to the review comment. */
+        body: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixPullRequestReviewCommentMySuperSuffix, any>({
+      this.request<PullRequestReviewComment, any>({
         path: `/repos/${owner}/${repo}/pulls/comments/${commentId}`,
         method: "PATCH",
         body: data,
@@ -25183,7 +22534,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/repos/{owner}/{repo}/pulls/comments/{comment_id}
      */
     pullsDeleteReviewComment: (owner: string, repo: string, commentId: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/repos/${owner}/${repo}/pulls/comments/${commentId}`,
         method: "DELETE",
         ...params,
@@ -25198,12 +22549,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions
      */
     reactionsListForPullRequestReviewComment: (
-      { owner, repo, commentId, ...query }: IMySuperPrefixReactionsListForPullRequestReviewCommentParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      commentId: number,
+      query?: {
+        /** Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a pull request review comment. */
+        content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixReactionMySuperSuffix[],
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        Reaction[],
+        | BasicError
         | {
             message: string;
             documentation_url: string;
@@ -25228,16 +22595,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       commentId: number,
-      data: IMySuperPrefixReactionsCreateForPullRequestReviewCommentPayloadMySuperSuffix,
+      data: {
+        /** The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the pull request review comment. */
+        content: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixReactionMySuperSuffix,
+        Reaction,
         | {
             message: string;
             documentation_url: string;
           }
-        | IMySuperPrefixValidationErrorMySuperSuffix
+        | ValidationError
       >({
         path: `/repos/${owner}/${repo}/pulls/comments/${commentId}/reactions`,
         method: "POST",
@@ -25277,7 +22647,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/pulls/{pull_number}
      */
     pullsGet: (owner: string, repo: string, pullNumber: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixPullRequestMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<PullRequest, BasicError>({
         path: `/repos/${owner}/${repo}/pulls/${pullNumber}`,
         method: "GET",
         format: "json",
@@ -25296,13 +22666,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       pullNumber: number,
-      data: IMySuperPrefixPullsUpdatePayloadMySuperSuffix,
+      data: {
+        /** The title of the pull request. */
+        title?: string;
+        /** The contents of the pull request. */
+        body?: string;
+        /** State of this Pull Request. Either `open` or `closed`. */
+        state?: "open" | "closed";
+        /** The name of the branch you want your changes pulled into. This should be an existing branch on the current repository. You cannot update the base branch on a pull request to point to another repository. */
+        base?: string;
+        /** Indicates whether [maintainers can modify](https://help.github.com/articles/allowing-changes-to-a-pull-request-branch-created-from-a-fork/) the pull request. */
+        maintainer_can_modify?: boolean;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixPullRequestMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<PullRequest, BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/pulls/${pullNumber}`,
         method: "PATCH",
         body: data,
@@ -25320,10 +22698,33 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/pulls/{pull_number}/comments
      */
     pullsListReviewComments: (
-      { owner, repo, pullNumber, ...query }: IMySuperPrefixPullsListReviewCommentsParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      pullNumber: number,
+      query?: {
+        /**
+         * One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
+         * @default "created"
+         */
+        sort?: "created" | "updated";
+        /** Can be either `asc` or `desc`. Ignored without `sort` parameter. */
+        direction?: "asc" | "desc";
+        /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+        since?: string;
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixPullRequestReviewCommentMySuperSuffix[], any>({
+      this.request<PullRequestReviewComment[], any>({
         path: `/repos/${owner}/${repo}/pulls/${pullNumber}/comments`,
         method: "GET",
         query: query,
@@ -25343,13 +22744,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       pullNumber: number,
-      data: IMySuperPrefixPullsCreateReviewCommentPayloadMySuperSuffix,
+      data: {
+        /** The text of the review comment. */
+        body: string;
+        /** The SHA of the commit needing a comment. Not using the latest commit SHA may render your comment outdated if a subsequent commit modifies the line you specify as the `position`. */
+        commit_id?: string;
+        /** The relative path to the file that necessitates a comment. */
+        path: string;
+        /** **Required without `comfort-fade` preview**. The position in the diff where you want to add a review comment. Note this value is not the same as the line number in the file. For help finding the position value, read the note above. */
+        position?: number;
+        /** **Required with `comfort-fade` preview**. In a split diff view, the side of the diff that the pull request's changes appear on. Can be `LEFT` or `RIGHT`. Use `LEFT` for deletions that appear in red. Use `RIGHT` for additions that appear in green or unchanged lines that appear in white and are shown for context. For a multi-line comment, side represents whether the last line of the comment range is a deletion or addition. For more information, see "[Diff view options](https://help.github.com/en/articles/about-comparing-branches-in-pull-requests#diff-view-options)" in the GitHub Help documentation. */
+        side?: "LEFT" | "RIGHT";
+        /** **Required with `comfort-fade` preview**. The line of the blob in the pull request diff that the comment applies to. For a multi-line comment, the last line of the range that your comment applies to. */
+        line?: number;
+        /** **Required when using multi-line comments**. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_line` is the first line in the pull request diff that your multi-line comment applies to. To learn more about multi-line comments, see "[Commenting on a pull request](https://help.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)" in the GitHub Help documentation. */
+        start_line?: number;
+        /** **Required when using multi-line comments**. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_side` is the starting side of the diff that the comment applies to. Can be `LEFT` or `RIGHT`. To learn more about multi-line comments, see "[Commenting on a pull request](https://help.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)" in the GitHub Help documentation. See `side` in this table for additional context. */
+        start_side?: "LEFT" | "RIGHT" | "side";
+        /** @example 2 */
+        in_reply_to?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixPullRequestReviewCommentMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<PullRequestReviewComment, BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/pulls/${pullNumber}/comments`,
         method: "POST",
         body: data,
@@ -25371,10 +22788,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       pullNumber: number,
       commentId: number,
-      data: IMySuperPrefixPullsCreateReplyForReviewCommentPayloadMySuperSuffix,
+      data: {
+        /** The text of the review comment. */
+        body: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixPullRequestReviewCommentMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<PullRequestReviewComment, BasicError>({
         path: `/repos/${owner}/${repo}/pulls/${pullNumber}/comments/${commentId}/replies`,
         method: "POST",
         body: data,
@@ -25392,10 +22812,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/pulls/{pull_number}/commits
      */
     pullsListCommits: (
-      { owner, repo, pullNumber, ...query }: IMySuperPrefixPullsListCommitsParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      pullNumber: number,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixCommitMySuperSuffix[], any>({
+      this.request<Commit[], any>({
         path: `/repos/${owner}/${repo}/pulls/${pullNumber}/commits`,
         method: "GET",
         query: query,
@@ -25412,13 +22846,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/pulls/{pull_number}/files
      */
     pullsListFiles: (
-      { owner, repo, pullNumber, ...query }: IMySuperPrefixPullsListFilesParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      pullNumber: number,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixDiffEntryMySuperSuffix[],
-        IMySuperPrefixValidationErrorMySuperSuffix | IMySuperPrefixBasicErrorMySuperSuffix
-      >({
+      this.request<DiffEntry[], ValidationError | BasicError>({
         path: `/repos/${owner}/${repo}/pulls/${pullNumber}/files`,
         method: "GET",
         query: query,
@@ -25453,17 +22898,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       pullNumber: number,
-      data: IMySuperPrefixPullsMergePayloadMySuperSuffix,
+      data: {
+        /** Title for the automatic commit message. */
+        commit_title?: string;
+        /** Extra detail to append to automatic commit message. */
+        commit_message?: string;
+        /** SHA that pull request head must match to allow merge. */
+        sha?: string;
+        /** Merge method to use. Possible values are `merge`, `squash` or `rebase`. Default is `merge`. */
+        merge_method?: "merge" | "squash" | "rebase";
+      } | null,
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixPullRequestMergeResultMySuperSuffix,
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        PullRequestMergeResult,
+        | BasicError
         | {
             message?: string;
             documentation_url?: string;
           }
-        | IMySuperPrefixValidationErrorMySuperSuffix
+        | ValidationError
       >({
         path: `/repos/${owner}/${repo}/pulls/${pullNumber}/merge`,
         method: "PUT",
@@ -25482,10 +22936,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers
      */
     pullsListRequestedReviewers: (
-      { owner, repo, pullNumber, ...query }: IMySuperPrefixPullsListRequestedReviewersParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      pullNumber: number,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixPullRequestReviewRequestMySuperSuffix, any>({
+      this.request<PullRequestReviewRequest, any>({
         path: `/repos/${owner}/${repo}/pulls/${pullNumber}/requested_reviewers`,
         method: "GET",
         query: query,
@@ -25505,10 +22973,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       pullNumber: number,
-      data: IMySuperPrefixPullsRequestReviewersPayloadMySuperSuffix,
+      data: {
+        /** An array of user `login`s that will be requested. */
+        reviewers?: string[];
+        /** An array of team `slug`s that will be requested. */
+        team_reviewers?: string[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixPullRequestSimpleMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix | void>({
+      this.request<PullRequestSimple, BasicError | void>({
         path: `/repos/${owner}/${repo}/pulls/${pullNumber}/requested_reviewers`,
         method: "POST",
         body: data,
@@ -25529,10 +23002,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       pullNumber: number,
-      data: IMySuperPrefixPullsRemoveRequestedReviewersPayloadMySuperSuffix,
+      data: {
+        /** An array of user `login`s that will be removed. */
+        reviewers?: string[];
+        /** An array of team `slug`s that will be removed. */
+        team_reviewers?: string[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<void, IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<void, ValidationError>({
         path: `/repos/${owner}/${repo}/pulls/${pullNumber}/requested_reviewers`,
         method: "DELETE",
         body: data,
@@ -25549,10 +23027,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/pulls/{pull_number}/reviews
      */
     pullsListReviews: (
-      { owner, repo, pullNumber, ...query }: IMySuperPrefixPullsListReviewsParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      pullNumber: number,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixPullRequestReviewMySuperSuffix[], any>({
+      this.request<PullRequestReview[], any>({
         path: `/repos/${owner}/${repo}/pulls/${pullNumber}/reviews`,
         method: "GET",
         query: query,
@@ -25572,13 +23064,34 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       pullNumber: number,
-      data: IMySuperPrefixPullsCreateReviewPayloadMySuperSuffix,
+      data: {
+        /** The SHA of the commit that needs a review. Not using the latest commit SHA may render your review comment outdated if a subsequent commit modifies the line you specify as the `position`. Defaults to the most recent commit in the pull request when you do not specify a value. */
+        commit_id?: string;
+        /** **Required** when using `REQUEST_CHANGES` or `COMMENT` for the `event` parameter. The body text of the pull request review. */
+        body?: string;
+        /** The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. By leaving this blank, you set the review action state to `PENDING`, which means you will need to [submit the pull request review](https://docs.github.com/rest/reference/pulls#submit-a-review-for-a-pull-request) when you are ready. */
+        event?: "APPROVE" | "REQUEST_CHANGES" | "COMMENT";
+        /** Use the following table to specify the location, destination, and contents of the draft review comment. */
+        comments?: {
+          /** The relative path to the file that necessitates a review comment. */
+          path: string;
+          /** The position in the diff where you want to add a review comment. Note this value is not the same as the line number in the file. For help finding the position value, read the note below. */
+          position?: number;
+          /** Text of the review comment. */
+          body: string;
+          /** @example 28 */
+          line?: number;
+          /** @example "RIGHT" */
+          side?: string;
+          /** @example 26 */
+          start_line?: number;
+          /** @example "LEFT" */
+          start_side?: string;
+        }[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixPullRequestReviewMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorSimpleMySuperSuffix
-      >({
+      this.request<PullRequestReview, BasicError | ValidationErrorSimple>({
         path: `/repos/${owner}/${repo}/pulls/${pullNumber}/reviews`,
         method: "POST",
         body: data,
@@ -25596,7 +23109,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}
      */
     pullsGetReview: (owner: string, repo: string, pullNumber: number, reviewId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixPullRequestReviewMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<PullRequestReview, BasicError>({
         path: `/repos/${owner}/${repo}/pulls/${pullNumber}/reviews/${reviewId}`,
         method: "GET",
         format: "json",
@@ -25616,10 +23129,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       pullNumber: number,
       reviewId: number,
-      data: IMySuperPrefixPullsUpdateReviewPayloadMySuperSuffix,
+      data: {
+        /** The body text of the pull request review. */
+        body: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixPullRequestReviewMySuperSuffix, IMySuperPrefixValidationErrorSimpleMySuperSuffix>({
+      this.request<PullRequestReview, ValidationErrorSimple>({
         path: `/repos/${owner}/${repo}/pulls/${pullNumber}/reviews/${reviewId}`,
         method: "PUT",
         body: data,
@@ -25643,10 +23159,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       reviewId: number,
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixPullRequestReviewMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorSimpleMySuperSuffix
-      >({
+      this.request<PullRequestReview, BasicError | ValidationErrorSimple>({
         path: `/repos/${owner}/${repo}/pulls/${pullNumber}/reviews/${reviewId}`,
         method: "DELETE",
         format: "json",
@@ -25662,10 +23175,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/comments
      */
     pullsListCommentsForReview: (
-      { owner, repo, pullNumber, reviewId, ...query }: IMySuperPrefixPullsListCommentsForReviewParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      pullNumber: number,
+      reviewId: number,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixReviewCommentMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<ReviewComment[], BasicError>({
         path: `/repos/${owner}/${repo}/pulls/${pullNumber}/reviews/${reviewId}/comments`,
         method: "GET",
         query: query,
@@ -25686,13 +23214,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       pullNumber: number,
       reviewId: number,
-      data: IMySuperPrefixPullsDismissReviewPayloadMySuperSuffix,
+      data: {
+        /** The message for the pull request review dismissal */
+        message: string;
+        /** @example ""APPROVE"" */
+        event?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixPullRequestReviewMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorSimpleMySuperSuffix
-      >({
+      this.request<PullRequestReview, BasicError | ValidationErrorSimple>({
         path: `/repos/${owner}/${repo}/pulls/${pullNumber}/reviews/${reviewId}/dismissals`,
         method: "PUT",
         body: data,
@@ -25714,13 +23244,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       pullNumber: number,
       reviewId: number,
-      data: IMySuperPrefixPullsSubmitReviewPayloadMySuperSuffix,
+      data: {
+        /** The body text of the pull request review */
+        body?: string;
+        /** The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. When you leave this blank, the API returns _HTTP 422 (Unrecognizable entity)_ and sets the review action state to `PENDING`, which means you will need to re-submit the pull request review using a review action. */
+        event: "APPROVE" | "REQUEST_CHANGES" | "COMMENT";
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixPullRequestReviewMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorSimpleMySuperSuffix
-      >({
+      this.request<PullRequestReview, BasicError | ValidationErrorSimple>({
         path: `/repos/${owner}/${repo}/pulls/${pullNumber}/reviews/${reviewId}/events`,
         method: "POST",
         body: data,
@@ -25741,7 +23273,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       pullNumber: number,
-      data: IMySuperPrefixPullsUpdateBranchPayloadMySuperSuffix,
+      data: {
+        /** The expected SHA of the pull request's HEAD ref. This is the most recent commit on the pull request's branch. If the expected SHA does not match the pull request's HEAD, you will receive a `422 Unprocessable Entity` status. You can use the "[List commits](https://docs.github.com/rest/reference/repos#list-commits)" endpoint to find the most recent commit SHA. Default: SHA of the pull request's current HEAD ref. */
+        expected_head_sha?: string;
+      } | null,
       params: RequestParams = {},
     ) =>
       this.request<
@@ -25749,12 +23284,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
           message?: string;
           url?: string;
         },
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        | BasicError
         | {
             message: string;
             documentation_url: string;
           }
-        | IMySuperPrefixValidationErrorMySuperSuffix
+        | ValidationError
       >({
         path: `/repos/${owner}/${repo}/pulls/${pullNumber}/update-branch`,
         method: "PUT",
@@ -25773,13 +23308,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/readme
      */
     reposGetReadme: (
-      { owner, repo, ...query }: IMySuperPrefixReposGetReadmeParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /** The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`) */
+        ref?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixContentFileMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<ContentFile, BasicError | ValidationError>({
         path: `/repos/${owner}/${repo}/readme`,
         method: "GET",
         query: query,
@@ -25796,10 +23333,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/releases
      */
     reposListReleases: (
-      { owner, repo, ...query }: IMySuperPrefixReposListReleasesParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixReleaseMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Release[], BasicError>({
         path: `/repos/${owner}/${repo}/releases`,
         method: "GET",
         query: query,
@@ -25818,10 +23368,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     reposCreateRelease: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixReposCreateReleasePayloadMySuperSuffix,
+      data: {
+        /** The name of the tag. */
+        tag_name: string;
+        /** Specifies the commitish value that determines where the Git tag is created from. Can be any branch or commit SHA. Unused if the Git tag already exists. Default: the repository's default branch (usually `master`). */
+        target_commitish?: string;
+        /** The name of the release. */
+        name?: string;
+        /** Text describing the contents of the tag. */
+        body?: string;
+        /**
+         * `true` to create a draft (unpublished) release, `false` to create a published one.
+         * @default false
+         */
+        draft?: boolean;
+        /**
+         * `true` to identify the release as a prerelease. `false` to identify the release as a full release.
+         * @default false
+         */
+        prerelease?: boolean;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixReleaseMySuperSuffix, IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<Release, ValidationError>({
         path: `/repos/${owner}/${repo}/releases`,
         method: "POST",
         body: data,
@@ -25840,8 +23409,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     reposGetReleaseAsset: (owner: string, repo: string, assetId: number, params: RequestParams = {}) =>
       this.request<
-        IMySuperPrefixReleaseAssetMySuperSuffix,
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        ReleaseAsset,
+        | BasicError
         | {
             message: string;
             documentation_url: string;
@@ -25865,10 +23434,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       assetId: number,
-      data: IMySuperPrefixReposUpdateReleaseAssetPayloadMySuperSuffix,
+      data: {
+        /** The file name of the asset. */
+        name?: string;
+        /** An alternate short description of the asset. Used in place of the filename. */
+        label?: string;
+        /** @example ""uploaded"" */
+        state?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixReleaseAssetMySuperSuffix, any>({
+      this.request<ReleaseAsset, any>({
         path: `/repos/${owner}/${repo}/releases/assets/${assetId}`,
         method: "PATCH",
         body: data,
@@ -25901,7 +23477,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/releases/latest
      */
     reposGetLatestRelease: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixReleaseMySuperSuffix, any>({
+      this.request<Release, any>({
         path: `/repos/${owner}/${repo}/releases/latest`,
         method: "GET",
         format: "json",
@@ -25917,7 +23493,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/releases/tags/{tag}
      */
     reposGetReleaseByTag: (owner: string, repo: string, tag: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixReleaseMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Release, BasicError>({
         path: `/repos/${owner}/${repo}/releases/tags/${tag}`,
         method: "GET",
         format: "json",
@@ -25933,7 +23509,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/releases/{release_id}
      */
     reposGetRelease: (owner: string, repo: string, releaseId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixReleaseMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Release, BasicError>({
         path: `/repos/${owner}/${repo}/releases/${releaseId}`,
         method: "GET",
         format: "json",
@@ -25952,10 +23528,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       releaseId: number,
-      data: IMySuperPrefixReposUpdateReleasePayloadMySuperSuffix,
+      data: {
+        /** The name of the tag. */
+        tag_name?: string;
+        /** Specifies the commitish value that determines where the Git tag is created from. Can be any branch or commit SHA. Unused if the Git tag already exists. Default: the repository's default branch (usually `master`). */
+        target_commitish?: string;
+        /** The name of the release. */
+        name?: string;
+        /** Text describing the contents of the tag. */
+        body?: string;
+        /** `true` makes the release a draft, and `false` publishes the release. */
+        draft?: boolean;
+        /** `true` to identify the release as a prerelease, `false` to identify the release as a full release. */
+        prerelease?: boolean;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixReleaseMySuperSuffix, any>({
+      this.request<Release, any>({
         path: `/repos/${owner}/${repo}/releases/${releaseId}`,
         method: "PATCH",
         body: data,
@@ -25988,10 +23577,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/releases/{release_id}/assets
      */
     reposListReleaseAssets: (
-      { owner, repo, releaseId, ...query }: IMySuperPrefixReposListReleaseAssetsParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      releaseId: number,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixReleaseAssetMySuperSuffix[], any>({
+      this.request<ReleaseAsset[], any>({
         path: `/repos/${owner}/${repo}/releases/${releaseId}/assets`,
         method: "GET",
         query: query,
@@ -26008,11 +23611,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/repos/{owner}/{repo}/releases/{release_id}/assets
      */
     reposUploadReleaseAsset: (
-      { owner, repo, releaseId, ...query }: IMySuperPrefixReposUploadReleaseAssetParamsMySuperSuffix,
-      data: IMySuperPrefixReposUploadReleaseAssetPayloadMySuperSuffix,
+      owner: string,
+      repo: string,
+      releaseId: number,
+      data: WebhookConfigUrl,
+      query?: {
+        name?: string;
+        label?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixReleaseAssetMySuperSuffix, any>({
+      this.request<ReleaseAsset, any>({
         path: `/repos/${owner}/${repo}/releases/${releaseId}/assets`,
         method: "POST",
         query: query,
@@ -26030,11 +23639,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/secret-scanning/alerts
      */
     secretScanningListAlertsForRepo: (
-      { owner, repo, ...query }: IMySuperPrefixSecretScanningListAlertsForRepoParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /** Set to `open` or `resolved` to only list secret scanning alerts in a specific state. */
+        state?: "open" | "resolved";
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixSecretScanningAlertMySuperSuffix[],
+        SecretScanningAlert[],
         void | {
           code?: string;
           message?: string;
@@ -26056,14 +23680,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Get a secret scanning alert
      * @request GET:/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}
      */
-    secretScanningGetAlert: (
-      owner: string,
-      repo: string,
-      alertNumber: IMySuperPrefixAlertNumberMySuperSuffix,
-      params: RequestParams = {},
-    ) =>
+    secretScanningGetAlert: (owner: string, repo: string, alertNumber: AlertNumber, params: RequestParams = {}) =>
       this.request<
-        IMySuperPrefixSecretScanningAlertMySuperSuffix,
+        SecretScanningAlert,
         void | {
           code?: string;
           message?: string;
@@ -26087,12 +23706,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     secretScanningUpdateAlert: (
       owner: string,
       repo: string,
-      alertNumber: IMySuperPrefixAlertNumberMySuperSuffix,
-      data: IMySuperPrefixSecretScanningUpdateAlertPayloadMySuperSuffix,
+      alertNumber: AlertNumber,
+      data: {
+        /** Sets the state of the secret scanning alert. Can be either `open` or `resolved`. You must provide `resolution` when you set the state to `resolved`. */
+        state: SecretScanningAlertState;
+        /** **Required when the `state` is `resolved`.** The reason for resolving the alert. Can be one of `false_positive`, `wont_fix`, `revoked`, or `used_in_tests`. */
+        resolution?: SecretScanningAlertResolution;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixSecretScanningAlertMySuperSuffix,
+        SecretScanningAlert,
         void | {
           code?: string;
           message?: string;
@@ -26116,10 +23740,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/stargazers
      */
     activityListStargazersForRepo: (
-      { owner, repo, ...query }: IMySuperPrefixActivityListStargazersForRepoParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixSimpleUserMySuperSuffix[], IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<SimpleUser[], ValidationError>({
         path: `/repos/${owner}/${repo}/stargazers`,
         method: "GET",
         query: query,
@@ -26136,7 +23773,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/stats/code_frequency
      */
     reposGetCodeFrequencyStats: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixCodeFrequencyStatMySuperSuffix[], any>({
+      this.request<CodeFrequencyStat[], any>({
         path: `/repos/${owner}/${repo}/stats/code_frequency`,
         method: "GET",
         format: "json",
@@ -26152,7 +23789,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/stats/commit_activity
      */
     reposGetCommitActivityStats: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixCommitActivityMySuperSuffix[], any>({
+      this.request<CommitActivity[], any>({
         path: `/repos/${owner}/${repo}/stats/commit_activity`,
         method: "GET",
         format: "json",
@@ -26168,7 +23805,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/stats/contributors
      */
     reposGetContributorsStats: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixContributorActivityMySuperSuffix[], any>({
+      this.request<ContributorActivity[], any>({
         path: `/repos/${owner}/${repo}/stats/contributors`,
         method: "GET",
         format: "json",
@@ -26184,7 +23821,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/stats/participation
      */
     reposGetParticipationStats: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixParticipationStatsMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<ParticipationStats, BasicError>({
         path: `/repos/${owner}/${repo}/stats/participation`,
         method: "GET",
         format: "json",
@@ -26200,7 +23837,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/stats/punch_card
      */
     reposGetPunchCardStats: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixCodeFrequencyStatMySuperSuffix[], any>({
+      this.request<CodeFrequencyStat[], any>({
         path: `/repos/${owner}/${repo}/stats/punch_card`,
         method: "GET",
         format: "json",
@@ -26219,10 +23856,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       sha: string,
-      data: IMySuperPrefixReposCreateCommitStatusPayloadMySuperSuffix,
+      data: {
+        /** The state of the status. Can be one of `error`, `failure`, `pending`, or `success`. */
+        state: "error" | "failure" | "pending" | "success";
+        /**
+         * The target URL to associate with this status. This URL will be linked from the GitHub UI to allow users to easily see the source of the status.
+         * For example, if your continuous integration system is posting build status, you would want to provide the deep link for the build output for this specific SHA:
+         * `http://ci.example.com/user/repo/build/sha`
+         */
+        target_url?: string;
+        /** A short description of the status. */
+        description?: string;
+        /**
+         * A string label to differentiate this status from the status of other systems. This field is case-insensitive.
+         * @default "default"
+         */
+        context?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixStatusMySuperSuffix, any>({
+      this.request<Status, any>({
         path: `/repos/${owner}/${repo}/statuses/${sha}`,
         method: "POST",
         body: data,
@@ -26240,10 +23893,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/subscribers
      */
     activityListWatchersForRepo: (
-      { owner, repo, ...query }: IMySuperPrefixActivityListWatchersForRepoParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixSimpleUserMySuperSuffix[], any>({
+      this.request<SimpleUser[], any>({
         path: `/repos/${owner}/${repo}/subscribers`,
         method: "GET",
         query: query,
@@ -26260,7 +23926,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/subscription
      */
     activityGetRepoSubscription: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixRepositorySubscriptionMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix | void>({
+      this.request<RepositorySubscription, BasicError | void>({
         path: `/repos/${owner}/${repo}/subscription`,
         method: "GET",
         format: "json",
@@ -26278,10 +23944,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     activitySetRepoSubscription: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixActivitySetRepoSubscriptionPayloadMySuperSuffix,
+      data: {
+        /** Determines if notifications should be received from this repository. */
+        subscribed?: boolean;
+        /** Determines if all notifications should be blocked from this repository. */
+        ignored?: boolean;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixRepositorySubscriptionMySuperSuffix, any>({
+      this.request<RepositorySubscription, any>({
         path: `/repos/${owner}/${repo}/subscription`,
         method: "PUT",
         body: data,
@@ -26314,10 +23985,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/tags
      */
     reposListTags: (
-      { owner, repo, ...query }: IMySuperPrefixReposListTagsParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixTagMySuperSuffix[], any>({
+      this.request<Tag[], any>({
         path: `/repos/${owner}/${repo}/tags`,
         method: "GET",
         query: query,
@@ -26349,10 +24033,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/teams
      */
     reposListTeams: (
-      { owner, repo, ...query }: IMySuperPrefixReposListTeamsParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixTeamMySuperSuffix[], any>({
+      this.request<Team[], any>({
         path: `/repos/${owner}/${repo}/teams`,
         method: "GET",
         query: query,
@@ -26370,8 +24067,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     reposGetAllTopics: (owner: string, repo: string, params: RequestParams = {}) =>
       this.request<
-        IMySuperPrefixTopicMySuperSuffix,
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        Topic,
+        | BasicError
         | {
             message: string;
             documentation_url: string;
@@ -26394,17 +24091,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     reposReplaceAllTopics: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixReposReplaceAllTopicsPayloadMySuperSuffix,
+      data: {
+        /** An array of topics to add to the repository. Pass one or more topics to _replace_ the set of existing topics. Send an empty array (`[]`) to clear all topics from the repository. **Note:** Topic `names` cannot contain uppercase letters. */
+        names: string[];
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixTopicMySuperSuffix,
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        Topic,
+        | BasicError
         | {
             message: string;
             documentation_url: string;
           }
-        | IMySuperPrefixValidationErrorSimpleMySuperSuffix
+        | ValidationErrorSimple
       >({
         path: `/repos/${owner}/${repo}/topics`,
         method: "PUT",
@@ -26423,10 +24123,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/traffic/clones
      */
     reposGetClones: (
-      { owner, repo, ...query }: IMySuperPrefixReposGetClonesParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * Must be one of: `day`, `week`.
+         * @default "day"
+         */
+        per?: "day" | "week";
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixCloneTrafficMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<CloneTraffic, BasicError>({
         path: `/repos/${owner}/${repo}/traffic/clones`,
         method: "GET",
         query: query,
@@ -26443,7 +24151,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/traffic/popular/paths
      */
     reposGetTopPaths: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixContentTrafficMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<ContentTraffic[], BasicError>({
         path: `/repos/${owner}/${repo}/traffic/popular/paths`,
         method: "GET",
         format: "json",
@@ -26459,7 +24167,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/traffic/popular/referrers
      */
     reposGetTopReferrers: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixReferrerTrafficMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<ReferrerTraffic[], BasicError>({
         path: `/repos/${owner}/${repo}/traffic/popular/referrers`,
         method: "GET",
         format: "json",
@@ -26475,10 +24183,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/traffic/views
      */
     reposGetViews: (
-      { owner, repo, ...query }: IMySuperPrefixReposGetViewsParamsMySuperSuffix,
+      owner: string,
+      repo: string,
+      query?: {
+        /**
+         * Must be one of: `day`, `week`.
+         * @default "day"
+         */
+        per?: "day" | "week";
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixViewTrafficMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<ViewTraffic, BasicError>({
         path: `/repos/${owner}/${repo}/traffic/views`,
         method: "GET",
         query: query,
@@ -26497,10 +24213,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     reposTransfer: (
       owner: string,
       repo: string,
-      data: IMySuperPrefixReposTransferPayloadMySuperSuffix,
+      data: {
+        /** The username or organization name the repository will be transferred to. */
+        new_owner: string;
+        /** ID of the team or teams to add to the repository. Teams can only be added to organization-owned repositories. */
+        team_ids?: number[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixRepositoryMySuperSuffix, any>({
+      this.request<Repository, any>({
         path: `/repos/${owner}/${repo}/transfer`,
         method: "POST",
         body: data,
@@ -26580,10 +24301,27 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     reposCreateUsingTemplate: (
       templateOwner: string,
       templateRepo: string,
-      data: IMySuperPrefixReposCreateUsingTemplatePayloadMySuperSuffix,
+      data: {
+        /** The organization or person who will own the new repository. To create a new repository in an organization, the authenticated user must be a member of the specified organization. */
+        owner?: string;
+        /** The name of the new repository. */
+        name: string;
+        /** A short description of the new repository. */
+        description?: string;
+        /**
+         * Set to `true` to include the directory structure and files from all branches in the template repository, and not just the default branch. Default: `false`.
+         * @default false
+         */
+        include_all_branches?: boolean;
+        /**
+         * Either `true` to create a new private repository or `false` to create a new public one.
+         * @default false
+         */
+        private?: boolean;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixRepositoryMySuperSuffix, any>({
+      this.request<Repository, any>({
         path: `/repos/${templateOwner}/${templateRepo}/generate`,
         method: "POST",
         body: data,
@@ -26601,8 +24339,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary List public repositories
      * @request GET:/repositories
      */
-    reposListPublic: (query: IMySuperPrefixReposListPublicParamsMySuperSuffix, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixMinimalRepositoryMySuperSuffix[], IMySuperPrefixValidationErrorMySuperSuffix>({
+    reposListPublic: (
+      query?: {
+        /** A repository ID. Only return repositories with an ID greater than this ID. */
+        since?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<MinimalRepository[], ValidationError>({
         path: `/repositories`,
         method: "GET",
         query: query,
@@ -26620,10 +24364,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/scim/v2/enterprises/{enterprise}/Groups
      */
     enterpriseAdminListProvisionedGroupsEnterprise: (
-      { enterprise, ...query }: IMySuperPrefixEnterpriseAdminListProvisionedGroupsEnterpriseParamsMySuperSuffix,
+      enterprise: string,
+      query?: {
+        /** Used for pagination: the index of the first result to return. */
+        startIndex?: number;
+        /** Used for pagination: the number of results to return. */
+        count?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixScimGroupListEnterpriseMySuperSuffix, any>({
+      this.request<ScimGroupListEnterprise, any>({
         path: `/scim/v2/enterprises/${enterprise}/Groups`,
         method: "GET",
         query: query,
@@ -26641,10 +24391,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     enterpriseAdminProvisionAndInviteEnterpriseGroup: (
       enterprise: string,
-      data: IMySuperPrefixEnterpriseAdminProvisionAndInviteEnterpriseGroupPayloadMySuperSuffix,
+      data: {
+        /** The SCIM schema URIs. */
+        schemas: string[];
+        /** The name of the SCIM group. This must match the GitHub organization that the group maps to. */
+        displayName: string;
+        members?: {
+          /** The SCIM user ID for a user. */
+          value: string;
+        }[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixScimEnterpriseGroupMySuperSuffix, any>({
+      this.request<ScimEnterpriseGroup, any>({
         path: `/scim/v2/enterprises/${enterprise}/Groups`,
         method: "POST",
         body: data,
@@ -26666,7 +24425,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       scimGroupId: string,
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixScimEnterpriseGroupMySuperSuffix, any>({
+      this.request<ScimEnterpriseGroup, any>({
         path: `/scim/v2/enterprises/${enterprise}/Groups/${scimGroupId}`,
         method: "GET",
         format: "json",
@@ -26684,10 +24443,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     enterpriseAdminSetInformationForProvisionedEnterpriseGroup: (
       enterprise: string,
       scimGroupId: string,
-      data: IMySuperPrefixEnterpriseAdminSetInformationForProvisionedEnterpriseGroupPayloadMySuperSuffix,
+      data: {
+        /** The SCIM schema URIs. */
+        schemas: string[];
+        /** The name of the SCIM group. This must match the GitHub organization that the group maps to. */
+        displayName: string;
+        members?: {
+          /** The SCIM user ID for a user. */
+          value: string;
+        }[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixScimEnterpriseGroupMySuperSuffix, any>({
+      this.request<ScimEnterpriseGroup, any>({
         path: `/scim/v2/enterprises/${enterprise}/Groups/${scimGroupId}`,
         method: "PUT",
         body: data,
@@ -26707,10 +24475,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     enterpriseAdminUpdateAttributeForEnterpriseGroup: (
       enterprise: string,
       scimGroupId: string,
-      data: IMySuperPrefixEnterpriseAdminUpdateAttributeForEnterpriseGroupPayloadMySuperSuffix,
+      data: {
+        /** The SCIM schema URIs. */
+        schemas: string[];
+        /** Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2). */
+        Operations: object[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixScimEnterpriseGroupMySuperSuffix, any>({
+      this.request<ScimEnterpriseGroup, any>({
         path: `/scim/v2/enterprises/${enterprise}/Groups/${scimGroupId}`,
         method: "PATCH",
         body: data,
@@ -26747,10 +24520,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/scim/v2/enterprises/{enterprise}/Users
      */
     enterpriseAdminListProvisionedIdentitiesEnterprise: (
-      { enterprise, ...query }: IMySuperPrefixEnterpriseAdminListProvisionedIdentitiesEnterpriseParamsMySuperSuffix,
+      enterprise: string,
+      query?: {
+        /** Used for pagination: the index of the first result to return. */
+        startIndex?: number;
+        /** Used for pagination: the number of results to return. */
+        count?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixScimUserListEnterpriseMySuperSuffix, any>({
+      this.request<ScimUserListEnterprise, any>({
         path: `/scim/v2/enterprises/${enterprise}/Users`,
         method: "GET",
         query: query,
@@ -26768,10 +24547,34 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     enterpriseAdminProvisionAndInviteEnterpriseUser: (
       enterprise: string,
-      data: IMySuperPrefixEnterpriseAdminProvisionAndInviteEnterpriseUserPayloadMySuperSuffix,
+      data: {
+        /** The SCIM schema URIs. */
+        schemas: string[];
+        /** The username for the user. */
+        userName: string;
+        name: {
+          /** The first name of the user. */
+          givenName: string;
+          /** The last name of the user. */
+          familyName: string;
+        };
+        /** List of user emails. */
+        emails: {
+          /** The email address. */
+          value: string;
+          /** The type of email address. */
+          type: string;
+          /** Whether this email address is the primary address. */
+          primary: boolean;
+        }[];
+        /** List of SCIM group IDs the user is a member of. */
+        groups?: {
+          value?: string;
+        }[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixScimEnterpriseUserMySuperSuffix, any>({
+      this.request<ScimEnterpriseUser, any>({
         path: `/scim/v2/enterprises/${enterprise}/Users`,
         method: "POST",
         body: data,
@@ -26793,7 +24596,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       scimUserId: string,
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixScimEnterpriseUserMySuperSuffix, any>({
+      this.request<ScimEnterpriseUser, any>({
         path: `/scim/v2/enterprises/${enterprise}/Users/${scimUserId}`,
         method: "GET",
         format: "json",
@@ -26811,10 +24614,34 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     enterpriseAdminSetInformationForProvisionedEnterpriseUser: (
       enterprise: string,
       scimUserId: string,
-      data: IMySuperPrefixEnterpriseAdminSetInformationForProvisionedEnterpriseUserPayloadMySuperSuffix,
+      data: {
+        /** The SCIM schema URIs. */
+        schemas: string[];
+        /** The username for the user. */
+        userName: string;
+        name: {
+          /** The first name of the user. */
+          givenName: string;
+          /** The last name of the user. */
+          familyName: string;
+        };
+        /** List of user emails. */
+        emails: {
+          /** The email address. */
+          value: string;
+          /** The type of email address. */
+          type: string;
+          /** Whether this email address is the primary address. */
+          primary: boolean;
+        }[];
+        /** List of SCIM group IDs the user is a member of. */
+        groups?: {
+          value?: string;
+        }[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixScimEnterpriseUserMySuperSuffix, any>({
+      this.request<ScimEnterpriseUser, any>({
         path: `/scim/v2/enterprises/${enterprise}/Users/${scimUserId}`,
         method: "PUT",
         body: data,
@@ -26834,10 +24661,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     enterpriseAdminUpdateAttributeForEnterpriseUser: (
       enterprise: string,
       scimUserId: string,
-      data: IMySuperPrefixEnterpriseAdminUpdateAttributeForEnterpriseUserPayloadMySuperSuffix,
+      data: {
+        /** The SCIM schema URIs. */
+        schemas: string[];
+        /** Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2). */
+        Operations: object[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixScimEnterpriseUserMySuperSuffix, any>({
+      this.request<ScimEnterpriseUser, any>({
         path: `/scim/v2/enterprises/${enterprise}/Users/${scimUserId}`,
         method: "PATCH",
         body: data,
@@ -26870,10 +24702,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/scim/v2/organizations/{org}/Users
      */
     scimListProvisionedIdentities: (
-      { org, ...query }: IMySuperPrefixScimListProvisionedIdentitiesParamsMySuperSuffix,
+      org: string,
+      query?: {
+        /** Used for pagination: the index of the first result to return. */
+        startIndex?: number;
+        /** Used for pagination: the number of results to return. */
+        count?: number;
+        /**
+         * Filters results using the equals query parameter operator (`eq`). You can filter results that are equal to `id`, `userName`, `emails`, and `external_id`. For example, to search for an identity with the `userName` Octocat, you would use this query:
+         *
+         * `?filter=userName%20eq%20\"Octocat\"`.
+         *
+         * To filter results for the identity with the email `octocat@github.com`, you would use this query:
+         *
+         * `?filter=emails%20eq%20\"octocat@github.com\"`.
+         */
+        filter?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixScimUserListMySuperSuffix, IMySuperPrefixScimErrorMySuperSuffix>({
+      this.request<ScimUserList, ScimError>({
         path: `/scim/v2/organizations/${org}/Users`,
         method: "GET",
         query: query,
@@ -26891,10 +24739,41 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     scimProvisionAndInviteUser: (
       org: string,
-      data: IMySuperPrefixScimProvisionAndInviteUserPayloadMySuperSuffix,
+      data: {
+        /**
+         * Configured by the admin. Could be an email, login, or username
+         * @example "someone@example.com"
+         */
+        userName: string;
+        /**
+         * The name of the user, suitable for display to end-users
+         * @example "Jon Doe"
+         */
+        displayName?: string;
+        /** @example {"givenName":"Jane","familyName":"User"} */
+        name: {
+          givenName: string;
+          familyName: string;
+          formatted?: string;
+        };
+        /**
+         * user emails
+         * @minItems 1
+         * @example [{"value":"someone@example.com","primary":true},{"value":"another@example.com","primary":false}]
+         */
+        emails: {
+          value: string;
+          primary?: boolean;
+          type?: string;
+        }[];
+        schemas?: string[];
+        externalId?: string;
+        groups?: string[];
+        active?: boolean;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixScimUserMySuperSuffix, IMySuperPrefixScimErrorMySuperSuffix>({
+      this.request<ScimUser, ScimError>({
         path: `/scim/v2/organizations/${org}/Users`,
         method: "POST",
         body: data,
@@ -26912,7 +24791,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/scim/v2/organizations/{org}/Users/{scim_user_id}
      */
     scimGetProvisioningInformationForUser: (org: string, scimUserId: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixScimUserMySuperSuffix, IMySuperPrefixScimErrorMySuperSuffix>({
+      this.request<ScimUser, ScimError>({
         path: `/scim/v2/organizations/${org}/Users/${scimUserId}`,
         method: "GET",
         format: "json",
@@ -26930,10 +24809,41 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     scimSetInformationForProvisionedUser: (
       org: string,
       scimUserId: string,
-      data: IMySuperPrefixScimSetInformationForProvisionedUserPayloadMySuperSuffix,
+      data: {
+        schemas?: string[];
+        /**
+         * The name of the user, suitable for display to end-users
+         * @example "Jon Doe"
+         */
+        displayName?: string;
+        externalId?: string;
+        groups?: string[];
+        active?: boolean;
+        /**
+         * Configured by the admin. Could be an email, login, or username
+         * @example "someone@example.com"
+         */
+        userName: string;
+        /** @example {"givenName":"Jane","familyName":"User"} */
+        name: {
+          givenName: string;
+          familyName: string;
+          formatted?: string;
+        };
+        /**
+         * user emails
+         * @minItems 1
+         * @example [{"value":"someone@example.com","primary":true},{"value":"another@example.com","primary":false}]
+         */
+        emails: {
+          type?: string;
+          value: string;
+          primary?: boolean;
+        }[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixScimUserMySuperSuffix, IMySuperPrefixScimErrorMySuperSuffix>({
+      this.request<ScimUser, ScimError>({
         path: `/scim/v2/organizations/${org}/Users/${scimUserId}`,
         method: "PUT",
         body: data,
@@ -26953,13 +24863,34 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     scimUpdateAttributeForUser: (
       org: string,
       scimUserId: string,
-      data: IMySuperPrefixScimUpdateAttributeForUserPayloadMySuperSuffix,
+      data: {
+        schemas?: string[];
+        /**
+         * Set of operations to be performed
+         * @minItems 1
+         * @example [{"op":"replace","value":{"active":false}}]
+         */
+        Operations: {
+          op: "add" | "remove" | "replace";
+          path?: string;
+          value?:
+            | {
+                active?: boolean | null;
+                userName?: string | null;
+                externalId?: string | null;
+                givenName?: string | null;
+                familyName?: string | null;
+              }
+            | {
+                value?: string;
+                primary?: boolean;
+              }[]
+            | string;
+        }[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixScimUserMySuperSuffix,
-        IMySuperPrefixScimErrorMySuperSuffix | IMySuperPrefixBasicErrorMySuperSuffix
-      >({
+      this.request<ScimUser, ScimError | BasicError>({
         path: `/scim/v2/organizations/${org}/Users/${scimUserId}`,
         method: "PATCH",
         body: data,
@@ -26977,7 +24908,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/scim/v2/organizations/{org}/Users/{scim_user_id}
      */
     scimDeleteUserFromOrg: (org: string, scimUserId: string, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixScimErrorMySuperSuffix>({
+      this.request<void, ScimError>({
         path: `/scim/v2/organizations/${org}/Users/${scimUserId}`,
         method: "DELETE",
         ...params,
@@ -26992,15 +24923,38 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Search code
      * @request GET:/search/code
      */
-    searchCode: (query: IMySuperPrefixSearchCodeParamsMySuperSuffix, params: RequestParams = {}) =>
+    searchCode: (
+      query: {
+        /** The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). See "[Searching code](https://help.github.com/articles/searching-code/)" for a detailed list of qualifiers. */
+        q: string;
+        /** Sorts the results of your query. Can only be `indexed`, which indicates how recently a file has been indexed by the GitHub search infrastructure. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results) */
+        sort?: "indexed";
+        /**
+         * Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
+         * @default "desc"
+         */
+        order?: "desc" | "asc";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<
         {
           total_count: number;
           incomplete_results: boolean;
-          items: IMySuperPrefixCodeSearchResultItemMySuperSuffix[];
+          items: CodeSearchResultItem[];
         },
-        | IMySuperPrefixBasicErrorMySuperSuffix
-        | IMySuperPrefixValidationErrorMySuperSuffix
+        | BasicError
+        | ValidationError
         | {
             code?: string;
             message?: string;
@@ -27022,12 +24976,35 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Search commits
      * @request GET:/search/commits
      */
-    searchCommits: (query: IMySuperPrefixSearchCommitsParamsMySuperSuffix, params: RequestParams = {}) =>
+    searchCommits: (
+      query: {
+        /** The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). See "[Searching commits](https://help.github.com/articles/searching-commits/)" for a detailed list of qualifiers. */
+        q: string;
+        /** Sorts the results of your query by `author-date` or `committer-date`. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results) */
+        sort?: "author-date" | "committer-date";
+        /**
+         * Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
+         * @default "desc"
+         */
+        order?: "desc" | "asc";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<
         {
           total_count: number;
           incomplete_results: boolean;
-          items: IMySuperPrefixCommitSearchResultItemMySuperSuffix[];
+          items: CommitSearchResultItem[];
         },
         {
           message: string;
@@ -27050,17 +25027,48 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/search/issues
      */
     searchIssuesAndPullRequests: (
-      query: IMySuperPrefixSearchIssuesAndPullRequestsParamsMySuperSuffix,
+      query: {
+        /** The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). See "[Searching issues and pull requests](https://help.github.com/articles/searching-issues-and-pull-requests/)" for a detailed list of qualifiers. */
+        q: string;
+        /** Sorts the results of your query by the number of `comments`, `reactions`, `reactions-+1`, `reactions--1`, `reactions-smile`, `reactions-thinking_face`, `reactions-heart`, `reactions-tada`, or `interactions`. You can also sort results by how recently the items were `created` or `updated`, Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results) */
+        sort?:
+          | "comments"
+          | "reactions"
+          | "reactions-+1"
+          | "reactions--1"
+          | "reactions-smile"
+          | "reactions-thinking_face"
+          | "reactions-heart"
+          | "reactions-tada"
+          | "interactions"
+          | "created"
+          | "updated";
+        /**
+         * Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
+         * @default "desc"
+         */
+        order?: "desc" | "asc";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         {
           total_count: number;
           incomplete_results: boolean;
-          items: IMySuperPrefixIssueSearchResultItemMySuperSuffix[];
+          items: IssueSearchResultItem[];
         },
-        | IMySuperPrefixBasicErrorMySuperSuffix
-        | IMySuperPrefixValidationErrorMySuperSuffix
+        | BasicError
+        | ValidationError
         | {
             code?: string;
             message?: string;
@@ -27082,14 +25090,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Search labels
      * @request GET:/search/labels
      */
-    searchLabels: (query: IMySuperPrefixSearchLabelsParamsMySuperSuffix, params: RequestParams = {}) =>
+    searchLabels: (
+      query: {
+        /** The id of the repository. */
+        repository_id: number;
+        /** The search keywords. This endpoint does not accept qualifiers in the query. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). */
+        q: string;
+        /** Sorts the results of your query by when the label was `created` or `updated`. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results) */
+        sort?: "created" | "updated";
+        /**
+         * Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
+         * @default "desc"
+         */
+        order?: "desc" | "asc";
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<
         {
           total_count: number;
           incomplete_results: boolean;
-          items: IMySuperPrefixLabelSearchResultItemMySuperSuffix[];
+          items: LabelSearchResultItem[];
         },
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
+        BasicError | ValidationError
       >({
         path: `/search/labels`,
         method: "GET",
@@ -27106,14 +25129,37 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Search repositories
      * @request GET:/search/repositories
      */
-    searchRepos: (query: IMySuperPrefixSearchReposParamsMySuperSuffix, params: RequestParams = {}) =>
+    searchRepos: (
+      query: {
+        /** The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). See "[Searching for repositories](https://help.github.com/articles/searching-for-repositories/)" for a detailed list of qualifiers. */
+        q: string;
+        /** Sorts the results of your query by number of `stars`, `forks`, or `help-wanted-issues` or how recently the items were `updated`. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results) */
+        sort?: "stars" | "forks" | "help-wanted-issues" | "updated";
+        /**
+         * Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
+         * @default "desc"
+         */
+        order?: "desc" | "asc";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<
         {
           total_count: number;
           incomplete_results: boolean;
-          items: IMySuperPrefixRepoSearchResultItemMySuperSuffix[];
+          items: RepoSearchResultItem[];
         },
-        | IMySuperPrefixValidationErrorMySuperSuffix
+        | ValidationError
         | {
             code?: string;
             message?: string;
@@ -27135,12 +25181,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Search topics
      * @request GET:/search/topics
      */
-    searchTopics: (query: IMySuperPrefixSearchTopicsParamsMySuperSuffix, params: RequestParams = {}) =>
+    searchTopics: (
+      query: {
+        /** The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). */
+        q: string;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<
         {
           total_count: number;
           incomplete_results: boolean;
-          items: IMySuperPrefixTopicSearchResultItemMySuperSuffix[];
+          items: TopicSearchResultItem[];
         },
         {
           message: string;
@@ -27162,14 +25214,37 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Search users
      * @request GET:/search/users
      */
-    searchUsers: (query: IMySuperPrefixSearchUsersParamsMySuperSuffix, params: RequestParams = {}) =>
+    searchUsers: (
+      query: {
+        /** The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). See "[Searching users](https://help.github.com/articles/searching-users/)" for a detailed list of qualifiers. */
+        q: string;
+        /** Sorts the results of your query by number of `followers` or `repositories`, or when the person `joined` GitHub. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results) */
+        sort?: "followers" | "repositories" | "joined";
+        /**
+         * Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
+         * @default "desc"
+         */
+        order?: "desc" | "asc";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<
         {
           total_count: number;
           incomplete_results: boolean;
-          items: IMySuperPrefixUserSearchResultItemMySuperSuffix[];
+          items: UserSearchResultItem[];
         },
-        | IMySuperPrefixValidationErrorMySuperSuffix
+        | ValidationError
         | {
             code?: string;
             message?: string;
@@ -27194,7 +25269,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     teamsGetLegacy: (teamId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixTeamFullMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<TeamFull, BasicError>({
         path: `/teams/${teamId}`,
         method: "GET",
         format: "json",
@@ -27212,13 +25287,34 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     teamsUpdateLegacy: (
       teamId: number,
-      data: IMySuperPrefixTeamsUpdateLegacyPayloadMySuperSuffix,
+      data: {
+        /** The name of the team. */
+        name: string;
+        /** The description of the team. */
+        description?: string;
+        /**
+         * The level of privacy this team should have. Editing teams without specifying this parameter leaves `privacy` intact. The options are:
+         * **For a non-nested team:**
+         * \* `secret` - only visible to organization owners and members of this team.
+         * \* `closed` - visible to all members of this organization.
+         * **For a parent or child team:**
+         * \* `closed` - visible to all members of this organization.
+         */
+        privacy?: "secret" | "closed";
+        /**
+         * **Deprecated**. The permission that new repositories will be added to the team with when none is specified. Can be one of:
+         * \* `pull` - team members can pull, but not push to or administer newly-added repositories.
+         * \* `push` - team members can pull and push, but not administer newly-added repositories.
+         * \* `admin` - team members can pull, push and administer newly-added repositories.
+         * @default "pull"
+         */
+        permission?: "pull" | "push" | "admin";
+        /** The ID of a team to set as the parent team. */
+        parent_team_id?: number | null;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixTeamFullMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<TeamFull, BasicError | ValidationError>({
         path: `/teams/${teamId}`,
         method: "PATCH",
         body: data,
@@ -27237,7 +25333,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     teamsDeleteLegacy: (teamId: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<void, BasicError | ValidationError>({
         path: `/teams/${teamId}`,
         method: "DELETE",
         ...params,
@@ -27253,10 +25349,27 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     teamsListDiscussionsLegacy: (
-      { teamId, ...query }: IMySuperPrefixTeamsListDiscussionsLegacyParamsMySuperSuffix,
+      teamId: number,
+      query?: {
+        /**
+         * One of `asc` (ascending) or `desc` (descending).
+         * @default "desc"
+         */
+        direction?: "asc" | "desc";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixTeamDiscussionMySuperSuffix[], any>({
+      this.request<TeamDiscussion[], any>({
         path: `/teams/${teamId}/discussions`,
         method: "GET",
         query: query,
@@ -27275,10 +25388,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     teamsCreateDiscussionLegacy: (
       teamId: number,
-      data: IMySuperPrefixTeamsCreateDiscussionLegacyPayloadMySuperSuffix,
+      data: {
+        /** The discussion post's title. */
+        title: string;
+        /** The discussion post's body text. */
+        body: string;
+        /**
+         * Private posts are only visible to team members, organization owners, and team maintainers. Public posts are visible to all members of the organization. Set to `true` to create a private post.
+         * @default false
+         */
+        private?: boolean;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixTeamDiscussionMySuperSuffix, any>({
+      this.request<TeamDiscussion, any>({
         path: `/teams/${teamId}/discussions`,
         method: "POST",
         body: data,
@@ -27297,7 +25420,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     teamsGetDiscussionLegacy: (teamId: number, discussionNumber: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixTeamDiscussionMySuperSuffix, any>({
+      this.request<TeamDiscussion, any>({
         path: `/teams/${teamId}/discussions/${discussionNumber}`,
         method: "GET",
         format: "json",
@@ -27316,10 +25439,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     teamsUpdateDiscussionLegacy: (
       teamId: number,
       discussionNumber: number,
-      data: IMySuperPrefixTeamsUpdateDiscussionLegacyPayloadMySuperSuffix,
+      data: {
+        /** The discussion post's title. */
+        title?: string;
+        /** The discussion post's body text. */
+        body?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixTeamDiscussionMySuperSuffix, any>({
+      this.request<TeamDiscussion, any>({
         path: `/teams/${teamId}/discussions/${discussionNumber}`,
         method: "PATCH",
         body: data,
@@ -27354,10 +25482,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     teamsListDiscussionCommentsLegacy: (
-      { teamId, discussionNumber, ...query }: IMySuperPrefixTeamsListDiscussionCommentsLegacyParamsMySuperSuffix,
+      teamId: number,
+      discussionNumber: number,
+      query?: {
+        /**
+         * One of `asc` (ascending) or `desc` (descending).
+         * @default "desc"
+         */
+        direction?: "asc" | "desc";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixTeamDiscussionCommentMySuperSuffix[], any>({
+      this.request<TeamDiscussionComment[], any>({
         path: `/teams/${teamId}/discussions/${discussionNumber}/comments`,
         method: "GET",
         query: query,
@@ -27377,10 +25523,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     teamsCreateDiscussionCommentLegacy: (
       teamId: number,
       discussionNumber: number,
-      data: IMySuperPrefixTeamsCreateDiscussionCommentLegacyPayloadMySuperSuffix,
+      data: {
+        /** The discussion comment's body text. */
+        body: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixTeamDiscussionCommentMySuperSuffix, any>({
+      this.request<TeamDiscussionComment, any>({
         path: `/teams/${teamId}/discussions/${discussionNumber}/comments`,
         method: "POST",
         body: data,
@@ -27404,7 +25553,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       commentNumber: number,
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixTeamDiscussionCommentMySuperSuffix, any>({
+      this.request<TeamDiscussionComment, any>({
         path: `/teams/${teamId}/discussions/${discussionNumber}/comments/${commentNumber}`,
         method: "GET",
         format: "json",
@@ -27424,10 +25573,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       teamId: number,
       discussionNumber: number,
       commentNumber: number,
-      data: IMySuperPrefixTeamsUpdateDiscussionCommentLegacyPayloadMySuperSuffix,
+      data: {
+        /** The discussion comment's body text. */
+        body: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixTeamDiscussionCommentMySuperSuffix, any>({
+      this.request<TeamDiscussionComment, any>({
         path: `/teams/${teamId}/discussions/${discussionNumber}/comments/${commentNumber}`,
         method: "PATCH",
         body: data,
@@ -27467,15 +25619,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     reactionsListForTeamDiscussionCommentLegacy: (
-      {
-        teamId,
-        discussionNumber,
-        commentNumber,
-        ...query
-      }: IMySuperPrefixReactionsListForTeamDiscussionCommentLegacyParamsMySuperSuffix,
+      teamId: number,
+      discussionNumber: number,
+      commentNumber: number,
+      query?: {
+        /** Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion comment. */
+        content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixReactionMySuperSuffix[], any>({
+      this.request<Reaction[], any>({
         path: `/teams/${teamId}/discussions/${discussionNumber}/comments/${commentNumber}/reactions`,
         method: "GET",
         query: query,
@@ -27496,10 +25659,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       teamId: number,
       discussionNumber: number,
       commentNumber: number,
-      data: IMySuperPrefixReactionsCreateForTeamDiscussionCommentLegacyPayloadMySuperSuffix,
+      data: {
+        /** The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion comment. */
+        content: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixReactionMySuperSuffix, any>({
+      this.request<Reaction, any>({
         path: `/teams/${teamId}/discussions/${discussionNumber}/comments/${commentNumber}/reactions`,
         method: "POST",
         body: data,
@@ -27518,10 +25684,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     reactionsListForTeamDiscussionLegacy: (
-      { teamId, discussionNumber, ...query }: IMySuperPrefixReactionsListForTeamDiscussionLegacyParamsMySuperSuffix,
+      teamId: number,
+      discussionNumber: number,
+      query?: {
+        /** Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion. */
+        content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixReactionMySuperSuffix[], any>({
+      this.request<Reaction[], any>({
         path: `/teams/${teamId}/discussions/${discussionNumber}/reactions`,
         method: "GET",
         query: query,
@@ -27541,10 +25722,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     reactionsCreateForTeamDiscussionLegacy: (
       teamId: number,
       discussionNumber: number,
-      data: IMySuperPrefixReactionsCreateForTeamDiscussionLegacyPayloadMySuperSuffix,
+      data: {
+        /** The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion. */
+        content: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixReactionMySuperSuffix, any>({
+      this.request<Reaction, any>({
         path: `/teams/${teamId}/discussions/${discussionNumber}/reactions`,
         method: "POST",
         body: data,
@@ -27563,10 +25747,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     teamsListPendingInvitationsLegacy: (
-      { teamId, ...query }: IMySuperPrefixTeamsListPendingInvitationsLegacyParamsMySuperSuffix,
+      teamId: number,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixOrganizationInvitationMySuperSuffix[], any>({
+      this.request<OrganizationInvitation[], any>({
         path: `/teams/${teamId}/invitations`,
         method: "GET",
         query: query,
@@ -27584,10 +25780,30 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     teamsListMembersLegacy: (
-      { teamId, ...query }: IMySuperPrefixTeamsListMembersLegacyParamsMySuperSuffix,
+      teamId: number,
+      query?: {
+        /**
+         * Filters members returned by their role in the team. Can be one of:
+         * \* `member` - normal members of the team.
+         * \* `maintainer` - team maintainers.
+         * \* `all` - all members of the team.
+         * @default "all"
+         */
+        role?: "member" | "maintainer" | "all";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixSimpleUserMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<SimpleUser[], BasicError>({
         path: `/teams/${teamId}/members`,
         method: "GET",
         query: query,
@@ -27623,7 +25839,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     teamsAddMemberLegacy: (teamId: number, username: string, params: RequestParams = {}) =>
       this.request<
         void,
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        | BasicError
         | void
         | {
             message?: string;
@@ -27667,7 +25883,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     teamsGetMembershipForUserLegacy: (teamId: number, username: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixTeamMembershipMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<TeamMembership, BasicError>({
         path: `/teams/${teamId}/memberships/${username}`,
         method: "GET",
         format: "json",
@@ -27686,13 +25902,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     teamsAddOrUpdateMembershipForUserLegacy: (
       teamId: number,
       username: string,
-      data: IMySuperPrefixTeamsAddOrUpdateMembershipForUserLegacyPayloadMySuperSuffix,
+      data: {
+        /**
+         * The role that this user should have in the team. Can be one of:
+         * \* `member` - a normal member of the team.
+         * \* `maintainer` - a team maintainer. Able to add/remove other team members, promote other team members to team maintainer, and edit the team's name and description.
+         * @default "member"
+         */
+        role?: "member" | "maintainer";
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixTeamMembershipMySuperSuffix,
+        TeamMembership,
         | void
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        | BasicError
         | {
             message?: string;
             errors?: {
@@ -27738,12 +25962,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     teamsListProjectsLegacy: (
-      { teamId, ...query }: IMySuperPrefixTeamsListProjectsLegacyParamsMySuperSuffix,
+      teamId: number,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixTeamProjectMySuperSuffix[],
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        TeamProject[],
+        | BasicError
         | {
             message: string;
             documentation_url: string;
@@ -27767,7 +26003,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     teamsCheckPermissionsForProjectLegacy: (teamId: number, projectId: number, params: RequestParams = {}) =>
       this.request<
-        IMySuperPrefixTeamProjectMySuperSuffix,
+        TeamProject,
         void | {
           message: string;
           documentation_url: string;
@@ -27791,7 +26027,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     teamsAddOrUpdateProjectPermissionsLegacy: (
       teamId: number,
       projectId: number,
-      data: IMySuperPrefixTeamsAddOrUpdateProjectPermissionsLegacyPayloadMySuperSuffix,
+      data: {
+        /**
+         * The permission to grant to the team for this project. Can be one of:
+         * \* `read` - team members can read, but not write to or administer this project.
+         * \* `write` - team members can read and write, but not administer this project.
+         * \* `admin` - team members can read, write and administer this project.
+         * Default: the team's `permission` attribute will be used to determine what permission to grant the team on this project. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
+         */
+        permission?: "read" | "write" | "admin";
+      },
       params: RequestParams = {},
     ) =>
       this.request<
@@ -27800,12 +26045,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
             message?: string;
             documentation_url?: string;
           }
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        | BasicError
         | {
             message: string;
             documentation_url: string;
           }
-        | IMySuperPrefixValidationErrorMySuperSuffix
+        | ValidationError
       >({
         path: `/teams/${teamId}/projects/${projectId}`,
         method: "PUT",
@@ -27826,12 +26071,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     teamsRemoveProjectLegacy: (teamId: number, projectId: number, params: RequestParams = {}) =>
       this.request<
         void,
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        | BasicError
         | {
             message: string;
             documentation_url: string;
           }
-        | IMySuperPrefixValidationErrorMySuperSuffix
+        | ValidationError
       >({
         path: `/teams/${teamId}/projects/${projectId}`,
         method: "DELETE",
@@ -27848,10 +26093,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     teamsListReposLegacy: (
-      { teamId, ...query }: IMySuperPrefixTeamsListReposLegacyParamsMySuperSuffix,
+      teamId: number,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixMinimalRepositoryMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<MinimalRepository[], BasicError>({
         path: `/teams/${teamId}/repos`,
         method: "GET",
         query: query,
@@ -27869,7 +26126,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     teamsCheckPermissionsForRepoLegacy: (teamId: number, owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixTeamRepositoryMySuperSuffix, void>({
+      this.request<TeamRepository, void>({
         path: `/teams/${teamId}/repos/${owner}/${repo}`,
         method: "GET",
         format: "json",
@@ -27889,10 +26146,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       teamId: number,
       owner: string,
       repo: string,
-      data: IMySuperPrefixTeamsAddOrUpdateRepoPermissionsLegacyPayloadMySuperSuffix,
+      data: {
+        /**
+         * The permission to grant the team on this repository. Can be one of:
+         * \* `pull` - team members can pull, but not push to or administer this repository.
+         * \* `push` - team members can pull and push, but not administer this repository.
+         * \* `admin` - team members can pull, push and administer this repository.
+         *
+         * If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
+         */
+        permission?: "pull" | "push" | "admin";
+      },
       params: RequestParams = {},
     ) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<void, BasicError | ValidationError>({
         path: `/teams/${teamId}/repos/${owner}/${repo}`,
         method: "PUT",
         body: data,
@@ -27926,7 +26193,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     teamsListIdpGroupsForLegacy: (teamId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixGroupMappingMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<GroupMapping, BasicError>({
         path: `/teams/${teamId}/team-sync/group-mappings`,
         method: "GET",
         format: "json",
@@ -27944,13 +26211,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     teamsCreateOrUpdateIdpGroupConnectionsLegacy: (
       teamId: number,
-      data: IMySuperPrefixTeamsCreateOrUpdateIdpGroupConnectionsLegacyPayloadMySuperSuffix,
+      data: {
+        /** The IdP groups you want to connect to a GitHub team. When updating, the new `groups` object will replace the original one. You must include any existing groups that you don't want to remove. */
+        groups: {
+          /** ID of the IdP group. */
+          group_id: string;
+          /** Name of the IdP group. */
+          group_name: string;
+          /** Description of the IdP group. */
+          group_description: string;
+          /** @example ""caceab43fc9ffa20081c"" */
+          id?: string;
+          /** @example ""external-team-6c13e7288ef7"" */
+          name?: string;
+          /** @example ""moar cheese pleese"" */
+          description?: string;
+        }[];
+        /** @example ""I am not a timestamp"" */
+        synced_at?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixGroupMappingMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<GroupMapping, BasicError | ValidationError>({
         path: `/teams/${teamId}/team-sync/group-mappings`,
         method: "PATCH",
         body: data,
@@ -27969,13 +26251,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     teamsListChildLegacy: (
-      { teamId, ...query }: IMySuperPrefixTeamsListChildLegacyParamsMySuperSuffix,
+      teamId: number,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixTeamMySuperSuffix[],
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<Team[], BasicError | ValidationError>({
         path: `/teams/${teamId}/teams`,
         method: "GET",
         query: query,
@@ -27993,10 +26284,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user
      */
     usersGetAuthenticated: (params: RequestParams = {}) =>
-      this.request<
-        IMySuperPrefixPrivateUserMySuperSuffix | IMySuperPrefixPublicUserMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix
-      >({
+      this.request<PrivateUser | PublicUser, BasicError>({
         path: `/user`,
         method: "GET",
         format: "json",
@@ -28012,13 +26300,45 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PATCH:/user
      */
     usersUpdateAuthenticated: (
-      data: IMySuperPrefixUsersUpdateAuthenticatedPayloadMySuperSuffix,
+      data: {
+        /**
+         * The new name of the user.
+         * @example "Omar Jahandar"
+         */
+        name?: string;
+        /**
+         * The publicly visible email address of the user.
+         * @example "omar@example.com"
+         */
+        email?: string;
+        /**
+         * The new blog URL of the user.
+         * @example "blog.example.com"
+         */
+        blog?: string;
+        /**
+         * The new Twitter username of the user.
+         * @example "therealomarj"
+         */
+        twitter_username?: string | null;
+        /**
+         * The new company of the user.
+         * @example "Acme corporation"
+         */
+        company?: string;
+        /**
+         * The new location of the user.
+         * @example "Berlin, Germany"
+         */
+        location?: string;
+        /** The new hiring availability of the user. */
+        hireable?: boolean;
+        /** The new short biography of the user. */
+        bio?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixPrivateUserMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<PrivateUser, BasicError | ValidationError>({
         path: `/user`,
         method: "PATCH",
         body: data,
@@ -28037,8 +26357,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     usersListBlockedByAuthenticated: (params: RequestParams = {}) =>
       this.request<
-        IMySuperPrefixSimpleUserMySuperSuffix[],
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        SimpleUser[],
+        | BasicError
         | {
             message: string;
             documentation_url: string;
@@ -28059,7 +26379,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/blocks/{username}
      */
     usersCheckBlocked: (username: string, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/user/blocks/${username}`,
         method: "GET",
         ...params,
@@ -28074,7 +26394,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/user/blocks/{username}
      */
     usersBlock: (username: string, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<void, BasicError | ValidationError>({
         path: `/user/blocks/${username}`,
         method: "PUT",
         ...params,
@@ -28089,7 +26409,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/user/blocks/{username}
      */
     usersUnblock: (username: string, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/user/blocks/${username}`,
         method: "DELETE",
         ...params,
@@ -28104,13 +26424,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PATCH:/user/email/visibility
      */
     usersSetPrimaryEmailVisibilityForAuthenticated: (
-      data: IMySuperPrefixUsersSetPrimaryEmailVisibilityForAuthenticatedPayloadMySuperSuffix,
+      data: {
+        /**
+         * An email address associated with the GitHub user account to manage.
+         * @example "org@example.com"
+         */
+        email: string;
+        /** Denotes whether an email is publically visible. */
+        visibility: "public" | "private";
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixEmailMySuperSuffix[],
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<Email[], BasicError | ValidationError>({
         path: `/user/email/visibility`,
         method: "PATCH",
         body: data,
@@ -28128,10 +26453,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/emails
      */
     usersListEmailsForAuthenticated: (
-      query: IMySuperPrefixUsersListEmailsForAuthenticatedParamsMySuperSuffix,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixEmailMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Email[], BasicError>({
         path: `/user/emails`,
         method: "GET",
         query: query,
@@ -28148,13 +26484,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/user/emails
      */
     usersAddEmailForAuthenticated: (
-      data: IMySuperPrefixUsersAddEmailForAuthenticatedPayloadMySuperSuffix,
+      data:
+        | {
+            /**
+             * Adds one or more email addresses to your GitHub account. Must contain at least one email address. **Note:** Alternatively, you can pass a single email address or an `array` of emails addresses directly, but we recommend that you pass an object using the `emails` key.
+             * @example []
+             */
+            emails: string[];
+          }
+        | string[]
+        | string,
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixEmailMySuperSuffix[],
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<Email[], BasicError | ValidationError>({
         path: `/user/emails`,
         method: "POST",
         body: data,
@@ -28172,10 +26514,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/user/emails
      */
     usersDeleteEmailForAuthenticated: (
-      data: IMySuperPrefixUsersDeleteEmailForAuthenticatedPayloadMySuperSuffix,
+      data:
+        | {
+            /** Email addresses associated with the GitHub user account. */
+            emails: string[];
+          }
+        | string[]
+        | string,
       params: RequestParams = {},
     ) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<void, BasicError | ValidationError>({
         path: `/user/emails`,
         method: "DELETE",
         body: data,
@@ -28192,10 +26540,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/followers
      */
     usersListFollowersForAuthenticatedUser: (
-      query: IMySuperPrefixUsersListFollowersForAuthenticatedUserParamsMySuperSuffix,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixSimpleUserMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<SimpleUser[], BasicError>({
         path: `/user/followers`,
         method: "GET",
         query: query,
@@ -28212,10 +26571,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/following
      */
     usersListFollowedByAuthenticated: (
-      query: IMySuperPrefixUsersListFollowedByAuthenticatedParamsMySuperSuffix,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixSimpleUserMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<SimpleUser[], BasicError>({
         path: `/user/following`,
         method: "GET",
         query: query,
@@ -28232,7 +26602,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/following/{username}
      */
     usersCheckPersonIsFollowedByAuthenticated: (username: string, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/user/following/${username}`,
         method: "GET",
         ...params,
@@ -28247,7 +26617,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/user/following/{username}
      */
     usersFollow: (username: string, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/user/following/${username}`,
         method: "PUT",
         ...params,
@@ -28262,7 +26632,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/user/following/{username}
      */
     usersUnfollow: (username: string, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/user/following/${username}`,
         method: "DELETE",
         ...params,
@@ -28277,10 +26647,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/gpg_keys
      */
     usersListGpgKeysForAuthenticated: (
-      query: IMySuperPrefixUsersListGpgKeysForAuthenticatedParamsMySuperSuffix,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixGpgKeyMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<GpgKey[], BasicError>({
         path: `/user/gpg_keys`,
         method: "GET",
         query: query,
@@ -28297,13 +26678,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/user/gpg_keys
      */
     usersCreateGpgKeyForAuthenticated: (
-      data: IMySuperPrefixUsersCreateGpgKeyForAuthenticatedPayloadMySuperSuffix,
+      data: {
+        /** A GPG key in ASCII-armored format. */
+        armored_public_key: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixGpgKeyMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<GpgKey, BasicError | ValidationError>({
         path: `/user/gpg_keys`,
         method: "POST",
         body: data,
@@ -28321,7 +26702,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/gpg_keys/{gpg_key_id}
      */
     usersGetGpgKeyForAuthenticated: (gpgKeyId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixGpgKeyMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<GpgKey, BasicError>({
         path: `/user/gpg_keys/${gpgKeyId}`,
         method: "GET",
         format: "json",
@@ -28337,7 +26718,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/user/gpg_keys/{gpg_key_id}
      */
     usersDeleteGpgKeyForAuthenticated: (gpgKeyId: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<void, BasicError | ValidationError>({
         path: `/user/gpg_keys/${gpgKeyId}`,
         method: "DELETE",
         ...params,
@@ -28352,15 +26733,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/installations
      */
     appsListInstallationsForAuthenticatedUser: (
-      query: IMySuperPrefixAppsListInstallationsForAuthenticatedUserParamsMySuperSuffix,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         {
           total_count: number;
-          installations: IMySuperPrefixInstallationMySuperSuffix[];
+          installations: Installation[];
         },
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        | BasicError
         | {
             message: string;
             documentation_url: string;
@@ -28382,16 +26774,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/installations/{installation_id}/repositories
      */
     appsListInstallationReposForAuthenticatedUser: (
-      { installationId, ...query }: IMySuperPrefixAppsListInstallationReposForAuthenticatedUserParamsMySuperSuffix,
+      installationId: number,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
         {
           total_count: number;
           repository_selection?: string;
-          repositories: IMySuperPrefixRepositoryMySuperSuffix[];
+          repositories: Repository[];
         },
-        IMySuperPrefixBasicErrorMySuperSuffix
+        BasicError
       >({
         path: `/user/installations/${installationId}/repositories`,
         method: "GET",
@@ -28409,7 +26813,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/user/installations/{installation_id}/repositories/{repository_id}
      */
     appsAddRepoToInstallation: (installationId: number, repositoryId: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/user/installations/${installationId}/repositories/${repositoryId}`,
         method: "PUT",
         ...params,
@@ -28424,7 +26828,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/user/installations/{installation_id}/repositories/{repository_id}
      */
     appsRemoveRepoFromInstallation: (installationId: number, repositoryId: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/user/installations/${installationId}/repositories/${repositoryId}`,
         method: "DELETE",
         ...params,
@@ -28439,7 +26843,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/interaction-limits
      */
     interactionsGetRestrictionsForAuthenticatedUser: (params: RequestParams = {}) =>
-      this.request<IMySuperPrefixInteractionLimitResponseMySuperSuffix, any>({
+      this.request<InteractionLimitResponse, any>({
         path: `/user/interaction-limits`,
         method: "GET",
         format: "json",
@@ -28454,11 +26858,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Set interaction restrictions for your public repositories
      * @request PUT:/user/interaction-limits
      */
-    interactionsSetRestrictionsForAuthenticatedUser: (
-      data: IMySuperPrefixInteractionLimitMySuperSuffix,
-      params: RequestParams = {},
-    ) =>
-      this.request<IMySuperPrefixInteractionLimitResponseMySuperSuffix, IMySuperPrefixValidationErrorMySuperSuffix>({
+    interactionsSetRestrictionsForAuthenticatedUser: (data: InteractionLimit, params: RequestParams = {}) =>
+      this.request<InteractionLimitResponse, ValidationError>({
         path: `/user/interaction-limits`,
         method: "PUT",
         body: data,
@@ -28491,10 +26892,50 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/issues
      */
     issuesListForAuthenticatedUser: (
-      query: IMySuperPrefixIssuesListForAuthenticatedUserParamsMySuperSuffix,
+      query?: {
+        /**
+         * Indicates which sorts of issues to return. Can be one of:
+         * \* `assigned`: Issues assigned to you
+         * \* `created`: Issues created by you
+         * \* `mentioned`: Issues mentioning you
+         * \* `subscribed`: Issues you're subscribed to updates for
+         * \* `all`: All issues the authenticated user can see, regardless of participation or creation
+         * @default "assigned"
+         */
+        filter?: "assigned" | "created" | "mentioned" | "subscribed" | "all";
+        /**
+         * Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
+         * @default "open"
+         */
+        state?: "open" | "closed" | "all";
+        /** A list of comma separated label names. Example: `bug,ui,@high` */
+        labels?: string;
+        /**
+         * What to sort results by. Can be either `created`, `updated`, `comments`.
+         * @default "created"
+         */
+        sort?: "created" | "updated" | "comments";
+        /**
+         * One of `asc` (ascending) or `desc` (descending).
+         * @default "desc"
+         */
+        direction?: "asc" | "desc";
+        /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+        since?: string;
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixIssueMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Issue[], BasicError>({
         path: `/user/issues`,
         method: "GET",
         query: query,
@@ -28511,10 +26952,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/keys
      */
     usersListPublicSshKeysForAuthenticated: (
-      query: IMySuperPrefixUsersListPublicSshKeysForAuthenticatedParamsMySuperSuffix,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixKeyMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Key[], BasicError>({
         path: `/user/keys`,
         method: "GET",
         query: query,
@@ -28531,13 +26983,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/user/keys
      */
     usersCreatePublicSshKeyForAuthenticated: (
-      data: IMySuperPrefixUsersCreatePublicSshKeyForAuthenticatedPayloadMySuperSuffix,
+      data: {
+        /**
+         * A descriptive name for the new key.
+         * @example "Personal MacBook Air"
+         */
+        title?: string;
+        /**
+         * The public SSH key to add to your GitHub account.
+         * @pattern ^ssh-(rsa|dss|ed25519) |^ecdsa-sha2-nistp(256|384|521)
+         */
+        key: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixKeyMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<Key, BasicError | ValidationError>({
         path: `/user/keys`,
         method: "POST",
         body: data,
@@ -28555,7 +27015,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/keys/{key_id}
      */
     usersGetPublicSshKeyForAuthenticated: (keyId: number, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixKeyMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Key, BasicError>({
         path: `/user/keys/${keyId}`,
         method: "GET",
         format: "json",
@@ -28571,7 +27031,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/user/keys/{key_id}
      */
     usersDeletePublicSshKeyForAuthenticated: (keyId: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/user/keys/${keyId}`,
         method: "DELETE",
         ...params,
@@ -28586,10 +27046,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/marketplace_purchases
      */
     appsListSubscriptionsForAuthenticatedUser: (
-      query: IMySuperPrefixAppsListSubscriptionsForAuthenticatedUserParamsMySuperSuffix,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixUserMarketplacePurchaseMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<UserMarketplacePurchase[], BasicError>({
         path: `/user/marketplace_purchases`,
         method: "GET",
         query: query,
@@ -28606,10 +27077,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/marketplace_purchases/stubbed
      */
     appsListSubscriptionsForAuthenticatedUserStubbed: (
-      query: IMySuperPrefixAppsListSubscriptionsForAuthenticatedUserStubbedParamsMySuperSuffix,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixUserMarketplacePurchaseMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<UserMarketplacePurchase[], BasicError>({
         path: `/user/marketplace_purchases/stubbed`,
         method: "GET",
         query: query,
@@ -28626,13 +27108,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/memberships/orgs
      */
     orgsListMembershipsForAuthenticatedUser: (
-      query: IMySuperPrefixOrgsListMembershipsForAuthenticatedUserParamsMySuperSuffix,
+      query?: {
+        /** Indicates the state of the memberships to return. Can be either `active` or `pending`. If not specified, the API returns both active and pending memberships. */
+        state?: "active" | "pending";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixOrgMembershipMySuperSuffix[],
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<OrgMembership[], BasicError | ValidationError>({
         path: `/user/memberships/orgs`,
         method: "GET",
         query: query,
@@ -28649,7 +27141,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/memberships/orgs/{org}
      */
     orgsGetMembershipForAuthenticatedUser: (org: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixOrgMembershipMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<OrgMembership, BasicError>({
         path: `/user/memberships/orgs/${org}`,
         method: "GET",
         format: "json",
@@ -28666,13 +27158,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     orgsUpdateMembershipForAuthenticatedUser: (
       org: string,
-      data: IMySuperPrefixOrgsUpdateMembershipForAuthenticatedUserPayloadMySuperSuffix,
+      data: {
+        /** The state that the membership should be in. Only `"active"` will be accepted. */
+        state: "active";
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixOrgMembershipMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<OrgMembership, BasicError | ValidationError>({
         path: `/user/memberships/orgs/${org}`,
         method: "PATCH",
         body: data,
@@ -28690,10 +27182,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/migrations
      */
     migrationsListForAuthenticatedUser: (
-      query: IMySuperPrefixMigrationsListForAuthenticatedUserParamsMySuperSuffix,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixMigrationMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Migration[], BasicError>({
         path: `/user/migrations`,
         method: "GET",
         query: query,
@@ -28710,13 +27213,27 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/user/migrations
      */
     migrationsStartForAuthenticatedUser: (
-      data: IMySuperPrefixMigrationsStartForAuthenticatedUserPayloadMySuperSuffix,
+      data: {
+        /**
+         * Lock the repositories being migrated at the start of the migration
+         * @example true
+         */
+        lock_repositories?: boolean;
+        /**
+         * Do not include attachments in the migration
+         * @example true
+         */
+        exclude_attachments?: boolean;
+        /**
+         * Exclude attributes from the API response to improve performance
+         * @example ["repositories"]
+         */
+        exclude?: "repositories"[];
+        repositories: string[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixMigrationMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<Migration, BasicError | ValidationError>({
         path: `/user/migrations`,
         method: "POST",
         body: data,
@@ -28734,10 +27251,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/migrations/{migration_id}
      */
     migrationsGetStatusForAuthenticatedUser: (
-      { migrationId, ...query }: IMySuperPrefixMigrationsGetStatusForAuthenticatedUserParamsMySuperSuffix,
+      migrationId: number,
+      query?: {
+        exclude?: string[];
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixMigrationMySuperSuffix, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Migration, BasicError>({
         path: `/user/migrations/${migrationId}`,
         method: "GET",
         query: query,
@@ -28754,7 +27274,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/migrations/{migration_id}/archive
      */
     migrationsGetArchiveForAuthenticatedUser: (migrationId: number, params: RequestParams = {}) =>
-      this.request<any, void | IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<any, void | BasicError>({
         path: `/user/migrations/${migrationId}/archive`,
         method: "GET",
         ...params,
@@ -28769,7 +27289,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/user/migrations/{migration_id}/archive
      */
     migrationsDeleteArchiveForAuthenticatedUser: (migrationId: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/user/migrations/${migrationId}/archive`,
         method: "DELETE",
         ...params,
@@ -28784,7 +27304,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/user/migrations/{migration_id}/repos/{repo_name}/lock
      */
     migrationsUnlockRepoForAuthenticatedUser: (migrationId: number, repoName: string, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/user/migrations/${migrationId}/repos/${repoName}/lock`,
         method: "DELETE",
         ...params,
@@ -28799,10 +27319,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/migrations/{migration_id}/repositories
      */
     migrationsListReposForUser: (
-      { migrationId, ...query }: IMySuperPrefixMigrationsListReposForUserParamsMySuperSuffix,
+      migrationId: number,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixMinimalRepositoryMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<MinimalRepository[], BasicError>({
         path: `/user/migrations/${migrationId}/repositories`,
         method: "GET",
         query: query,
@@ -28819,10 +27351,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/orgs
      */
     orgsListForAuthenticatedUser: (
-      query: IMySuperPrefixOrgsListForAuthenticatedUserParamsMySuperSuffix,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixOrganizationSimpleMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<OrganizationSimple[], BasicError>({
         path: `/user/orgs`,
         method: "GET",
         query: query,
@@ -28839,17 +27382,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/user/projects
      */
     projectsCreateForAuthenticatedUser: (
-      data: IMySuperPrefixProjectsCreateForAuthenticatedUserPayloadMySuperSuffix,
+      data: {
+        /**
+         * Name of the project
+         * @example "Week One Sprint"
+         */
+        name: string;
+        /**
+         * Body of the project
+         * @example "This project represents the sprint of the first week in January"
+         */
+        body?: string | null;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixProjectMySuperSuffix,
-        | IMySuperPrefixBasicErrorMySuperSuffix
+        Project,
+        | BasicError
         | {
             message: string;
             documentation_url: string;
           }
-        | IMySuperPrefixValidationErrorSimpleMySuperSuffix
+        | ValidationErrorSimple
       >({
         path: `/user/projects`,
         method: "POST",
@@ -28868,10 +27422,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/public_emails
      */
     usersListPublicEmailsForAuthenticated: (
-      query: IMySuperPrefixUsersListPublicEmailsForAuthenticatedParamsMySuperSuffix,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixEmailMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Email[], BasicError>({
         path: `/user/public_emails`,
         method: "GET",
         query: query,
@@ -28888,13 +27453,52 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/repos
      */
     reposListForAuthenticatedUser: (
-      query: IMySuperPrefixReposListForAuthenticatedUserParamsMySuperSuffix,
+      query?: {
+        /**
+         * Can be one of `all`, `public`, or `private`.
+         * @default "all"
+         */
+        visibility?: "all" | "public" | "private";
+        /**
+         * Comma-separated list of values. Can include:
+         * \* `owner`: Repositories that are owned by the authenticated user.
+         * \* `collaborator`: Repositories that the user has been added to as a collaborator.
+         * \* `organization_member`: Repositories that the user has access to through being a member of an organization. This includes every repository on every team that the user is on.
+         * @default "owner,collaborator,organization_member"
+         */
+        affiliation?: string;
+        /**
+         * Can be one of `all`, `owner`, `public`, `private`, `member`. Default: `all`
+         *
+         * Will cause a `422` error if used in the same request as **visibility** or **affiliation**. Will cause a `422` error if used in the same request as **visibility** or **affiliation**.
+         * @default "all"
+         */
+        type?: "all" | "owner" | "public" | "private" | "member";
+        /**
+         * Can be one of `created`, `updated`, `pushed`, `full_name`.
+         * @default "full_name"
+         */
+        sort?: "created" | "updated" | "pushed" | "full_name";
+        /** Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc` */
+        direction?: "asc" | "desc";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+        /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+        since?: string;
+        /** Only show notifications updated before the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+        before?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixRepositoryMySuperSuffix[],
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<Repository[], BasicError | ValidationError>({
         path: `/user/repos`,
         method: "GET",
         query: query,
@@ -28911,13 +27515,96 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/user/repos
      */
     reposCreateForAuthenticatedUser: (
-      data: IMySuperPrefixReposCreateForAuthenticatedUserPayloadMySuperSuffix,
+      data: {
+        /**
+         * The name of the repository.
+         * @example "Team Environment"
+         */
+        name: string;
+        /** A short description of the repository. */
+        description?: string;
+        /** A URL with more information about the repository. */
+        homepage?: string;
+        /**
+         * Whether the repository is private or public.
+         * @default false
+         */
+        private?: boolean;
+        /**
+         * Whether issues are enabled.
+         * @default true
+         * @example true
+         */
+        has_issues?: boolean;
+        /**
+         * Whether projects are enabled.
+         * @default true
+         * @example true
+         */
+        has_projects?: boolean;
+        /**
+         * Whether the wiki is enabled.
+         * @default true
+         * @example true
+         */
+        has_wiki?: boolean;
+        /** The id of the team that will be granted access to this repository. This is only valid when creating a repository in an organization. */
+        team_id?: number;
+        /**
+         * Whether the repository is initialized with a minimal README.
+         * @default false
+         */
+        auto_init?: boolean;
+        /**
+         * The desired language or platform to apply to the .gitignore.
+         * @example "Haskell"
+         */
+        gitignore_template?: string;
+        /**
+         * The license keyword of the open source license for this repository.
+         * @example "mit"
+         */
+        license_template?: string;
+        /**
+         * Whether to allow squash merges for pull requests.
+         * @default true
+         * @example true
+         */
+        allow_squash_merge?: boolean;
+        /**
+         * Whether to allow merge commits for pull requests.
+         * @default true
+         * @example true
+         */
+        allow_merge_commit?: boolean;
+        /**
+         * Whether to allow rebase merges for pull requests.
+         * @default true
+         * @example true
+         */
+        allow_rebase_merge?: boolean;
+        /**
+         * Whether to delete head branches when pull requests are merged
+         * @default false
+         * @example false
+         */
+        delete_branch_on_merge?: boolean;
+        /**
+         * Whether downloads are enabled.
+         * @default true
+         * @example true
+         */
+        has_downloads?: boolean;
+        /**
+         * Whether this repository acts as a template that can be used to generate new repositories.
+         * @default false
+         * @example true
+         */
+        is_template?: boolean;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixRepositoryMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<Repository, BasicError | ValidationError>({
         path: `/user/repos`,
         method: "POST",
         body: data,
@@ -28935,10 +27622,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/repository_invitations
      */
     reposListInvitationsForAuthenticatedUser: (
-      query: IMySuperPrefixReposListInvitationsForAuthenticatedUserParamsMySuperSuffix,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixRepositoryInvitationMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<RepositoryInvitation[], BasicError>({
         path: `/user/repository_invitations`,
         method: "GET",
         query: query,
@@ -28955,7 +27653,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PATCH:/user/repository_invitations/{invitation_id}
      */
     reposAcceptInvitation: (invitationId: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/user/repository_invitations/${invitationId}`,
         method: "PATCH",
         ...params,
@@ -28970,7 +27668,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/user/repository_invitations/{invitation_id}
      */
     reposDeclineInvitation: (invitationId: number, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/user/repository_invitations/${invitationId}`,
         method: "DELETE",
         ...params,
@@ -28985,10 +27683,31 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/starred
      */
     activityListReposStarredByAuthenticatedUser: (
-      query: IMySuperPrefixActivityListReposStarredByAuthenticatedUserParamsMySuperSuffix,
+      query?: {
+        /**
+         * One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
+         * @default "created"
+         */
+        sort?: "created" | "updated";
+        /**
+         * One of `asc` (ascending) or `desc` (descending).
+         * @default "desc"
+         */
+        direction?: "asc" | "desc";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixRepositoryMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<Repository[], BasicError>({
         path: `/user/starred`,
         method: "GET",
         query: query,
@@ -29005,7 +27724,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/starred/{owner}/{repo}
      */
     activityCheckRepoIsStarredByAuthenticatedUser: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/user/starred/${owner}/${repo}`,
         method: "GET",
         ...params,
@@ -29020,7 +27739,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/user/starred/{owner}/{repo}
      */
     activityStarRepoForAuthenticatedUser: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/user/starred/${owner}/${repo}`,
         method: "PUT",
         ...params,
@@ -29035,7 +27754,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/user/starred/{owner}/{repo}
      */
     activityUnstarRepoForAuthenticatedUser: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<void, IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<void, BasicError>({
         path: `/user/starred/${owner}/${repo}`,
         method: "DELETE",
         ...params,
@@ -29050,10 +27769,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/subscriptions
      */
     activityListWatchedReposForAuthenticatedUser: (
-      query: IMySuperPrefixActivityListWatchedReposForAuthenticatedUserParamsMySuperSuffix,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixMinimalRepositoryMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<MinimalRepository[], BasicError>({
         path: `/user/subscriptions`,
         method: "GET",
         query: query,
@@ -29070,10 +27800,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/teams
      */
     teamsListForAuthenticatedUser: (
-      query: IMySuperPrefixTeamsListForAuthenticatedUserParamsMySuperSuffix,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixTeamFullMySuperSuffix[], IMySuperPrefixBasicErrorMySuperSuffix>({
+      this.request<TeamFull[], BasicError>({
         path: `/user/teams`,
         method: "GET",
         query: query,
@@ -29090,8 +27831,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary List users
      * @request GET:/users
      */
-    usersList: (query: IMySuperPrefixUsersListParamsMySuperSuffix, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixSimpleUserMySuperSuffix[], any>({
+    usersList: (
+      query?: {
+        /** A user ID. Only return users with an ID greater than this ID. */
+        since?: number;
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<SimpleUser[], any>({
         path: `/users`,
         method: "GET",
         query: query,
@@ -29108,10 +27860,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}
      */
     usersGetByUsername: (username: string, params: RequestParams = {}) =>
-      this.request<
-        IMySuperPrefixPrivateUserMySuperSuffix | IMySuperPrefixPublicUserMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix
-      >({
+      this.request<PrivateUser | PublicUser, BasicError>({
         path: `/users/${username}`,
         method: "GET",
         format: "json",
@@ -29127,10 +27876,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/events
      */
     activityListEventsForAuthenticatedUser: (
-      { username, ...query }: IMySuperPrefixActivityListEventsForAuthenticatedUserParamsMySuperSuffix,
+      username: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixEventMySuperSuffix[], any>({
+      this.request<Event[], any>({
         path: `/users/${username}/events`,
         method: "GET",
         query: query,
@@ -29147,10 +27908,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/events/orgs/{org}
      */
     activityListOrgEventsForAuthenticatedUser: (
-      { username, org, ...query }: IMySuperPrefixActivityListOrgEventsForAuthenticatedUserParamsMySuperSuffix,
+      username: string,
+      org: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixEventMySuperSuffix[], any>({
+      this.request<Event[], any>({
         path: `/users/${username}/events/orgs/${org}`,
         method: "GET",
         query: query,
@@ -29167,10 +27941,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/events/public
      */
     activityListPublicEventsForUser: (
-      { username, ...query }: IMySuperPrefixActivityListPublicEventsForUserParamsMySuperSuffix,
+      username: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixEventMySuperSuffix[], any>({
+      this.request<Event[], any>({
         path: `/users/${username}/events/public`,
         method: "GET",
         query: query,
@@ -29187,10 +27973,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/followers
      */
     usersListFollowersForUser: (
-      { username, ...query }: IMySuperPrefixUsersListFollowersForUserParamsMySuperSuffix,
+      username: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixSimpleUserMySuperSuffix[], any>({
+      this.request<SimpleUser[], any>({
         path: `/users/${username}/followers`,
         method: "GET",
         query: query,
@@ -29207,10 +28005,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/following
      */
     usersListFollowingForUser: (
-      { username, ...query }: IMySuperPrefixUsersListFollowingForUserParamsMySuperSuffix,
+      username: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixSimpleUserMySuperSuffix[], any>({
+      this.request<SimpleUser[], any>({
         path: `/users/${username}/following`,
         method: "GET",
         query: query,
@@ -29242,10 +28052,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/gists
      */
     gistsListForUser: (
-      { username, ...query }: IMySuperPrefixGistsListForUserParamsMySuperSuffix,
+      username: string,
+      query?: {
+        /** Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
+        since?: string;
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixBaseGistMySuperSuffix[], IMySuperPrefixValidationErrorMySuperSuffix>({
+      this.request<BaseGist[], ValidationError>({
         path: `/users/${username}/gists`,
         method: "GET",
         query: query,
@@ -29262,10 +28086,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/gpg_keys
      */
     usersListGpgKeysForUser: (
-      { username, ...query }: IMySuperPrefixUsersListGpgKeysForUserParamsMySuperSuffix,
+      username: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixGpgKeyMySuperSuffix[], any>({
+      this.request<GpgKey[], any>({
         path: `/users/${username}/gpg_keys`,
         method: "GET",
         query: query,
@@ -29282,13 +28118,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/hovercard
      */
     usersGetContextForUser: (
-      { username, ...query }: IMySuperPrefixUsersGetContextForUserParamsMySuperSuffix,
+      username: string,
+      query?: {
+        /** Identifies which additional information you'd like to receive about the person's hovercard. Can be `organization`, `repository`, `issue`, `pull_request`. **Required** when using `subject_id`. */
+        subject_type?: "organization" | "repository" | "issue" | "pull_request";
+        /** Uses the ID for the `subject_type` you specified. **Required** when using `subject_type`. */
+        subject_id?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<
-        IMySuperPrefixHovercardMySuperSuffix,
-        IMySuperPrefixBasicErrorMySuperSuffix | IMySuperPrefixValidationErrorMySuperSuffix
-      >({
+      this.request<Hovercard, BasicError | ValidationError>({
         path: `/users/${username}/hovercard`,
         method: "GET",
         query: query,
@@ -29305,7 +28144,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/installation
      */
     appsGetUserInstallation: (username: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixInstallationMySuperSuffix, any>({
+      this.request<Installation, any>({
         path: `/users/${username}/installation`,
         method: "GET",
         format: "json",
@@ -29321,10 +28160,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/keys
      */
     usersListPublicKeysForUser: (
-      { username, ...query }: IMySuperPrefixUsersListPublicKeysForUserParamsMySuperSuffix,
+      username: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixKeySimpleMySuperSuffix[], any>({
+      this.request<KeySimple[], any>({
         path: `/users/${username}/keys`,
         method: "GET",
         query: query,
@@ -29341,10 +28192,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/orgs
      */
     orgsListForUser: (
-      { username, ...query }: IMySuperPrefixOrgsListForUserParamsMySuperSuffix,
+      username: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixOrganizationSimpleMySuperSuffix[], any>({
+      this.request<OrganizationSimple[], any>({
         path: `/users/${username}/orgs`,
         method: "GET",
         query: query,
@@ -29361,16 +28224,33 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/projects
      */
     projectsListForUser: (
-      { username, ...query }: IMySuperPrefixProjectsListForUserParamsMySuperSuffix,
+      username: string,
+      query?: {
+        /**
+         * Indicates the state of the projects to return. Can be either `open`, `closed`, or `all`.
+         * @default "open"
+         */
+        state?: "open" | "closed" | "all";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<
-        IMySuperPrefixProjectMySuperSuffix[],
+        Project[],
         | {
             message: string;
             documentation_url: string;
           }
-        | IMySuperPrefixValidationErrorMySuperSuffix
+        | ValidationError
       >({
         path: `/users/${username}/projects`,
         method: "GET",
@@ -29388,10 +28268,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/received_events
      */
     activityListReceivedEventsForUser: (
-      { username, ...query }: IMySuperPrefixActivityListReceivedEventsForUserParamsMySuperSuffix,
+      username: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixEventMySuperSuffix[], any>({
+      this.request<Event[], any>({
         path: `/users/${username}/received_events`,
         method: "GET",
         query: query,
@@ -29408,10 +28300,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/received_events/public
      */
     activityListReceivedPublicEventsForUser: (
-      { username, ...query }: IMySuperPrefixActivityListReceivedPublicEventsForUserParamsMySuperSuffix,
+      username: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixEventMySuperSuffix[], any>({
+      this.request<Event[], any>({
         path: `/users/${username}/received_events/public`,
         method: "GET",
         query: query,
@@ -29428,10 +28332,34 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/repos
      */
     reposListForUser: (
-      { username, ...query }: IMySuperPrefixReposListForUserParamsMySuperSuffix,
+      username: string,
+      query?: {
+        /**
+         * Can be one of `all`, `owner`, `member`.
+         * @default "owner"
+         */
+        type?: "all" | "owner" | "member";
+        /**
+         * Can be one of `created`, `updated`, `pushed`, `full_name`.
+         * @default "full_name"
+         */
+        sort?: "created" | "updated" | "pushed" | "full_name";
+        /** Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc` */
+        direction?: "asc" | "desc";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixMinimalRepositoryMySuperSuffix[], any>({
+      this.request<MinimalRepository[], any>({
         path: `/users/${username}/repos`,
         method: "GET",
         query: query,
@@ -29448,7 +28376,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/settings/billing/actions
      */
     billingGetGithubActionsBillingUser: (username: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixActionsBillingUsageMySuperSuffix, any>({
+      this.request<ActionsBillingUsage, any>({
         path: `/users/${username}/settings/billing/actions`,
         method: "GET",
         format: "json",
@@ -29464,7 +28392,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/settings/billing/packages
      */
     billingGetGithubPackagesBillingUser: (username: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixPackagesBillingUsageMySuperSuffix, any>({
+      this.request<PackagesBillingUsage, any>({
         path: `/users/${username}/settings/billing/packages`,
         method: "GET",
         format: "json",
@@ -29480,7 +28408,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/settings/billing/shared-storage
      */
     billingGetSharedStorageBillingUser: (username: string, params: RequestParams = {}) =>
-      this.request<IMySuperPrefixCombinedBillingUsageMySuperSuffix, any>({
+      this.request<CombinedBillingUsage, any>({
         path: `/users/${username}/settings/billing/shared-storage`,
         method: "GET",
         format: "json",
@@ -29496,10 +28424,32 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/starred
      */
     activityListReposStarredByUser: (
-      { username, ...query }: IMySuperPrefixActivityListReposStarredByUserParamsMySuperSuffix,
+      username: string,
+      query?: {
+        /**
+         * One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
+         * @default "created"
+         */
+        sort?: "created" | "updated";
+        /**
+         * One of `asc` (ascending) or `desc` (descending).
+         * @default "desc"
+         */
+        direction?: "asc" | "desc";
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixRepositoryMySuperSuffix[], any>({
+      this.request<Repository[], any>({
         path: `/users/${username}/starred`,
         method: "GET",
         query: query,
@@ -29516,10 +28466,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/subscriptions
      */
     activityListReposWatchedByUser: (
-      { username, ...query }: IMySuperPrefixActivityListReposWatchedByUserParamsMySuperSuffix,
+      username: string,
+      query?: {
+        /**
+         * Results per page (max 100)
+         * @default 30
+         */
+        per_page?: number;
+        /**
+         * Page number of the results to fetch.
+         * @default 1
+         */
+        page?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<IMySuperPrefixMinimalRepositoryMySuperSuffix[], any>({
+      this.request<MinimalRepository[], any>({
         path: `/users/${username}/subscriptions`,
         method: "GET",
         query: query,
@@ -29537,7 +28499,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/zen
      */
     metaGetZen: (params: RequestParams = {}) =>
-      this.request<IMySuperPrefixWebhookConfigUrlMySuperSuffix, any>({
+      this.request<WebhookConfigUrl, any>({
         path: `/zen`,
         method: "GET",
         ...params,
