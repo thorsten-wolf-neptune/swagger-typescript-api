@@ -12,39 +12,53 @@
 export interface Step {
   /** address of the stop */
   address?: string;
-
   /**
    * arrival at the stop in its local timezone as YYYY-MM-DDThh:mm
    * @format date-time
    */
   arrival?: string;
-
   /** geographical coordinates of the stop */
-  coordinates?: { lat?: number; lon?: number };
-
+  coordinates?: {
+    /**
+     * latitude
+     * @format float
+     */
+    lat?: number;
+    /**
+     * longitude
+     * @format float
+     */
+    lon?: number;
+  };
   /**
    * departure from the stop in its local timezone as YYYY-MM-DDThh:mm
    * @format date-time
    */
   departure?: string;
-
   /** name of the stop */
   name?: string;
-
   /**
    * number of nights
    * @format int64
    */
   nights?: number;
-
   /** route leading to the stop */
   route?: {
+    /**
+     * route distance in meters
+     * @format int64
+     */
     distance?: number;
+    /**
+     * route duration in seconds
+     * @format int64
+     */
     duration?: number;
+    /** travel mode */
     mode?: "car" | "motorcycle" | "bicycle" | "walk" | "other";
+    /** route path compatible with Google polyline encoding algorithm */
     polyline?: string;
   };
-
   /** url of the page with more information about the stop */
   url?: string;
 }
@@ -55,19 +69,15 @@ export interface Trip {
    * @format date-time
    */
   begin?: string;
-
   /** description of the trip (truncated to 200 characters) */
   description?: string;
-
   /**
    * end of the trip in its local timezone as YYYY-MM-DDThh:mm
    * @format date-time
    */
   end?: string;
-
   /** Unique ID of the trip */
   id?: string;
-
   /** name of the trip */
   name?: string;
 }
@@ -114,6 +124,7 @@ export enum ContentType {
   Json = "application/json",
   FormData = "multipart/form-data",
   UrlEncoded = "application/x-www-form-urlencoded",
+  Text = "text/plain",
 }
 
 export class HttpClient<SecurityDataType = unknown> {
@@ -138,16 +149,16 @@ export class HttpClient<SecurityDataType = unknown> {
     this.securityData = data;
   };
 
-  private encodeQueryParam(key: string, value: any) {
+  protected encodeQueryParam(key: string, value: any) {
     const encodedKey = encodeURIComponent(key);
     return `${encodedKey}=${encodeURIComponent(typeof value === "number" ? value : `${value}`)}`;
   }
 
-  private addQueryParam(query: QueryParamsType, key: string) {
+  protected addQueryParam(query: QueryParamsType, key: string) {
     return this.encodeQueryParam(key, query[key]);
   }
 
-  private addArrayQueryParam(query: QueryParamsType, key: string) {
+  protected addArrayQueryParam(query: QueryParamsType, key: string) {
     const value = query[key];
     return value.map((v: any) => this.encodeQueryParam(key, v)).join("&");
   }
@@ -168,6 +179,7 @@ export class HttpClient<SecurityDataType = unknown> {
   private contentFormatters: Record<ContentType, (input: any) => any> = {
     [ContentType.Json]: (input: any) =>
       input !== null && (typeof input === "object" || typeof input === "string") ? JSON.stringify(input) : input,
+    [ContentType.Text]: (input: any) => (input !== null && typeof input !== "string" ? JSON.stringify(input) : input),
     [ContentType.FormData]: (input: any) =>
       Object.keys(input || {}).reduce((formData, key) => {
         const property = input[key];
@@ -184,7 +196,7 @@ export class HttpClient<SecurityDataType = unknown> {
     [ContentType.UrlEncoded]: (input: any) => this.toQueryString(input),
   };
 
-  private mergeRequestParams(params1: RequestParams, params2?: RequestParams): RequestParams {
+  protected mergeRequestParams(params1: RequestParams, params2?: RequestParams): RequestParams {
     return {
       ...this.baseApiParams,
       ...params1,
@@ -197,7 +209,7 @@ export class HttpClient<SecurityDataType = unknown> {
     };
   }
 
-  private createAbortSignal = (cancelToken: CancelToken): AbortSignal | undefined => {
+  protected createAbortSignal = (cancelToken: CancelToken): AbortSignal | undefined => {
     if (this.abortControllers.has(cancelToken)) {
       const abortController = this.abortControllers.get(cancelToken);
       if (abortController) {
@@ -244,15 +256,15 @@ export class HttpClient<SecurityDataType = unknown> {
     return this.customFetch(`${baseUrl || this.baseUrl || ""}${path}${queryString ? `?${queryString}` : ""}`, {
       ...requestParams,
       headers: {
-        ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
         ...(requestParams.headers || {}),
+        ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
       },
-      signal: cancelToken ? this.createAbortSignal(cancelToken) : void 0,
+      signal: cancelToken ? this.createAbortSignal(cancelToken) : requestParams.signal,
       body: typeof body === "undefined" || body === null ? null : payloadFormatter(body),
     }).then(async (response) => {
       const r = response as HttpResponse<T, E>;
-      r.data = (null as unknown) as T;
-      r.error = (null as unknown) as E;
+      r.data = null as unknown as T;
+      r.error = null as unknown as E;
 
       const data = !responseFormat
         ? r

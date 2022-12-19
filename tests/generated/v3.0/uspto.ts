@@ -9,6 +9,26 @@
  * ---------------------------------------------------------------
  */
 
+export interface DataSetList {
+  apis?: {
+    /** To be used as a dataset parameter value */
+    apiKey?: string;
+    /** To be used as a version parameter value */
+    apiVersionNumber?: string;
+    /**
+     * The URL describing the dataset's fields
+     * @format uriref
+     */
+    apiUrl?: string;
+    /**
+     * A URL to the API console for each API
+     * @format uriref
+     */
+    apiDocumentationUrl?: string;
+  }[];
+  total?: number;
+}
+
 export enum SomeEnum {
   Foo = "Foo",
   Bar = "Bar",
@@ -19,11 +39,6 @@ export enum Status {
   Resolved = "resolved",
   New = "new",
   InProgress = "in progress",
-}
-
-export interface DataSetList {
-  total?: number;
-  apis?: { apiKey?: string; apiVersionNumber?: string; apiUrl?: string; apiDocumentationUrl?: string }[];
 }
 
 export type QueryParamsType = Record<string | number, any>;
@@ -68,6 +83,7 @@ export enum ContentType {
   Json = "application/json",
   FormData = "multipart/form-data",
   UrlEncoded = "application/x-www-form-urlencoded",
+  Text = "text/plain",
 }
 
 export class HttpClient<SecurityDataType = unknown> {
@@ -92,16 +108,16 @@ export class HttpClient<SecurityDataType = unknown> {
     this.securityData = data;
   };
 
-  private encodeQueryParam(key: string, value: any) {
+  protected encodeQueryParam(key: string, value: any) {
     const encodedKey = encodeURIComponent(key);
     return `${encodedKey}=${encodeURIComponent(typeof value === "number" ? value : `${value}`)}`;
   }
 
-  private addQueryParam(query: QueryParamsType, key: string) {
+  protected addQueryParam(query: QueryParamsType, key: string) {
     return this.encodeQueryParam(key, query[key]);
   }
 
-  private addArrayQueryParam(query: QueryParamsType, key: string) {
+  protected addArrayQueryParam(query: QueryParamsType, key: string) {
     const value = query[key];
     return value.map((v: any) => this.encodeQueryParam(key, v)).join("&");
   }
@@ -122,6 +138,7 @@ export class HttpClient<SecurityDataType = unknown> {
   private contentFormatters: Record<ContentType, (input: any) => any> = {
     [ContentType.Json]: (input: any) =>
       input !== null && (typeof input === "object" || typeof input === "string") ? JSON.stringify(input) : input,
+    [ContentType.Text]: (input: any) => (input !== null && typeof input !== "string" ? JSON.stringify(input) : input),
     [ContentType.FormData]: (input: any) =>
       Object.keys(input || {}).reduce((formData, key) => {
         const property = input[key];
@@ -138,7 +155,7 @@ export class HttpClient<SecurityDataType = unknown> {
     [ContentType.UrlEncoded]: (input: any) => this.toQueryString(input),
   };
 
-  private mergeRequestParams(params1: RequestParams, params2?: RequestParams): RequestParams {
+  protected mergeRequestParams(params1: RequestParams, params2?: RequestParams): RequestParams {
     return {
       ...this.baseApiParams,
       ...params1,
@@ -151,7 +168,7 @@ export class HttpClient<SecurityDataType = unknown> {
     };
   }
 
-  private createAbortSignal = (cancelToken: CancelToken): AbortSignal | undefined => {
+  protected createAbortSignal = (cancelToken: CancelToken): AbortSignal | undefined => {
     if (this.abortControllers.has(cancelToken)) {
       const abortController = this.abortControllers.get(cancelToken);
       if (abortController) {
@@ -198,15 +215,15 @@ export class HttpClient<SecurityDataType = unknown> {
     return this.customFetch(`${baseUrl || this.baseUrl || ""}${path}${queryString ? `?${queryString}` : ""}`, {
       ...requestParams,
       headers: {
-        ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
         ...(requestParams.headers || {}),
+        ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
       },
-      signal: cancelToken ? this.createAbortSignal(cancelToken) : void 0,
+      signal: cancelToken ? this.createAbortSignal(cancelToken) : requestParams.signal,
       body: typeof body === "undefined" || body === null ? null : payloadFormatter(body),
     }).then(async (response) => {
       const r = response as HttpResponse<T, E>;
-      r.data = (null as unknown) as T;
-      r.error = (null as unknown) as E;
+      r.data = null as unknown as T;
+      r.error = null as unknown as E;
 
       const data = !responseFormat
         ? r
@@ -287,7 +304,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     performSearch: (
       version: string,
       dataset: string,
-      data: { criteria: string; start?: number; rows?: number },
+      data: {
+        /**
+         * Uses Lucene Query Syntax in the format of propertyName:value, propertyName:[num1 TO num2] and date range format: propertyName:[yyyyMMdd TO yyyyMMdd]. In the response please see the 'docs' element which has the list of record objects. Each record structure would consist of all the fields and their corresponding values.
+         * @default "*:*"
+         */
+        criteria: string;
+        /**
+         * Starting record number. Default value is 0.
+         * @default 0
+         */
+        start?: number;
+        /**
+         * Specify number of rows to be returned. If you run the search with default values, in the response you will see 'numFound' attribute which will tell the number of records available in the dataset.
+         * @default 100
+         */
+        rows?: number;
+      },
       params: RequestParams = {},
     ) =>
       this.request<Record<string, object>[], void>({

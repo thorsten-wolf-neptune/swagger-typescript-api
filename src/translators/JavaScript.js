@@ -7,20 +7,9 @@ function translate(fileName, content, options) {
   const originalSourceFileGet = host.getSourceFile.bind(host);
   host.getSourceFile = (sourceFileName, languageVersion, onError, shouldCreateNewSourceFile) => {
     if (sourceFileName !== fileName)
-      return originalSourceFileGet(
-        sourceFileName,
-        languageVersion,
-        onError,
-        shouldCreateNewSourceFile,
-      );
+      return originalSourceFileGet(sourceFileName, languageVersion, onError, shouldCreateNewSourceFile);
 
-    return ts.createSourceFile(
-      sourceFileName,
-      content,
-      languageVersion,
-      true,
-      ts.ScriptKind.External,
-    );
+    return ts.createSourceFile(sourceFileName, content, languageVersion, true, ts.ScriptKind.External);
   };
 
   host.writeFile = (fileName, contents) => {
@@ -51,10 +40,21 @@ module.exports = {
 
     const sourceFileName = fileName.replace(ts.Extension.Ts, ts.Extension.Js);
     const declarationFileName = fileName.replace(ts.Extension.Ts, ts.Extension.Dts);
+    const sourceContent = translated[sourceFileName];
+    const tsImportRows = sourceTypeScript.split("\n").filter((line) => line.startsWith("import "));
+    const declarationContent = translated[declarationFileName]
+      .split("\n")
+      .map((line) => {
+        if (line.startsWith("import ")) {
+          return tsImportRows.shift();
+        }
+        return line;
+      })
+      .join("\n");
 
     return {
-      sourceContent: translated[sourceFileName],
-      declarationContent: translated[declarationFileName],
+      sourceContent: sourceContent,
+      declarationContent: declarationContent,
     };
   },
 };

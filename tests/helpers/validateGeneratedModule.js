@@ -63,5 +63,11 @@ module.exports = (pathToFile) => {
   //   );
   // });
 
+  if (diagnostics.length) {
+    console.error(diagnostics);
+    console.error(new Error("Failed").stack);
+    process.exit(1);
+  }
+
   return diagnostics;
 };

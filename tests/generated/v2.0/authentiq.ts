@@ -9,27 +9,20 @@
  * ---------------------------------------------------------------
  */
 
-/**
- * Authentiq ID in JWT format, self-signed.
- */
+/** Authentiq ID in JWT format, self-signed. */
 export interface AuthentiqID {
   /** device token for push messages */
   devtoken?: string;
-
   /** UUID and public signing key */
   sub: string;
 }
 
-/**
- * Claim in JWT format, self- or issuer-signed.
- */
+/** Claim in JWT format, self- or issuer-signed.  */
 export interface Claims {
   email?: string;
   phone?: string;
-
   /** claim scope */
   scope: string;
-
   /** UUID */
   sub: string;
   type?: string;
@@ -39,24 +32,19 @@ export interface Error {
   detail?: string;
   error: number;
   title?: string;
-
   /** unique uri for this error */
   type?: string;
 }
 
-/**
- * PushToken in JWT format, self-signed.
- */
+/** PushToken in JWT format, self-signed.  */
 export interface PushToken {
   /** audience (URI) */
   aud: string;
   exp?: number;
   iat?: number;
-
   /** issuer (URI) */
   iss: string;
   nbf: number;
-
   /** UUID and public signing key */
   sub: string;
 }
@@ -103,6 +91,7 @@ export enum ContentType {
   Json = "application/json",
   FormData = "multipart/form-data",
   UrlEncoded = "application/x-www-form-urlencoded",
+  Text = "text/plain",
 }
 
 export class HttpClient<SecurityDataType = unknown> {
@@ -127,16 +116,16 @@ export class HttpClient<SecurityDataType = unknown> {
     this.securityData = data;
   };
 
-  private encodeQueryParam(key: string, value: any) {
+  protected encodeQueryParam(key: string, value: any) {
     const encodedKey = encodeURIComponent(key);
     return `${encodedKey}=${encodeURIComponent(typeof value === "number" ? value : `${value}`)}`;
   }
 
-  private addQueryParam(query: QueryParamsType, key: string) {
+  protected addQueryParam(query: QueryParamsType, key: string) {
     return this.encodeQueryParam(key, query[key]);
   }
 
-  private addArrayQueryParam(query: QueryParamsType, key: string) {
+  protected addArrayQueryParam(query: QueryParamsType, key: string) {
     const value = query[key];
     return value.map((v: any) => this.encodeQueryParam(key, v)).join("&");
   }
@@ -157,6 +146,7 @@ export class HttpClient<SecurityDataType = unknown> {
   private contentFormatters: Record<ContentType, (input: any) => any> = {
     [ContentType.Json]: (input: any) =>
       input !== null && (typeof input === "object" || typeof input === "string") ? JSON.stringify(input) : input,
+    [ContentType.Text]: (input: any) => (input !== null && typeof input !== "string" ? JSON.stringify(input) : input),
     [ContentType.FormData]: (input: any) =>
       Object.keys(input || {}).reduce((formData, key) => {
         const property = input[key];
@@ -173,7 +163,7 @@ export class HttpClient<SecurityDataType = unknown> {
     [ContentType.UrlEncoded]: (input: any) => this.toQueryString(input),
   };
 
-  private mergeRequestParams(params1: RequestParams, params2?: RequestParams): RequestParams {
+  protected mergeRequestParams(params1: RequestParams, params2?: RequestParams): RequestParams {
     return {
       ...this.baseApiParams,
       ...params1,
@@ -186,7 +176,7 @@ export class HttpClient<SecurityDataType = unknown> {
     };
   }
 
-  private createAbortSignal = (cancelToken: CancelToken): AbortSignal | undefined => {
+  protected createAbortSignal = (cancelToken: CancelToken): AbortSignal | undefined => {
     if (this.abortControllers.has(cancelToken)) {
       const abortController = this.abortControllers.get(cancelToken);
       if (abortController) {
@@ -233,15 +223,15 @@ export class HttpClient<SecurityDataType = unknown> {
     return this.customFetch(`${baseUrl || this.baseUrl || ""}${path}${queryString ? `?${queryString}` : ""}`, {
       ...requestParams,
       headers: {
-        ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
         ...(requestParams.headers || {}),
+        ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
       },
-      signal: cancelToken ? this.createAbortSignal(cancelToken) : void 0,
+      signal: cancelToken ? this.createAbortSignal(cancelToken) : requestParams.signal,
       body: typeof body === "undefined" || body === null ? null : payloadFormatter(body),
     }).then(async (response) => {
       const r = response as HttpResponse<T, E>;
-      r.data = (null as unknown) as T;
-      r.error = (null as unknown) as E;
+      r.data = null as unknown as T;
+      r.error = null as unknown as E;
 
       const data = !responseFormat
         ? r
@@ -324,8 +314,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name KeyRevokeNosecret
      * @request DELETE:/key
      */
-    keyRevokeNosecret: (query: { email: string; phone: string; code?: string }, params: RequestParams = {}) =>
-      this.request<{ status?: string }, Error>({
+    keyRevokeNosecret: (
+      query: {
+        /** primary email associated to Key (ID) */
+        email: string;
+        /** primary phone number, international representation */
+        phone: string;
+        /** verification code sent by email */
+        code?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<
+        {
+          /** pending or done */
+          status?: string;
+        },
+        Error
+      >({
         path: `/key`,
         method: "DELETE",
         query: query,
@@ -341,7 +347,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/key
      */
     keyRegister: (body: AuthentiqID, params: RequestParams = {}) =>
-      this.request<{ secret?: string; status?: string }, Error>({
+      this.request<
+        {
+          /** revoke key */
+          secret?: string;
+          /** registered */
+          status?: string;
+        },
+        Error
+      >({
         path: `/key`,
         method: "POST",
         body: body,
@@ -356,8 +370,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name KeyRevoke
      * @request DELETE:/key/{PK}
      */
-    keyRevoke: (pk: string, query: { secret: string }, params: RequestParams = {}) =>
-      this.request<{ status?: string }, Error>({
+    keyRevoke: (
+      pk: string,
+      query: {
+        /** revokation secret */
+        secret: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<
+        {
+          /** done */
+          status?: string;
+        },
+        Error
+      >({
         path: `/key/${pk}`,
         method: "DELETE",
         query: query,
@@ -373,7 +400,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/key/{PK}
      */
     getKey: (pk: string, params: RequestParams = {}) =>
-      this.request<{ since?: string; status?: string; sub?: string }, Error>({
+      this.request<
+        {
+          /** @format date-time */
+          since?: string;
+          status?: string;
+          /** base64safe encoded public signing key */
+          sub?: string;
+        },
+        Error
+      >({
         path: `/key/${pk}`,
         method: "GET",
         format: "json",
@@ -402,7 +438,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/key/{PK}
      */
     keyUpdate: (pk: string, body: AuthentiqID, params: RequestParams = {}) =>
-      this.request<{ status?: string }, Error>({
+      this.request<
+        {
+          /** confirmed */
+          status?: string;
+        },
+        Error
+      >({
         path: `/key/${pk}`,
         method: "POST",
         body: body,
@@ -418,7 +460,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/key/{PK}
      */
     keyBind: (pk: string, body: AuthentiqID, params: RequestParams = {}) =>
-      this.request<{ status?: string }, Error>({
+      this.request<
+        {
+          /** confirmed */
+          status?: string;
+        },
+        Error
+      >({
         path: `/key/${pk}`,
         method: "PUT",
         body: body,
@@ -434,8 +482,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name PushLoginRequest
      * @request POST:/login
      */
-    pushLoginRequest: (query: { callback: string }, body: PushToken, params: RequestParams = {}) =>
-      this.request<{ status?: string }, Error>({
+    pushLoginRequest: (
+      query: {
+        /** URI App will connect to */
+        callback: string;
+      },
+      body: PushToken,
+      params: RequestParams = {},
+    ) =>
+      this.request<
+        {
+          /** sent */
+          status?: string;
+        },
+        Error
+      >({
         path: `/login`,
         method: "POST",
         query: query,
@@ -452,8 +513,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name SignRequest
      * @request POST:/scope
      */
-    signRequest: (body: Claims, query?: { test?: number }, params: RequestParams = {}) =>
-      this.request<{ job?: string; status?: string }, Error>({
+    signRequest: (
+      body: Claims,
+      query?: {
+        /** test only mode, using test issuer */
+        test?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<
+        {
+          /** 20-character ID */
+          job?: string;
+          /** waiting */
+          status?: string;
+        },
+        Error
+      >({
         path: `/scope`,
         method: "POST",
         query: query,
@@ -470,7 +546,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/scope/{job}
      */
     signDelete: (job: string, params: RequestParams = {}) =>
-      this.request<{ status?: string }, Error>({
+      this.request<
+        {
+          /** done */
+          status?: string;
+        },
+        Error
+      >({
         path: `/scope/${job}`,
         method: "DELETE",
         format: "json",
@@ -485,7 +567,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/scope/{job}
      */
     signRetrieve: (job: string, params: RequestParams = {}) =>
-      this.request<{ exp?: number; field?: string; sub?: string }, Error>({
+      this.request<
+        {
+          exp?: number;
+          field?: string;
+          /** base64safe encoded public signing key */
+          sub?: string;
+        },
+        Error
+      >({
         path: `/scope/${job}`,
         method: "GET",
         format: "json",
@@ -514,7 +604,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/scope/{job}
      */
     signConfirm: (job: string, params: RequestParams = {}) =>
-      this.request<{ status?: string }, Error>({
+      this.request<
+        {
+          /** confirmed */
+          status?: string;
+        },
+        Error
+      >({
         path: `/scope/${job}`,
         method: "POST",
         type: ContentType.Json,
@@ -530,7 +626,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/scope/{job}
      */
     signUpdate: (job: string, params: RequestParams = {}) =>
-      this.request<{ jwt?: string; status?: string }, Error>({
+      this.request<
+        {
+          /** result is JWT or JSON?? */
+          jwt?: string;
+          /** ready */
+          status?: string;
+        },
+        Error
+      >({
         path: `/scope/${job}`,
         method: "PUT",
         ...params,
