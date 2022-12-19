@@ -9,57 +9,60 @@
  * ---------------------------------------------------------------
  */
 
-export interface AuthUser {
+export interface IMySuperPrefixAuthUserMySuperSuffix {
   password: string;
   username: string;
 }
 
-export interface GetProfileBioDTO {
+export interface IMySuperPrefixGetProfileBioDTOMySuperSuffix {
   /** @format int32 */
   candidateId?: number;
   cityName?: string | null;
 }
 
-export interface Job {
+export interface IMySuperPrefixJobMySuperSuffix {
   address?: string | null;
   github?: string | null;
   id: string;
   isTool?: boolean | null;
-  kind: Kind;
+  kind: IMySuperPrefixKindMySuperSuffix;
   link?: string | null;
   name?: string | null;
   npm?: string | null;
 }
 
-export type JobUpdate = OmitJobId | PickJobGithub | Record<string, any>;
+export type IMySuperPrefixJobUpdateMySuperSuffix =
+  | IMySuperPrefixOmitJobIdMySuperSuffix
+  | IMySuperPrefixPickJobGithubMySuperSuffix
+  | Record<string, any>;
 
-export enum Kind {
+export enum IMySuperPrefixKindMySuperSuffix {
   COMPANY = "COMPANY",
   PERSONAL = "PERSONAL",
   FREELANCE = "FREELANCE",
   OPEN_SOURCE = "OPEN_SOURCE",
 }
 
-export type OmitJobId = PickJobExcludeKeysId;
+export type IMySuperPrefixOmitJobIdMySuperSuffix = IMySuperPrefixPickJobExcludeKeysIdMySuperSuffix;
 
 /** From T, pick a set of properties whose keys are in the union K */
-export interface PickJobGithub {
+export interface IMySuperPrefixPickJobGithubMySuperSuffix {
   github?: string;
 }
 
 /** From T, pick a set of properties whose keys are in the union K */
-export interface PickJobExcludeKeysId {
+export interface IMySuperPrefixPickJobExcludeKeysIdMySuperSuffix {
   address?: string;
   github?: string;
   isTool?: boolean;
-  kind: Kind;
+  kind: IMySuperPrefixKindMySuperSuffix;
   link?: string;
   name?: string;
   npm?: string;
 }
 
 /** From T, pick a set of properties whose keys are in the union K */
-export interface PickProjectExcludeKeysIdOrjob {
+export interface IMySuperPrefixPickProjectExcludeKeysIdOrjobMySuperSuffix {
   description: string;
   name?: string;
   notImportant?: boolean;
@@ -70,10 +73,10 @@ export interface PickProjectExcludeKeysIdOrjob {
   year: number;
 }
 
-export interface Project {
+export interface IMySuperPrefixProjectMySuperSuffix {
   description: string;
   id: string;
-  job: Job;
+  job: IMySuperPrefixJobMySuperSuffix;
   name?: string | null;
   notImportant?: boolean | null;
   prefix?: string | null;
@@ -83,7 +86,7 @@ export interface Project {
   year: number;
 }
 
-export interface ProjectUpdate {
+export interface IMySuperPrefixProjectUpdateMySuperSuffix {
   description: string;
   job: string;
   name?: string | null;
@@ -95,9 +98,9 @@ export interface ProjectUpdate {
   year: number;
 }
 
-export type UpdatedJob = Job;
+export type IMySuperPrefixUpdatedJobMySuperSuffix = IMySuperPrefixJobMySuperSuffix;
 
-export interface UpdatedProject {
+export interface IMySuperPrefixUpdatedProjectMySuperSuffix {
   description: string;
   id: string;
   job: string;
@@ -110,12 +113,12 @@ export interface UpdatedProject {
   year: number;
 }
 
-export interface User {
+export interface IMySuperPrefixUserMySuperSuffix {
   id: string;
   username: string;
 }
 
-export interface UserUpdate {
+export interface IMySuperPrefixUserUpdateMySuperSuffix {
   id?: string | null;
   username?: string | null;
 }
@@ -343,7 +346,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name Login
      * @request POST:/auth
      */
-    login: (data?: AuthUser, params: RequestParams = {}) =>
+    login: (data?: IMySuperPrefixAuthUserMySuperSuffix, params: RequestParams = {}) =>
       this.request<string, any>({
         path: `/auth`,
         method: "POST",
@@ -380,7 +383,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     getJobs: (params: RequestParams = {}) =>
-      this.request<Job[], any>({
+      this.request<IMySuperPrefixJobMySuperSuffix[], any>({
         path: `/jobs`,
         method: "GET",
         secure: true,
@@ -396,7 +399,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/jobs
      * @secure
      */
-    addJob: (data: PickJobGithub, params: RequestParams = {}) =>
+    addJob: (data: IMySuperPrefixPickJobGithubMySuperSuffix, params: RequestParams = {}) =>
       this.request<string, any>({
         path: `/jobs`,
         method: "POST",
@@ -416,7 +419,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     getJob: (id: string, params: RequestParams = {}) =>
-      this.request<Job, void>({
+      this.request<IMySuperPrefixJobMySuperSuffix, void>({
         path: `/jobs/${id}`,
         method: "GET",
         secure: true,
@@ -432,8 +435,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PATCH:/jobs/{id}
      * @secure
      */
-    updateJob: (id: string, data: JobUpdate, params: RequestParams = {}) =>
-      this.request<UpdatedJob, any>({
+    updateJob: (id: string, data: IMySuperPrefixJobUpdateMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixUpdatedJobMySuperSuffix, any>({
         path: `/jobs/${id}`,
         method: "PATCH",
         body: data,
@@ -470,7 +473,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     getJobs: (params: RequestParams = {}) =>
-      this.request<Job[], any>({
+      this.request<IMySuperPrefixJobMySuperSuffix[], any>({
         path: `x-route`,
         method: "GET",
         secure: true,
@@ -486,7 +489,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:x-route
      * @secure
      */
-    addJob: (data: PickJobGithub, params: RequestParams = {}) =>
+    addJob: (data: IMySuperPrefixPickJobGithubMySuperSuffix, params: RequestParams = {}) =>
       this.request<string, any>({
         path: `x-route`,
         method: "POST",
@@ -506,7 +509,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/projects
      */
     getProjects: (params: RequestParams = {}) =>
-      this.request<Project[], any>({
+      this.request<IMySuperPrefixProjectMySuperSuffix[], any>({
         path: `/projects`,
         method: "GET",
         format: "json",
@@ -521,7 +524,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/projects
      * @secure
      */
-    addProjects: (data: ProjectUpdate, params: RequestParams = {}) =>
+    addProjects: (data: IMySuperPrefixProjectUpdateMySuperSuffix, params: RequestParams = {}) =>
       this.request<string, any>({
         path: `/projects`,
         method: "POST",
@@ -540,8 +543,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PATCH:/projects/{id}
      * @secure
      */
-    updateProject: (id: string, data: ProjectUpdate, params: RequestParams = {}) =>
-      this.request<UpdatedProject, any>({
+    updateProject: (id: string, data: IMySuperPrefixProjectUpdateMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixUpdatedProjectMySuperSuffix, any>({
         path: `/projects/${id}`,
         method: "PATCH",
         body: data,
@@ -561,7 +564,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     getUsers: (params: RequestParams = {}) =>
-      this.request<User[], any>({
+      this.request<IMySuperPrefixUserMySuperSuffix[], any>({
         path: `/users`,
         method: "GET",
         secure: true,
@@ -577,8 +580,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/users
      * @secure
      */
-    addUser: (data: AuthUser, params: RequestParams = {}) =>
-      this.request<User, any>({
+    addUser: (data: IMySuperPrefixAuthUserMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixUserMySuperSuffix, any>({
         path: `/users`,
         method: "POST",
         body: data,
@@ -613,8 +616,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PATCH:/users/{id}
      * @secure
      */
-    updateUser: (id: string, data: UserUpdate, params: RequestParams = {}) =>
-      this.request<User, any>({
+    updateUser: (id: string, data: IMySuperPrefixUserUpdateMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixUserMySuperSuffix, any>({
         path: `/users/${id}`,
         method: "PATCH",
         body: data,

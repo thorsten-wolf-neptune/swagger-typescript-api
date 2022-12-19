@@ -9,8 +9,384 @@
  * ---------------------------------------------------------------
  */
 
+export interface IMySuperPrefixCodeListParamsMySuperSuffix {
+  /**
+   * The sort field. if sort param is provided. Can be either asc or desc.
+   * @default "desc"
+   */
+  order?: "desc" | "asc";
+  /**
+   * The search terms. This can be any combination of the supported code
+   * search parameters:
+   * 'Search In' Qualifies which fields are searched. With this qualifier
+   * you can restrict the search to just the file contents, the file path,
+   * or both.
+   * 'Languages' Searches code based on the language it's written in.
+   * 'Forks' Filters repositories based on the number of forks, and/or
+   * whether code from forked repositories should be included in the results
+   * at all.
+   * 'Size' Finds files that match a certain size (in bytes).
+   * 'Path' Specifies the path that the resulting file must be at.
+   * 'Extension' Matches files with a certain extension.
+   * 'Users' or 'Repositories' Limits searches to a specific user or repository.
+   */
+  q: string;
+  /**
+   * Can only be 'indexed', which indicates how recently a file has been indexed
+   * by the GitHub search infrastructure. If not provided, results are sorted
+   * by best match.
+   */
+  sort?: "indexed";
+}
+
+export interface IMySuperPrefixCommitsDetailParamsMySuperSuffix {
+  /**
+   * The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
+   * Example: "2012-10-09T23:39:01Z".
+   */
+  since?: string;
+  /** Sha or branch to start listing commits from. */
+  sha?: string;
+  /** Only commits containing this file path will be returned. */
+  path?: string;
+  /** GitHub login, name, or email by which to filter by commit author. */
+  author?: string;
+  /** ISO 8601 Date - Only commits before this date will be returned. */
+  until?: string;
+  /** Name of repository owner. */
+  owner: string;
+  /** Name of repository. */
+  repo: string;
+}
+
+export interface IMySuperPrefixContentsDetailParamsMySuperSuffix {
+  path: string;
+  /** The String name of the Commit/Branch/Tag. Defaults to 'master'. */
+  ref?: string;
+  /** Name of repository owner. */
+  owner: string;
+  /** Name of repository. */
+  repo: string;
+}
+
+export interface IMySuperPrefixContributorsDetailParamsMySuperSuffix {
+  /** Set to 1 or true to include anonymous contributors in results. */
+  anon: string;
+  /** Name of repository owner. */
+  owner: string;
+  /** Name of repository. */
+  repo: string;
+}
+
+export interface IMySuperPrefixForksDetailParamsMySuperSuffix {
+  /** @default "newes" */
+  sort?: "newes" | "oldes" | "watchers";
+  /** Name of repository owner. */
+  owner: string;
+  /** Name of repository. */
+  repo: string;
+}
+
+export interface IMySuperPrefixGistsDetailParamsMySuperSuffix {
+  /**
+   * The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
+   * Example: "2012-10-09T23:39:01Z".
+   */
+  since?: string;
+  /** Name of user. */
+  username: string;
+}
+
+export interface IMySuperPrefixGistsListParamsMySuperSuffix {
+  /**
+   * Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ.
+   * Only gists updated at or after this time are returned.
+   */
+  since?: string;
+}
+
+export interface IMySuperPrefixGitTreesDetailParamsMySuperSuffix {
+  /** Get a Tree Recursively. (0 or 1) */
+  recursive?: number;
+  /** Name of repository owner. */
+  owner: string;
+  /** Name of repository. */
+  repo: string;
+  /** Tree SHA. */
+  shaCode: string;
+}
+
+export interface IMySuperPrefixIssuesCommentsDetailParamsMySuperSuffix {
+  /** Ignored without 'sort' parameter. */
+  direction?: string;
+  sort?: "created" | "updated";
+  /**
+   * The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
+   * Example: "2012-10-09T23:39:01Z".
+   */
+  since?: string;
+  /** Name of repository owner. */
+  owner: string;
+  /** Name of repository. */
+  repo: string;
+}
+
+export interface IMySuperPrefixIssuesDetailParamsMySuperSuffix {
+  /**
+   * Issues assigned to you / created by you / mentioning you / you're
+   * subscribed to updates for / All issues the authenticated user can see
+   * @default "all"
+   */
+  filter: "assigned" | "created" | "mentioned" | "subscribed" | "all";
+  /** @default "open" */
+  state: "open" | "closed";
+  /** String list of comma separated Label names. Example - bug,ui,@high. */
+  labels: string;
+  /** @default "created" */
+  sort: "created" | "updated" | "comments";
+  /** @default "desc" */
+  direction: "asc" | "desc";
+  /**
+   * Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
+   * Only issues updated at or after this time are returned.
+   */
+  since?: string;
+  /** Name of organisation. */
+  org: string;
+}
+
+export interface IMySuperPrefixIssuesListParamsMySuperSuffix {
+  /**
+   * Issues assigned to you / created by you / mentioning you / you're
+   * subscribed to updates for / All issues the authenticated user can see
+   * @default "all"
+   */
+  filter: "assigned" | "created" | "mentioned" | "subscribed" | "all";
+  /** @default "open" */
+  state: "open" | "closed";
+  /** String list of comma separated Label names. Example - bug,ui,@high. */
+  labels: string;
+  /** @default "created" */
+  sort: "created" | "updated" | "comments";
+  /** @default "desc" */
+  direction: "asc" | "desc";
+  /**
+   * Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
+   * Only issues updated at or after this time are returned.
+   */
+  since?: string;
+}
+
+export interface IMySuperPrefixMilestonesDetailParamsMySuperSuffix {
+  /**
+   * String to filter by state.
+   * @default "open"
+   */
+  state?: "open" | "closed";
+  /** Ignored without 'sort' parameter. */
+  direction?: string;
+  /** @default "due_date" */
+  sort?: "due_date" | "completeness";
+  /** Name of repository owner. */
+  owner: string;
+  /** Name of repository. */
+  repo: string;
+}
+
+export interface IMySuperPrefixNotificationsDetailParamsMySuperSuffix {
+  /** True to show notifications marked as read. */
+  all?: boolean;
+  /**
+   * True to show only notifications in which the user is directly participating
+   * or mentioned.
+   */
+  participating?: boolean;
+  /**
+   * The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
+   * Example: "2012-10-09T23:39:01Z".
+   */
+  since?: string;
+  /** Name of repository owner. */
+  owner: string;
+  /** Name of repository. */
+  repo: string;
+}
+
+export interface IMySuperPrefixNotificationsListParamsMySuperSuffix {
+  /** True to show notifications marked as read. */
+  all?: boolean;
+  /**
+   * True to show only notifications in which the user is directly participating
+   * or mentioned.
+   */
+  participating?: boolean;
+  /**
+   * The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
+   * Example: "2012-10-09T23:39:01Z".
+   */
+  since?: string;
+}
+
+export interface IMySuperPrefixPublicListParamsMySuperSuffix {
+  /**
+   * Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ.
+   * Only gists updated at or after this time are returned.
+   */
+  since?: string;
+}
+
+export interface IMySuperPrefixPullsCommentsDetailParamsMySuperSuffix {
+  /** Ignored without 'sort' parameter. */
+  direction?: string;
+  sort?: "created" | "updated";
+  /**
+   * The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
+   * Example: "2012-10-09T23:39:01Z".
+   */
+  since?: string;
+  /** Name of repository owner. */
+  owner: string;
+  /** Name of repository. */
+  repo: string;
+}
+
+export interface IMySuperPrefixPullsDetailParamsMySuperSuffix {
+  /**
+   * String to filter by state.
+   * @default "open"
+   */
+  state?: "open" | "closed";
+  /**
+   * Filter pulls by head user and branch name in the format of 'user:ref-name'.
+   * Example: github:new-script-format.
+   */
+  head?: string;
+  /** Filter pulls by base branch name. Example - gh-pages. */
+  base?: string;
+  /** Name of repository owner. */
+  owner: string;
+  /** Name of repository. */
+  repo: string;
+}
+
+export interface IMySuperPrefixReadmeDetailParamsMySuperSuffix {
+  /** The String name of the Commit/Branch/Tag. Defaults to master. */
+  ref?: string;
+  /** Name of repository owner. */
+  owner: string;
+  /** Name of repository. */
+  repo: string;
+}
+
+export interface IMySuperPrefixReposDetailParamsMySuperSuffix {
+  /** @default "all" */
+  type?: "all" | "public" | "private" | "forks" | "sources" | "member";
+  /** Name of organisation. */
+  org: string;
+}
+
+export interface IMySuperPrefixReposListParamsMySuperSuffix {
+  /** @default "all" */
+  type?: "all" | "public" | "private" | "forks" | "sources" | "member";
+}
+
+export interface IMySuperPrefixReposSearchDetailParamsMySuperSuffix {
+  /**
+   * The sort field. if sort param is provided. Can be either asc or desc.
+   * @default "desc"
+   */
+  order?: "desc" | "asc";
+  /** Filter results by language */
+  language?: string;
+  /** The page number to fetch */
+  start_page?: string;
+  /** The sort field. One of stars, forks, or updated. Default: results are sorted by best match. */
+  sort?: "updated" | "stars" | "forks";
+  /** The search term */
+  keyword: string;
+}
+
+export interface IMySuperPrefixRepositoriesListParamsMySuperSuffix {
+  /**
+   * The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
+   * Example: "2012-10-09T23:39:01Z".
+   */
+  since?: string;
+}
+
+export interface IMySuperPrefixSomeOp1ParamsMySuperSuffix {
+  /**
+   * description
+   * @default 0
+   */
+  queryParam1?: number;
+  /**
+   * description
+   * @default 20
+   */
+  queryParam2?: number;
+  /** description */
+  queryParam3?: string[];
+}
+
+export interface IMySuperPrefixSomeOpParamsMySuperSuffix {
+  /** @default 0 */
+  page?: number;
+  /** @default 20 */
+  size?: number;
+  sort?: string[];
+  fooId: string;
+}
+
+export interface IMySuperPrefixStarredListParamsMySuperSuffix {
+  /**
+   * Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ.
+   * Only gists updated at or after this time are returned.
+   */
+  since?: string;
+}
+
+export interface IMySuperPrefixUserSearchDetailParamsMySuperSuffix {
+  /**
+   * The sort field. if sort param is provided. Can be either asc or desc.
+   * @default "desc"
+   */
+  order?: "desc" | "asc";
+  /** The page number to fetch */
+  start_page?: string;
+  /** The sort field. One of stars, forks, or updated. Default: results are sorted by best match. */
+  sort?: "updated" | "stars" | "forks";
+  /** The search term */
+  keyword: string;
+}
+
+export interface IMySuperPrefixUsersListParamsMySuperSuffix {
+  /**
+   * The sort field. if sort param is provided. Can be either asc or desc.
+   * @default "desc"
+   */
+  order?: "desc" | "asc";
+  /**
+   * The search terms. This can be any combination of the supported user
+   * search parameters:
+   * 'Search In' Qualifies which fields are searched. With this qualifier you
+   * can restrict the search to just the username, public email, full name,
+   * location, or any combination of these.
+   * 'Repository count' Filters users based on the number of repositories they
+   * have.
+   * 'Location' Filter users by the location indicated in their profile.
+   * 'Language' Search for users that have repositories that match a certain
+   * language.
+   * 'Created' Filter users based on when they joined.
+   * 'Followers' Filter users based on the number of followers they have.
+   */
+  q: string;
+  /** If not provided, results are sorted by best match. */
+  sort?: "followers" | "repositories" | "joined";
+}
+
 /** A user or organization */
-export interface Actor {
+export interface IMySuperPrefixActorMySuperSuffix {
   avatar_url?: string;
   bio?: string;
   /** The website URL from the profile page */
@@ -56,7 +432,112 @@ export interface Actor {
   url?: string;
 }
 
-export interface Asset {
+export interface IMySuperPrefixActor2MySuperSuffix {
+  /**
+   * The sort field. if sort param is provided. Can be either asc or desc.
+   * @default "desc"
+   */
+  order?: "desc" | "asc";
+  /**
+   * The search terms. This can be any combination of the supported repository
+   * search parameters:
+   * 'Search In' Qualifies which fields are searched. With this qualifier you
+   * can restrict the search to just the repository name, description, readme,
+   * or any combination of these.
+   * 'Size' Finds repositories that match a certain size (in kilobytes).
+   * 'Forks' Filters repositories based on the number of forks, and/or whether
+   * forked repositories should be included in the results at all.
+   * 'Created' and 'Last Updated' Filters repositories based on times of
+   * creation, or when they were last updated.
+   * 'Users or Repositories' Limits searches to a specific user or repository.
+   * 'Languages' Searches repositories based on the language they are written in.
+   * 'Stars' Searches repositories based on the number of stars.
+   */
+  q: string;
+  /** If not provided, results are sorted by best match. */
+  sort?: "stars" | "forks" | "updated";
+}
+
+export interface IMySuperPrefixActor3MySuperSuffix {
+  /**
+   * Issues assigned to you / created by you / mentioning you / you're
+   * subscribed to updates for / All issues the authenticated user can see
+   * @default "all"
+   */
+  filter: "assigned" | "created" | "mentioned" | "subscribed" | "all";
+  /** @default "open" */
+  state: "open" | "closed";
+  /** String list of comma separated Label names. Example - bug,ui,@high. */
+  labels: string;
+  /** @default "created" */
+  sort: "created" | "updated" | "comments";
+  /** @default "desc" */
+  direction: "asc" | "desc";
+  /**
+   * Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
+   * Only issues updated at or after this time are returned.
+   */
+  since?: string;
+}
+
+export interface IMySuperPrefixActor5MySuperSuffix {
+  /**
+   * Issues assigned to you / created by you / mentioning you / you're
+   * subscribed to updates for / All issues the authenticated user can see
+   * @default "all"
+   */
+  filter: "assigned" | "created" | "mentioned" | "subscribed" | "all";
+  /** @default "open" */
+  state: "open" | "closed";
+  /** String list of comma separated Label names. Example - bug,ui,@high. */
+  labels: string;
+  /** @default "created" */
+  sort: "created" | "updated" | "comments";
+  /** @default "desc" */
+  direction: "asc" | "desc";
+  /**
+   * Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
+   * Only issues updated at or after this time are returned.
+   */
+  since?: string;
+  /** Name of repository owner. */
+  owner: string;
+  /** Name of repository. */
+  repo: string;
+}
+
+export interface IMySuperPrefixActor6MySuperSuffix {
+  /** @default "all" */
+  type?: "all" | "public" | "private" | "forks" | "sources" | "member";
+  /** Name of user. */
+  username: string;
+}
+
+export interface IMySuperPrefixActor7MySuperSuffix {
+  /**
+   * The sort field. if sort param is provided. Can be either asc or desc.
+   * @default "desc"
+   */
+  order?: "desc" | "asc";
+  /** The q search term can also contain any combination of the supported issue search qualifiers: */
+  q: string;
+  /** The sort field. Can be comments, created, or updated. Default: results are sorted by best match. */
+  sort?: "updated" | "created" | "comments";
+}
+
+export interface IMySuperPrefixActor8MySuperSuffix {
+  /** Ignored without 'sort' parameter. */
+  direction?: string;
+  /** @default "created" */
+  sort?: "created" | "updated";
+}
+
+export interface IMySuperPrefixActor9MySuperSuffix {
+  /** The integer ID of the last user that you've seen. */
+  since?: number;
+}
+
+export interface IMySuperPrefixAssetMySuperSuffix {
   content_type?: string;
   created_at?: string;
   download_count?: number;
@@ -67,38 +548,38 @@ export interface Asset {
   state?: string;
   updated_at?: string;
   /** A GitHub user */
-  uploader?: User;
+  uploader?: IMySuperPrefixUserMySuperSuffix;
   url?: string;
 }
 
-export interface AssetPatch {
+export interface IMySuperPrefixAssetPatchMySuperSuffix {
   label?: string;
   name: string;
 }
 
-export type Assets = Asset[];
+export type IMySuperPrefixAssetsMySuperSuffix = IMySuperPrefixAssetMySuperSuffix[];
 
-export type Assignees = User[];
+export type IMySuperPrefixAssigneesMySuperSuffix = IMySuperPrefixUserMySuperSuffix[];
 
-export interface Blob {
+export interface IMySuperPrefixBlobMySuperSuffix {
   content?: string;
   encoding?: "utf-8" | "base64";
   sha?: string;
   size?: number;
 }
 
-export interface Blobs {
+export interface IMySuperPrefixBlobsMySuperSuffix {
   sha?: string;
 }
 
-export interface Branch {
+export interface IMySuperPrefixBranchMySuperSuffix {
   _links?: {
     html?: string;
     self?: string;
   };
   commit?: {
     /** A GitHub user */
-    author?: User;
+    author?: IMySuperPrefixUserMySuperSuffix;
     commit?: {
       author?: {
         /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
@@ -120,7 +601,7 @@ export interface Branch {
       url?: string;
     };
     /** A GitHub user */
-    committer?: User;
+    committer?: IMySuperPrefixUserMySuperSuffix;
     parents?: {
       sha?: string;
       url?: string;
@@ -131,7 +612,7 @@ export interface Branch {
   name?: string;
 }
 
-export type Branches = {
+export type IMySuperPrefixBranchesMySuperSuffix = {
   commit?: {
     sha?: string;
     url?: string;
@@ -139,29 +620,29 @@ export type Branches = {
   name?: string;
 }[];
 
-export type CodeFrequencyStats = number[];
+export type IMySuperPrefixCodeFrequencyStatsMySuperSuffix = number[];
 
-export interface Comment {
+export interface IMySuperPrefixCommentMySuperSuffix {
   body?: string;
 }
 
-export interface CommentBody {
+export interface IMySuperPrefixCommentBodyMySuperSuffix {
   body: string;
 }
 
-export type Comments = {
+export type IMySuperPrefixCommentsMySuperSuffix = {
   body?: string;
   /** ISO 8601. */
   created_at?: string;
   id?: number;
   url?: string;
   /** A GitHub user */
-  user?: User;
+  user?: IMySuperPrefixUserMySuperSuffix;
 }[];
 
-export interface Commit {
+export interface IMySuperPrefixCommitMySuperSuffix {
   /** A GitHub user */
-  author?: User;
+  author?: IMySuperPrefixUserMySuperSuffix;
   commit?: {
     author?: {
       /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
@@ -183,7 +664,7 @@ export interface Commit {
     url?: string;
   };
   /** A GitHub user */
-  committer?: User;
+  committer?: IMySuperPrefixUserMySuperSuffix;
   files?: {
     additions?: number;
     blob_url?: string;
@@ -207,13 +688,13 @@ export interface Commit {
   url?: string;
 }
 
-export type CommitActivityStats = {
+export type IMySuperPrefixCommitActivityStatsMySuperSuffix = {
   days?: number[];
   total?: number;
   week?: number;
 }[];
 
-export interface CommitComment {
+export interface IMySuperPrefixCommitCommentMySuperSuffix {
   body?: string;
   commit_id?: string;
   /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
@@ -227,10 +708,10 @@ export interface CommitComment {
   updated_at?: string;
   url?: string;
   /** A GitHub user */
-  user?: User;
+  user?: IMySuperPrefixUserMySuperSuffix;
 }
 
-export interface CommitCommentBody {
+export interface IMySuperPrefixCommitCommentBodyMySuperSuffix {
   body: string;
   /** Deprecated - Use position parameter instead. */
   line?: string;
@@ -244,9 +725,9 @@ export interface CommitCommentBody {
   sha: string;
 }
 
-export type Commits = {
+export type IMySuperPrefixCommitsMySuperSuffix = {
   /** A GitHub user */
-  author?: User;
+  author?: IMySuperPrefixUserMySuperSuffix;
   commit?: {
     author?: {
       /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
@@ -268,7 +749,7 @@ export type Commits = {
     url?: string;
   };
   /** A GitHub user */
-  committer?: User;
+  committer?: IMySuperPrefixUserMySuperSuffix;
   parents?: {
     sha?: string;
     url?: string;
@@ -277,11 +758,11 @@ export type Commits = {
   url?: string;
 }[];
 
-export interface CompareCommits {
+export interface IMySuperPrefixCompareCommitsMySuperSuffix {
   ahead_by?: number;
   base_commit?: {
     /** A GitHub user */
-    author?: User;
+    author?: IMySuperPrefixUserMySuperSuffix;
     commit?: {
       author?: {
         date?: string;
@@ -301,7 +782,7 @@ export interface CompareCommits {
       url?: string;
     };
     /** A GitHub user */
-    committer?: User;
+    committer?: IMySuperPrefixUserMySuperSuffix;
     parents?: {
       sha?: string;
       url?: string;
@@ -312,7 +793,7 @@ export interface CompareCommits {
   behind_by?: number;
   commits?: {
     /** A GitHub user */
-    author?: User;
+    author?: IMySuperPrefixUserMySuperSuffix;
     commit?: {
       author?: {
         date?: string;
@@ -332,7 +813,7 @@ export interface CompareCommits {
       url?: string;
     };
     /** A GitHub user */
-    committer?: User;
+    committer?: IMySuperPrefixUserMySuperSuffix;
     parents?: {
       sha?: string;
       url?: string;
@@ -361,7 +842,7 @@ export interface CompareCommits {
   url?: string;
 }
 
-export interface ContentsPath {
+export interface IMySuperPrefixContentsPathMySuperSuffix {
   _links?: {
     git?: string;
     html?: string;
@@ -379,7 +860,7 @@ export interface ContentsPath {
   url?: string;
 }
 
-export type ContributorsStats = {
+export type IMySuperPrefixContributorsStatsMySuperSuffix = {
   author?: {
     avatar_url?: string;
     gravatar_id?: string;
@@ -401,7 +882,7 @@ export type ContributorsStats = {
   }[];
 }[];
 
-export interface CreateFile {
+export interface IMySuperPrefixCreateFileMySuperSuffix {
   commit?: {
     author?: {
       date?: string;
@@ -444,7 +925,7 @@ export interface CreateFile {
   };
 }
 
-export interface CreateFileBody {
+export interface IMySuperPrefixCreateFileBodyMySuperSuffix {
   committer?: {
     email?: string;
     name?: string;
@@ -453,7 +934,7 @@ export interface CreateFileBody {
   message?: string;
 }
 
-export interface DeleteFile {
+export interface IMySuperPrefixDeleteFileMySuperSuffix {
   commit?: {
     author?: {
       date?: string;
@@ -482,7 +963,7 @@ export interface DeleteFile {
   content?: string;
 }
 
-export interface DeleteFileBody {
+export interface IMySuperPrefixDeleteFileBodyMySuperSuffix {
   committer?: {
     email?: string;
     name?: string;
@@ -491,7 +972,7 @@ export interface DeleteFileBody {
   sha?: string;
 }
 
-export interface Deployment {
+export interface IMySuperPrefixDeploymentMySuperSuffix {
   description?: string;
   payload?: {
     deploy_user?: string;
@@ -501,10 +982,10 @@ export interface Deployment {
   ref?: string;
 }
 
-export interface DeploymentResp {
+export interface IMySuperPrefixDeploymentRespMySuperSuffix {
   created_at?: string;
   /** A GitHub user */
-  creator?: User;
+  creator?: IMySuperPrefixUserMySuperSuffix;
   description?: string;
   id?: number;
   payload?: string;
@@ -514,10 +995,10 @@ export interface DeploymentResp {
   url?: string;
 }
 
-export type DeploymentStatuses = {
+export type IMySuperPrefixDeploymentStatusesMySuperSuffix = {
   created_at?: string;
   /** A GitHub user */
-  creator?: User;
+  creator?: IMySuperPrefixUserMySuperSuffix;
   description?: string;
   id?: number;
   payload?: string;
@@ -527,13 +1008,13 @@ export type DeploymentStatuses = {
   url?: string;
 }[];
 
-export interface DeploymentStatusesCreate {
+export interface IMySuperPrefixDeploymentStatusesCreateMySuperSuffix {
   description?: string;
   state?: string;
   target_url?: string;
 }
 
-export interface Download {
+export interface IMySuperPrefixDownloadMySuperSuffix {
   content_type?: string;
   description?: string;
   download_count?: number;
@@ -544,24 +1025,24 @@ export interface Download {
   url?: string;
 }
 
-export type Downloads = Download[];
+export type IMySuperPrefixDownloadsMySuperSuffix = IMySuperPrefixDownloadMySuperSuffix[];
 
-export interface EditTeam {
+export interface IMySuperPrefixEditTeamMySuperSuffix {
   name: string;
   permission?: "pull" | "push" | "admin";
 }
 
-export type EmailsPost = string[];
+export type IMySuperPrefixEmailsPostMySuperSuffix = string[];
 
-export type Emojis = Record<string, string>;
+export type IMySuperPrefixEmojisMySuperSuffix = Record<string, string>;
 
-export interface Event {
+export interface IMySuperPrefixEventMySuperSuffix {
   /** A user or organization */
-  actor?: Actor;
+  actor?: IMySuperPrefixActorMySuperSuffix;
   created_at?: object;
   id?: number;
   /** A GitHub organization */
-  org?: Organization;
+  org?: IMySuperPrefixOrganizationMySuperSuffix;
   payload?: object;
   public?: boolean;
   repo?: {
@@ -572,9 +1053,9 @@ export interface Event {
   type?: string;
 }
 
-export type Events = Event[];
+export type IMySuperPrefixEventsMySuperSuffix = IMySuperPrefixEventMySuperSuffix[];
 
-export interface Feeds {
+export interface IMySuperPrefixFeedsMySuperSuffix {
   _links?: {
     current_user?: {
       href?: string;
@@ -609,13 +1090,13 @@ export interface Feeds {
   user_url?: string;
 }
 
-export interface ForkBody {
+export interface IMySuperPrefixForkBodyMySuperSuffix {
   organization?: string;
 }
 
-export type Forks = Repos;
+export type IMySuperPrefixForksMySuperSuffix = IMySuperPrefixReposMySuperSuffix;
 
-export interface Gist {
+export interface IMySuperPrefixGistMySuperSuffix {
   comments?: number;
   comments_url?: string;
   /** Timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. */
@@ -633,7 +1114,7 @@ export interface Gist {
     created_at?: string;
     url?: string;
     /** A GitHub user */
-    user?: User;
+    user?: IMySuperPrefixUserMySuperSuffix;
   }[];
   git_pull_url?: string;
   git_push_url?: string;
@@ -647,7 +1128,7 @@ export interface Gist {
     committed_at?: string;
     url?: string;
     /** A GitHub user */
-    user?: User;
+    user?: IMySuperPrefixUserMySuperSuffix;
     version?: string;
   }[];
   html_url?: string;
@@ -655,10 +1136,10 @@ export interface Gist {
   public?: boolean;
   url?: string;
   /** A GitHub user */
-  user?: User;
+  user?: IMySuperPrefixUserMySuperSuffix;
 }
 
-export type Gists = {
+export type IMySuperPrefixGistsMySuperSuffix = {
   comments?: number;
   comments_url?: string;
   created_at?: string;
@@ -677,10 +1158,10 @@ export type Gists = {
   public?: boolean;
   url?: string;
   /** A GitHub user */
-  user?: User;
+  user?: IMySuperPrefixUserMySuperSuffix;
 }[];
 
-export interface GitCommit {
+export interface IMySuperPrefixGitCommitMySuperSuffix {
   author?: {
     date?: string;
     email?: string;
@@ -691,19 +1172,19 @@ export interface GitCommit {
   tree?: string;
 }
 
-export interface GitRefPatch {
+export interface IMySuperPrefixGitRefPatchMySuperSuffix {
   force?: boolean;
   sha?: string;
 }
 
-export type Gitignore = any[];
+export type IMySuperPrefixGitignoreMySuperSuffix = any[];
 
-export interface GitignoreLang {
+export interface IMySuperPrefixGitignoreLangMySuperSuffix {
   name?: string;
   source?: string;
 }
 
-export interface HeadBranch {
+export interface IMySuperPrefixHeadBranchMySuperSuffix {
   object?: {
     sha?: string;
     type?: string;
@@ -713,7 +1194,7 @@ export interface HeadBranch {
   url?: string;
 }
 
-export type Hook = {
+export type IMySuperPrefixHookMySuperSuffix = {
   active?: boolean;
   config?: {
     content_type?: string;
@@ -745,12 +1226,12 @@ export type Hook = {
   url?: string;
 }[];
 
-export interface HookBody {
+export interface IMySuperPrefixHookBodyMySuperSuffix {
   active?: boolean;
   add_events?: string[];
 }
 
-export interface Issue {
+export interface IMySuperPrefixIssueMySuperSuffix {
   assignee?: string;
   body?: string;
   labels?: string[];
@@ -758,16 +1239,16 @@ export interface Issue {
   title?: string;
 }
 
-export interface IssueEvent {
+export interface IMySuperPrefixIssueEventMySuperSuffix {
   /** A user or organization */
-  actor?: Actor;
+  actor?: IMySuperPrefixActorMySuperSuffix;
   commit_id?: string;
   /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
   created_at?: string;
   event?: string;
   issue?: {
     /** A GitHub user */
-    assignee?: User;
+    assignee?: IMySuperPrefixUserMySuperSuffix;
     body?: string;
     /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
     closed_at?: string;
@@ -785,7 +1266,7 @@ export interface IssueEvent {
       /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
       created_at?: string;
       /** A GitHub user */
-      creator?: User;
+      creator?: IMySuperPrefixUserMySuperSuffix;
       description?: string;
       /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
       due_on?: string;
@@ -807,16 +1288,16 @@ export interface IssueEvent {
     updated_at?: string;
     url?: string;
     /** A GitHub user */
-    user?: User;
+    user?: IMySuperPrefixUserMySuperSuffix;
   };
   url?: string;
 }
 
-export type IssueEvents = IssueEvent[];
+export type IMySuperPrefixIssueEventsMySuperSuffix = IMySuperPrefixIssueEventMySuperSuffix[];
 
-export type Issues = {
+export type IMySuperPrefixIssuesMySuperSuffix = {
   /** A GitHub user */
-  assignee?: User;
+  assignee?: IMySuperPrefixUserMySuperSuffix;
   body?: string;
   /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
   closed_at?: string;
@@ -834,7 +1315,7 @@ export type Issues = {
     /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
     created_at?: string;
     /** A GitHub user */
-    creator?: User;
+    creator?: IMySuperPrefixUserMySuperSuffix;
     description?: string;
     /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
     due_on?: string;
@@ -856,10 +1337,10 @@ export type Issues = {
   updated_at?: string;
   url?: string;
   /** A GitHub user */
-  user?: User;
+  user?: IMySuperPrefixUserMySuperSuffix;
 }[];
 
-export interface IssuesComment {
+export interface IMySuperPrefixIssuesCommentMySuperSuffix {
   body?: string;
   /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
   created_at?: string;
@@ -869,10 +1350,10 @@ export interface IssuesComment {
   updated_at?: string;
   url?: string;
   /** A GitHub user */
-  user?: User;
+  user?: IMySuperPrefixUserMySuperSuffix;
 }
 
-export type IssuesComments = {
+export type IMySuperPrefixIssuesCommentsMySuperSuffix = {
   _links?: {
     html?: {
       href?: string;
@@ -895,17 +1376,17 @@ export type IssuesComments = {
   updated_at?: string;
   url?: string;
   /** A GitHub user */
-  user?: User;
+  user?: IMySuperPrefixUserMySuperSuffix;
 }[];
 
-export type Keys = {
+export type IMySuperPrefixKeysMySuperSuffix = {
   id?: number;
   key?: string;
   title?: string;
   url?: string;
 }[];
 
-export interface Label {
+export interface IMySuperPrefixLabelMySuperSuffix {
   /**
    * @minLength 6
    * @maxLength 6
@@ -915,7 +1396,7 @@ export interface Label {
   url?: string;
 }
 
-export type Labels = {
+export type IMySuperPrefixLabelsMySuperSuffix = {
   /**
    * @minLength 6
    * @maxLength 6
@@ -925,38 +1406,38 @@ export type Labels = {
   url?: string;
 }[];
 
-export type Languages = Record<string, number>;
+export type IMySuperPrefixLanguagesMySuperSuffix = Record<string, number>;
 
-export interface Markdown {
+export interface IMySuperPrefixMarkdownMySuperSuffix {
   context?: string;
   mode?: string;
   text?: string;
 }
 
-export interface Merge {
+export interface IMySuperPrefixMergeMySuperSuffix {
   merged?: boolean;
   message?: string;
   sha?: string;
 }
 
-export interface MergePullBody {
+export interface IMySuperPrefixMergePullBodyMySuperSuffix {
   commit_message?: string;
 }
 
-export interface MergesBody {
+export interface IMySuperPrefixMergesBodyMySuperSuffix {
   base?: string;
   commit_message?: string;
   head?: string;
 }
 
-export interface MergesConflict {
+export interface IMySuperPrefixMergesConflictMySuperSuffix {
   /** Error message */
   message?: string;
 }
 
-export interface MergesSuccessful {
+export interface IMySuperPrefixMergesSuccessfulMySuperSuffix {
   /** A GitHub user */
-  author?: User;
+  author?: IMySuperPrefixUserMySuperSuffix;
   comments_url?: string;
   commit?: {
     author?: {
@@ -978,7 +1459,7 @@ export interface MergesSuccessful {
     url?: string;
   };
   /** A GitHub user */
-  committer?: User;
+  committer?: IMySuperPrefixUserMySuperSuffix;
   merged?: boolean;
   message?: string;
   parents?: {
@@ -989,17 +1470,17 @@ export interface MergesSuccessful {
   url?: string;
 }
 
-export interface Meta {
+export interface IMySuperPrefixMetaMySuperSuffix {
   git?: string[];
   hooks?: string[];
 }
 
-export interface Milestone {
+export interface IMySuperPrefixMilestoneMySuperSuffix {
   closed_issues?: number;
   /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
   created_at?: string;
   /** A GitHub user */
-  creator?: User;
+  creator?: IMySuperPrefixUserMySuperSuffix;
   description?: string;
   /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
   due_on?: string;
@@ -1010,18 +1491,18 @@ export interface Milestone {
   url?: string;
 }
 
-export interface MilestoneUpdate {
+export interface IMySuperPrefixMilestoneUpdateMySuperSuffix {
   description?: string;
   due_on?: string;
   state?: string;
   title?: string;
 }
 
-export interface NotificationMarkRead {
+export interface IMySuperPrefixNotificationMarkReadMySuperSuffix {
   last_read_at?: string;
 }
 
-export interface Notifications {
+export interface IMySuperPrefixNotificationsMySuperSuffix {
   id?: number;
   last_read_at?: string;
   reason?: string;
@@ -1033,7 +1514,7 @@ export interface Notifications {
     id?: number;
     name?: string;
     /** A user or organization */
-    owner?: Actor;
+    owner?: IMySuperPrefixActorMySuperSuffix;
     private?: boolean;
     url?: string;
   };
@@ -1048,16 +1529,16 @@ export interface Notifications {
   url?: string;
 }
 
-export interface OrgTeamsPost {
+export interface IMySuperPrefixOrgTeamsPostMySuperSuffix {
   name: string;
   permission?: "pull" | "push" | "admin";
   repo_names?: string[];
 }
 
 /** A GitHub organization */
-export type Organization = Actor;
+export type IMySuperPrefixOrganizationMySuperSuffix = IMySuperPrefixActorMySuperSuffix;
 
-export interface OrganizationAsTeamMember {
+export interface IMySuperPrefixOrganizationAsTeamMemberMySuperSuffix {
   errors?: {
     code?: string;
     field?: string;
@@ -1066,12 +1547,12 @@ export interface OrganizationAsTeamMember {
   message?: string;
 }
 
-export interface ParticipationStats {
+export interface IMySuperPrefixParticipationStatsMySuperSuffix {
   all?: number[];
   owner?: number[];
 }
 
-export interface PatchGist {
+export interface IMySuperPrefixPatchGistMySuperSuffix {
   description?: string;
   files?: {
     "delete_this_file.txt"?: string;
@@ -1088,7 +1569,7 @@ export interface PatchGist {
   };
 }
 
-export interface PatchOrg {
+export interface IMySuperPrefixPatchOrgMySuperSuffix {
   /** Billing email address. This address is not publicized. */
   billing_email?: string;
   company?: string;
@@ -1098,7 +1579,7 @@ export interface PatchOrg {
   name?: string;
 }
 
-export interface PostGist {
+export interface IMySuperPrefixPostGistMySuperSuffix {
   description?: string;
   files?: {
     "file1.txt"?: {
@@ -1108,7 +1589,7 @@ export interface PostGist {
   public?: boolean;
 }
 
-export interface PostRepo {
+export interface IMySuperPrefixPostRepoMySuperSuffix {
   /** True to create an initial commit with empty README. Default is false. */
   auto_init?: boolean;
   description?: string;
@@ -1128,7 +1609,7 @@ export interface PostRepo {
   team_id?: number;
 }
 
-export interface PullRequest {
+export interface IMySuperPrefixPullRequestMySuperSuffix {
   _links?: {
     comments?: {
       href?: string;
@@ -1147,7 +1628,7 @@ export interface PullRequest {
   base?: {
     label?: string;
     ref?: string;
-    repo?: Repo;
+    repo?: IMySuperPrefixRepoMySuperSuffix;
     sha?: string;
     user?: {
       avatar_url?: string;
@@ -1168,7 +1649,7 @@ export interface PullRequest {
   head?: {
     label?: string;
     ref?: string;
-    repo?: Repo;
+    repo?: IMySuperPrefixRepoMySuperSuffix;
     sha?: string;
     user?: {
       avatar_url?: string;
@@ -1206,13 +1687,13 @@ export interface PullRequest {
   };
 }
 
-export interface PullUpdate {
+export interface IMySuperPrefixPullUpdateMySuperSuffix {
   body?: string;
   state?: string;
   title?: string;
 }
 
-export type Pulls = {
+export type IMySuperPrefixPullsMySuperSuffix = {
   _links?: {
     comments?: {
       href?: string;
@@ -1230,7 +1711,7 @@ export type Pulls = {
   base?: {
     label?: string;
     ref?: string;
-    repo?: Repo;
+    repo?: IMySuperPrefixRepoMySuperSuffix;
     sha?: string;
     user?: {
       avatar_url?: string;
@@ -1249,7 +1730,7 @@ export type Pulls = {
   head?: {
     label?: string;
     ref?: string;
-    repo?: Repo;
+    repo?: IMySuperPrefixRepoMySuperSuffix;
     sha?: string;
     user?: {
       avatar_url?: string;
@@ -1279,7 +1760,7 @@ export type Pulls = {
   };
 }[];
 
-export interface PullsComment {
+export interface IMySuperPrefixPullsCommentMySuperSuffix {
   _links?: {
     html?: {
       href?: string;
@@ -1310,14 +1791,14 @@ export interface PullsComment {
   };
 }
 
-export interface PullsCommentPost {
+export interface IMySuperPrefixPullsCommentPostMySuperSuffix {
   body?: string;
   commit_id?: string;
   path?: string;
   position?: number;
 }
 
-export type PullsComments = {
+export type IMySuperPrefixPullsCommentsMySuperSuffix = {
   _links?: {
     html?: {
       href?: string;
@@ -1348,14 +1829,14 @@ export type PullsComments = {
   };
 }[];
 
-export interface PullsPost {
+export interface IMySuperPrefixPullsPostMySuperSuffix {
   base?: string;
   body?: string;
   head?: string;
   title?: string;
 }
 
-export interface PutSubscription {
+export interface IMySuperPrefixPutSubscriptionMySuperSuffix {
   created_at?: string;
   ignored?: boolean;
   reason?: object;
@@ -1364,7 +1845,7 @@ export interface PutSubscription {
   url?: string;
 }
 
-export interface RateLimit {
+export interface IMySuperPrefixRateLimitMySuperSuffix {
   rate?: {
     limit?: number;
     remaining?: number;
@@ -1372,7 +1853,7 @@ export interface RateLimit {
   };
 }
 
-export type Ref = {
+export type IMySuperPrefixRefMySuperSuffix = {
   /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
   created_at?: string;
   creator?: {
@@ -1391,7 +1872,7 @@ export type Ref = {
   url?: string;
 }[];
 
-export type RefStatus = {
+export type IMySuperPrefixRefStatusMySuperSuffix = {
   commit_url?: string;
   name?: string;
   repository_url?: string;
@@ -1409,7 +1890,7 @@ export type RefStatus = {
   }[];
 }[];
 
-export type Refs = {
+export type IMySuperPrefixRefsMySuperSuffix = {
   object?: {
     sha?: string;
     type?: string;
@@ -1419,12 +1900,12 @@ export type Refs = {
   url?: string;
 }[];
 
-export interface RefsBody {
+export interface IMySuperPrefixRefsBodyMySuperSuffix {
   ref?: string;
   sha?: string;
 }
 
-export interface Release {
+export interface IMySuperPrefixReleaseMySuperSuffix {
   assets?: {
     content_type?: string;
     created_at?: string;
@@ -1436,12 +1917,12 @@ export interface Release {
     state?: string;
     updated_at?: string;
     /** A GitHub user */
-    uploader?: User;
+    uploader?: IMySuperPrefixUserMySuperSuffix;
     url?: string;
   }[];
   assets_url?: string;
   /** A GitHub user */
-  author?: User;
+  author?: IMySuperPrefixUserMySuperSuffix;
   body?: string;
   created_at?: string;
   draft?: boolean;
@@ -1458,7 +1939,7 @@ export interface Release {
   zipball_url?: string;
 }
 
-export interface ReleaseCreate {
+export interface IMySuperPrefixReleaseCreateMySuperSuffix {
   body?: string;
   draft?: boolean;
   name?: string;
@@ -1467,7 +1948,7 @@ export interface ReleaseCreate {
   target_commitish?: string;
 }
 
-export type Releases = {
+export type IMySuperPrefixReleasesMySuperSuffix = {
   assets?: {
     content_type?: string;
     created_at?: string;
@@ -1479,12 +1960,12 @@ export type Releases = {
     state?: string;
     updated_at?: string;
     /** A GitHub user */
-    uploader?: User;
+    uploader?: IMySuperPrefixUserMySuperSuffix;
     url?: string;
   }[];
   assets_url?: string;
   /** A GitHub user */
-  author?: User;
+  author?: IMySuperPrefixUserMySuperSuffix;
   body?: string;
   created_at?: string;
   draft?: boolean;
@@ -1501,7 +1982,7 @@ export type Releases = {
   zipball_url?: string;
 }[];
 
-export interface Repo {
+export interface IMySuperPrefixRepoMySuperSuffix {
   clone_url?: string;
   /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
   created_at?: string;
@@ -1524,17 +2005,17 @@ export interface Repo {
   open_issues?: number;
   open_issues_count?: number;
   /** A GitHub organization */
-  organization?: Organization;
+  organization?: IMySuperPrefixOrganizationMySuperSuffix;
   /** A user or organization */
-  owner?: Actor;
+  owner?: IMySuperPrefixActorMySuperSuffix;
   /** Is present when the repo is a fork. Parent is the repo this repo was forked from. */
-  parent?: Repo;
+  parent?: IMySuperPrefixRepoMySuperSuffix;
   private?: boolean;
   /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
   pushed_at?: string;
   size?: number;
   /** Is present when the repo is a fork. Source is the ultimate source for the network. */
-  source?: Repo;
+  source?: IMySuperPrefixRepoMySuperSuffix;
   ssh_url?: string;
   svn_url?: string;
   /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
@@ -1544,10 +2025,10 @@ export interface Repo {
   watchers_count?: number;
 }
 
-export type RepoDeployments = {
+export type IMySuperPrefixRepoDeploymentsMySuperSuffix = {
   created_at?: string;
   /** A GitHub user */
-  creator?: User;
+  creator?: IMySuperPrefixUserMySuperSuffix;
   description?: string;
   id?: number;
   payload?: string;
@@ -1557,7 +2038,7 @@ export type RepoDeployments = {
   url?: string;
 }[];
 
-export type RepoComments = {
+export type IMySuperPrefixRepoCommentsMySuperSuffix = {
   body?: string;
   commit_id?: string;
   /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
@@ -1571,10 +2052,10 @@ export type RepoComments = {
   updated_at?: string;
   url?: string;
   /** A GitHub user */
-  user?: User;
+  user?: IMySuperPrefixUserMySuperSuffix;
 }[];
 
-export interface RepoCommit {
+export interface IMySuperPrefixRepoCommitMySuperSuffix {
   author?: {
     /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
     date?: string;
@@ -1600,7 +2081,7 @@ export interface RepoCommit {
   url?: string;
 }
 
-export interface RepoCommitBody {
+export interface IMySuperPrefixRepoCommitBodyMySuperSuffix {
   author?: {
     date?: string;
     email?: string;
@@ -1611,7 +2092,7 @@ export interface RepoCommitBody {
   tree: string;
 }
 
-export interface RepoEdit {
+export interface IMySuperPrefixRepoEditMySuperSuffix {
   description?: string;
   has_downloads?: boolean;
   has_issues?: boolean;
@@ -1621,9 +2102,9 @@ export interface RepoEdit {
   private?: boolean;
 }
 
-export type Repos = Repo[];
+export type IMySuperPrefixReposMySuperSuffix = IMySuperPrefixRepoMySuperSuffix[];
 
-export interface SearchCode {
+export interface IMySuperPrefixSearchCodeMySuperSuffix {
   items?: {
     git_url?: string;
     html_url?: string;
@@ -1663,7 +2144,7 @@ export interface SearchCode {
       name?: string;
       notifications_url?: string;
       /** A user or organization */
-      owner?: Actor;
+      owner?: IMySuperPrefixActorMySuperSuffix;
       private?: boolean;
       pulls_url?: string;
       stargazers_url?: string;
@@ -1682,7 +2163,7 @@ export interface SearchCode {
   total_count?: number;
 }
 
-export interface SearchIssues {
+export interface IMySuperPrefixSearchIssuesMySuperSuffix {
   items?: {
     assignee?: any;
     body?: string;
@@ -1712,12 +2193,12 @@ export interface SearchIssues {
     updated_at?: string;
     url?: string;
     /** A GitHub user */
-    user?: User;
+    user?: IMySuperPrefixUserMySuperSuffix;
   }[];
   total_count?: number;
 }
 
-export interface SearchIssuesByKeyword {
+export interface IMySuperPrefixSearchIssuesByKeywordMySuperSuffix {
   issues?: {
     body?: string;
     comments?: number;
@@ -1735,30 +2216,30 @@ export interface SearchIssuesByKeyword {
   }[];
 }
 
-export interface SearchRepositories {
-  items?: Repo[];
+export interface IMySuperPrefixSearchRepositoriesMySuperSuffix {
+  items?: IMySuperPrefixRepoMySuperSuffix[];
   total_count?: number;
 }
 
-export interface SearchRepositoriesByKeyword {
-  repositories?: Repo[];
+export interface IMySuperPrefixSearchRepositoriesByKeywordMySuperSuffix {
+  repositories?: IMySuperPrefixRepoMySuperSuffix[];
 }
 
-export interface SearchUserByEmail {
+export interface IMySuperPrefixSearchUserByEmailMySuperSuffix {
   /** A GitHub user */
-  user?: User;
+  user?: IMySuperPrefixUserMySuperSuffix;
 }
 
-export interface SearchUsers {
-  items?: Users;
+export interface IMySuperPrefixSearchUsersMySuperSuffix {
+  items?: IMySuperPrefixUsersMySuperSuffix;
   total_count?: number;
 }
 
-export interface SearchUsersByKeyword {
-  users?: Users;
+export interface IMySuperPrefixSearchUsersByKeywordMySuperSuffix {
+  users?: IMySuperPrefixUsersMySuperSuffix;
 }
 
-export interface Subscription {
+export interface IMySuperPrefixSubscriptionMySuperSuffix {
   /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
   created_at?: string;
   ignored?: boolean;
@@ -1769,12 +2250,12 @@ export interface Subscription {
   url?: string;
 }
 
-export interface SubscriptionBody {
+export interface IMySuperPrefixSubscriptionBodyMySuperSuffix {
   ignored?: boolean;
   subscribed?: boolean;
 }
 
-export interface Tag {
+export interface IMySuperPrefixTagMySuperSuffix {
   /** String of the tag message. */
   message?: string;
   object?: {
@@ -1797,7 +2278,7 @@ export interface Tag {
   url?: string;
 }
 
-export interface TagBody {
+export interface IMySuperPrefixTagBodyMySuperSuffix {
   /** String of the tag message. */
   message: string;
   /** String of the SHA of the git object this is tagging. */
@@ -1816,9 +2297,9 @@ export interface TagBody {
   type: "commit" | "tree" | "blob";
 }
 
-export type Tags = Tag[];
+export type IMySuperPrefixTagsMySuperSuffix = IMySuperPrefixTagMySuperSuffix[];
 
-export interface Team {
+export interface IMySuperPrefixTeamMySuperSuffix {
   id?: number;
   members_count?: number;
   name?: string;
@@ -1827,20 +2308,20 @@ export interface Team {
   url?: string;
 }
 
-export interface TeamMembership {
+export interface IMySuperPrefixTeamMembershipMySuperSuffix {
   state?: string;
   url?: string;
 }
 
-export type TeamRepos = Repos;
+export type IMySuperPrefixTeamReposMySuperSuffix = IMySuperPrefixReposMySuperSuffix;
 
-export type Teams = {
+export type IMySuperPrefixTeamsMySuperSuffix = {
   id?: number;
   name?: string;
   url?: string;
 }[];
 
-export type TeamsList = {
+export type IMySuperPrefixTeamsListMySuperSuffix = {
   id?: number;
   members_count?: number;
   name?: string;
@@ -1855,7 +2336,7 @@ export type TeamsList = {
   url?: string;
 }[];
 
-export interface Tree {
+export interface IMySuperPrefixTreeMySuperSuffix {
   sha?: string;
   tree?: {
     /** One of 100644 for file (blob), 100755 for executable (blob), 040000 for subdirectory (tree), 160000 for submodule (commit) or 120000 for a blob that specifies the path of a symlink. */
@@ -1870,32 +2351,32 @@ export interface Tree {
   url?: string;
 }
 
-export interface Trees {
+export interface IMySuperPrefixTreesMySuperSuffix {
   base_tree?: string;
   /** SHA1 checksum ID of the object in the tree. */
   sha?: string;
-  tree?: Tree[];
+  tree?: IMySuperPrefixTreeMySuperSuffix[];
   url?: string;
 }
 
 /** A GitHub user */
-export type User = Actor;
+export type IMySuperPrefixUserMySuperSuffix = IMySuperPrefixActorMySuperSuffix;
 
-export type UserEmails = string[];
+export type IMySuperPrefixUserEmailsMySuperSuffix = string[];
 
-export interface UserKeysKeyId {
+export interface IMySuperPrefixUserKeysKeyIdMySuperSuffix {
   id?: number;
   key?: string;
   title?: string;
   url?: string;
 }
 
-export interface UserKeysPost {
+export interface IMySuperPrefixUserKeysPostMySuperSuffix {
   key?: string;
   title?: string;
 }
 
-export interface UserUpdate {
+export interface IMySuperPrefixUserUpdateMySuperSuffix {
   bio?: string;
   blog?: string;
   company?: string;
@@ -1905,7 +2386,7 @@ export interface UserUpdate {
   name?: string;
 }
 
-export type Users = User[];
+export type IMySuperPrefixUsersMySuperSuffix = IMySuperPrefixUserMySuperSuffix[];
 
 export type QueryParamsType = Record<string | number, any>;
 export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
@@ -2136,24 +2617,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/someop
      */
     someOp1: (
-      data: Events,
-      query?: {
-        /**
-         * description
-         * @default 0
-         */
-        queryParam1?: number;
-        /**
-         * description
-         * @default 20
-         */
-        queryParam2?: number;
-        /** description */
-        queryParam3?: string[];
-      },
+      query: IMySuperPrefixSomeOp1ParamsMySuperSuffix,
+      data: IMySuperPrefixEventsMySuperSuffix,
       params: RequestParams = {},
     ) =>
-      this.request<Events, void>({
+      this.request<IMySuperPrefixEventsMySuperSuffix, void>({
         path: `/someop`,
         method: "POST",
         query: query,
@@ -2170,18 +2638,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/someop/{fooId}/bars/bar-bar
      */
     someOp: (
-      fooId: string,
-      data: Events,
-      query?: {
-        /** @default 0 */
-        page?: number;
-        /** @default 20 */
-        size?: number;
-        sort?: string[];
-      },
+      { fooId, ...query }: IMySuperPrefixSomeOpParamsMySuperSuffix,
+      data: IMySuperPrefixEventsMySuperSuffix,
       params: RequestParams = {},
     ) =>
-      this.request<Events, void>({
+      this.request<IMySuperPrefixEventsMySuperSuffix, void>({
         path: `/someop/${fooId}/bars/bar-bar`,
         method: "POST",
         query: query,
@@ -2198,7 +2659,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/emojis
      */
     emojisList: (params: RequestParams = {}) =>
-      this.request<Emojis, void>({
+      this.request<IMySuperPrefixEmojisMySuperSuffix, void>({
         path: `/emojis`,
         method: "GET",
         format: "json",
@@ -2213,7 +2674,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/events
      */
     eventsList: (params: RequestParams = {}) =>
-      this.request<Events, void>({
+      this.request<IMySuperPrefixEventsMySuperSuffix, void>({
         path: `/events`,
         method: "GET",
         format: "json",
@@ -2228,7 +2689,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/feeds
      */
     feedsList: (params: RequestParams = {}) =>
-      this.request<Feeds, void>({
+      this.request<IMySuperPrefixFeedsMySuperSuffix, void>({
         path: `/feeds`,
         method: "GET",
         format: "json",
@@ -2242,17 +2703,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name GistsList
      * @request GET:/gists
      */
-    gistsList: (
-      query?: {
-        /**
-         * Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ.
-         * Only gists updated at or after this time are returned.
-         */
-        since?: string;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<Gists, void>({
+    gistsList: (query: IMySuperPrefixGistsListParamsMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixGistsMySuperSuffix, void>({
         path: `/gists`,
         method: "GET",
         query: query,
@@ -2266,8 +2718,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name GistsCreate
      * @request POST:/gists
      */
-    gistsCreate: (body: PostGist, params: RequestParams = {}) =>
-      this.request<Gist, void>({
+    gistsCreate: (body: IMySuperPrefixPostGistMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixGistMySuperSuffix, void>({
         path: `/gists`,
         method: "POST",
         body: body,
@@ -2282,17 +2734,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name PublicList
      * @request GET:/gists/public
      */
-    publicList: (
-      query?: {
-        /**
-         * Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ.
-         * Only gists updated at or after this time are returned.
-         */
-        since?: string;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<Gists, void>({
+    publicList: (query: IMySuperPrefixPublicListParamsMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixGistsMySuperSuffix, void>({
         path: `/gists/public`,
         method: "GET",
         query: query,
@@ -2306,17 +2749,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name StarredList
      * @request GET:/gists/starred
      */
-    starredList: (
-      query?: {
-        /**
-         * Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ.
-         * Only gists updated at or after this time are returned.
-         */
-        since?: string;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<Gists, void>({
+    starredList: (query: IMySuperPrefixStarredListParamsMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixGistsMySuperSuffix, void>({
         path: `/gists/starred`,
         method: "GET",
         query: query,
@@ -2344,7 +2778,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/gists/{id}
      */
     gistsDetail: (id: number, params: RequestParams = {}) =>
-      this.request<Gist, void>({
+      this.request<IMySuperPrefixGistMySuperSuffix, void>({
         path: `/gists/${id}`,
         method: "GET",
         format: "json",
@@ -2357,8 +2791,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name GistsPartialUpdate
      * @request PATCH:/gists/{id}
      */
-    gistsPartialUpdate: (id: number, body: PatchGist, params: RequestParams = {}) =>
-      this.request<Gist, void>({
+    gistsPartialUpdate: (id: number, body: IMySuperPrefixPatchGistMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixGistMySuperSuffix, void>({
         path: `/gists/${id}`,
         method: "PATCH",
         body: body,
@@ -2374,7 +2808,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/gists/{id}/comments
      */
     commentsDetail: (id: number, params: RequestParams = {}) =>
-      this.request<Comments, void>({
+      this.request<IMySuperPrefixCommentsMySuperSuffix, void>({
         path: `/gists/${id}/comments`,
         method: "GET",
         format: "json",
@@ -2387,8 +2821,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name CommentsCreate
      * @request POST:/gists/{id}/comments
      */
-    commentsCreate: (id: number, body: CommentBody, params: RequestParams = {}) =>
-      this.request<Comment, void>({
+    commentsCreate: (id: number, body: IMySuperPrefixCommentBodyMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixCommentMySuperSuffix, void>({
         path: `/gists/${id}/comments`,
         method: "POST",
         body: body,
@@ -2418,7 +2852,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @duplicate
      */
     commentsDetail2: (id: number, commentId: number, params: RequestParams = {}) =>
-      this.request<Comment, void>({
+      this.request<IMySuperPrefixCommentMySuperSuffix, void>({
         path: `/gists/${id}/comments/${commentId}`,
         method: "GET",
         format: "json",
@@ -2431,8 +2865,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name CommentsPartialUpdate
      * @request PATCH:/gists/{id}/comments/{commentId}
      */
-    commentsPartialUpdate: (id: number, commentId: number, body: Comment, params: RequestParams = {}) =>
-      this.request<Comment, void>({
+    commentsPartialUpdate: (
+      id: number,
+      commentId: number,
+      body: IMySuperPrefixCommentMySuperSuffix,
+      params: RequestParams = {},
+    ) =>
+      this.request<IMySuperPrefixCommentMySuperSuffix, void>({
         path: `/gists/${id}/comments/${commentId}`,
         method: "PATCH",
         body: body,
@@ -2501,7 +2940,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/gitignore/templates
      */
     templatesList: (params: RequestParams = {}) =>
-      this.request<Gitignore, void>({
+      this.request<IMySuperPrefixGitignoreMySuperSuffix, void>({
         path: `/gitignore/templates`,
         method: "GET",
         format: "json",
@@ -2515,7 +2954,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/gitignore/templates/{language}
      */
     templatesDetail: (language: string, params: RequestParams = {}) =>
-      this.request<GitignoreLang, void>({
+      this.request<IMySuperPrefixGitignoreLangMySuperSuffix, void>({
         path: `/gitignore/templates/${language}`,
         method: "GET",
         format: "json",
@@ -2529,31 +2968,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name IssuesList
      * @request GET:/issues
      */
-    issuesList: (
-      query: {
-        /**
-         * Issues assigned to you / created by you / mentioning you / you're
-         * subscribed to updates for / All issues the authenticated user can see
-         * @default "all"
-         */
-        filter: "assigned" | "created" | "mentioned" | "subscribed" | "all";
-        /** @default "open" */
-        state: "open" | "closed";
-        /** String list of comma separated Label names. Example - bug,ui,@high. */
-        labels: string;
-        /** @default "created" */
-        sort: "created" | "updated" | "comments";
-        /** @default "desc" */
-        direction: "asc" | "desc";
-        /**
-         * Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
-         * Only issues updated at or after this time are returned.
-         */
-        since?: string;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<Issues, void>({
+    issuesList: (query: IMySuperPrefixIssuesListParamsMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixIssuesMySuperSuffix, void>({
         path: `/issues`,
         method: "GET",
         query: query,
@@ -2576,7 +2992,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repository: string,
       params: RequestParams = {},
     ) =>
-      this.request<SearchIssuesByKeyword, void>({
+      this.request<IMySuperPrefixSearchIssuesByKeywordMySuperSuffix, void>({
         path: `/legacy/issues/search/${owner}/${repository}/${state}/${keyword}`,
         method: "GET",
         format: "json",
@@ -2591,23 +3007,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     reposSearchDetail: (
-      keyword: string,
-      query?: {
-        /**
-         * The sort field. if sort param is provided. Can be either asc or desc.
-         * @default "desc"
-         */
-        order?: "desc" | "asc";
-        /** Filter results by language */
-        language?: string;
-        /** The page number to fetch */
-        start_page?: string;
-        /** The sort field. One of stars, forks, or updated. Default: results are sorted by best match. */
-        sort?: "updated" | "stars" | "forks";
-      },
+      { keyword, ...query }: IMySuperPrefixReposSearchDetailParamsMySuperSuffix,
       params: RequestParams = {},
     ) =>
-      this.request<SearchRepositoriesByKeyword, void>({
+      this.request<IMySuperPrefixSearchRepositoriesByKeywordMySuperSuffix, void>({
         path: `/legacy/repos/search/${keyword}`,
         method: "GET",
         query: query,
@@ -2623,7 +3026,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     userEmailDetail: (email: string, params: RequestParams = {}) =>
-      this.request<SearchUserByEmail, void>({
+      this.request<IMySuperPrefixSearchUserByEmailMySuperSuffix, void>({
         path: `/legacy/user/email/${email}`,
         method: "GET",
         format: "json",
@@ -2638,21 +3041,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     userSearchDetail: (
-      keyword: string,
-      query?: {
-        /**
-         * The sort field. if sort param is provided. Can be either asc or desc.
-         * @default "desc"
-         */
-        order?: "desc" | "asc";
-        /** The page number to fetch */
-        start_page?: string;
-        /** The sort field. One of stars, forks, or updated. Default: results are sorted by best match. */
-        sort?: "updated" | "stars" | "forks";
-      },
+      { keyword, ...query }: IMySuperPrefixUserSearchDetailParamsMySuperSuffix,
       params: RequestParams = {},
     ) =>
-      this.request<SearchUsersByKeyword, void>({
+      this.request<IMySuperPrefixSearchUsersByKeywordMySuperSuffix, void>({
         path: `/legacy/user/search/${keyword}`,
         method: "GET",
         query: query,
@@ -2667,7 +3059,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name MarkdownCreate
      * @request POST:/markdown
      */
-    markdownCreate: (body: Markdown, params: RequestParams = {}) =>
+    markdownCreate: (body: IMySuperPrefixMarkdownMySuperSuffix, params: RequestParams = {}) =>
       this.request<void, void>({
         path: `/markdown`,
         method: "POST",
@@ -2698,7 +3090,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/meta
      */
     metaList: (params: RequestParams = {}) =>
-      this.request<Meta, void>({
+      this.request<IMySuperPrefixMetaMySuperSuffix, void>({
         path: `/meta`,
         method: "GET",
         format: "json",
@@ -2713,7 +3105,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/networks/{owner}/{repo}/events
      */
     eventsDetail: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<Events, void>({
+      this.request<IMySuperPrefixEventsMySuperSuffix, void>({
         path: `/networks/${owner}/${repo}/events`,
         method: "GET",
         format: "json",
@@ -2727,24 +3119,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name NotificationsList
      * @request GET:/notifications
      */
-    notificationsList: (
-      query?: {
-        /** True to show notifications marked as read. */
-        all?: boolean;
-        /**
-         * True to show only notifications in which the user is directly participating
-         * or mentioned.
-         */
-        participating?: boolean;
-        /**
-         * The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
-         * Example: "2012-10-09T23:39:01Z".
-         */
-        since?: string;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<Notifications, void>({
+    notificationsList: (query: IMySuperPrefixNotificationsListParamsMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixNotificationsMySuperSuffix, void>({
         path: `/notifications`,
         method: "GET",
         query: query,
@@ -2758,7 +3134,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name NotificationsUpdate
      * @request PUT:/notifications
      */
-    notificationsUpdate: (body: NotificationMarkRead, params: RequestParams = {}) =>
+    notificationsUpdate: (body: IMySuperPrefixNotificationMarkReadMySuperSuffix, params: RequestParams = {}) =>
       this.request<void, void>({
         path: `/notifications`,
         method: "PUT",
@@ -2773,7 +3149,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/notifications/threads/{id}
      */
     threadsDetail: (id: number, params: RequestParams = {}) =>
-      this.request<Notifications, void>({
+      this.request<IMySuperPrefixNotificationsMySuperSuffix, void>({
         path: `/notifications/threads/${id}`,
         method: "GET",
         format: "json",
@@ -2813,7 +3189,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/notifications/threads/{id}/subscription
      */
     threadsSubscriptionDetail: (id: number, params: RequestParams = {}) =>
-      this.request<Subscription, void>({
+      this.request<IMySuperPrefixSubscriptionMySuperSuffix, void>({
         path: `/notifications/threads/${id}/subscription`,
         method: "GET",
         format: "json",
@@ -2826,8 +3202,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name ThreadsSubscriptionUpdate
      * @request PUT:/notifications/threads/{id}/subscription
      */
-    threadsSubscriptionUpdate: (id: number, body: PutSubscription, params: RequestParams = {}) =>
-      this.request<Subscription, void>({
+    threadsSubscriptionUpdate: (
+      id: number,
+      body: IMySuperPrefixPutSubscriptionMySuperSuffix,
+      params: RequestParams = {},
+    ) =>
+      this.request<IMySuperPrefixSubscriptionMySuperSuffix, void>({
         path: `/notifications/threads/${id}/subscription`,
         method: "PUT",
         body: body,
@@ -2844,7 +3224,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}
      */
     orgsDetail: (org: string, params: RequestParams = {}) =>
-      this.request<Organization, void>({
+      this.request<IMySuperPrefixOrganizationMySuperSuffix, void>({
         path: `/orgs/${org}`,
         method: "GET",
         format: "json",
@@ -2857,8 +3237,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name OrgsPartialUpdate
      * @request PATCH:/orgs/{org}
      */
-    orgsPartialUpdate: (org: string, body: PatchOrg, params: RequestParams = {}) =>
-      this.request<Organization, void>({
+    orgsPartialUpdate: (org: string, body: IMySuperPrefixPatchOrgMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixOrganizationMySuperSuffix, void>({
         path: `/orgs/${org}`,
         method: "PATCH",
         body: body,
@@ -2874,7 +3254,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/events
      */
     eventsDetail: (org: string, params: RequestParams = {}) =>
-      this.request<Events, void>({
+      this.request<IMySuperPrefixEventsMySuperSuffix, void>({
         path: `/orgs/${org}/events`,
         method: "GET",
         format: "json",
@@ -2887,32 +3267,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name IssuesDetail
      * @request GET:/orgs/{org}/issues
      */
-    issuesDetail: (
-      org: string,
-      query: {
-        /**
-         * Issues assigned to you / created by you / mentioning you / you're
-         * subscribed to updates for / All issues the authenticated user can see
-         * @default "all"
-         */
-        filter: "assigned" | "created" | "mentioned" | "subscribed" | "all";
-        /** @default "open" */
-        state: "open" | "closed";
-        /** String list of comma separated Label names. Example - bug,ui,@high. */
-        labels: string;
-        /** @default "created" */
-        sort: "created" | "updated" | "comments";
-        /** @default "desc" */
-        direction: "asc" | "desc";
-        /**
-         * Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
-         * Only issues updated at or after this time are returned.
-         */
-        since?: string;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<Issues, void>({
+    issuesDetail: ({ org, ...query }: IMySuperPrefixIssuesDetailParamsMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixIssuesMySuperSuffix, void>({
         path: `/orgs/${org}/issues`,
         method: "GET",
         query: query,
@@ -2927,7 +3283,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/members
      */
     membersDetail: (org: string, params: RequestParams = {}) =>
-      this.request<Users, void>({
+      this.request<IMySuperPrefixUsersMySuperSuffix, void>({
         path: `/orgs/${org}/members`,
         method: "GET",
         format: "json",
@@ -2969,7 +3325,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/public_members
      */
     publicMembersDetail: (org: string, params: RequestParams = {}) =>
-      this.request<Users, void>({
+      this.request<IMySuperPrefixUsersMySuperSuffix, void>({
         path: `/orgs/${org}/public_members`,
         method: "GET",
         format: "json",
@@ -3023,15 +3379,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name ReposDetail
      * @request GET:/orgs/{org}/repos
      */
-    reposDetail: (
-      org: string,
-      query?: {
-        /** @default "all" */
-        type?: "all" | "public" | "private" | "forks" | "sources" | "member";
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<Repos, void>({
+    reposDetail: ({ org, ...query }: IMySuperPrefixReposDetailParamsMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixReposMySuperSuffix, void>({
         path: `/orgs/${org}/repos`,
         method: "GET",
         query: query,
@@ -3045,8 +3394,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name ReposCreate
      * @request POST:/orgs/{org}/repos
      */
-    reposCreate: (org: string, body: PostRepo, params: RequestParams = {}) =>
-      this.request<Repos, void>({
+    reposCreate: (org: string, body: IMySuperPrefixPostRepoMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixReposMySuperSuffix, void>({
         path: `/orgs/${org}/repos`,
         method: "POST",
         body: body,
@@ -3061,7 +3410,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/orgs/{org}/teams
      */
     teamsDetail: (org: string, params: RequestParams = {}) =>
-      this.request<Teams, void>({
+      this.request<IMySuperPrefixTeamsMySuperSuffix, void>({
         path: `/orgs/${org}/teams`,
         method: "GET",
         format: "json",
@@ -3074,8 +3423,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name TeamsCreate
      * @request POST:/orgs/{org}/teams
      */
-    teamsCreate: (org: string, body: OrgTeamsPost, params: RequestParams = {}) =>
-      this.request<Team, void>({
+    teamsCreate: (org: string, body: IMySuperPrefixOrgTeamsPostMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixTeamMySuperSuffix, void>({
         path: `/orgs/${org}/teams`,
         method: "POST",
         body: body,
@@ -3092,7 +3441,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/rate_limit
      */
     rateLimitList: (params: RequestParams = {}) =>
-      this.request<RateLimit, void>({
+      this.request<IMySuperPrefixRateLimitMySuperSuffix, void>({
         path: `/rate_limit`,
         method: "GET",
         format: "json",
@@ -3120,7 +3469,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}
      */
     reposDetail: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<Repo, void>({
+      this.request<IMySuperPrefixRepoMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}`,
         method: "GET",
         format: "json",
@@ -3133,8 +3482,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name ReposPartialUpdate
      * @request PATCH:/repos/{owner}/{repo}
      */
-    reposPartialUpdate: (owner: string, repo: string, body: RepoEdit, params: RequestParams = {}) =>
-      this.request<Repo, void>({
+    reposPartialUpdate: (
+      owner: string,
+      repo: string,
+      body: IMySuperPrefixRepoEditMySuperSuffix,
+      params: RequestParams = {},
+    ) =>
+      this.request<IMySuperPrefixRepoMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}`,
         method: "PATCH",
         body: body,
@@ -3150,7 +3504,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/assignees
      */
     assigneesDetail: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<Assignees, void>({
+      this.request<IMySuperPrefixAssigneesMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/assignees`,
         method: "GET",
         format: "json",
@@ -3179,7 +3533,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/branches
      */
     branchesDetail: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<Branches, void>({
+      this.request<IMySuperPrefixBranchesMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/branches`,
         method: "GET",
         format: "json",
@@ -3195,7 +3549,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @duplicate
      */
     branchesDetail2: (owner: string, repo: string, branch: string, params: RequestParams = {}) =>
-      this.request<Branch, void>({
+      this.request<IMySuperPrefixBranchMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/branches/${branch}`,
         method: "GET",
         format: "json",
@@ -3209,7 +3563,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/collaborators
      */
     collaboratorsDetail: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<Users, void>({
+      this.request<IMySuperPrefixUsersMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/collaborators`,
         method: "GET",
         format: "json",
@@ -3264,7 +3618,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/comments
      */
     commentsDetail: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<RepoComments, void>({
+      this.request<IMySuperPrefixRepoCommentsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/comments`,
         method: "GET",
         format: "json",
@@ -3293,7 +3647,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @duplicate
      */
     commentsDetail2: (owner: string, repo: string, commentId: number, params: RequestParams = {}) =>
-      this.request<CommitComment, void>({
+      this.request<IMySuperPrefixCommitCommentMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/comments/${commentId}`,
         method: "GET",
         format: "json",
@@ -3310,10 +3664,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       commentId: number,
-      body: CommentBody,
+      body: IMySuperPrefixCommentBodyMySuperSuffix,
       params: RequestParams = {},
     ) =>
-      this.request<CommitComment, void>({
+      this.request<IMySuperPrefixCommitCommentMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/comments/${commentId}`,
         method: "PATCH",
         body: body,
@@ -3328,26 +3682,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/commits
      */
     commitsDetail: (
-      owner: string,
-      repo: string,
-      query?: {
-        /**
-         * The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
-         * Example: "2012-10-09T23:39:01Z".
-         */
-        since?: string;
-        /** Sha or branch to start listing commits from. */
-        sha?: string;
-        /** Only commits containing this file path will be returned. */
-        path?: string;
-        /** GitHub login, name, or email by which to filter by commit author. */
-        author?: string;
-        /** ISO 8601 Date - Only commits before this date will be returned. */
-        until?: string;
-      },
+      { owner, repo, ...query }: IMySuperPrefixCommitsDetailParamsMySuperSuffix,
       params: RequestParams = {},
     ) =>
-      this.request<Commits, void>({
+      this.request<IMySuperPrefixCommitsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/commits`,
         method: "GET",
         query: query,
@@ -3362,7 +3700,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/commits/{ref}/status
      */
     commitsStatusDetail: (owner: string, repo: string, ref: string, params: RequestParams = {}) =>
-      this.request<RefStatus, void>({
+      this.request<IMySuperPrefixRefStatusMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/commits/${ref}/status`,
         method: "GET",
         format: "json",
@@ -3378,7 +3716,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @duplicate
      */
     commitsDetail2: (owner: string, repo: string, shaCode: string, params: RequestParams = {}) =>
-      this.request<Commit, void>({
+      this.request<IMySuperPrefixCommitMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/commits/${shaCode}`,
         method: "GET",
         format: "json",
@@ -3392,7 +3730,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/commits/{shaCode}/comments
      */
     commitsCommentsDetail: (owner: string, repo: string, shaCode: string, params: RequestParams = {}) =>
-      this.request<RepoComments, void>({
+      this.request<IMySuperPrefixRepoCommentsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/commits/${shaCode}/comments`,
         method: "GET",
         format: "json",
@@ -3409,10 +3747,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       shaCode: string,
-      body: CommitCommentBody,
+      body: IMySuperPrefixCommitCommentBodyMySuperSuffix,
       params: RequestParams = {},
     ) =>
-      this.request<CommitComment, void>({
+      this.request<IMySuperPrefixCommitCommentMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/commits/${shaCode}/comments`,
         method: "POST",
         body: body,
@@ -3428,7 +3766,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/compare/{baseId}...{headId}
      */
     compareDetail: (owner: string, repo: string, baseId: string, headId: string, params: RequestParams = {}) =>
-      this.request<CompareCommits, void>({
+      this.request<IMySuperPrefixCompareCommitsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/compare/${baseId}...${headId}`,
         method: "GET",
         format: "json",
@@ -3441,8 +3779,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name ContentsDelete
      * @request DELETE:/repos/{owner}/{repo}/contents/{path}
      */
-    contentsDelete: (owner: string, repo: string, path: string, body: DeleteFileBody, params: RequestParams = {}) =>
-      this.request<DeleteFile, void>({
+    contentsDelete: (
+      owner: string,
+      repo: string,
+      path: string,
+      body: IMySuperPrefixDeleteFileBodyMySuperSuffix,
+      params: RequestParams = {},
+    ) =>
+      this.request<IMySuperPrefixDeleteFileMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/contents/${path}`,
         method: "DELETE",
         body: body,
@@ -3458,18 +3802,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/contents/{path}
      */
     contentsDetail: (
-      owner: string,
-      repo: string,
-      path: string,
-      query?: {
-        /** The content path. */
-        path?: string;
-        /** The String name of the Commit/Branch/Tag. Defaults to 'master'. */
-        ref?: string;
-      },
+      { owner, repo, path, ...query }: IMySuperPrefixContentsDetailParamsMySuperSuffix,
       params: RequestParams = {},
     ) =>
-      this.request<ContentsPath, void>({
+      this.request<IMySuperPrefixContentsPathMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/contents/${path}`,
         method: "GET",
         query: query,
@@ -3483,8 +3819,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name ContentsUpdate
      * @request PUT:/repos/{owner}/{repo}/contents/{path}
      */
-    contentsUpdate: (owner: string, repo: string, path: string, body: CreateFileBody, params: RequestParams = {}) =>
-      this.request<CreateFile, void>({
+    contentsUpdate: (
+      owner: string,
+      repo: string,
+      path: string,
+      body: IMySuperPrefixCreateFileBodyMySuperSuffix,
+      params: RequestParams = {},
+    ) =>
+      this.request<IMySuperPrefixCreateFileMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/contents/${path}`,
         method: "PUT",
         body: body,
@@ -3500,15 +3842,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/contributors
      */
     contributorsDetail: (
-      owner: string,
-      repo: string,
-      query: {
-        /** Set to 1 or true to include anonymous contributors in results. */
-        anon: string;
-      },
+      { owner, repo, ...query }: IMySuperPrefixContributorsDetailParamsMySuperSuffix,
       params: RequestParams = {},
     ) =>
-      this.request<Users, void>({
+      this.request<IMySuperPrefixUsersMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/contributors`,
         method: "GET",
         query: query,
@@ -3523,7 +3860,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/deployments
      */
     deploymentsDetail: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<RepoDeployments, void>({
+      this.request<IMySuperPrefixRepoDeploymentsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/deployments`,
         method: "GET",
         format: "json",
@@ -3536,8 +3873,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name DeploymentsCreate
      * @request POST:/repos/{owner}/{repo}/deployments
      */
-    deploymentsCreate: (owner: string, repo: string, body: Deployment, params: RequestParams = {}) =>
-      this.request<DeploymentResp, void>({
+    deploymentsCreate: (
+      owner: string,
+      repo: string,
+      body: IMySuperPrefixDeploymentMySuperSuffix,
+      params: RequestParams = {},
+    ) =>
+      this.request<IMySuperPrefixDeploymentRespMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/deployments`,
         method: "POST",
         body: body,
@@ -3553,7 +3895,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/deployments/{id}/statuses
      */
     deploymentsStatusesDetail: (owner: string, repo: string, id: number, params: RequestParams = {}) =>
-      this.request<DeploymentStatuses, void>({
+      this.request<IMySuperPrefixDeploymentStatusesMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/deployments/${id}/statuses`,
         method: "GET",
         format: "json",
@@ -3570,7 +3912,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       id: number,
-      body: DeploymentStatusesCreate,
+      body: IMySuperPrefixDeploymentStatusesCreateMySuperSuffix,
       params: RequestParams = {},
     ) =>
       this.request<void, void>({
@@ -3589,7 +3931,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     downloadsDetail: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<Downloads, void>({
+      this.request<IMySuperPrefixDownloadsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/downloads`,
         method: "GET",
         format: "json",
@@ -3620,7 +3962,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @duplicate
      */
     downloadsDetail2: (owner: string, repo: string, downloadId: number, params: RequestParams = {}) =>
-      this.request<Download, void>({
+      this.request<IMySuperPrefixDownloadMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/downloads/${downloadId}`,
         method: "GET",
         format: "json",
@@ -3634,7 +3976,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/events
      */
     eventsDetail: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<Events, void>({
+      this.request<IMySuperPrefixEventsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/events`,
         method: "GET",
         format: "json",
@@ -3648,15 +3990,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/forks
      */
     forksDetail: (
-      owner: string,
-      repo: string,
-      query?: {
-        /** @default "newes" */
-        sort?: "newes" | "oldes" | "watchers";
-      },
+      { owner, repo, ...query }: IMySuperPrefixForksDetailParamsMySuperSuffix,
       params: RequestParams = {},
     ) =>
-      this.request<Forks, void>({
+      this.request<IMySuperPrefixForksMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/forks`,
         method: "GET",
         query: query,
@@ -3670,8 +4007,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name ForksCreate
      * @request POST:/repos/{owner}/{repo}/forks
      */
-    forksCreate: (owner: string, repo: string, body: ForkBody, params: RequestParams = {}) =>
-      this.request<Repo, void>({
+    forksCreate: (owner: string, repo: string, body: IMySuperPrefixForkBodyMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixRepoMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/forks`,
         method: "POST",
         body: body,
@@ -3686,8 +4023,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name GitBlobsCreate
      * @request POST:/repos/{owner}/{repo}/git/blobs
      */
-    gitBlobsCreate: (owner: string, repo: string, body: Blob, params: RequestParams = {}) =>
-      this.request<Blobs, void>({
+    gitBlobsCreate: (owner: string, repo: string, body: IMySuperPrefixBlobMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixBlobsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/git/blobs`,
         method: "POST",
         body: body,
@@ -3703,7 +4040,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/git/blobs/{shaCode}
      */
     gitBlobsDetail: (owner: string, repo: string, shaCode: string, params: RequestParams = {}) =>
-      this.request<Blob, void>({
+      this.request<IMySuperPrefixBlobMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/git/blobs/${shaCode}`,
         method: "GET",
         format: "json",
@@ -3716,8 +4053,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name GitCommitsCreate
      * @request POST:/repos/{owner}/{repo}/git/commits
      */
-    gitCommitsCreate: (owner: string, repo: string, body: RepoCommitBody, params: RequestParams = {}) =>
-      this.request<GitCommit, void>({
+    gitCommitsCreate: (
+      owner: string,
+      repo: string,
+      body: IMySuperPrefixRepoCommitBodyMySuperSuffix,
+      params: RequestParams = {},
+    ) =>
+      this.request<IMySuperPrefixGitCommitMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/git/commits`,
         method: "POST",
         body: body,
@@ -3733,7 +4075,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/git/commits/{shaCode}
      */
     gitCommitsDetail: (owner: string, repo: string, shaCode: string, params: RequestParams = {}) =>
-      this.request<RepoCommit, void>({
+      this.request<IMySuperPrefixRepoCommitMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/git/commits/${shaCode}`,
         method: "GET",
         format: "json",
@@ -3747,7 +4089,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/git/refs
      */
     gitRefsDetail: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<Refs, void>({
+      this.request<IMySuperPrefixRefsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/git/refs`,
         method: "GET",
         format: "json",
@@ -3760,8 +4102,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name GitRefsCreate
      * @request POST:/repos/{owner}/{repo}/git/refs
      */
-    gitRefsCreate: (owner: string, repo: string, body: RefsBody, params: RequestParams = {}) =>
-      this.request<HeadBranch, void>({
+    gitRefsCreate: (
+      owner: string,
+      repo: string,
+      body: IMySuperPrefixRefsBodyMySuperSuffix,
+      params: RequestParams = {},
+    ) =>
+      this.request<IMySuperPrefixHeadBranchMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/git/refs`,
         method: "POST",
         body: body,
@@ -3792,7 +4139,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @duplicate
      */
     gitRefsDetail2: (owner: string, repo: string, ref: string, params: RequestParams = {}) =>
-      this.request<HeadBranch, void>({
+      this.request<IMySuperPrefixHeadBranchMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/git/refs/${ref}`,
         method: "GET",
         format: "json",
@@ -3805,8 +4152,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name GitRefsPartialUpdate
      * @request PATCH:/repos/{owner}/{repo}/git/refs/{ref}
      */
-    gitRefsPartialUpdate: (owner: string, repo: string, ref: string, body: GitRefPatch, params: RequestParams = {}) =>
-      this.request<HeadBranch, void>({
+    gitRefsPartialUpdate: (
+      owner: string,
+      repo: string,
+      ref: string,
+      body: IMySuperPrefixGitRefPatchMySuperSuffix,
+      params: RequestParams = {},
+    ) =>
+      this.request<IMySuperPrefixHeadBranchMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/git/refs/${ref}`,
         method: "PATCH",
         body: body,
@@ -3821,8 +4174,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name GitTagsCreate
      * @request POST:/repos/{owner}/{repo}/git/tags
      */
-    gitTagsCreate: (owner: string, repo: string, body: TagBody, params: RequestParams = {}) =>
-      this.request<Tag, void>({
+    gitTagsCreate: (
+      owner: string,
+      repo: string,
+      body: IMySuperPrefixTagBodyMySuperSuffix,
+      params: RequestParams = {},
+    ) =>
+      this.request<IMySuperPrefixTagMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/git/tags`,
         method: "POST",
         body: body,
@@ -3838,7 +4196,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/git/tags/{shaCode}
      */
     gitTagsDetail: (owner: string, repo: string, shaCode: string, params: RequestParams = {}) =>
-      this.request<Tag, void>({
+      this.request<IMySuperPrefixTagMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/git/tags/${shaCode}`,
         method: "GET",
         format: "json",
@@ -3851,8 +4209,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name GitTreesCreate
      * @request POST:/repos/{owner}/{repo}/git/trees
      */
-    gitTreesCreate: (owner: string, repo: string, body: Tree, params: RequestParams = {}) =>
-      this.request<Trees, void>({
+    gitTreesCreate: (owner: string, repo: string, body: IMySuperPrefixTreeMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixTreesMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/git/trees`,
         method: "POST",
         body: body,
@@ -3868,16 +4226,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/git/trees/{shaCode}
      */
     gitTreesDetail: (
-      owner: string,
-      repo: string,
-      shaCode: string,
-      query?: {
-        /** Get a Tree Recursively. (0 or 1) */
-        recursive?: number;
-      },
+      { owner, repo, shaCode, ...query }: IMySuperPrefixGitTreesDetailParamsMySuperSuffix,
       params: RequestParams = {},
     ) =>
-      this.request<Tree, void>({
+      this.request<IMySuperPrefixTreeMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/git/trees/${shaCode}`,
         method: "GET",
         query: query,
@@ -3892,7 +4244,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/hooks
      */
     hooksDetail: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<Hook, void>({
+      this.request<IMySuperPrefixHookMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/hooks`,
         method: "GET",
         format: "json",
@@ -3905,8 +4257,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name HooksCreate
      * @request POST:/repos/{owner}/{repo}/hooks
      */
-    hooksCreate: (owner: string, repo: string, body: HookBody, params: RequestParams = {}) =>
-      this.request<Hook, void>({
+    hooksCreate: (owner: string, repo: string, body: IMySuperPrefixHookBodyMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixHookMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/hooks`,
         method: "POST",
         body: body,
@@ -3936,7 +4288,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @duplicate
      */
     hooksDetail2: (owner: string, repo: string, hookId: number, params: RequestParams = {}) =>
-      this.request<Hook, void>({
+      this.request<IMySuperPrefixHookMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/hooks/${hookId}`,
         method: "GET",
         format: "json",
@@ -3949,8 +4301,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name HooksPartialUpdate
      * @request PATCH:/repos/{owner}/{repo}/hooks/{hookId}
      */
-    hooksPartialUpdate: (owner: string, repo: string, hookId: number, body: HookBody, params: RequestParams = {}) =>
-      this.request<Hook, void>({
+    hooksPartialUpdate: (
+      owner: string,
+      repo: string,
+      hookId: number,
+      body: IMySuperPrefixHookBodyMySuperSuffix,
+      params: RequestParams = {},
+    ) =>
+      this.request<IMySuperPrefixHookMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/hooks/${hookId}`,
         method: "PATCH",
         body: body,
@@ -3977,33 +4335,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name IssuesDetail
      * @request GET:/repos/{owner}/{repo}/issues
      */
-    issuesDetail: (
-      owner: string,
-      repo: string,
-      query: {
-        /**
-         * Issues assigned to you / created by you / mentioning you / you're
-         * subscribed to updates for / All issues the authenticated user can see
-         * @default "all"
-         */
-        filter: "assigned" | "created" | "mentioned" | "subscribed" | "all";
-        /** @default "open" */
-        state: "open" | "closed";
-        /** String list of comma separated Label names. Example - bug,ui,@high. */
-        labels: string;
-        /** @default "created" */
-        sort: "created" | "updated" | "comments";
-        /** @default "desc" */
-        direction: "asc" | "desc";
-        /**
-         * Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
-         * Only issues updated at or after this time are returned.
-         */
-        since?: string;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<Issues, void>({
+    issuesDetail: ({ owner, repo, ...query }: IMySuperPrefixActor5MySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixIssuesMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/issues`,
         method: "GET",
         query: query,
@@ -4017,8 +4350,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name IssuesCreate
      * @request POST:/repos/{owner}/{repo}/issues
      */
-    issuesCreate: (owner: string, repo: string, body: Issue, params: RequestParams = {}) =>
-      this.request<Issue, void>({
+    issuesCreate: (owner: string, repo: string, body: IMySuperPrefixIssueMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixIssueMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/issues`,
         method: "POST",
         body: body,
@@ -4033,21 +4366,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/issues/comments
      */
     issuesCommentsDetail: (
-      owner: string,
-      repo: string,
-      query?: {
-        /** Ignored without 'sort' parameter. */
-        direction?: string;
-        sort?: "created" | "updated";
-        /**
-         * The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
-         * Example: "2012-10-09T23:39:01Z".
-         */
-        since?: string;
-      },
+      { owner, repo, ...query }: IMySuperPrefixIssuesCommentsDetailParamsMySuperSuffix,
       params: RequestParams = {},
     ) =>
-      this.request<IssuesComments, void>({
+      this.request<IMySuperPrefixIssuesCommentsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/issues/comments`,
         method: "GET",
         query: query,
@@ -4077,7 +4399,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @duplicate
      */
     issuesCommentsDetail2: (owner: string, repo: string, commentId: number, params: RequestParams = {}) =>
-      this.request<IssuesComment, void>({
+      this.request<IMySuperPrefixIssuesCommentMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/issues/comments/${commentId}`,
         method: "GET",
         format: "json",
@@ -4094,10 +4416,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       commentId: number,
-      body: CommentBody,
+      body: IMySuperPrefixCommentBodyMySuperSuffix,
       params: RequestParams = {},
     ) =>
-      this.request<IssuesComment, void>({
+      this.request<IMySuperPrefixIssuesCommentMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/issues/comments/${commentId}`,
         method: "PATCH",
         body: body,
@@ -4112,7 +4434,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/issues/events
      */
     issuesEventsDetail: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<IssueEvents, void>({
+      this.request<IMySuperPrefixIssueEventsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/issues/events`,
         method: "GET",
         format: "json",
@@ -4128,7 +4450,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @duplicate
      */
     issuesEventsDetail2: (owner: string, repo: string, eventId: number, params: RequestParams = {}) =>
-      this.request<IssueEvent, void>({
+      this.request<IMySuperPrefixIssueEventMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/issues/events/${eventId}`,
         method: "GET",
         format: "json",
@@ -4144,7 +4466,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @duplicate
      */
     issuesDetail2: (owner: string, repo: string, number: number, params: RequestParams = {}) =>
-      this.request<Issue, void>({
+      this.request<IMySuperPrefixIssueMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/issues/${number}`,
         method: "GET",
         format: "json",
@@ -4157,8 +4479,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name IssuesPartialUpdate
      * @request PATCH:/repos/{owner}/{repo}/issues/{number}
      */
-    issuesPartialUpdate: (owner: string, repo: string, number: number, body: Issue, params: RequestParams = {}) =>
-      this.request<Issue, void>({
+    issuesPartialUpdate: (
+      owner: string,
+      repo: string,
+      number: number,
+      body: IMySuperPrefixIssueMySuperSuffix,
+      params: RequestParams = {},
+    ) =>
+      this.request<IMySuperPrefixIssueMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/issues/${number}`,
         method: "PATCH",
         body: body,
@@ -4175,7 +4503,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @duplicate
      */
     issuesCommentsDetail3: (owner: string, repo: string, number: number, params: RequestParams = {}) =>
-      this.request<IssuesComments, void>({
+      this.request<IMySuperPrefixIssuesCommentsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/issues/${number}/comments`,
         method: "GET",
         format: "json",
@@ -4192,10 +4520,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       number: number,
-      body: CommentBody,
+      body: IMySuperPrefixCommentBodyMySuperSuffix,
       params: RequestParams = {},
     ) =>
-      this.request<IssuesComment, void>({
+      this.request<IMySuperPrefixIssuesCommentMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/issues/${number}/comments`,
         method: "POST",
         body: body,
@@ -4212,7 +4540,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @duplicate
      */
     issuesEventsDetail3: (owner: string, repo: string, number: number, params: RequestParams = {}) =>
-      this.request<IssueEvents, void>({
+      this.request<IMySuperPrefixIssueEventsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/issues/${number}/events`,
         method: "GET",
         format: "json",
@@ -4239,7 +4567,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/issues/{number}/labels
      */
     issuesLabelsDetail: (owner: string, repo: string, number: number, params: RequestParams = {}) =>
-      this.request<Labels, void>({
+      this.request<IMySuperPrefixLabelsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/issues/${number}/labels`,
         method: "GET",
         format: "json",
@@ -4252,8 +4580,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name IssuesLabelsCreate
      * @request POST:/repos/{owner}/{repo}/issues/{number}/labels
      */
-    issuesLabelsCreate: (owner: string, repo: string, number: number, body: EmailsPost, params: RequestParams = {}) =>
-      this.request<Label, void>({
+    issuesLabelsCreate: (
+      owner: string,
+      repo: string,
+      number: number,
+      body: IMySuperPrefixEmailsPostMySuperSuffix,
+      params: RequestParams = {},
+    ) =>
+      this.request<IMySuperPrefixLabelMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/issues/${number}/labels`,
         method: "POST",
         body: body,
@@ -4267,8 +4601,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name IssuesLabelsUpdate
      * @request PUT:/repos/{owner}/{repo}/issues/{number}/labels
      */
-    issuesLabelsUpdate: (owner: string, repo: string, number: number, body: EmailsPost, params: RequestParams = {}) =>
-      this.request<Label, void>({
+    issuesLabelsUpdate: (
+      owner: string,
+      repo: string,
+      number: number,
+      body: IMySuperPrefixEmailsPostMySuperSuffix,
+      params: RequestParams = {},
+    ) =>
+      this.request<IMySuperPrefixLabelMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/issues/${number}/labels`,
         method: "PUT",
         body: body,
@@ -4298,7 +4638,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/keys
      */
     keysDetail: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<Keys, void>({
+      this.request<IMySuperPrefixKeysMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/keys`,
         method: "GET",
         format: "json",
@@ -4311,8 +4651,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name KeysCreate
      * @request POST:/repos/{owner}/{repo}/keys
      */
-    keysCreate: (owner: string, repo: string, body: UserKeysPost, params: RequestParams = {}) =>
-      this.request<UserKeysKeyId, void>({
+    keysCreate: (
+      owner: string,
+      repo: string,
+      body: IMySuperPrefixUserKeysPostMySuperSuffix,
+      params: RequestParams = {},
+    ) =>
+      this.request<IMySuperPrefixUserKeysKeyIdMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/keys`,
         method: "POST",
         body: body,
@@ -4342,7 +4687,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @duplicate
      */
     keysDetail2: (owner: string, repo: string, keyId: number, params: RequestParams = {}) =>
-      this.request<UserKeysKeyId, void>({
+      this.request<IMySuperPrefixUserKeysKeyIdMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/keys/${keyId}`,
         method: "GET",
         format: "json",
@@ -4356,7 +4701,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/labels
      */
     labelsDetail: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<Labels, void>({
+      this.request<IMySuperPrefixLabelsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/labels`,
         method: "GET",
         format: "json",
@@ -4369,8 +4714,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name LabelsCreate
      * @request POST:/repos/{owner}/{repo}/labels
      */
-    labelsCreate: (owner: string, repo: string, body: EmailsPost, params: RequestParams = {}) =>
-      this.request<Label, void>({
+    labelsCreate: (
+      owner: string,
+      repo: string,
+      body: IMySuperPrefixEmailsPostMySuperSuffix,
+      params: RequestParams = {},
+    ) =>
+      this.request<IMySuperPrefixLabelMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/labels`,
         method: "POST",
         body: body,
@@ -4400,7 +4750,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @duplicate
      */
     labelsDetail2: (owner: string, repo: string, name: string, params: RequestParams = {}) =>
-      this.request<Label, void>({
+      this.request<IMySuperPrefixLabelMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/labels/${name}`,
         method: "GET",
         format: "json",
@@ -4413,8 +4763,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name LabelsPartialUpdate
      * @request PATCH:/repos/{owner}/{repo}/labels/{name}
      */
-    labelsPartialUpdate: (owner: string, repo: string, name: string, body: EmailsPost, params: RequestParams = {}) =>
-      this.request<Label, void>({
+    labelsPartialUpdate: (
+      owner: string,
+      repo: string,
+      name: string,
+      body: IMySuperPrefixEmailsPostMySuperSuffix,
+      params: RequestParams = {},
+    ) =>
+      this.request<IMySuperPrefixLabelMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/labels/${name}`,
         method: "PATCH",
         body: body,
@@ -4429,7 +4785,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/languages
      */
     languagesDetail: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<Languages, void>({
+      this.request<IMySuperPrefixLanguagesMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/languages`,
         method: "GET",
         format: "json",
@@ -4442,8 +4798,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name MergesCreate
      * @request POST:/repos/{owner}/{repo}/merges
      */
-    mergesCreate: (owner: string, repo: string, body: MergesBody, params: RequestParams = {}) =>
-      this.request<MergesSuccessful, void | MergesConflict>({
+    mergesCreate: (
+      owner: string,
+      repo: string,
+      body: IMySuperPrefixMergesBodyMySuperSuffix,
+      params: RequestParams = {},
+    ) =>
+      this.request<IMySuperPrefixMergesSuccessfulMySuperSuffix, void | IMySuperPrefixMergesConflictMySuperSuffix>({
         path: `/repos/${owner}/${repo}/merges`,
         method: "POST",
         body: body,
@@ -4459,22 +4820,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/milestones
      */
     milestonesDetail: (
-      owner: string,
-      repo: string,
-      query?: {
-        /**
-         * String to filter by state.
-         * @default "open"
-         */
-        state?: "open" | "closed";
-        /** Ignored without 'sort' parameter. */
-        direction?: string;
-        /** @default "due_date" */
-        sort?: "due_date" | "completeness";
-      },
+      { owner, repo, ...query }: IMySuperPrefixMilestonesDetailParamsMySuperSuffix,
       params: RequestParams = {},
     ) =>
-      this.request<Milestone, void>({
+      this.request<IMySuperPrefixMilestoneMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/milestones`,
         method: "GET",
         query: query,
@@ -4488,8 +4837,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name MilestonesCreate
      * @request POST:/repos/{owner}/{repo}/milestones
      */
-    milestonesCreate: (owner: string, repo: string, body: MilestoneUpdate, params: RequestParams = {}) =>
-      this.request<Milestone, void>({
+    milestonesCreate: (
+      owner: string,
+      repo: string,
+      body: IMySuperPrefixMilestoneUpdateMySuperSuffix,
+      params: RequestParams = {},
+    ) =>
+      this.request<IMySuperPrefixMilestoneMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/milestones`,
         method: "POST",
         body: body,
@@ -4519,7 +4873,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @duplicate
      */
     milestonesDetail2: (owner: string, repo: string, number: number, params: RequestParams = {}) =>
-      this.request<Milestone, void>({
+      this.request<IMySuperPrefixMilestoneMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/milestones/${number}`,
         method: "GET",
         format: "json",
@@ -4536,10 +4890,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       number: number,
-      body: MilestoneUpdate,
+      body: IMySuperPrefixMilestoneUpdateMySuperSuffix,
       params: RequestParams = {},
     ) =>
-      this.request<Milestone, void>({
+      this.request<IMySuperPrefixMilestoneMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/milestones/${number}`,
         method: "PATCH",
         body: body,
@@ -4554,7 +4908,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/milestones/{number}/labels
      */
     milestonesLabelsDetail: (owner: string, repo: string, number: number, params: RequestParams = {}) =>
-      this.request<Labels, void>({
+      this.request<IMySuperPrefixLabelsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/milestones/${number}/labels`,
         method: "GET",
         format: "json",
@@ -4568,25 +4922,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/notifications
      */
     notificationsDetail: (
-      owner: string,
-      repo: string,
-      query?: {
-        /** True to show notifications marked as read. */
-        all?: boolean;
-        /**
-         * True to show only notifications in which the user is directly participating
-         * or mentioned.
-         */
-        participating?: boolean;
-        /**
-         * The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
-         * Example: "2012-10-09T23:39:01Z".
-         */
-        since?: string;
-      },
+      { owner, repo, ...query }: IMySuperPrefixNotificationsDetailParamsMySuperSuffix,
       params: RequestParams = {},
     ) =>
-      this.request<Notifications, void>({
+      this.request<IMySuperPrefixNotificationsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/notifications`,
         method: "GET",
         query: query,
@@ -4600,7 +4939,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name NotificationsUpdate
      * @request PUT:/repos/{owner}/{repo}/notifications
      */
-    notificationsUpdate: (owner: string, repo: string, body: NotificationMarkRead, params: RequestParams = {}) =>
+    notificationsUpdate: (
+      owner: string,
+      repo: string,
+      body: IMySuperPrefixNotificationMarkReadMySuperSuffix,
+      params: RequestParams = {},
+    ) =>
       this.request<void, void>({
         path: `/repos/${owner}/${repo}/notifications`,
         method: "PUT",
@@ -4615,25 +4959,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/pulls
      */
     pullsDetail: (
-      owner: string,
-      repo: string,
-      query?: {
-        /**
-         * String to filter by state.
-         * @default "open"
-         */
-        state?: "open" | "closed";
-        /**
-         * Filter pulls by head user and branch name in the format of 'user:ref-name'.
-         * Example: github:new-script-format.
-         */
-        head?: string;
-        /** Filter pulls by base branch name. Example - gh-pages. */
-        base?: string;
-      },
+      { owner, repo, ...query }: IMySuperPrefixPullsDetailParamsMySuperSuffix,
       params: RequestParams = {},
     ) =>
-      this.request<Pulls, void>({
+      this.request<IMySuperPrefixPullsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/pulls`,
         method: "GET",
         query: query,
@@ -4647,8 +4976,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name PullsCreate
      * @request POST:/repos/{owner}/{repo}/pulls
      */
-    pullsCreate: (owner: string, repo: string, body: PullsPost, params: RequestParams = {}) =>
-      this.request<Pulls, void>({
+    pullsCreate: (
+      owner: string,
+      repo: string,
+      body: IMySuperPrefixPullsPostMySuperSuffix,
+      params: RequestParams = {},
+    ) =>
+      this.request<IMySuperPrefixPullsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/pulls`,
         method: "POST",
         body: body,
@@ -4664,21 +4998,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/pulls/comments
      */
     pullsCommentsDetail: (
-      owner: string,
-      repo: string,
-      query?: {
-        /** Ignored without 'sort' parameter. */
-        direction?: string;
-        sort?: "created" | "updated";
-        /**
-         * The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
-         * Example: "2012-10-09T23:39:01Z".
-         */
-        since?: string;
-      },
+      { owner, repo, ...query }: IMySuperPrefixPullsCommentsDetailParamsMySuperSuffix,
       params: RequestParams = {},
     ) =>
-      this.request<IssuesComments, void>({
+      this.request<IMySuperPrefixIssuesCommentsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/pulls/comments`,
         method: "GET",
         query: query,
@@ -4708,7 +5031,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @duplicate
      */
     pullsCommentsDetail2: (owner: string, repo: string, commentId: number, params: RequestParams = {}) =>
-      this.request<PullsComment, void>({
+      this.request<IMySuperPrefixPullsCommentMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/pulls/comments/${commentId}`,
         method: "GET",
         format: "json",
@@ -4725,10 +5048,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       commentId: number,
-      body: CommentBody,
+      body: IMySuperPrefixCommentBodyMySuperSuffix,
       params: RequestParams = {},
     ) =>
-      this.request<PullsComment, void>({
+      this.request<IMySuperPrefixPullsCommentMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/pulls/comments/${commentId}`,
         method: "PATCH",
         body: body,
@@ -4745,7 +5068,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @duplicate
      */
     pullsDetail2: (owner: string, repo: string, number: number, params: RequestParams = {}) =>
-      this.request<PullRequest, void>({
+      this.request<IMySuperPrefixPullRequestMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/pulls/${number}`,
         method: "GET",
         format: "json",
@@ -4758,8 +5081,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name PullsPartialUpdate
      * @request PATCH:/repos/{owner}/{repo}/pulls/{number}
      */
-    pullsPartialUpdate: (owner: string, repo: string, number: number, body: PullUpdate, params: RequestParams = {}) =>
-      this.request<Repo, void>({
+    pullsPartialUpdate: (
+      owner: string,
+      repo: string,
+      number: number,
+      body: IMySuperPrefixPullUpdateMySuperSuffix,
+      params: RequestParams = {},
+    ) =>
+      this.request<IMySuperPrefixRepoMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/pulls/${number}`,
         method: "PATCH",
         body: body,
@@ -4777,7 +5106,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @duplicate
      */
     pullsCommentsDetail3: (owner: string, repo: string, number: number, params: RequestParams = {}) =>
-      this.request<PullsComment, void>({
+      this.request<IMySuperPrefixPullsCommentMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/pulls/${number}/comments`,
         method: "GET",
         format: "json",
@@ -4794,10 +5123,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       number: number,
-      body: PullsCommentPost,
+      body: IMySuperPrefixPullsCommentPostMySuperSuffix,
       params: RequestParams = {},
     ) =>
-      this.request<PullsComment, void>({
+      this.request<IMySuperPrefixPullsCommentMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/pulls/${number}/comments`,
         method: "POST",
         body: body,
@@ -4813,7 +5142,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/pulls/{number}/commits
      */
     pullsCommitsDetail: (owner: string, repo: string, number: number, params: RequestParams = {}) =>
-      this.request<Commits, void>({
+      this.request<IMySuperPrefixCommitsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/pulls/${number}/commits`,
         method: "GET",
         format: "json",
@@ -4827,7 +5156,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/pulls/{number}/files
      */
     pullsFilesDetail: (owner: string, repo: string, number: number, params: RequestParams = {}) =>
-      this.request<Pulls, void>({
+      this.request<IMySuperPrefixPullsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/pulls/${number}/files`,
         method: "GET",
         format: "json",
@@ -4853,8 +5182,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name PullsMergeUpdate
      * @request PUT:/repos/{owner}/{repo}/pulls/{number}/merge
      */
-    pullsMergeUpdate: (owner: string, repo: string, number: number, body: MergePullBody, params: RequestParams = {}) =>
-      this.request<Merge, void | Merge>({
+    pullsMergeUpdate: (
+      owner: string,
+      repo: string,
+      number: number,
+      body: IMySuperPrefixMergePullBodyMySuperSuffix,
+      params: RequestParams = {},
+    ) =>
+      this.request<IMySuperPrefixMergeMySuperSuffix, void | IMySuperPrefixMergeMySuperSuffix>({
         path: `/repos/${owner}/${repo}/pulls/${number}/merge`,
         method: "PUT",
         body: body,
@@ -4870,15 +5205,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/readme
      */
     readmeDetail: (
-      owner: string,
-      repo: string,
-      query?: {
-        /** The String name of the Commit/Branch/Tag. Defaults to master. */
-        ref?: string;
-      },
+      { owner, repo, ...query }: IMySuperPrefixReadmeDetailParamsMySuperSuffix,
       params: RequestParams = {},
     ) =>
-      this.request<ContentsPath, void>({
+      this.request<IMySuperPrefixContentsPathMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/readme`,
         method: "GET",
         query: query,
@@ -4893,7 +5223,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/releases
      */
     releasesDetail: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<Releases, void>({
+      this.request<IMySuperPrefixReleasesMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/releases`,
         method: "GET",
         format: "json",
@@ -4906,8 +5236,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name ReleasesCreate
      * @request POST:/repos/{owner}/{repo}/releases
      */
-    releasesCreate: (owner: string, repo: string, body: ReleaseCreate, params: RequestParams = {}) =>
-      this.request<Release, void>({
+    releasesCreate: (
+      owner: string,
+      repo: string,
+      body: IMySuperPrefixReleaseCreateMySuperSuffix,
+      params: RequestParams = {},
+    ) =>
+      this.request<IMySuperPrefixReleaseMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/releases`,
         method: "POST",
         body: body,
@@ -4935,7 +5270,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/releases/assets/{id}
      */
     releasesAssetsDetail: (owner: string, repo: string, id: string, params: RequestParams = {}) =>
-      this.request<Asset, void>({
+      this.request<IMySuperPrefixAssetMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/releases/assets/${id}`,
         method: "GET",
         format: "json",
@@ -4952,10 +5287,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repo: string,
       id: string,
-      body: AssetPatch,
+      body: IMySuperPrefixAssetPatchMySuperSuffix,
       params: RequestParams = {},
     ) =>
-      this.request<Asset, void>({
+      this.request<IMySuperPrefixAssetMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/releases/assets/${id}`,
         method: "PATCH",
         body: body,
@@ -4986,7 +5321,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @duplicate
      */
     releasesDetail2: (owner: string, repo: string, id: string, params: RequestParams = {}) =>
-      this.request<Release, void>({
+      this.request<IMySuperPrefixReleaseMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/releases/${id}`,
         method: "GET",
         format: "json",
@@ -4999,8 +5334,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name ReleasesPartialUpdate
      * @request PATCH:/repos/{owner}/{repo}/releases/{id}
      */
-    releasesPartialUpdate: (owner: string, repo: string, id: string, body: ReleaseCreate, params: RequestParams = {}) =>
-      this.request<Release, void>({
+    releasesPartialUpdate: (
+      owner: string,
+      repo: string,
+      id: string,
+      body: IMySuperPrefixReleaseCreateMySuperSuffix,
+      params: RequestParams = {},
+    ) =>
+      this.request<IMySuperPrefixReleaseMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/releases/${id}`,
         method: "PATCH",
         body: body,
@@ -5017,7 +5358,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @duplicate
      */
     releasesAssetsDetail2: (owner: string, repo: string, id: string, params: RequestParams = {}) =>
-      this.request<Assets, void>({
+      this.request<IMySuperPrefixAssetsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/releases/${id}/assets`,
         method: "GET",
         format: "json",
@@ -5031,7 +5372,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/stargazers
      */
     stargazersDetail: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<Users, void>({
+      this.request<IMySuperPrefixUsersMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/stargazers`,
         method: "GET",
         format: "json",
@@ -5045,7 +5386,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/stats/code_frequency
      */
     statsCodeFrequencyDetail: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<CodeFrequencyStats, void>({
+      this.request<IMySuperPrefixCodeFrequencyStatsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/stats/code_frequency`,
         method: "GET",
         format: "json",
@@ -5059,7 +5400,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/stats/commit_activity
      */
     statsCommitActivityDetail: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<CommitActivityStats, void>({
+      this.request<IMySuperPrefixCommitActivityStatsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/stats/commit_activity`,
         method: "GET",
         format: "json",
@@ -5073,7 +5414,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/stats/contributors
      */
     statsContributorsDetail: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<ContributorsStats, void>({
+      this.request<IMySuperPrefixContributorsStatsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/stats/contributors`,
         method: "GET",
         format: "json",
@@ -5087,7 +5428,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/stats/participation
      */
     statsParticipationDetail: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<ParticipationStats, void>({
+      this.request<IMySuperPrefixParticipationStatsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/stats/participation`,
         method: "GET",
         format: "json",
@@ -5101,7 +5442,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/stats/punch_card
      */
     statsPunchCardDetail: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<CodeFrequencyStats, void>({
+      this.request<IMySuperPrefixCodeFrequencyStatsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/stats/punch_card`,
         method: "GET",
         format: "json",
@@ -5115,7 +5456,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/statuses/{ref}
      */
     statusesDetail: (owner: string, repo: string, ref: string, params: RequestParams = {}) =>
-      this.request<Ref, void>({
+      this.request<IMySuperPrefixRefMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/statuses/${ref}`,
         method: "GET",
         format: "json",
@@ -5128,8 +5469,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name StatusesCreate
      * @request POST:/repos/{owner}/{repo}/statuses/{ref}
      */
-    statusesCreate: (owner: string, repo: string, ref: string, body: HeadBranch, params: RequestParams = {}) =>
-      this.request<Ref, void>({
+    statusesCreate: (
+      owner: string,
+      repo: string,
+      ref: string,
+      body: IMySuperPrefixHeadBranchMySuperSuffix,
+      params: RequestParams = {},
+    ) =>
+      this.request<IMySuperPrefixRefMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/statuses/${ref}`,
         method: "POST",
         body: body,
@@ -5145,7 +5492,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/subscribers
      */
     subscribersDetail: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<Users, void>({
+      this.request<IMySuperPrefixUsersMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/subscribers`,
         method: "GET",
         format: "json",
@@ -5172,7 +5519,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/subscription
      */
     subscriptionDetail: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<Subscription, void>({
+      this.request<IMySuperPrefixSubscriptionMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/subscription`,
         method: "GET",
         format: "json",
@@ -5185,8 +5532,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name SubscriptionUpdate
      * @request PUT:/repos/{owner}/{repo}/subscription
      */
-    subscriptionUpdate: (owner: string, repo: string, body: SubscriptionBody, params: RequestParams = {}) =>
-      this.request<Subscription, void>({
+    subscriptionUpdate: (
+      owner: string,
+      repo: string,
+      body: IMySuperPrefixSubscriptionBodyMySuperSuffix,
+      params: RequestParams = {},
+    ) =>
+      this.request<IMySuperPrefixSubscriptionMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/subscription`,
         method: "PUT",
         body: body,
@@ -5202,7 +5554,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/tags
      */
     tagsDetail: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<Tags, void>({
+      this.request<IMySuperPrefixTagsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/tags`,
         method: "GET",
         format: "json",
@@ -5216,7 +5568,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/teams
      */
     teamsDetail: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<Teams, void>({
+      this.request<IMySuperPrefixTeamsMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/teams`,
         method: "GET",
         format: "json",
@@ -5230,7 +5582,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/repos/{owner}/{repo}/watchers
      */
     watchersDetail: (owner: string, repo: string, params: RequestParams = {}) =>
-      this.request<Users, void>({
+      this.request<IMySuperPrefixUsersMySuperSuffix, void>({
         path: `/repos/${owner}/${repo}/watchers`,
         method: "GET",
         format: "json",
@@ -5265,17 +5617,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name RepositoriesList
      * @request GET:/repositories
      */
-    repositoriesList: (
-      query?: {
-        /**
-         * The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
-         * Example: "2012-10-09T23:39:01Z".
-         */
-        since?: string;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<Repos, void>({
+    repositoriesList: (query: IMySuperPrefixRepositoriesListParamsMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixReposMySuperSuffix, void>({
         path: `/repositories`,
         method: "GET",
         query: query,
@@ -5290,39 +5633,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name CodeList
      * @request GET:/search/code
      */
-    codeList: (
-      query: {
-        /**
-         * The sort field. if sort param is provided. Can be either asc or desc.
-         * @default "desc"
-         */
-        order?: "desc" | "asc";
-        /**
-         * The search terms. This can be any combination of the supported code
-         * search parameters:
-         * 'Search In' Qualifies which fields are searched. With this qualifier
-         * you can restrict the search to just the file contents, the file path,
-         * or both.
-         * 'Languages' Searches code based on the language it's written in.
-         * 'Forks' Filters repositories based on the number of forks, and/or
-         * whether code from forked repositories should be included in the results
-         * at all.
-         * 'Size' Finds files that match a certain size (in bytes).
-         * 'Path' Specifies the path that the resulting file must be at.
-         * 'Extension' Matches files with a certain extension.
-         * 'Users' or 'Repositories' Limits searches to a specific user or repository.
-         */
-        q: string;
-        /**
-         * Can only be 'indexed', which indicates how recently a file has been indexed
-         * by the GitHub search infrastructure. If not provided, results are sorted
-         * by best match.
-         */
-        sort?: "indexed";
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<SearchCode, void>({
+    codeList: (query: IMySuperPrefixCodeListParamsMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixSearchCodeMySuperSuffix, void>({
         path: `/search/code`,
         method: "GET",
         query: query,
@@ -5336,21 +5648,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name IssuesList
      * @request GET:/search/issues
      */
-    issuesList: (
-      query: {
-        /**
-         * The sort field. if sort param is provided. Can be either asc or desc.
-         * @default "desc"
-         */
-        order?: "desc" | "asc";
-        /** The q search term can also contain any combination of the supported issue search qualifiers: */
-        q: string;
-        /** The sort field. Can be comments, created, or updated. Default: results are sorted by best match. */
-        sort?: "updated" | "created" | "comments";
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<SearchIssues, void>({
+    issuesList: (query: IMySuperPrefixActor7MySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixSearchIssuesMySuperSuffix, void>({
         path: `/search/issues`,
         method: "GET",
         query: query,
@@ -5364,35 +5663,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name RepositoriesList
      * @request GET:/search/repositories
      */
-    repositoriesList: (
-      query: {
-        /**
-         * The sort field. if sort param is provided. Can be either asc or desc.
-         * @default "desc"
-         */
-        order?: "desc" | "asc";
-        /**
-         * The search terms. This can be any combination of the supported repository
-         * search parameters:
-         * 'Search In' Qualifies which fields are searched. With this qualifier you
-         * can restrict the search to just the repository name, description, readme,
-         * or any combination of these.
-         * 'Size' Finds repositories that match a certain size (in kilobytes).
-         * 'Forks' Filters repositories based on the number of forks, and/or whether
-         * forked repositories should be included in the results at all.
-         * 'Created' and 'Last Updated' Filters repositories based on times of
-         * creation, or when they were last updated.
-         * 'Users or Repositories' Limits searches to a specific user or repository.
-         * 'Languages' Searches repositories based on the language they are written in.
-         * 'Stars' Searches repositories based on the number of stars.
-         */
-        q: string;
-        /** If not provided, results are sorted by best match. */
-        sort?: "stars" | "forks" | "updated";
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<SearchRepositories, void>({
+    repositoriesList: (query: IMySuperPrefixActor2MySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixSearchRepositoriesMySuperSuffix, void>({
         path: `/search/repositories`,
         method: "GET",
         query: query,
@@ -5406,34 +5678,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name UsersList
      * @request GET:/search/users
      */
-    usersList: (
-      query: {
-        /**
-         * The sort field. if sort param is provided. Can be either asc or desc.
-         * @default "desc"
-         */
-        order?: "desc" | "asc";
-        /**
-         * The search terms. This can be any combination of the supported user
-         * search parameters:
-         * 'Search In' Qualifies which fields are searched. With this qualifier you
-         * can restrict the search to just the username, public email, full name,
-         * location, or any combination of these.
-         * 'Repository count' Filters users based on the number of repositories they
-         * have.
-         * 'Location' Filter users by the location indicated in their profile.
-         * 'Language' Search for users that have repositories that match a certain
-         * language.
-         * 'Created' Filter users based on when they joined.
-         * 'Followers' Filter users based on the number of followers they have.
-         */
-        q: string;
-        /** If not provided, results are sorted by best match. */
-        sort?: "followers" | "repositories" | "joined";
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<SearchUsers, void>({
+    usersList: (query: IMySuperPrefixUsersListParamsMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixSearchUsersMySuperSuffix, void>({
         path: `/search/users`,
         method: "GET",
         query: query,
@@ -5462,7 +5708,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/teams/{teamId}
      */
     teamsDetail: (teamId: number, params: RequestParams = {}) =>
-      this.request<Team, void>({
+      this.request<IMySuperPrefixTeamMySuperSuffix, void>({
         path: `/teams/${teamId}`,
         method: "GET",
         format: "json",
@@ -5475,8 +5721,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name TeamsPartialUpdate
      * @request PATCH:/teams/{teamId}
      */
-    teamsPartialUpdate: (teamId: number, body: EditTeam, params: RequestParams = {}) =>
-      this.request<Team, void>({
+    teamsPartialUpdate: (teamId: number, body: IMySuperPrefixEditTeamMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixTeamMySuperSuffix, void>({
         path: `/teams/${teamId}`,
         method: "PATCH",
         body: body,
@@ -5492,7 +5738,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/teams/{teamId}/members
      */
     membersDetail: (teamId: number, params: RequestParams = {}) =>
-      this.request<Users, void>({
+      this.request<IMySuperPrefixUsersMySuperSuffix, void>({
         path: `/teams/${teamId}/members`,
         method: "GET",
         format: "json",
@@ -5537,7 +5783,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      */
     membersUpdate: (teamId: number, username: string, params: RequestParams = {}) =>
-      this.request<void, void | OrganizationAsTeamMember>({
+      this.request<void, void | IMySuperPrefixOrganizationAsTeamMemberMySuperSuffix>({
         path: `/teams/${teamId}/members/${username}`,
         method: "PUT",
         ...params,
@@ -5563,7 +5809,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/teams/{teamId}/memberships/{username}
      */
     membershipsDetail: (teamId: number, username: string, params: RequestParams = {}) =>
-      this.request<TeamMembership, void>({
+      this.request<IMySuperPrefixTeamMembershipMySuperSuffix, void>({
         path: `/teams/${teamId}/memberships/${username}`,
         method: "GET",
         format: "json",
@@ -5577,7 +5823,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/teams/{teamId}/memberships/{username}
      */
     membershipsUpdate: (teamId: number, username: string, params: RequestParams = {}) =>
-      this.request<TeamMembership, void | OrganizationAsTeamMember>({
+      this.request<
+        IMySuperPrefixTeamMembershipMySuperSuffix,
+        void | IMySuperPrefixOrganizationAsTeamMemberMySuperSuffix
+      >({
         path: `/teams/${teamId}/memberships/${username}`,
         method: "PUT",
         format: "json",
@@ -5591,7 +5840,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/teams/{teamId}/repos
      */
     reposDetail: (teamId: number, params: RequestParams = {}) =>
-      this.request<TeamRepos, void>({
+      this.request<IMySuperPrefixTeamReposMySuperSuffix, void>({
         path: `/teams/${teamId}/repos`,
         method: "GET",
         format: "json",
@@ -5647,7 +5896,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user
      */
     userList: (params: RequestParams = {}) =>
-      this.request<User, void>({
+      this.request<IMySuperPrefixUserMySuperSuffix, void>({
         path: `/user`,
         method: "GET",
         format: "json",
@@ -5660,8 +5909,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name UserPartialUpdate
      * @request PATCH:/user
      */
-    userPartialUpdate: (body: UserUpdate, params: RequestParams = {}) =>
-      this.request<User, void>({
+    userPartialUpdate: (body: IMySuperPrefixUserUpdateMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixUserMySuperSuffix, void>({
         path: `/user`,
         method: "PATCH",
         body: body,
@@ -5676,7 +5925,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name EmailsDelete
      * @request DELETE:/user/emails
      */
-    emailsDelete: (body: UserEmails, params: RequestParams = {}) =>
+    emailsDelete: (body: IMySuperPrefixUserEmailsMySuperSuffix, params: RequestParams = {}) =>
       this.request<void, void>({
         path: `/user/emails`,
         method: "DELETE",
@@ -5692,7 +5941,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/emails
      */
     emailsList: (params: RequestParams = {}) =>
-      this.request<UserEmails, void>({
+      this.request<IMySuperPrefixUserEmailsMySuperSuffix, void>({
         path: `/user/emails`,
         method: "GET",
         ...params,
@@ -5704,7 +5953,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name EmailsCreate
      * @request POST:/user/emails
      */
-    emailsCreate: (body: EmailsPost, params: RequestParams = {}) =>
+    emailsCreate: (body: IMySuperPrefixEmailsPostMySuperSuffix, params: RequestParams = {}) =>
       this.request<any, void>({
         path: `/user/emails`,
         method: "POST",
@@ -5719,7 +5968,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/followers
      */
     followersList: (params: RequestParams = {}) =>
-      this.request<Users, void>({
+      this.request<IMySuperPrefixUsersMySuperSuffix, void>({
         path: `/user/followers`,
         method: "GET",
         format: "json",
@@ -5733,7 +5982,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/following
      */
     followingList: (params: RequestParams = {}) =>
-      this.request<Users, void>({
+      this.request<IMySuperPrefixUsersMySuperSuffix, void>({
         path: `/user/following`,
         method: "GET",
         format: "json",
@@ -5785,31 +6034,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name IssuesList
      * @request GET:/user/issues
      */
-    issuesList: (
-      query: {
-        /**
-         * Issues assigned to you / created by you / mentioning you / you're
-         * subscribed to updates for / All issues the authenticated user can see
-         * @default "all"
-         */
-        filter: "assigned" | "created" | "mentioned" | "subscribed" | "all";
-        /** @default "open" */
-        state: "open" | "closed";
-        /** String list of comma separated Label names. Example - bug,ui,@high. */
-        labels: string;
-        /** @default "created" */
-        sort: "created" | "updated" | "comments";
-        /** @default "desc" */
-        direction: "asc" | "desc";
-        /**
-         * Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
-         * Only issues updated at or after this time are returned.
-         */
-        since?: string;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<Issues, void>({
+    issuesList: (query: IMySuperPrefixActor3MySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixIssuesMySuperSuffix, void>({
         path: `/user/issues`,
         method: "GET",
         query: query,
@@ -5824,7 +6050,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/keys
      */
     keysList: (params: RequestParams = {}) =>
-      this.request<Gitignore, void>({
+      this.request<IMySuperPrefixGitignoreMySuperSuffix, void>({
         path: `/user/keys`,
         method: "GET",
         format: "json",
@@ -5837,8 +6063,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name KeysCreate
      * @request POST:/user/keys
      */
-    keysCreate: (body: UserKeysPost, params: RequestParams = {}) =>
-      this.request<UserKeysKeyId, void>({
+    keysCreate: (body: IMySuperPrefixUserKeysPostMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixUserKeysKeyIdMySuperSuffix, void>({
         path: `/user/keys`,
         method: "POST",
         body: body,
@@ -5866,7 +6092,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/keys/{keyId}
      */
     keysDetail: (keyId: number, params: RequestParams = {}) =>
-      this.request<UserKeysKeyId, void>({
+      this.request<IMySuperPrefixUserKeysKeyIdMySuperSuffix, void>({
         path: `/user/keys/${keyId}`,
         method: "GET",
         format: "json",
@@ -5880,7 +6106,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/orgs
      */
     orgsList: (params: RequestParams = {}) =>
-      this.request<Gitignore, void>({
+      this.request<IMySuperPrefixGitignoreMySuperSuffix, void>({
         path: `/user/orgs`,
         method: "GET",
         format: "json",
@@ -5893,14 +6119,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name ReposList
      * @request GET:/user/repos
      */
-    reposList: (
-      query?: {
-        /** @default "all" */
-        type?: "all" | "public" | "private" | "forks" | "sources" | "member";
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<Repos, void>({
+    reposList: (query: IMySuperPrefixReposListParamsMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixReposMySuperSuffix, void>({
         path: `/user/repos`,
         method: "GET",
         query: query,
@@ -5914,8 +6134,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name ReposCreate
      * @request POST:/user/repos
      */
-    reposCreate: (body: PostRepo, params: RequestParams = {}) =>
-      this.request<Repos, void>({
+    reposCreate: (body: IMySuperPrefixPostRepoMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixReposMySuperSuffix, void>({
         path: `/user/repos`,
         method: "POST",
         body: body,
@@ -5929,16 +6149,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name StarredList
      * @request GET:/user/starred
      */
-    starredList: (
-      query?: {
-        /** Ignored without 'sort' parameter. */
-        direction?: string;
-        /** @default "created" */
-        sort?: "created" | "updated";
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<Gitignore, void>({
+    starredList: (query: IMySuperPrefixActor8MySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixGitignoreMySuperSuffix, void>({
         path: `/user/starred`,
         method: "GET",
         query: query,
@@ -5992,7 +6204,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/subscriptions
      */
     subscriptionsList: (params: RequestParams = {}) =>
-      this.request<Repos, void>({
+      this.request<IMySuperPrefixReposMySuperSuffix, void>({
         path: `/user/subscriptions`,
         method: "GET",
         format: "json",
@@ -6048,7 +6260,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user/teams
      */
     teamsList: (params: RequestParams = {}) =>
-      this.request<TeamsList, void>({
+      this.request<IMySuperPrefixTeamsListMySuperSuffix, void>({
         path: `/user/teams`,
         method: "GET",
         format: "json",
@@ -6062,14 +6274,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name UsersList
      * @request GET:/users
      */
-    usersList: (
-      query?: {
-        /** The integer ID of the last user that you've seen. */
-        since?: number;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<Users, void>({
+    usersList: (query: IMySuperPrefixActor9MySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixUsersMySuperSuffix, void>({
         path: `/users`,
         method: "GET",
         query: query,
@@ -6084,7 +6290,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}
      */
     usersDetail: (username: string, params: RequestParams = {}) =>
-      this.request<User, void>({
+      this.request<IMySuperPrefixUserMySuperSuffix, void>({
         path: `/users/${username}`,
         method: "GET",
         format: "json",
@@ -6124,7 +6330,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/followers
      */
     followersDetail: (username: string, params: RequestParams = {}) =>
-      this.request<Users, void>({
+      this.request<IMySuperPrefixUsersMySuperSuffix, void>({
         path: `/users/${username}/followers`,
         method: "GET",
         format: "json",
@@ -6150,18 +6356,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name GistsDetail
      * @request GET:/users/{username}/gists
      */
-    gistsDetail: (
-      username: string,
-      query?: {
-        /**
-         * The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
-         * Example: "2012-10-09T23:39:01Z".
-         */
-        since?: string;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<Gists, void>({
+    gistsDetail: ({ username, ...query }: IMySuperPrefixGistsDetailParamsMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixGistsMySuperSuffix, void>({
         path: `/users/${username}/gists`,
         method: "GET",
         query: query,
@@ -6176,7 +6372,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/keys
      */
     keysDetail: (username: string, params: RequestParams = {}) =>
-      this.request<Gitignore, void>({
+      this.request<IMySuperPrefixGitignoreMySuperSuffix, void>({
         path: `/users/${username}/keys`,
         method: "GET",
         format: "json",
@@ -6190,7 +6386,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/orgs
      */
     orgsDetail: (username: string, params: RequestParams = {}) =>
-      this.request<Gitignore, void>({
+      this.request<IMySuperPrefixGitignoreMySuperSuffix, void>({
         path: `/users/${username}/orgs`,
         method: "GET",
         format: "json",
@@ -6229,15 +6425,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name ReposDetail
      * @request GET:/users/{username}/repos
      */
-    reposDetail: (
-      username: string,
-      query?: {
-        /** @default "all" */
-        type?: "all" | "public" | "private" | "forks" | "sources" | "member";
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<Repos, void>({
+    reposDetail: ({ username, ...query }: IMySuperPrefixActor6MySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixReposMySuperSuffix, void>({
         path: `/users/${username}/repos`,
         method: "GET",
         query: query,

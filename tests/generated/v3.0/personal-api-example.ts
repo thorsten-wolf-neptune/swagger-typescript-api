@@ -9,29 +9,29 @@
  * ---------------------------------------------------------------
  */
 
-export type AuthUserType = OmitIdUserType;
+export type IMySuperPrefixAuthUserTypeMySuperSuffix = IMySuperPrefixOmitIdUserTypeMySuperSuffix;
 
-export type ExtractedProjectType = OmitProjectTypeJob & {
+export type IMySuperPrefixExtractedProjectTypeMySuperSuffix = IMySuperPrefixOmitProjectTypeJobMySuperSuffix & {
   /** Information about job */
-  job: JobType;
+  job: IMySuperPrefixJobTypeMySuperSuffix;
 };
 
 /** Information about job */
-export interface FooBar {
-  kind?: JobKind;
+export interface IMySuperPrefixFooBarMySuperSuffix {
+  kind?: IMySuperPrefixJobKindMySuperSuffix;
 }
 
 /** Information about job */
-export interface FooBarBaz {
+export interface IMySuperPrefixFooBarBazMySuperSuffix {
   id?: string;
-  kind?: JobKind;
+  kind?: IMySuperPrefixJobKindMySuperSuffix;
   link?: string;
   name?: string;
   [key: string]: any;
 }
 
 /** Information about job */
-export interface FooBaz {
+export interface IMySuperPrefixFooBazMySuperSuffix {
   link?: string;
   name?: string;
 }
@@ -40,7 +40,7 @@ export interface FooBaz {
  * FooBar
  * @format int32
  */
-export enum IntEnumWithNames {
+export enum IMySuperPrefixIntEnumWithNamesMySuperSuffix {
   Unknown = 0,
   String = 1,
   Int32 = 2,
@@ -53,7 +53,7 @@ export enum IntEnumWithNames {
   BooFar = 9,
 }
 
-export enum JobKind {
+export enum IMySuperPrefixJobKindMySuperSuffix {
   COMPANY = "COMPANY",
   PERSONAL = "PERSONAL",
   FREELANCE = "FREELANCE",
@@ -61,7 +61,7 @@ export enum JobKind {
 }
 
 /** Information about job */
-export interface JobType {
+export interface IMySuperPrefixJobTypeMySuperSuffix {
   /** web site address */
   address?: string;
   /**
@@ -75,7 +75,7 @@ export interface JobType {
    * Means project is dev. tool (like swagger code generator)
    */
   isTool?: boolean;
-  kind: JobKind;
+  kind: IMySuperPrefixJobKindMySuperSuffix;
   link?: string;
   name?: string;
   /**
@@ -85,30 +85,31 @@ export interface JobType {
   npm?: string;
 }
 
-export type JobUpdateType = OmitIdJobType;
+export type IMySuperPrefixJobUpdateTypeMySuperSuffix = IMySuperPrefixOmitIdJobTypeMySuperSuffix;
 
-export interface NullableEnum {
+export interface IMySuperPrefixNullableEnumMySuperSuffix {
   /** @format int64 */
   id?: number;
   legalCategory?: "SARL" | "ASSOCIATION" | null;
 }
 
-export type OmitIdJobType = OmitJobTypeIdOrId;
+export type IMySuperPrefixOmitIdJobTypeMySuperSuffix = IMySuperPrefixOmitJobTypeIdOrIdMySuperSuffix;
 
-export type OmitIdProjectType = OmitProjectTypeIdOrId;
+export type IMySuperPrefixOmitIdProjectTypeMySuperSuffix = IMySuperPrefixOmitProjectTypeIdOrIdMySuperSuffix;
 
-export type OmitIdUserType = OmitUserTypeIdOrId;
+export type IMySuperPrefixOmitIdUserTypeMySuperSuffix = IMySuperPrefixOmitUserTypeIdOrIdMySuperSuffix;
 
-export type OmitJobTypeIdOrId = PickJobTypeExcludeKeysIdOrId;
+export type IMySuperPrefixOmitJobTypeIdOrIdMySuperSuffix = IMySuperPrefixPickJobTypeExcludeKeysIdOrIdMySuperSuffix;
 
-export type OmitProjectTypeIdOrId = PickProjectTypeExcludeKeysIdOrId;
+export type IMySuperPrefixOmitProjectTypeIdOrIdMySuperSuffix =
+  IMySuperPrefixPickProjectTypeExcludeKeysIdOrIdMySuperSuffix;
 
-export type OmitProjectTypeJob = PickProjectTypeExcludeKeysJob;
+export type IMySuperPrefixOmitProjectTypeJobMySuperSuffix = IMySuperPrefixPickProjectTypeExcludeKeysJobMySuperSuffix;
 
-export type OmitUserTypeIdOrId = PickUserTypeExcludeKeysIdOrId;
+export type IMySuperPrefixOmitUserTypeIdOrIdMySuperSuffix = IMySuperPrefixPickUserTypeExcludeKeysIdOrIdMySuperSuffix;
 
 /** From T, pick a set of properties whose keys are in the union K */
-export interface PickJobTypeExcludeKeysIdOrId {
+export interface IMySuperPrefixPickJobTypeExcludeKeysIdOrIdMySuperSuffix {
   /** web site address */
   address?: string;
   /**
@@ -121,7 +122,7 @@ export interface PickJobTypeExcludeKeysIdOrId {
    * Means project is dev. tool (like swagger code generator)
    */
   isTool?: boolean;
-  kind: JobKind;
+  kind: IMySuperPrefixJobKindMySuperSuffix;
   link?: string;
   name?: string;
   /**
@@ -132,7 +133,7 @@ export interface PickJobTypeExcludeKeysIdOrId {
 }
 
 /** From T, pick a set of properties whose keys are in the union K */
-export interface PickProjectTypeExcludeKeysIdOrId {
+export interface IMySuperPrefixPickProjectTypeExcludeKeysIdOrIdMySuperSuffix {
   description: string;
   job: string;
   name?: string;
@@ -145,7 +146,7 @@ export interface PickProjectTypeExcludeKeysIdOrId {
 }
 
 /** From T, pick a set of properties whose keys are in the union K */
-export interface PickProjectTypeExcludeKeysJob {
+export interface IMySuperPrefixPickProjectTypeExcludeKeysJobMySuperSuffix {
   description: string;
   id: string;
   name?: string;
@@ -158,12 +159,12 @@ export interface PickProjectTypeExcludeKeysJob {
 }
 
 /** From T, pick a set of properties whose keys are in the union K */
-export interface PickUserTypeExcludeKeysIdOrId {
+export interface IMySuperPrefixPickUserTypeExcludeKeysIdOrIdMySuperSuffix {
   password: string;
   username: string;
 }
 
-export interface ProjectType {
+export interface IMySuperPrefixProjectTypeMySuperSuffix {
   description: string;
   id: string;
   job: string;
@@ -176,21 +177,29 @@ export interface ProjectType {
   year: number;
 }
 
-export type ProjectUpdateType = OmitIdProjectType;
+export type IMySuperPrefixProjectUpdateTypeMySuperSuffix = IMySuperPrefixOmitIdProjectTypeMySuperSuffix;
 
-export type TestAllOfDc = (FooBarBaz & FooBar) & {
+export type IMySuperPrefixTestAllOfDcMySuperSuffix = (IMySuperPrefixFooBarBazMySuperSuffix &
+  IMySuperPrefixFooBarMySuperSuffix) & {
   prop?: string;
 };
 
-export type TestAllOfDc2 = FooBarBaz & {
+export type IMySuperPrefixTestAllOfDc2MySuperSuffix = IMySuperPrefixFooBarBazMySuperSuffix & {
   prop?: string;
 };
 
-export type TestAnyOfDc = (FooBarBaz | FooBar | (FooBarBaz & FooBar)) & {
+export type IMySuperPrefixTestAnyOfDcMySuperSuffix = (
+  | IMySuperPrefixFooBarBazMySuperSuffix
+  | IMySuperPrefixFooBarMySuperSuffix
+  | (IMySuperPrefixFooBarBazMySuperSuffix & IMySuperPrefixFooBarMySuperSuffix)
+) & {
   prop?: string;
 };
 
-export type TestOneOfDc = (FooBarBaz | FooBar) & {
+export type IMySuperPrefixTestOneOfDcMySuperSuffix = (
+  | IMySuperPrefixFooBarBazMySuperSuffix
+  | IMySuperPrefixFooBarMySuperSuffix
+) & {
   prop?: string;
 };
 
@@ -417,7 +426,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name Login
      * @request POST:/auth
      */
-    login: (data: AuthUserType, params: RequestParams = {}) =>
+    login: (data: IMySuperPrefixAuthUserTypeMySuperSuffix, params: RequestParams = {}) =>
       this.request<string, any>({
         path: `/auth`,
         method: "POST",
@@ -454,7 +463,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     getJobs: (params: RequestParams = {}) =>
-      this.request<JobType[], any>({
+      this.request<IMySuperPrefixJobTypeMySuperSuffix[], any>({
         path: `/jobs`,
         method: "GET",
         secure: true,
@@ -470,7 +479,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/jobs
      * @secure
      */
-    addJob: (data: JobUpdateType, params: RequestParams = {}) =>
+    addJob: (data: IMySuperPrefixJobUpdateTypeMySuperSuffix, params: RequestParams = {}) =>
       this.request<string, any>({
         path: `/jobs`,
         method: "POST",
@@ -490,7 +499,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     getJob: (id: string, params: RequestParams = {}) =>
-      this.request<JobType, void>({
+      this.request<IMySuperPrefixJobTypeMySuperSuffix, void>({
         path: `/jobs/${id}`,
         method: "GET",
         secure: true,
@@ -506,8 +515,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PATCH:/jobs/{id}
      * @secure
      */
-    updateJob: (id: string, params: JobUpdateType, requestParams: RequestParams = {}) =>
-      this.request<JobType, any>({
+    updateJob: (id: string, params: IMySuperPrefixJobUpdateTypeMySuperSuffix, requestParams: RequestParams = {}) =>
+      this.request<IMySuperPrefixJobTypeMySuperSuffix, any>({
         path: `/jobs/${id}`,
         method: "PATCH",
         body: params,
@@ -543,7 +552,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/projects
      */
     getProjects: (params: RequestParams = {}) =>
-      this.request<ExtractedProjectType[], any>({
+      this.request<IMySuperPrefixExtractedProjectTypeMySuperSuffix[], any>({
         path: `/projects`,
         method: "GET",
         format: "json",
@@ -558,7 +567,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/projects
      * @secure
      */
-    addProjects: (data: ProjectUpdateType, params: RequestParams = {}) =>
+    addProjects: (data: IMySuperPrefixProjectUpdateTypeMySuperSuffix, params: RequestParams = {}) =>
       this.request<string, any>({
         path: `/projects`,
         method: "POST",
@@ -577,8 +586,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PATCH:/projects/{id}
      * @secure
      */
-    updateProject: (id: string, data: ProjectUpdateType, params: RequestParams = {}) =>
-      this.request<ProjectType, any>({
+    updateProject: (id: string, data: IMySuperPrefixProjectUpdateTypeMySuperSuffix, params: RequestParams = {}) =>
+      this.request<IMySuperPrefixProjectTypeMySuperSuffix, any>({
         path: `/projects/${id}`,
         method: "PATCH",
         body: data,
